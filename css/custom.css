@@ -1,0 +1,371 @@
+/* 文章封面右侧置顶 */
+ /* {
+  background-repeat:no-repeat !important;
+  background-position:right top !important;
+} */
+
+/*个人签名*/
+.author-info__name {
+	color:#39c5bb;
+}
+.author-info__description {
+	border-top-style:solid;
+	border-color:#39c5bb;
+	color:#6495ED;
+}
+
+/* 小冰分类分类磁铁黑夜模式适配 */
+/* 一般状态 */
+[data-theme="dark"] .magnet_link_context {
+  background: #1e1e1e;
+  color: antiquewhite;
+}
+/* 鼠标悬浮状态 */
+[data-theme="dark"] .magnet_link_context:hover {
+  background: #3ecdf1;
+  color: #f2f2f2;
+}
+
+/* 菜单栏发光字 */
+#nav .site-page,
+#nav .site-name,
+#nav .menus_items .menus_item .menus_item_child li a {
+  text-shadow: 0 0 2px rgb(57, 197, 187) !important;
+}
+
+#site-title {
+  text-shadow: 0 0 3px rgb(57, 197, 187) !important;
+  color:#233333;
+}
+
+/* 手机端适配 */
+#sidebar #sidebar-menus .menus_items .site-page {
+  text-shadow: 0 0 2px rgb(57, 197, 187) !important;
+}
+
+
+/*主页副标题（一句诗）*/
+#subtitle {
+	Font Family："Kaiti";
+	text-shadow:0px 0px 1px rgb(57, 197, 187);
+}
+
+/*分类磁贴的样式*/
+#categoryBar {
+  width: 100% !important;
+}
+ul.categoryBar-list {
+  margin: 5px 5px 5px 5px !important;
+  padding: 0 !important;
+}
+li.categoryBar-list-item {
+  font-weight: bold;
+  display: inline-block;
+  height: 150px !important;
+  margin: 5px 0.5% 5px 0.5% !important;
+  background-image: linear-gradient(rgba(0,0,0,0.4) 25%, rgba(16,16,16,0) 100%);
+  border-radius: 10px;
+  padding: 25px 0 25px 25px !important;
+  box-shadow: rgba(50,50,50,0.3) 50px 50px 50px 50px inset;
+  overflow: hidden;
+  background-size: 100% !important;
+  background-position: center !important;
+}
+li.categoryBar-list-item:hover {
+  background-size: 110% !important;
+  box-shadow: inset 500px 50px 50px 50px rgba(50,50,50,0.6);
+}
+li.categoryBar-list-item:hover span.categoryBar-list-descr {
+  transition: all 0.5s;
+  transform: translate(-100%, 0);
+}
+a.categoryBar-list-link {
+  color: #fff !important;
+  font-size: 20px !important;
+}
+a.categoryBar-list-link::before {
+  content: '|' !important;
+  color: #fff !important;
+  font-size: 20px !important;
+}
+a.categoryBar-list-link:after {
+  content: '';
+  position: relative;
+  width: 0;
+  bottom: 0;
+  display: block;
+  height: 10px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+a.categoryBar-list-link:hover:after {
+  width: 90%;
+  left: 1%;
+  transition: all 0.5s;
+}
+span.categoryBar-list-count {
+  display: block !important;
+  color: #fff !important;
+  font-size: 20px !important;
+}
+span.categoryBar-list-count::before {
+  content: '\f02d' !important;
+  padding-right: 15px !important;
+  display: inline-block;
+  font-weight: 600;
+  font-style: normal;
+  font-variant: normal;
+  font-family: 'Font Awesome 6 Free';
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+span.categoryBar-list-descr {
+  padding: 5px;
+  display: block !important;
+  color: #fff !important;
+  font-size: 20px !important;
+  position: relative;
+  right: -100%;
+}
+@media screen and (max-width: 650px) {
+  li.categoryBar-list-item {
+    width: 48% !important;
+    height: 150px !important;
+    margin: 5px 1% 0 1% !important;
+  }
+}
+
+
+/* 翻页按钮居中 */
+#pagination {
+  width: 100%;
+  margin: auto;
+}
+
+
+
+/* 页脚与头图透明 */
+#footer {
+  background: transparent !important;
+}
+#page-header {
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.3)0%,rgba(0,0,0,0)39%, rgba(0,0,0,0)99%) !important;
+}
+
+/* 白天模式遮罩透明 */
+#footer::before {
+  background: transparent !important;
+}
+/*#page-header::before {
+  background: transparent !important;
+}
+*/
+/* 夜间模式遮罩透明 */
+[data-theme="dark"] #footer::before {
+  background: transparent !important;
+}
+/*[data-theme="dark"] #page-header::before {
+  background: transparent !important;
+}*/
+
+:root {
+  --trans-light: rgba(255, 255, 255, 0.88);
+  --trans-dark: rgba(25, 25, 25, 0.88);
+  --border-style: 1px solid rgb(169, 169, 169);
+  --backdrop-filter: blur(5px) saturate(150%);
+}
+
+/* 首页文章卡片 */
+#recent-posts > .recent-post-item {
+  background: var(--trans-light);
+  backdrop-filter: var(--backdrop-filter);
+  border-radius: 25px;
+  border: var(--border-style);
+}
+
+/* 首页侧栏卡片 */
+#aside-content .card-widget {
+  background: var(--trans-light);
+  backdrop-filter: var(--backdrop-filter);
+  border-radius: 18px;
+  border: var(--border-style);
+}
+
+/* 文章页、归档页、普通页面 */
+div#post,
+div#page,
+div#archive {
+  background: var(--trans-light);
+  backdrop-filter: var(--backdrop-filter);
+  border: var(--border-style);
+  border-radius: 20px;
+}
+
+/* 导航栏 */
+#page-header.nav-fixed #nav {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--backdrop-filter);
+}
+
+[data-theme="dark"] #page-header.nav-fixed #nav {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* 夜间模式遮罩 */
+[data-theme="dark"] #recent-posts > .recent-post-item,
+[data-theme="dark"] #aside-content .card-widget,
+[data-theme="dark"] div#post,
+[data-theme="dark"] div#archive,
+[data-theme="dark"] div#page {
+  background: var(--trans-dark);
+}
+
+
+/* 夜间模式页脚页头遮罩透明 */
+[data-theme="dark"] #footer::before {
+  background: transparent !important;
+}
+[data-theme="dark"] #page-header::before {
+  background: transparent !important;
+}
+
+/* 阅读模式 */
+.read-mode #aside-content .card-widget {
+  background: rgba(158, 204, 171, 0.5) !important;
+}
+.read-mode div#post {
+  background: rgba(158, 204, 171, 0.5) !important;
+}
+
+/* 夜间模式下的阅读模式 */
+[data-theme="dark"] .read-mode #aside-content .card-widget {
+  background: rgba(25, 25, 25, 0.9) !important;
+  color: #ffffff;
+}
+[data-theme="dark"] .read-mode div#post {
+  background: rgba(25, 25, 25, 0.9) !important;
+  color: #ffffff;
+}
+
+/*哔哩哔哩视频适配*/
+	/*	可以在md文件中插入哔哩哔哩的视频
+	用法是在文章中插入以下代码，并将在aid后添加av号
+
+		<div align=center class="aspect-ratio">
+		    <iframe src="https://player.bilibili.com/player.html?aid=替换av号&&page=1&as_wide=1&high_quality=1&danmaku=0" 
+		    scrolling="no" 
+		    border="0" 
+		    frameborder="no" 
+		    framespacing="0" 
+		    high_quality=1
+		    danmaku=1 
+		    allowfullscreen="true"> 
+		    </iframe>
+		</div>
+
+	*/
+.aspect-ratio {
+  position: relative;
+  width: 90%;
+  height: auto;
+  padding-bottom: 75%;
+  margin: 3% auto;
+  text-align: center;
+}
+.aspect-ratio iframe {
+  position: absolute;
+  width: 100%;
+  height: 86%;
+  left: 0;
+  top: 0;
+}
+
+
+/* 文章页H1-H6图标样式效果 */
+/* 控制图标转动速度 4s那里可以自己调节快慢 */
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  -webkit-animation: ccc 4s linear infinite;
+  animation: ccc 4s linear infinite;
+}
+/* 控制图标转动方向 -1turn 为逆时针转动，1turn 为顺时针转动，相同数字部分记得统一修改 */
+@-webkit-keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+@keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+/* 设置图标颜色 */
+#content-inner.layout h1::before {
+  color: #ef50a8;
+  margin-left: -1.55rem;
+  font-size: 1.3rem;
+  margin-top: -0.23rem;
+}
+#content-inner.layout h2::before {
+  color: #fb7061;
+  margin-left: -1.35rem;
+  font-size: 1.1rem;
+  margin-top: -0.12rem;
+}
+#content-inner.layout h3::before {
+  color: #ffbf00;
+  margin-left: -1.22rem;
+  font-size: 0.95rem;
+  margin-top: -0.09rem;
+}
+#content-inner.layout h4::before {
+  color: #a9e000;
+  margin-left: -1.05rem;
+  font-size: 0.8rem;
+  margin-top: -0.09rem;
+}
+#content-inner.layout h5::before {
+  color: #57c850;
+  margin-left: -0.9rem;
+  font-size: 0.7rem;
+  margin-top: 0rem;
+}
+#content-inner.layout h6::before {
+  color: #5ec1e0;
+  margin-left: -0.9rem;
+  font-size: 0.66rem;
+  margin-top: 0rem;
+}
+/* s设置图标hover动效 6s那里可以自己调节快慢*/
+#content-inner.layout h1:hover,
+#content-inner.layout h2:hover,
+#content-inner.layout h3:hover,
+#content-inner.layout h4:hover,
+#content-inner.layout h5:hover,
+#content-inner.layout h6:hover {
+  color: var(--theme-color);
+}
+#content-inner.layout h1:hover::before,
+#content-inner.layout h2:hover::before,
+#content-inner.layout h3:hover::before,
+#content-inner.layout h4:hover::before,
+#content-inner.layout h5:hover::before,
+#content-inner.layout h6:hover::before {
+  color: var(--theme-color);
+  -webkit-animation: ccc 6s linear infinite;
+  animation: ccc 6s linear infinite;
+}

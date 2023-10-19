@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【科普】计算机网络概述 | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="网络概述本文以实际出发，不从基本概念、发展历史、技术原理细致介绍，我始终认为，工科类课程应该以实践为主。理论是为实践而服务的，理论准不准确不是很重要。 前两章主要是简单介绍一些概念，第三章开始从实际出发，讲解数据如何传输的。  叠甲：本文以字数量少为前提来科普整个网络方面的知识、因此会有很多地方不严谨。 本文的目的是为各位阅读几百页的教材书或者看几十集的网络课程时有一个基础的概念与体系，方便入门深">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【科普】计算机网络概述">
+<meta property="og:url" content="https://magiku.github.io/2023/10/19/%E3%80%90%E7%A7%91%E6%99%AE%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="网络概述本文以实际出发，不从基本概念、发展历史、技术原理细致介绍，我始终认为，工科类课程应该以实践为主。理论是为实践而服务的，理论准不准确不是很重要。 前两章主要是简单介绍一些概念，第三章开始从实际出发，讲解数据如何传输的。  叠甲：本文以字数量少为前提来科普整个网络方面的知识、因此会有很多地方不严谨。 本文的目的是为各位阅读几百页的教材书或者看几十集的网络课程时有一个基础的概念与体系，方便入门深">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg">
+<meta property="article:published_time" content="2023-10-19T07:51:51.000Z">
+<meta property="article:modified_time" content="2023-10-19T07:51:51.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="科普">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg"><link rel="shortcut icon" href="https://telegraph-image-713.pages.dev/file/35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/2023/10/19/%E3%80%90%E7%A7%91%E6%99%AE%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【科普】计算机网络概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-19 15:51:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Magiku's药剂屋"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【科普】计算机网络概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-19T07:51:51.000Z" title="发表于 2023-10-19 15:51:51">2023-10-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-19T07:51:51.000Z" title="更新于 2023-10-19 15:51:51">2023-10-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【科普】计算机网络概述"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><p>本文以实际出发，不从基本概念、发展历史、技术原理细致介绍，我始终认为，工科类课程应该以实践为主。理论是为实践而服务的，理论准不准确不是很重要。</p>
+<p>前两章主要是简单介绍一些概念，第三章开始从实际出发，讲解数据如何传输的。</p>
+<blockquote>
+<p>叠甲：本文以字数量少为前提来科普整个网络方面的知识、因此会有很多地方不严谨。</p>
+<p>本文的目的是为各位阅读几百页的教材书或者看几十集的网络课程时有一个基础的概念与体系，方便入门深入学习。</p>
+<p>如果要以实践为主体的，推荐之后去按hcia的课程进行学习。</p>
+<p>如果想深层次理解原理的，可以去看看黑皮书根TCP&#x2F;IP相关的书籍。</p>
+</blockquote>
+<h3 id="从大家最熟悉的家庭网络开始介绍"><a href="#从大家最熟悉的家庭网络开始介绍" class="headerlink" title="从大家最熟悉的家庭网络开始介绍"></a>从大家最熟悉的家庭网络开始介绍</h3><p>一个家庭的网络从无到有，会经历这个过程</p>
+<blockquote>
+<p>找运营商购买宽带套餐</p>
+<p>运营商派宽带师傅上门安装</p>
+<p>宽带师傅从户外通信电箱拉光纤到房间</p>
+<p>拿出光猫接上光纤，配置光猫</p>
+<p>家庭有无线路由器的，再通过网线连上光猫</p>
+<p>设置号无线路由器的配置后</p>
+<p>手机连上WiFi就可以上网，电脑通过网线连接无线路由器也可以上网了。</p>
+</blockquote>
+<p>如果家中设备比较多，那么可以在无线路由器下再连接一个小型交换机</p>
+<p>最终就是这样样子</p>
+<p>简单用文字介绍，那就是 运营商提供的链路——光猫——路由器——交换机——网络设备</p>
+<p>接下来就简单介绍这些设备在网络中起到什么作用</p>
+<h4 id="光猫、或者说“猫”"><a href="#光猫、或者说“猫”" class="headerlink" title="光猫、或者说“猫”"></a>光猫、或者说“猫”</h4><p>这个设备的作用就是信号转换。比如将光纤中的光信号与网线中的电信号作互相转换。</p>
+<p>这个设备英文名叫Modem，是 modulator（调制器）和 demodulator（解调器）的合成，就是“调制解调器”。</p>
+<p>但早期大伙都音译叫做猫，于是”猫“这个叫法就这么一直流传下来了。</p>
+<p>目前“猫”这个词代指的设备很宽泛，不再单指调制解调器。</p>
+<p>现在运营商提供的光猫都带调制解调器功能与路由器功能，甚至有的加上了无线WiFi的功能。</p>
+<h4 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h4><p>连接不同网络的“网关”，可以类比作不同国家之间的海关。</p>
+<p>一般来说，一个网络中只配置一台路由器。</p>
+<p>路由器主要负责”路由“功能，也就是给网络数据的传播做一个导航指路的作用</p>
+<h4 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h4><p>一般交换机就是用来连接多台网络设备，使设备连接在一起。</p>
+<p>同时可以理解为，交换机就是一个插排，路由器&#x2F;其他交换机传过来的“电”只有一个”插座口”。</p>
+<p>交换机这个”插排“接上后，网络设备就都可以接上”电“了</p>
+<blockquote>
+<p>以上都是以基础小白的概念以及家庭网络层面来介绍的，后续以公司网络架构为基础介绍数据包过程就会更为具体准确的讲解了</p>
+<p>简单来说，数据包就是通过电脑主机形成、通过链路到达交换机、再用交换机转发到路由器、路由器再一路转发到目标电脑所在的局域网路由器、经过交换机到达目标电脑，由目标电脑解析数据包的内容。</p>
+</blockquote>
+<blockquote>
+<p>在正式的网络中，就是一台路由器加数台交换机。</p>
+<p>如果是规模比较大，一般会考虑一个链路冗余、双机备份，避免某处线缆破损或者设备损坏导致大片设备无法上网。</p>
+<p>这里贴一个网络拓扑图可以看看</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c18e9158b6b651bb8f787.png"></p>
+<h3 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h3><p>本章介绍网络通信时所需要的信息，平时会折腾一下电脑或手机网络可能都会看到这些</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/8f46c168c9517825dc3ec.png" alt="电脑"></p>
+<p>其中我们需要注意的 MAC地址（物理地址）、IP地址（一般指IPv4地址）、网关、DHCP、DNS。</p>
+<blockquote>
+<p>MAC地址是网卡的身份证，IP地址为门牌号，网关为小区门卫、DHCP是随机摇号机制、DNS是业主住址薄。</p>
+</blockquote>
+<p>图中网关DHCP服务器DNS服务器为同一个，是因为我用的电脑连接手机的热点。DNS为网关，也就是使用网关的网络信息的DNS服务器。</p>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>端口这个说法不够具体，物理接口也可以叫端口，比如交换机端口，墙面端口等等</p>
+<p>这里要介绍的是抽象概念上的端口，在计算机中，其范围从0~65535，</p>
+<p>你电脑上运行了很多联网的程序，他们都在使用网络资源。</p>
+<p>你所需要的qq信息，网页，歌曲总是互不干扰的准确传递到你电脑上对应的qq、浏览器、音乐播放器上。</p>
+<p>实现这种程序上的一对一通信，就是端口的作用。</p>
+<p>比喻起来的话，就是你与很多qq好友同时在线聊天，因为是在聊天列表有不同的独立窗口，所以消息不会发错人，你也不会收错对方发给其他人的消息。</p>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p>协议就是规则、规范，或者说一种语言。</p>
+<p>因为计算机网络中传播的数据只有0和1，就需要协议来定义出各种编码解码方式（类似摩斯密码）以及定义各种得到的参数代表什么含义。</p>
+<p>计算机通信中存在着许多的协议，这里按五层模型来展示的话，一共有这么多协议。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/33c5aa445129f81e48ab8.png" alt="图源华为"></p>
+<p>目前只需要知道有协议这个概念就行，以后会具体一个个协议的学习</p>
+<h4 id="OSI七层模型与TCP五层模型"><a href="#OSI七层模型与TCP五层模型" class="headerlink" title="OSI七层模型与TCP五层模型"></a>OSI七层模型与TCP五层模型</h4><p>七层模型是ISO组织于1984年发布的细化的网络层级，更多的作用是让你理解网络通信这个抽象的东西，同时让厂商基于这个层级去标准化规范化的设置与遵循协议。</p>
+<p>故障排查时也可以安装七层模型来逐级排查。</p>
+<p>而五层模型（有的会在把最下两层合并构成四层模型）可以说是对七层模型的简化。将最上的5、6、7层简化为一层。</p>
+<p>具体内容感兴趣可自行查阅资料，目前五层模型更被广泛接受。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/0dcd11e0b854a68df0ad9.png"></p>
+<p>目前只需要知道二层是基于mac地址进行数据传输，三层是基于ip地址传输。</p>
+<p>因此在电脑之间的网络传播都是处于前3层上的。</p>
+<p>路由器都是三层设备，而交换机会有二层交换机与三层交换机之分，一般个人接触到交换机都是二层交换机。</p>
+<blockquote>
+<p>介绍以上信息都是为了接下来介绍的数据包的传输做基础。</p>
+</blockquote>
+<h3 id="数据包的传输过程"><a href="#数据包的传输过程" class="headerlink" title="数据包的传输过程"></a>数据包的传输过程</h3><h4 id="数据包是什么"><a href="#数据包是什么" class="headerlink" title="数据包是什么"></a>数据包是什么</h4><p>我们都知道计算机的底层是由0和1构成的，我们看到的图片、音频、视频在计算机底层都是一串串数字。</p>
+<p>网络通信时传输的就是这些字符串。</p>
+<p>在实际传输时，会把这些字符串拆解打包，封装。成为一个个数据包，有些地方会叫做报文（严格来讲，有包、段、帧的区分）。</p>
+<p>一个、或者说一串数据包的接口可以简化为</p>
+<p>【目标地址】【源地址】【协议】【数据内容】【校验码】</p>
+<blockquote>
+<p>具体百度搜索一下数据报文结构。</p>
+</blockquote>
+<p>类比一下</p>
+<table>
+<thead>
+<tr>
+<th>**目标地址             **</th>
+<th><strong>数据包要送达的目的地</strong></th>
+<th><strong>快递的收件人</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>**源地址      **</td>
+<td><strong>数据包的发送来源</strong></td>
+<td><strong>快递的寄件人</strong></td>
+</tr>
+<tr>
+<td><strong>协议</strong></td>
+<td><strong>该数据包遵循什么协议、使用什么协议解读</strong></td>
+<td><strong>走哪一家物流公司的渠道</strong></td>
+</tr>
+<tr>
+<td>**数据内容           **</td>
+<td><strong>真正要传输的数据</strong></td>
+<td><strong>快递包裹内的东西</strong></td>
+</tr>
+<tr>
+<td>**检验码        **</td>
+<td><strong>通过固定的算法计算出的数据内容的值，如果后续设备收到数据包后计算的出的值与检验码不同，则说明该数据包损坏了，于是会丢弃该数据包</strong></td>
+<td><strong>快递的包装、如果包装破损、物品缺失、会拒收</strong></td>
+</tr>
+</tbody></table>
+<h4 id="公司拓扑"><a href="#公司拓扑" class="headerlink" title="公司拓扑"></a>公司拓扑</h4><p>在讲数据包的传输过程前，我们讲一讲公司的网络结构。先不考虑双击热备的冗余，一般公司的架构会是这样。</p>
+<blockquote>
+<p>左侧表示公司，右侧为互联网。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9b2236fa669a83163dcd0.png"></p>
+<p>拓扑图是这样的，图中每带电脑实际表示一整个办公区&#x2F;部门。</p>
+<p>在实际中，交换机都是在楼层的机房中，电脑是通过网线连接在工位附近的面板模块（就是“插座”），面板内的网线一路走到机房的跳线架上，再从跳线架使用一截网线连接交换机。（个别小公司会省去跳线架，面板的线直接接入交换机）</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/2023/10/19/%E3%80%90%E7%A7%91%E6%99%AE%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">https://magiku.github.io/2023/10/19/%E3%80%90%E7%A7%91%E6%99%AE%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，转载请注明出处！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a><a class="post-meta__tags" href="/tags/%E7%A7%91%E6%99%AE/">科普</a></div><div class="post_share"><div class="social-share" data-image="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/10/19/%E4%BA%A4%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" title="交换路由基础命令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">交换路由基础命令</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Magiku</div><div class="author-info__description">个人博客，用于记录知识库。<br>希望这些笔记能对你有所帮助！<br>要是有什么需要交流的，欢迎联系我~</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" href="/about/"><i class="fas fa-heart"></i><span>about</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://telegraph-image-713.pages.dev/file/d4b2b9f9468bef99c40b0.jpg" target="_blank" title="QQ"><i class="fab fa-qq" style="color: #6899ee;"></i></a><a class="social-icon" href="https://telegraph-image-713.pages.dev/file/47f3b24d63bbc1e29ec05.jpg" target="_blank" title="微信"><i class="fab fa-weixin" style="color: #44d55c;"></i></a><a class="social-icon" href="https://space.bilibili.com/39293027" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili" style="color: #e3d9;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">网络概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%A4%A7%E5%AE%B6%E6%9C%80%E7%86%9F%E6%82%89%E7%9A%84%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E5%BC%80%E5%A7%8B%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.0.1.</span> <span class="toc-text">从大家最熟悉的家庭网络开始介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%89%E7%8C%AB%E3%80%81%E6%88%96%E8%80%85%E8%AF%B4%E2%80%9C%E7%8C%AB%E2%80%9D"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">光猫、或者说“猫”</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">路由器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">交换机</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF"><span class="toc-number">1.0.2.</span> <span class="toc-text">网络信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E4%B8%8ETCP%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">OSI七层模型与TCP五层模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B"><span class="toc-number">1.0.3.</span> <span class="toc-text">数据包的传输过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">数据包是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AC%E5%8F%B8%E6%8B%93%E6%89%91"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">公司拓扑</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Magiku</div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'd55e9307ca605124a542',
+      clientSecret: '73a85d39b9bda1aa0f24ac51ea5a9504edf02277',
+      repo: 'magiku.github.io',
+      owner: 'magiku',
+      admin: ['magiku'],
+      id: 'a2ae24de6f515cbbdfbf73dea3240ff3',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/计算机网络/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 计算机网络 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://magiku.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '39b2c1fede67489eb9265b983874c66d';
+  var gaud_map_key = '84b1f52230bfdc06111b20984a0b04d9';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.324587,23.106574';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【科普】计算机网络概述 | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本篇主要是围绕着vlan（虚拟局域网）进行讲解介绍。 先从vlan技术（二层交换机）开始讲解一步步拓展到vlanif技术（三层交换机）。内容的介绍会涉及到命令的配置，使用的是华为的ensp模拟器来进行模拟配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【科普】计算机网络概述">
+<meta property="og:url" content="https://magiku.github.io/2023/12/11/%E3%80%90%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%E3%80%91vlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="本篇主要是围绕着vlan（虚拟局域网）进行讲解介绍。 先从vlan技术（二层交换机）开始讲解一步步拓展到vlanif技术（三层交换机）。内容的介绍会涉及到命令的配置，使用的是华为的ensp模拟器来进行模拟配置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg">
+<meta property="article:published_time" content="2023-12-11T08:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-11T08:00:00.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="交换">
+<meta property="article:tag" content="vlan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg"><link rel="shortcut icon" href="https://telegraph-image-713.pages.dev/file/35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/2023/12/11/%E3%80%90%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%E3%80%91vlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【科普】计算机网络概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-11 16:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Magiku's药剂屋"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【科普】计算机网络概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-11T08:00:00.000Z" title="发表于 2023-12-11 16:00:00">2023-12-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-11T08:00:00.000Z" title="更新于 2023-12-11 16:00:00">2023-12-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【科普】计算机网络概述"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 交换机（二层交换机）：工作在数据链路层（第二层），<strong>根据目标MAC地址来转发数据帧。</strong>它可以通过学习源MAC地址和物理接口之间的映射关系，建立转发表，从而实现数据帧的快速转发。 </p>
+<p> 这一部分的内容已经在上期的科普篇里有所介绍了，这边不再进行说明讲解。 </p>
+<p> 随着技术的发展，交换机也拓展出了基于网络层（第三层）的功能。为了区分，通常会称为三层交换机。 </p>
+<p> <strong>三层交换机有了网络层的功能</strong>，就可以<strong>作为网关实现跨网段的转发通信行</strong>，甚至分配动态ip。 </p>
+<blockquote>
+<p>另外，交换机还有傻瓜交换机与可网管交换机之分： </p>
+<p>傻瓜交换机 —— 特指无法进行配置，插上即可使用。 </p>
+<p>网管交换机 —— 也称企业级交换机，特指可以进行命令配置的交换机。 </p>
+<p>注：<strong>网管交换机并不都是三层交换机，二层交换机一样也有网管级的。</strong></p>
+</blockquote>
+<p> 本篇主要是围绕着vlan（虚拟局域网）进行讲解介绍。 先从vlan技术（二层交换机）开始讲解一步步拓展到vlanif技术（三层交换机）。<br> 内容的介绍会涉及到命令的配置，使用的是华为的ensp模拟器来进行模拟配置。</p>
+<h1 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h1><h2 id="什么是VLAN"><a href="#什么是VLAN" class="headerlink" title="什么是VLAN"></a>什么是VLAN</h2><p> <strong>VLAN（Virtual Local Area Network）即虚拟局域网</strong>，是一种逻辑上的网络分割技术，<strong>用于将物理上的局域网（LAN）划分成多个虚拟的子网（多个广播域）</strong>。  </p>
+<p>通过使用VLAN，可以将不同的设备或用户组织到不同的逻辑网络中，即使它们物理上连接的是同一个交换机上。（不同交换机也可组织到同一个VLAN）</p>
+<p> <strong>每个VLAN是一个广播域，VLAN内的主机间可以直接通信，而VLAN间则不能直接互通</strong>。(一方面是隔离广播域后无法使用ARP查找设备mac地址，另一方面是协议规定了设备遇到不同VLAN的数据帧就丢弃)</p>
+<p>此外，VLAN还可以简化网络管理，因为管理员可以根据需要对每个VLAN进行配置和管理，而无需干扰其他VLAN。</p>
+<p>VLAN是基于交换机的，交换机通过将数据帧打上VLAN标签来识别不同的VLAN。这些标签可以基于端口、MAC地址或其他标识符进行配置。  </p>
+<p>当数据帧在交换机之间传输时，<strong>交换机会根据VLAN标签将数据帧转发到正确的VLAN中的目标设备</strong>。</p>
+<p>总之，VLAN是一种用于划分局域网的技术，可以提供更好的网络管理、性能和安全性。  </p>
+<h2 id="为什么需要VLAN"><a href="#为什么需要VLAN" class="headerlink" title="为什么需要VLAN"></a>为什么需要VLAN</h2><p>在二层网络中，一台主机发送一个广播数据帧，网络中所有主机都会收到，网络中的每一条链路都至少传输了一次广播包。我们把这样的转发接收广播数据帧的区域叫做广播域。  </p>
+<p><strong>广播域范围过大，其中的广播数据会存在过多，占用太多带宽（网络资源），影响网络性能。</strong>  </p>
+<p>在此之前，我们采用的方案是划分网段，使网络设备分处于不同的局域网（LAN），再由<strong>路由器</strong>来隔离广播域。广播包就被限定在每一个局域网内，不会影响到处于其他局域网的设备。  </p>
+<p>而VLAN，即虚拟局域网，这种技术不需要修改设备的ip地址与网段，直接在<strong>二层网络</strong>中不涉及网络层的情况下就能虚拟出局域网，完成广播域的隔离。  </p>
+<p>还有一个更主要的原因是原先使用网段划分，需要使用大量的路由器。<strong>如果依旧采用单台路由器配合多台交换机的方案，那还是无法隔离</strong>。</p>
+<p>这是因为交换机只解封装到二层，发现数据帧报头的广播地址，便会从交换机的所有接口转发出去，不会去区分网段是否一致。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/21454544eed49d45d1f96.png" style="zoom:50%;" />
+
+<blockquote>
+<p>例如以上拓扑图，PC1是10网段，PC2也是10网段，但PC3是30网段。</p>
+<p>PC1要与PC2通信，因为没有PC2的mac地址，于是发送了ARP广播来询问PC2的mac地址。</p>
+<p>我们可能会觉得只是去查PC2的10.0.0.2这个ip对应的mac地址是多少，那么不会找到处于30网段的PC3去。</p>
+<p>但只要去抓包，就能知道交换机2会将ARP包也转发给PC3跟路由器。</p>
+</blockquote>
+<p>引入vlan这种二层技术，只需要交换机就可以完成广播域的隔离了。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/f8603a485c1e271f73c00.png" style="zoom:67%;" />
+
+  
+
+
+
+<h2 id="VLAN技术带来的问题"><a href="#VLAN技术带来的问题" class="headerlink" title="VLAN技术带来的问题"></a>VLAN技术带来的问题</h2><p>VLAN技术，可以在数据链路层的层面进行隔绝广播域，这非常好的解决了广播泛滥带来的性能显著下降甚至造成网络不可用等问题。但也正因为隔绝了广播域，它带来了新的问题。  </p>
+<p>广播包无法发送到其他vlan下的设备，意味着ARP包也无法跨vlan传播，这就导致<strong>无法获取其他vlan下设备的mac地址</strong>，进而导致不同vlan之间无法进行通信。**[ 但实际上即便知道了mac地址并手动绑定进ARP表中，也无法跨vlan通信；交换机不仅隔绝了广播包，不同vlan之间的单播包也会被拦截。]**</p>
+<p>不过，也有很多人将这一问题视为vlan的优点，认为这<strong>增加了网络的安全性</strong>。  </p>
+<p>想要解决这个问题，一个是逻辑上使vlan失效（后面就会介绍的标签管理）；</p>
+<p>另一个方法就是通过三层设备的路由功能来实现，也就是使用网关，并为每一个vlan划定好网段；网关可以使用路由器，也可以使用三层交换机（开启vlanif）。</p>
+<p>这一部分内容稍后会详细介绍，接下来我们讲一讲VLAN的原理与配置。  </p>
+<h2 id="VLAN的原理"><a href="#VLAN的原理" class="headerlink" title="VLAN的原理"></a>VLAN的原理</h2><p>IEEE于1999年颁布了用于标准化VLAN实现方案的802.1Q协议标准草案，该标准定义了VLAN的数据帧结构。  </p>
+<p>在传统的以太网数据帧基础上（源MAC地址字段和协议类型字段之间）增加4个字节的802.1Q Tag。</p>
+<blockquote>
+<p><strong>TPID</strong>（Tag Protocol Identifier）：TPID是VLAN标签的第一个字段，占据2个字节。它<strong>用于标识VLAN标签的存在</strong>，并指示后续字段的解释方式。对于以太网中的VLAN标签，TPID的值通常为0x8100。</p>
+<p>PRI（Priority Code Point）：PRI字段是VLAN标签的第二个字段，占据3个比特位。PRI字段用于指示数据帧的优先级，用于实现QoS（Quality of Service，服务质量）功能。PRI字段的值范围从0到7，值越大优先级越高。当网络阻塞时，交换机优先发送优先级高的数据帧。</p>
+<p>CFI（Canonical Format Identifier）：CFI字段是VLAN标签的第三个字段，占据1个比特位。CFI字段用于指示MAC地址是否采用规范格式。当CFI字段的值为0时，表示MAC地址采用规范格式；当CFI字段的值为1时，表示MAC地址采用非规范格式。</p>
+<p><strong>VID</strong>（VLAN Identifier）：VID字段是VLAN标签的最后一个字段，占据12个比特位。<strong>VID字段用于标识数据帧所属的VLAN</strong>。每个VLAN都有一个唯一的VLAN ID，可以支持最多4096个不同的VLAN。<strong>通过VID字段，交换机可以根据VLAN ID来识别并转发数据帧到相应的VLAN</strong>。(<strong>协议规定了VLAN0与VLAN4095作为保留，因此真正可使用的为4094个</strong>)</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2fc22496b3710e1214cf0.png" style="zoom: 80%;" />
+
+<p>请记住一点：<strong>VLAN是在交换设备上的技术，网络终端（PC）是不会发送与接收带有VLAN的数据帧。</strong></p>
+<p>人为的在交换机上配置VLAN的划分规则后，PC发送过来的数据帧在经过交换机时，就会被交换机添加上VLAN标签。</p>
+<p>交换机根据vlan标签来确定数据帧的发送范围，而当下一跳就为目的终端时，交换机会先将vlan标签剥离再发送。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/4752ef0f75797c048f585.png" style="zoom: 67%;" />
+
+<p><strong>打标签与剥离标签是vlan技术的重点内容。</strong>为了更好更方便的管理vlan标签，就引入了接口类型的概念。</p>
+<p>实际上vlan的实现方式有好几种，但<strong>目前广泛采用的都是基于接口的方式</strong>。</p>
+<p>简单说一下其他方式吧：【以下方式不被广泛采用都是因为配置繁琐、后期维护与拓展不易或有较大的漏洞（比如mac地址可被人为修改）】</p>
+<blockquote>
+<p><em>基于MAC地址划分：根据数据帧的源MAC地址来划分VLAN。</em></p>
+<blockquote>
+<p>网络管理员预先配置MAC地址和VLAN ID映射关系表，当交换机收到的是传统数据帧时，就依据该表给数据帧添加指定VLAN的标签，然后数据帧将在指定VLAN中传输。</p>
+</blockquote>
+<p><em>基于IP子网划分：根据数据帧中的源IP地址和子网掩码来划分VLAN。</em></p>
+<blockquote>
+<p>网络管理员预先配置IP地址和VLAN ID映射关系表，当交换机收到的是传统数据帧，就依据该表给数据帧添加指定VLAN的标签，然后数据帧将在指定VLAN中传输。</p>
+</blockquote>
+<p><em>基于协议划分：根据数据帧所属的协议（族）类型及封装格式来划分VLAN。</em></p>
+<blockquote>
+<p>网络管理员预先配置以太网帧中的协议域和VLAN ID的映射关系表，如果收到的是传统数据帧，就依据该表给数据帧添加指定VLAN的标签，然后数据帧将在指定VLAN中传输。</p>
+</blockquote>
+<p><em>基于策略划分：根据配置的策略划分VLAN，能实现多种组合的划分方式，包括接口、MAC地址、IP地址等。</em></p>
+<blockquote>
+<p>网络管理员预先配置策略，如果收到的是传统数据帧，且匹配配置的策略时，给数据帧添加指定VLAN的标签，然后数据帧将在指定VLAN中传输。</p>
+</blockquote>
+</blockquote>
+<hr>
+<p>在一个VLAN交换网络中，以太网数据帧主要有以下两种形式：</p>
+<ul>
+<li><strong>无标签帧（Untagged帧）</strong>：原始的、未加入4字节VLAN标签的传统数据帧。</li>
+<li><strong>有标签帧（Tagged帧）</strong>：加入了4字节VLAN标签的帧。</li>
+</ul>
+<h2 id="VLAN的接口类型和VLAN标签的处理机制"><a href="#VLAN的接口类型和VLAN标签的处理机制" class="headerlink" title="VLAN的接口类型和VLAN标签的处理机制"></a>VLAN的接口类型和VLAN标签的处理机制</h2><p>交换机内部处理的数据帧一律都带有VLAN标签，而现网中交换机连接的设备有些只会收发传统数据帧，要与这些设备交互，就需要接口能够识别传统数据帧并在收发时给帧添加&#x2F;剥除VLAN标签。</p>
+<p>同时，现网中属于同一个VLAN的用户可能会被连接在不同的交换机上，且跨越交换机的VLAN可能不止一个。</p>
+<p><strong>如果需要用户间的互通，就需要交换机与交换机之间的接口能够同时识别和发送多个VLAN的数据帧。</strong></p>
+<p>根据接口连接对象以及对收发数据帧处理的不同，当前有VLAN的多种接口类型，以适应不同的连接和组网。</p>
+<p>不同厂商对VLAN接口类型的定义可能不同。<strong>常见的VLAN接口类型有两种：Access和Trunk。</strong></p>
+<p>对于华为设备来说，还有第三种接口类型：Hybrid（一般不使用Hybrid）</p>
+<p><strong>接口类型是在交换机上配置的</strong>，不同接口类型有不同的机制，接下来就学习一下这三种接口类型。</p>
+<h2 id="默认VLAN-缺省VLAN"><a href="#默认VLAN-缺省VLAN" class="headerlink" title="默认VLAN&#x2F;缺省VLAN"></a>默认VLAN&#x2F;缺省VLAN</h2><p>在计算机术语中，<strong>“缺省”二字表示默认的意思</strong>。因为它听起来总是不那么适应，所以本文都会称为默认。</p>
+<p><strong>默认VLAN代指PVID</strong>（Port Default VLAN ID）。</p>
+<p>前面提到，<strong>交换机处理的数据帧都带Tag</strong>，当交换机收到Untagged帧（不带标签的传统数据帧）时，就需要给该帧添加Tag，添加什么Tag，就由接口上的默认VLAN决定。它的具体作用是：</p>
+<ul>
+<li>当接口接收数据帧时：如果接口收到一个Untagged帧，交换机会根据PVID给此数据帧添加等于PVID的Tag，然后再交给交换机内部处理；如果接口收到一个Tagged帧，交换机则不会再给该帧添加接口上PVID对应的Tag。</li>
+<li>当接口发送数据帧时：如果发现此数据帧的Tag的VID值与PVID相同，则交换机会将Tag去掉，然后再从此接口发送出去。</li>
+</ul>
+<p><strong>每个接口都有一个默认VLAN。默认情况下，所有接口的默认VLAN均为VLAN1</strong>，但用户可以根据需要进行配置：</p>
+<ul>
+<li>对于Access接口，默认VLAN就是它允许通过的VLAN，修改接口允许通过的VLAN即可更改接口的默认VLAN。</li>
+<li>对于Trunk接口和Hybrid接口，其接口可以允许多个VLAN通过，修改接口允许通过的VLAN不会更改接口的默认VLAN，修改默认VLAN需要使用专门的命令。</li>
+</ul>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><p><strong>对一台交换机来说，接口都是独立</strong>，不止是交换机外部表现为独立，在交换机内部也是独立的。</p>
+<p>后面介绍接口类型时，请一定不要将交换机当作一个整体。</p>
+<p><strong>交换机的配置都是基于接口的</strong>，每一个接口都可以进行独立的配置。</p>
+<p>所以一个数据帧进入交换机的接口时就开始进行处理，<strong>当处理完的数据帧，在交换机内部被移交到另一个接口时，会根据那一个接口的配置再进行一次处理</strong>。</p>
+<p>理解了这一点之后，后面对接口类型的学习就会很清晰了。</p>
+<h2 id="Access接口"><a href="#Access接口" class="headerlink" title="Access接口"></a>Access接口</h2><p><strong>Access接口一般用于和不能识别Tag的用户终端（如PC、服务器）相连，或者不需要区分不同VLAN成员时使用。</strong></p>
+<p><strong>Access接口大部分情况只能收发Untagged帧</strong>。</p>
+<p><strong>交换机内部只处理Tagged帧</strong>，所以Access接口需要给收到的数据帧添加VLAN标签，也就必须配置一个默认的VLAN。</p>
+<p><strong>配置默认VLAN后，该Access接口也就加入了该VLAN，收到不带标签的数据帧就会打上该默认VLAN的标签。</strong></p>
+<p><strong>如果Access接口收到带有Tag的帧，并且帧中VID与PVID（默认vlan）相同时，Access接口就接收并处理该帧。</strong></p>
+<blockquote>
+<p>当<strong>数据帧</strong>中的vlan标签内部的<strong>VID</strong>（vlan id）等于<strong>接口</strong>的<strong>PVID</strong>，那就说明这是萝卜回萝卜坑了。</p>
+<p>都是同属于一个vlan，自然就可以正常接收该数据帧</p>
+<p>如果ID不同，即不是同一vlan的数据帧，就会丢弃。</p>
+</blockquote>
+<p><strong>此外，当交换设备在发送带有Tag的帧前，Access接口会剥离Tag。</strong></p>
+<blockquote>
+<p>因为access接口在设定上是与无法识别带vlan标签的终端连接的。</p>
+<p>因此，当一个带标签数据帧的目标链路是access接口所在的链路，那么交换机在发送数据帧时会将标签剔除。</p>
+</blockquote>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/3e632a34c3ac1e8e73515.png" style="zoom: 33%;" />
+
+
+
+<h2 id="Trunk接口"><a href="#Trunk接口" class="headerlink" title="Trunk接口"></a>Trunk接口</h2><p><strong>Trunk接口一般用于连接交换机</strong>、路由器、AP。</p>
+<p>它可以<strong>允许多个VLAN的帧带Tag通过</strong>，但只允许<strong>属于默认VLAN的帧从该类接口上发出时不带Tag</strong>（即剥离标签）。</p>
+<blockquote>
+<p>说白了，就是与access接口互补，access接口是用于连接不能识别标签的终端；trunk接口就是用于可以识别标签的设备。</p>
+<p>因此trunk接口可以收发多个vlan的数据帧，只需要配置了允许哪些vlan标签的数据帧通过即可。</p>
+<p>至于剥离标签的机制，大部分不剥离，只有跟PVID一致的vlan标签才剥离。</p>
+</blockquote>
+<p>Trunk接口上的默认VLAN，有的厂商也将它定义为native VLAN。</p>
+<p>当Trunk接口收到Untagged帧时，会为Untagged帧打上Native VLAN对应的Tag。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/da443d2f87560f8f7a5fd.png" style="zoom: 33%;" />
+
+
+
+<h2 id="Hybrid接口"><a href="#Hybrid接口" class="headerlink" title="Hybrid接口"></a>Hybrid接口</h2><p>Hybrid接口既可以用于连接不能识别Tag的用户终端（如用户主机、服务器）和网络设备（如Hub），也可以用于连接交换机、路由器、AP。</p>
+<p>它<strong>可以允许多个VLAN的帧带Tag通过，且允许从该类接口发出的帧根据需要配置某些VLAN的帧带Tag（即不剥除Tag）、某些VLAN的帧不带Tag（即剥除Tag）。</strong></p>
+<blockquote>
+<p>意思就是通用性接口，可以随意配置，与任何设备连接都能使用Hybrid接口。</p>
+<p>接收原理与trunk一样，而发送时，可以根据预先配置来判断是否剥离vlan标签。</p>
+</blockquote>
+<p>Hybrid接口和Trunk接口在很多应用场景下可以通用，<strong>但在某些应用场景下，必须使用Hybrid接口。</strong></p>
+<p>比如在灵活<a target="_blank" rel="noopener" href="https://info.support.huawei.com/info-finder/encyclopedia/zh/QinQ.html">QinQ</a>中，服务提供商网络的<strong>多个</strong>VLAN的报文在进入用户网络前，需要剥离外层VLAN Tag。</p>
+<p>此时Trunk接口不能实现该功能，因为Trunk接口只能使该接口默认VLAN的报文不带VLAN Tag通过。</p>
+<blockquote>
+<p>Hybrid接口可以自由的使用命令来让交换机对什么vlan标签直接转发，对什么vlan标签进行剥离，有很大的操作空间。</p>
+<p>但一般来说不会去使用它，只有当access与trunk都无法满足需求，且设备与链路还有vlan必须这样配置时，才会采用Hybrid接口。</p>
+<p>这是因为现网中，很少全部采用同一品牌的设备，而Hybrid接口目前是华为设备使用的技术。更进一步的说，就是Hybrid接口还未被广大的基层网络工程师学习接受。</p>
+</blockquote>
+<h2 id="接口类型的命令配置"><a href="#接口类型的命令配置" class="headerlink" title="接口类型的命令配置"></a>接口类型的命令配置</h2><p>以上是三种接口类型的原理描述。接下来介绍一下配置命令，后面就使用命令来完成一个简易的拓扑配置。</p>
+<p><strong>加粗</strong>的为固定的命令语法，<em>斜体</em>是自行修改的变量，具体用法可以参照后面的拓扑配置。</p>
+<h3 id="创建vlan"><a href="#创建vlan" class="headerlink" title="创建vlan"></a>创建vlan</h3><p>首先需要在交换机内部创建好vlan，<strong>注意每一台交换机都需要配置vlan</strong>。</p>
+<ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>vlan</strong> <em>vlan-id</em>，创建VLAN并进入VLAN视图。如果VLAN已经创建，则直接进入VLAN视图。<ul>
+<li>如果需要批量创建，执行命令<strong>vlan bath</strong> <em>vlan-id1</em> <em>vlan-id2</em> ，命令后可创建多个vlan。每个vlan-id之间用空格隔开。</li>
+<li>如果批量创建的vlan是递增的，可执行命令<strong>vlan batch</strong> <em>vlan-id1</em> to <em>vlan-idn</em>  ，比如创建2到10，就<strong>vlan bath</strong> <em>2</em> to <em>1</em>0</li>
+</ul>
+</li>
+<li>执行命令<strong>quit</strong>，返回系统视图。</li>
+</ol>
+<h3 id="配置access接口"><a href="#配置access接口" class="headerlink" title="配置access接口"></a>配置access接口</h3><ol>
+<li>执行命令<strong>interface</strong> <em>interface-type</em> <em>interface-number</em>，进入需要加入VLAN的以太网接口视图。</li>
+<li>执行命令<strong>port link-type</strong> <strong>access</strong>，配置接口类型为access。</li>
+<li>执行命令<strong>port default vlan</strong> <em>vlan-id</em>，配置接口的默认VLAN并将接口加入到指定VLAN。</li>
+<li>（可选）执行命令<strong>port discard tagged-packet</strong>，配置接口丢弃入方向带VLAN 标签的数据帧，即不接收带标签的数据帧。</li>
+</ol>
+<blockquote>
+<p>如果要批量的配置access接口，可以在vlan视图下直接添加接口。</p>
+<ol>
+<li>执行命令<strong>vlan</strong> <em>vlan-id</em>，进入VLAN视图。</li>
+<li>执行命令<strong>port</strong> <em>interface-type</em> <em>interface-number</em> ，添加接口到vlan（以access的类型）</li>
+</ol>
+<p>该命令指定的接口数量也可以使用批量方式，接口号之间空格隔开或是使用“to”指定范围。</p>
+</blockquote>
+<h3 id="配置trunk接口"><a href="#配置trunk接口" class="headerlink" title="配置trunk接口"></a>配置trunk接口</h3><ol>
+<li>执行命令<strong>interface</strong> <em>interface-type</em> <em>interface-number</em>，进入需要加入VLAN的以太网接口视图。</li>
+<li>执行命令<strong>port link-type</strong> <strong>trunk</strong>，配置接口类型为trunk。</li>
+<li>执行命令<strong>port trunk allow-pass vlan</strong> <em>vlan-id</em>，配置放行通过的vlan。<ul>
+<li>批量添加也是可以多个vlan-id之间用空格隔开，或者使用“to”指代连续递增的vlan-id。</li>
+<li>另外可以使用port trunk allow-pass vlan all，表示放行所有vlan。</li>
+</ul>
+</li>
+<li>（可选）执行命令<strong>port trunk pvid vlan</strong> <em>vlan-id</em>，配置Trunk接口的默认VLAN。<ul>
+<li>需要剥离标签的情景下使用，发送数据帧是会剥离与该pvid相同的vlan标签。</li>
+</ul>
+</li>
+</ol>
+<h3 id="配置hybrid接口"><a href="#配置hybrid接口" class="headerlink" title="配置hybrid接口"></a>配置hybrid接口</h3><ol>
+<li><p>执行命令<strong>port link-type</strong> <strong>hybrid</strong>，配置接口类型为hybrid。</p>
+</li>
+<li><p>根据实际需要选择任一方式将接口加入VLAN（批量添加的方式与trunk接口一样）：</p>
+<p>执行命令<strong>port hybrid untagged vlan</strong> <em>vlan-id</em> ，配置指定vlan不带标签。</p>
+<p>执行命令<strong>port hybrid tagged vlan</strong> <em>vlan-id</em>，配置指定vlan携带标签。</p>
+</li>
+<li><p>（可选）执行命令<strong>port hybrid pvid vlan</strong> <em>vlan-id</em>，配置Hybrid接口的默认VLAN。</p>
+</li>
+</ol>
+<h3 id="批量添加方式"><a href="#批量添加方式" class="headerlink" title="批量添加方式"></a>批量添加方式</h3><p>接口类型的配置是基于接口的，一般的网管交换机都是24口，一个一个配置很费事。</p>
+<p>可以使用接口组，同时对多个接口进行<strong>相同</strong>的配置。配置不同的话，就还是得一个一个配。</p>
+<p>使用<strong>port-group</strong> <em>group-name</em> 命令创建接口组，指定接口。再按一般的接口类型配置命令进行配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt; system-view</span><br><span class="line">[HUAWEI] port-group pg1</span><br><span class="line">[HUAWEI-port-group-pg1] group-member gigabitethernet0/0/1 to gigabitethernet0/0/5</span><br><span class="line">[HUAWEI-port-group-pg1] port link-type access</span><br><span class="line">[HUAWEI-port-group-pg1] port default vlan 10</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="跨vlan通信"><a href="#跨vlan通信" class="headerlink" title="跨vlan通信"></a>跨vlan通信</h2><p>前面提到过，不同vlan之间无法互相通信，想要跨vlan通信有两种方法，一是使vlan”失效“，二是借助网关。</p>
+<p>接下来就分开介绍这两种方法。</p>
+<h3 id="使用接口类型的配置"><a href="#使用接口类型的配置" class="headerlink" title="使用接口类型的配置"></a>使用接口类型的配置</h3><p>vlan间的通信隔离实际就是通过vlan标签完成的，那么只要让<strong>跨vlan时传递的数据帧不携带vlan标签，就可以实现跨vlan通信。</strong></p>
+<p>需要利用有三点：</p>
+<ul>
+<li>access接口发送的数据帧不携带标签。</li>
+<li>接口要发送的数据帧携带的vlan标签id与该接口的默认vlan的id相同时就会剥离标签。</li>
+<li>采用hybrid接口来剥离与目标终端相连接口的数据帧标签。</li>
+</ul>
+<h4 id="基于access与trunk的配置"><a href="#基于access与trunk的配置" class="headerlink" title="基于access与trunk的配置"></a>基于access与trunk的配置</h4><p>基于前两点就可以实现跨vlan通信了，以下就举一个拓扑案例。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9b3b850b17425fbe0a00b.png" style="zoom:67%;" />
+
+<p>三台交换机串联在一起，每台交换机底下有一台PC，其中交换机1与3下的PC划分为vlan10；交换机2下的PC划分为vlan20。</p>
+<p>PC无法识别带标签的数据帧，那么交换机与PC之间的接口就必须采用access接口。同时已经划分好了vlan，所以该接口的配置命令就完全确定下来了。</p>
+<blockquote>
+<p>三个交换机都使用以下的配置，只是在交换机2将vlan-id改为20；注意括号之后的加粗字符才是真正键入的命令。</p>
+</blockquote>
+<blockquote>
+<p><magiku><strong>system-view</strong><br>[magiku]<strong>vlan 10</strong><br>[magiku-vlan10]<strong>q</strong><br>[magiku]<strong>interface g 0&#x2F;0&#x2F;1</strong><br>[magiku-GigabitEthernet0&#x2F;0&#x2F;1]<strong>port link-type access</strong><br>[magiku-GigabitEthernet0&#x2F;0&#x2F;1]<strong>port default vlan 10</strong></p>
+</blockquote>
+<p>因为涉及了多个vlan，所以交换机之间无法配置为access接口（access接口只能通行一个vlan），必须采用trunk接口。</p>
+<p>同时该接口需要放行vlan10与20，剩下的就是默认vlan（pvid）的确定了。</p>
+<p>现在让我们以交换机1为焦点，只有当标签为vlan10的数据帧才能转发给PC1，那么交换机1的trunk接口所接收到的数据帧就必须为vlan10。</p>
+<p>这有两种方式：（可以往回翻，再重新看一下trunk接口处理标签的机制）</p>
+<ul>
+<li>一是交换机2发来的数据帧不带标签且交换机1的trunk接口默认vlan为10。</li>
+<li>二是交换机2发来的数据帧携带vlan10的标签</li>
+</ul>
+<blockquote>
+<p>不过方式二其实无法做到，因为想发出vlan10的标签。</p>
+<p>在该拓扑之下，只能是交换机2在1号口收到的数据帧，处理为vlan10的标签。</p>
+<p>这就要将1号口改为vlan10，而这就不满足PC2设置为vlan20的要求了。</p>
+</blockquote>
+<p>交换机2收到PC发过来的数据帧会打上vlan20的标签，想要在发送时剥离标签的话，就要将左侧的2号口默认vlan设置为20。</p>
+<p>当不带标签的数据帧从交换机2到达交换机1，由于交换机1的2号口初始默认vlan为vlan1，所以会打上vlan1的标签，这就无法发送给PC1。</p>
+<p>因此还要修改交换机1的2号口默认vlan为vlan10。</p>
+<p>这正好也满足了PC1发送数据帧到达PC2的要求。</p>
+<p>好的，按照以上两点去配置交换机1与交换机2后，PC1与PC2就可以互相通信了。</p>
+<p>再按这个思路去配置交换机2与交换机3之间的接口，那么三台PC之间就能互相通信了。</p>
+<p>其中，PC1与PC3虽然同属vlan10，但数据帧在接触到交换机2的接口时，会被打上20的标签，发出时根据默认vlan的配置，会剥离20标签。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c50c3a5f6d2bc0f234f24.png" style="zoom:67%;" />
+
+<p>在交换机之间抓包的话，都是无标签。标签的变动都是在交换机内部进行的，进入交换机时打上标签，离开交换机时剥离标签。</p>
+<p>交换机1与交换机3的配置一样：</p>
+<blockquote>
+<p>vlan batch 10 20</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1<br> port link-type access<br> port default vlan 10</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;2<br> port link-type trunk<br> port trunk pvid vlan 10<br> port trunk allow-pass vlan 10 20</p>
+</blockquote>
+<p>交换机2的配置：</p>
+<blockquote>
+<p>vlan batch 10 20</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1<br> port link-type access<br> port default vlan 20</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;2<br> port link-type trunk<br> port trunk pvid vlan 20<br> port trunk allow-pass vlan 10 20</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;3<br> port link-type trunk<br> port trunk pvid vlan 20<br> port trunk allow-pass vlan 10 20</p>
+</blockquote>
+<h5 id="小问题"><a href="#小问题" class="headerlink" title="小问题"></a>小问题</h5><p>基于access与trunk的配置来实现跨vlan通信有一个缺点。</p>
+<p>那就是trunk接口只能配置一个默认vlan，所以<strong>只能剥离一个vlan标签</strong>。</p>
+<p>同时，<strong>如果在上一个交换机剥离了标签，那么到本交换机会被打上默认vlan标签。</strong></p>
+<p>具体点，我们把上面的拓扑修改以下，删除交换机3，将PC3连入交换机2。</p>
+<p>因此，需要将3号口修改为access接口，配置为vlan10。</p>
+<p>修改后，PC1与PC2依旧可以互相通信，但PC1与PC3就无法通信了（明明是同一个vlan）。</p>
+<p>因为PC1发送的数据帧在交换机1剥离了标签，在交换机2的2号口打上了20的标签，因为vlan不同，所以交换机不会将数据帧从3号口发送出去。</p>
+<p>同样的，PC2与PC3也因为vlan不同，在同交换机下，无法互相通信。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/ca51a36f37d397b6ba7ce.png" style="zoom:80%;" />
+
+<h4 id="引入hybrid接口的配置"><a href="#引入hybrid接口的配置" class="headerlink" title="引入hybrid接口的配置"></a>引入hybrid接口的配置</h4><p>上面这种拓扑要求已经无法使用access接口与trunk接口来完成跨vlan通信了。</p>
+<p>引入hybrid接口的话，以交换机2为焦点。</p>
+<p>想让PC2与PC3通信，同时保持他们处于vlan20与vlan10。</p>
+<p>那么只能是修改接口为hybrid，同时配置为剥离vlan10与20的标签，再分别配置其默认vlan。</p>
+<blockquote>
+<p>更换接口类型的话，需要删除之前的配置命令，在之前配置的命令前打上<strong>undo</strong>用空格隔开，如果报错了，就去掉命令后面的自定义变量参数。</p>
+</blockquote>
+<p>交换机2修改后的1号口与3号口配置</p>
+<blockquote>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1<br> port hybrid pvid vlan 20<br> port hybrid untagged vlan 10 20</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;3<br> port hybrid pvid vlan 10<br> port hybrid untagged vlan 10 20</p>
+</blockquote>
+<p>修改这两个接口的配置后，这三台PC就又可以互相通信了。</p>
+<p>当然，也可以把其他的接口都修改为hybrid接口，有兴趣的话，建议自己尝试一下。</p>
+<h3 id="使用网关的方式"><a href="#使用网关的方式" class="headerlink" title="使用网关的方式"></a>使用网关的方式</h3><p>一般来说，在企业中会基于部门、职能或办公区划分子网，再同时划分vlan来隔绝广播域。（很多管理设备与方案都是基于ip地址的）</p>
+<p>在这种情形下，<strong>不同网段的设备之间就可以借助网关实现跨vlan通信。</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/bc8f187b3d6c1411dc8c1.png" style="zoom:50%;" />
+
+<p>这是本文一开始的拓扑图，在路由器的接口配置好IP地址，PC上的网关填写为路由器的ip地址。</p>
+<p>再给交换机与路由器相连的接口配置好默认vlan，以保证发送无标签数据帧给路由器。</p>
+<p>这样PC1与PC3就可以互相通信了（三层通信）。</p>
+<p>不过这种方案不成熟，每一个vlan都需要占用一个路由器的物理接口。成熟的采用路由器的方案是单臂路由。</p>
+<h4 id="单臂路由"><a href="#单臂路由" class="headerlink" title="单臂路由"></a>单臂路由</h4><p>所谓的单臂路由就是只使用单条链路连接下行设备的路由器方案。</p>
+<p>单臂路由是通过在物理接口上虚拟出多个逻辑子接口，再配置不同的命令在这些虚拟接口上。</p>
+<p>配置方式：</p>
+<ol>
+<li>执行命令<strong>interface</strong> <em>interface-type</em> <em>interface-number</em>.virtual-number ，创建并进入虚拟子接口视图</li>
+<li>执行命令<strong>dot1q termination vid</strong> <em>vlan-id</em> ，将子接口与vlan进行关联，以处理该vlan的数据帧</li>
+<li>执行命令<strong>ip address</strong> <em>IP地址 子网掩码</em>  ，为该子接口配置ip地址，作为该vlan的网关</li>
+<li>执行命令<strong>arp broadcast enable</strong> ，使接口可以收发ARP广播包（旧型号的华为设备默认不开启该功能，不开启的话无法通信）</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/50a7a8ed771c22dd3a5bf.png" style="zoom:50%;" />
+
+<p>之前的拓扑图就可以修改为这样。AR1路由器上虚拟出了两个接口，配置了两个不同的ip地址作为10网段与30网段的网关地址。</p>
+<p>交换机2这边按正常的trunk方式配置，方向vlan10与vlan30的数据帧。</p>
+<blockquote>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;4<br> port link-type trunk<br> port trunk allow-pass vlan 10 30</p>
+</blockquote>
+<p>路由器的配置：</p>
+<blockquote>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1.10<br> dot1q termination vid 10<br> ip address 10.0.0.254 255.0.0.0<br> arp broadcast enable</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1.30<br> dot1q termination vid 30<br> ip address 30.0.0.254 255.0.0.0<br> arp broadcast enable</p>
+</blockquote>
+<p><strong>注：虚拟子接口的编号强烈建议设置为与vlan-id相同的</strong>，子接口可设置的编号范围与vlan-id的可设置范围都是一样的1-4095。</p>
+<p>经过以上配置后，三台PC之间就可以互相通信了。（PC记得填写好子网掩码与网关地址）</p>
+<p>同时，在路由器处抓包的话，可以看到数据帧的标签是来回切换的。</p>
+<p>发过来的为10标签，经由路由器转发出去时就为30；反过来，收到30，发出去就为10。</p>
+<h4 id="三层交换机与vlanif技术"><a href="#三层交换机与vlanif技术" class="headerlink" title="三层交换机与vlanif技术"></a>三层交换机与vlanif技术</h4><p>还记得我们一开始划分广播域的初衷吗——广播数据会存在过多，占用太多带宽（网络资源），影响网络性能。</p>
+<p>使用单臂路由结合vlan技术，是完美做到了削减广播数据。</p>
+<p>但是，进行跨vlan通信时，都需要跑到路由器上，并且还是单条链路进行收与发（一次双向通信，对上层链路的带宽占用是双倍的）。</p>
+<p>以我们科普篇的一张企业拓扑图举例，明明只是与隔壁交换机下的一台主机互相通信，却要绕一大圈，这不仅降低效率，也占用了太多额外网络资源。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2e501a5217ba45e4f7cfb.png" style="zoom: 33%;" />
+
+
+
+<p>为了解决这一问题，就发展出了三层交换机，由三层交换机作为下行设备的网关，以缩小跨网段通信的“通勤”范围。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/ee47c3dc74642d1eff628.png" style="zoom:50%;" />
+
+<p>vlanif就是三层交换机上的技术，在交换机上虚拟出拥有路由功能的三层接口，并自动绑定vlan。后期很多技术都是在该接口上配置（dns等）。</p>
+<p>注意：</p>
+<blockquote>
+<p>单臂路由的子接口是虚拟在真实物理接口之下的，绑定在物理接口的。更换一个物理接口的话，就无法访问到。</p>
+<p>而vlanif接口是在交换机的内部虚拟出来的三层接口，并不是绑定在某一物理接口，是绑定在vlan上的，匹配到vlan，就能访问到。</p>
+<p>如果在多个物理接口上配置同一个vlan，那么随便接一个接口都可以访问到这个vlanif接口。</p>
+</blockquote>
+<p>配置方法:</p>
+<ol>
+<li>提前创建好vlan</li>
+<li>执行命令<strong>interface Vlanif</strong> <em>vlan-id</em> ，创建vlanif接口，注意id号必须为已创建的vlan。</li>
+<li>执行命令 <strong>ip address</strong> <em>IP地址 子网掩码</em> ， 为vlanif接口绑定ip地址，作为其vlan-id的网关。</li>
+</ol>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/6da346d765ecf8067b4bf.png" style="zoom:50%;" />
+
+<p>将单臂路由的拓扑中的路由器替换为三层交换机，拓扑中其他设备的配置不变。</p>
+<p>只需要配置交换机3：</p>
+<blockquote>
+<p>vlan batch 10 30</p>
+<p>interface GigabitEthernet0&#x2F;0&#x2F;1<br> port link-type trunk<br> port trunk allow-pass vlan 10 30</p>
+<p>interface Vlanif10<br> ip address 10.0.0.254 255.0.0.0</p>
+<p>interface Vlanif30<br> ip address 30.0.0.254 255.0.0.0</p>
+</blockquote>
+<p>三台交换机之间就又可以互相通信了。</p>
+<h5 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h5><p>网络接口分二层接口与三层接口，<strong>路由器默认是三层接口，可以配置ip；交换机默认是二层接口，不可配置ip</strong>，只能配置vlan。</p>
+<p>如果使用了vlanif接口作为下行设备的网关，那么就需要<strong>交换机的另一侧接口也拥有ip地址，才能做路由跳转</strong>。</p>
+<p>这有两种方案：</p>
+<ol>
+<li>将交换机的接口通过命令配置修改为三层接口，然后配置ip（需要交换机支持切换）。</li>
+<li><strong>新建一个vlan，配置在该物理接口上，然后再创建一个vlanif接口并配置ip地址</strong>。</li>
+</ol>
+<p>第一个方案不常用，因为第二个方案更优；可以给多个物理口配置同一个vlan，使其都使用同一个ip地址；而<strong>三层物理口无法做到多个接口使用同一个ip地址。</strong></p>
+<p>多个物理口同ip的优势，一个是可以从每个接口独立分出，连接到傻瓜交换机或无线路由器&#x2F;AP作为接口拓展；另一个是后期链路故障时，可以很快速的通过更换接口来恢复网络。（现网中，可以提前规划配置好交换机的某两个接口为直连路由器的；这一链路故障后，直接在机房更换到空闲的另一个接口即可。）</p>
+<p>关于三层交换机与路由器的搭配，由于还未学习路由技术，本文暂不详细介绍，之后会通过一个实验来融合讲解。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/2023/12/11/%E3%80%90%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%E3%80%91vlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/">https://magiku.github.io/2023/12/11/%E3%80%90%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%E3%80%91vlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，转载请注明出处！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a><a class="post-meta__tags" href="/tags/%E4%BA%A4%E6%8D%A2/">交换</a><a class="post-meta__tags" href="/tags/vlan/">vlan</a></div><div class="post_share"><div class="social-share" data-image="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/19/%E4%BA%A4%E6%8D%A2%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" title="交换路由基础命令（查阅版）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">交换路由基础命令（查阅版）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/19/%E3%80%90%E7%A7%91%E6%99%AE%E3%80%91%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" title="【科普】计算机网络概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="title">【科普】计算机网络概述</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/e0c9f4bf477e8b40cd838.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Magiku</div><div class="author-info__description">个人博客，用于记录知识库。<br>希望这些笔记能对你有所帮助！<br>要是有什么需要交流的，欢迎联系我~</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" href="/about/"><i class="fas fa-heart"></i><span>about</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://telegraph-image-713.pages.dev/file/d4b2b9f9468bef99c40b0.jpg" target="_blank" title="QQ"><i class="fab fa-qq" style="color: #6899ee;"></i></a><a class="social-icon" href="https://telegraph-image-713.pages.dev/file/47f3b24d63bbc1e29ec05.jpg" target="_blank" title="微信"><i class="fab fa-weixin" style="color: #44d55c;"></i></a><a class="social-icon" href="https://space.bilibili.com/39293027" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili" style="color: #e3d9;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VLAN"><span class="toc-number">2.</span> <span class="toc-text">VLAN</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFVLAN"><span class="toc-number">2.1.</span> <span class="toc-text">什么是VLAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81VLAN"><span class="toc-number">2.2.</span> <span class="toc-text">为什么需要VLAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN%E6%8A%80%E6%9C%AF%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.3.</span> <span class="toc-text">VLAN技术带来的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">VLAN的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VLAN%E7%9A%84%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E5%92%8CVLAN%E6%A0%87%E7%AD%BE%E7%9A%84%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6"><span class="toc-number">2.5.</span> <span class="toc-text">VLAN的接口类型和VLAN标签的处理机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4VLAN-%E7%BC%BA%E7%9C%81VLAN"><span class="toc-number">2.6.</span> <span class="toc-text">默认VLAN&#x2F;缺省VLAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%82%B9"><span class="toc-number">2.7.</span> <span class="toc-text">重点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Access%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.8.</span> <span class="toc-text">Access接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trunk%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.9.</span> <span class="toc-text">Trunk接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hybrid%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.10.</span> <span class="toc-text">Hybrid接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE"><span class="toc-number">2.11.</span> <span class="toc-text">接口类型的命令配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAvlan"><span class="toc-number">2.11.1.</span> <span class="toc-text">创建vlan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEaccess%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.11.2.</span> <span class="toc-text">配置access接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEtrunk%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.11.3.</span> <span class="toc-text">配置trunk接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEhybrid%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.11.4.</span> <span class="toc-text">配置hybrid接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E6%96%B9%E5%BC%8F"><span class="toc-number">2.11.5.</span> <span class="toc-text">批量添加方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8vlan%E9%80%9A%E4%BF%A1"><span class="toc-number">2.12.</span> <span class="toc-text">跨vlan通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.12.1.</span> <span class="toc-text">使用接口类型的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Eaccess%E4%B8%8Etrunk%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.12.1.1.</span> <span class="toc-text">基于access与trunk的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%8F%E9%97%AE%E9%A2%98"><span class="toc-number">2.12.1.1.1.</span> <span class="toc-text">小问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E5%85%A5hybrid%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.12.1.2.</span> <span class="toc-text">引入hybrid接口的配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%BD%91%E5%85%B3%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">2.12.2.</span> <span class="toc-text">使用网关的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E8%87%82%E8%B7%AF%E7%94%B1"><span class="toc-number">2.12.2.1.</span> <span class="toc-text">单臂路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%B8%8Evlanif%E6%8A%80%E6%9C%AF"><span class="toc-number">2.12.2.2.</span> <span class="toc-text">三层交换机与vlanif技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8B%93%E5%B1%95"><span class="toc-number">2.12.2.2.1.</span> <span class="toc-text">拓展</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Magiku</div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'd55e9307ca605124a542',
+      clientSecret: '73a85d39b9bda1aa0f24ac51ea5a9504edf02277',
+      repo: 'magiku.github.io',
+      owner: 'magiku',
+      admin: ['magiku'],
+      id: '34b3f31af74c2e348269e3dbada265db',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/计算机网络/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 计算机网络 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://magiku.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '39b2c1fede67489eb9265b983874c66d';
+  var gaud_map_key = '84b1f52230bfdc06111b20984a0b04d9';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.324587,23.106574';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

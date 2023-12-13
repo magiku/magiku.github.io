@@ -203,7 +203,7 @@
 </blockquote>
 <p>如果家中设备比较多，那么可以在无线路由器下再连接一个小型交换机</p>
 <p>最终就是这样样子</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/158ff4cbec247bfd2bd43.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9de074a8bc2776f472146.png" alt="图1——家庭网络架构"></p>
 <p>简单用文字介绍，那就是 运营商提供的链路——光猫——路由器——交换机——网络设备</p>
 <p>接下来就简单介绍这些设备在网络中起到什么作用</p>
 <h4 id="光猫、或者说“猫”"><a href="#光猫、或者说“猫”" class="headerlink" title="光猫、或者说“猫”"></a>光猫、或者说“猫”</h4><p>这个设备的作用就是<strong>信号转换</strong>。比如将光纤中的光信号与网线中的电信号作互相转换。</p>
@@ -227,9 +227,9 @@
 <p>这里贴一个网络拓扑图可以参考一下（与家庭网络相比最主要的区别就是将WIFI功能从路由器上剥离，使用专门的无线AP设备来实现）</p>
 <p>强调一下，家用无线路由器是集成了WiFi、路由、交换三种功能的设备。在企业网络中，一般都是由专门的设备独立负责的（不使用家用无线路由器是出于性能考虑）</p>
 </blockquote>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/c18e9158b6b651bb8f787.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/1f6b213e66604a8bc5c32.png" alt="图2——企业网络架构"></p>
 <h1 id="网络信息"><a href="#网络信息" class="headerlink" title="网络信息"></a>网络信息</h1><p>本章介绍网络通信时所需要的信息，平时会折腾一下电脑或手机网络可能都会看到这些</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/8f46c168c9517825dc3ec.png" alt="电脑"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/65bfc6defc73214dd2cca.png" alt="图3——计算机网络信息"></p>
 <p>其中我们需要注意的 MAC地址（物理地址）、IP地址（一般指IPv4地址）、网关、DHCP、DNS。</p>
 <blockquote>
 <p>MAC地址是网卡的身份证——每个网络设备上至少有一块网卡，mac地址就是用来标识网卡的，严格来讲mac并不叫“地址”。</p>
@@ -246,21 +246,21 @@
 <p>具体一点就是你与很多qq好友同时在线聊天，你接收到A好友发来的消息并不会跑错到B好友的聊天窗口中。</p>
 <p>这是因为在你的电脑上虚拟了很多个端口，应用进程使用其中一个端口与对方通信，就不会跟其他的冲突了。</p>
 <p>打开系统的资源监视器就可以直观的看到了，注意看我只运行了一个qq（PID为12344），但它已经使用了很多个端口在与不同的远端电脑通信。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/757c7ca49bb01ef5cfa89.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/1c0515d4c9db8294d58f8.png" alt="图4——计算机进程端口映射表"></p>
 <h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p>协议就是规则、规范，或者说一种语言。</p>
 <p>因为计算机网络中传播的数据只有0和1，为此就需要协议来定义出各种编码解码方式（类似摩斯密码）</p>
 <p>以及定义得到的各种参数代表什么含义。（类似缩写与黑话）</p>
 <p>计算机通信中存在着许多的协议，这里按五层模型来展示的话，一共有这么多协议。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://telegraph-image-713.pages.dev/file/33c5aa445129f81e48ab8.png" alt="图源华为"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c69fcfccbbc0493af63b9.png" alt="图5——分层网络协议"></p>
 <p>目前只需要知道有协议这个概念就行，以后会具体一个个协议的学习</p>
 <h4 id="网络参考模型"><a href="#网络参考模型" class="headerlink" title="网络参考模型"></a>网络参考模型</h4><p>七层模型是ISO组织于1984年发布的细化的网络层级，更多的作用是让你理解网络通信这个抽象的东西，同时让厂商基于这个层级去标准化规范化的设置与遵循协议。</p>
 <p>故障排查时也可以按照七层模型来逐级排查。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">应用层:	OSI参考模型中最靠近用户的一层,为应用程序提供网络服务。</span><br><span class="line"></span><br><span class="line">表示层:	提供各种用于应用层数据的编码和转换功能,确保一个系统的应用层发送的数据能被另一个系统的应用层识别。</span><br><span class="line"></span><br><span class="line">会话层:	负责建立、管理和终止表示层实体之间的通信会话。该层的通信由不同设备中的应用程序之间的服务请求和响应组成。</span><br><span class="line"></span><br><span class="line">传输层:	提供面向连接或非面向连接的数据传递以及进行重传前的差错检测。</span><br><span class="line"></span><br><span class="line">网络层:	定义逻辑地址,供路由器确定路径,负责将数据从源网络传输到目的网络。</span><br><span class="line"></span><br><span class="line">数据链路层:将比特组合成字节,再将字节组合成帧,使用链路层地址(以太网使用MAC地址)来访问介质,并进行差错检测。</span><br><span class="line"></span><br><span class="line">物理层:	在设备之间传输比特流,规定了电平、速度和电缆针脚等物理特性。</span><br></pre></td></tr></table></figure>
 
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/0dcd11e0b854a68df0ad9.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/34123c5a32b053223662b.png" alt="图6——分层传输过程"></p>
 <p>而TCP&#x2F;IP四层&#x2F;五层模型可以说是对OSI七层模型的简化。将最上的5、6、7层简化为一层。</p>
 <p>具体内容感兴趣可自行查阅资料，<strong>目前五层模型更被广泛接受。</strong></p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/7ff7aaf7bb0729cffc596.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/b442b24545d26f20f99b6.png" alt="图7——两种分层协议对比"></p>
 <p>目前只需要知道<strong>二层是基于mac地址进行数据传输，三层是基于ip地址传输。</strong></p>
 <p>因此在电脑之间的网络传播都是处于前3层上的。</p>
 <p>路由器都是三层设备，而交换机会有二层交换机与三层交换机之分，一般个人接触到交换机都是二层交换机。</p>
@@ -313,7 +313,7 @@
 <h1 id="数据包的传输过程"><a href="#数据包的传输过程" class="headerlink" title="数据包的传输过程"></a>数据包的传输过程</h1><h2 id="交换阶段"><a href="#交换阶段" class="headerlink" title="交换阶段"></a>交换阶段</h2><p>不知道各位在学校上电脑课时，在老师还没开通“上网”功能前，有没有偷偷跟同学联机打几把cs。</p>
 <p>多台电脑在没连通互联网时是如何联机打游戏的呢？ 应该有人会说出一个词——“局域网”。</p>
 <p>局域网就是一个小型网络，在学校机房这个地方，其局域网可以简化为这样。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/aa50590ddc1d68327bde3.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/5b2b3d360339a99117c90.png" alt="图8——拓扑"></p>
 <blockquote>
 <p>交换机SW2开启DHCP功能，1号口连接SW1的4号口。MAC地址为：4c-1f-cc-25-2c-49</p>
 <p>交换机SW1的1、2、3号口分别连接PC1、PC2、PC3。MAC地址为：54-89-98-b6-57-ab</p>
@@ -347,7 +347,7 @@
 <p><strong>若不同子网，电脑会将数据包的目标mac填写为网关的mac地址，使该数据包发送给网关，由网关去寻找目标ip</strong></p>
 <p><strong>若同一子网，电脑会将额外发送一个ARP数据包</strong>，该数据包的目标mac填写为ffffffffffff，也就是广播。<strong>通过ARP获取了目标主机的mac地址后，才开始发送数据包。</strong></p>
 <p>这里我抓了个包，是在PC1与PC2都没有对方mac信息是，由PC1去访问PC2的ip地址。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9d40077d00fb8c1f047f6.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/81fe6f52ea7bc0c80b266.png" alt="图9——抓包信息"></p>
 <p>其中，第二行这段就是二层的信息，其注明了源地址为54:89:98:b6:57:ab 目标地址为ff:ff:ff:ff:ff:ff。以及该数据包的类型为ARP</p>
 <p>交换机只识别到二层信息，发现目标地址是广播地址（全F），于是转发给所有主机。</p>
 <blockquote>
@@ -361,7 +361,7 @@
 <p>PC2收到这个数据包后，解析内容知道这是一个ARP数据包，并且数据内容中含有自己的IP地址（192.168.10.252）。</p>
 <p>于是遵循协议，它会回复一个数据包。</p>
 <p>该数据包，自然就写上了PC2自身的mac地址，PC1收到这个数据包，也就清楚了192.168.10.252对应54:89:98:32:67:f6</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/a4ec5be02902890982388.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9334b3568d41a1e9627a2.png" alt="图10——抓包2"></p>
 <p>我们也可以验证一下，在PC1的命令行中查看ARP表。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PC&gt;arp -a</span><br><span class="line"></span><br><span class="line">Internet Address    Physical Address    Type</span><br><span class="line">192.168.10.252      54-89-98-32-67-F6   dynamic</span><br></pre></td></tr></table></figure>
 
@@ -380,7 +380,7 @@
 <p>（不与其他网段的设备通讯的话，可不填写网关）</p>
 <p>什么叫网段呢，网络号不相同的ip地址就是处于不同的网段，网段就是ip地址与子网掩码进行与运算后得到的网络地址。</p>
 <p>因此我们先介绍子网的概念</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/279384d0a3fdd519292a9.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/7fe940190b93f6df4f8e2.png" alt="图11——计算机ip信息"></p>
 <h3 id="子网"><a href="#子网" class="headerlink" title="子网"></a>子网</h3><p>我们可以看到ip地址、子网掩码每行都是由四段组成的，实际是4个字节，也就是4个8位二进制。例如</p>
 <p>00000000  00000000  00000000  00000000 表示的是0.0.0.0</p>
 <p>11111111  11111111  11111111  11111111 表示的是255.255.255.255</p>
@@ -489,7 +489,7 @@
 <p>网关收到给自己的数据包，发现虽然mac’地址是自己，但ip地址不是自己的，网关就会根据路由信息去转发这个数据包。</p>
 </blockquote>
 <p> 所以把路由设备叫做网关很好理解，跟海关差不多。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/92f863b34b74efe9708fb.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/bc8ded095962c0e282284.png" alt="图12——物流过程"></p>
 <blockquote>
 <p>1、电脑发送数据包</p>
 <p>2、链路传输</p>
@@ -503,7 +503,7 @@
 <h4 id="路由原理"><a href="#路由原理" class="headerlink" title="路由原理"></a>路由原理</h4><p>路由设备与交换机可以说原理大同小异。</p>
 <p>路由设备内部也是维护这一个数据表格，叫做路由表。</p>
 <p>我在模拟器上搭了个简单的网络拓扑</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/fa1e1a8a9187412922241.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/97888e3a3d7e245c3dc40.png" alt="图13——拓扑2"></p>
 <blockquote>
 <p>图片内容描述:</p>
 <p>三台专业路由器AR1、AR2、AR3连接在一起，它们底下各自连着一台PC</p>

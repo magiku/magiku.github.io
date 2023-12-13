@@ -209,8 +209,7 @@
 <p>而VLAN，即虚拟局域网，这种技术不需要修改设备的ip地址与网段，直接在<strong>二层网络</strong>中不涉及网络层的情况下就能虚拟出局域网，完成广播域的隔离。  </p>
 <p>还有一个更主要的原因是原先使用网段划分，需要使用大量的路由器。<strong>如果依旧采用单台路由器配合多台交换机的方案，那还是无法隔离</strong>。</p>
 <p>这是因为交换机只解封装到二层，发现数据帧报头的广播地址，便会从交换机的所有接口转发出去，不会去区分网段是否一致。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/21454544eed49d45d1f96.png" style="zoom:50%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/0ce8198d35b4c07a68ecd.png" alt="图1——前言拓扑"></p>
 <blockquote>
 <p>例如以上拓扑图，PC1是10网段，PC2也是10网段，但PC3是30网段。</p>
 <p>PC1要与PC2通信，因为没有PC2的mac地址，于是发送了ARP广播来询问PC2的mac地址。</p>
@@ -218,12 +217,7 @@
 <p>但只要去抓包，就能知道交换机2会将ARP包也转发给PC3跟路由器。</p>
 </blockquote>
 <p>引入vlan这种二层技术，只需要交换机就可以完成广播域的隔离了。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/f8603a485c1e271f73c00.png" style="zoom:67%;" />
-
-  
-
-
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/4b323cb19471ec3628159.png" alt="图2——vlan作用"></p>
 <h2 id="VLAN技术带来的问题"><a href="#VLAN技术带来的问题" class="headerlink" title="VLAN技术带来的问题"></a>VLAN技术带来的问题</h2><p>VLAN技术，可以在数据链路层的层面进行隔绝广播域，这非常好的解决了广播泛滥带来的性能显著下降甚至造成网络不可用等问题。但也正因为隔绝了广播域，它带来了新的问题。  </p>
 <p>广播包无法发送到其他vlan下的设备，意味着ARP包也无法跨vlan传播，这就导致<strong>无法获取其他vlan下设备的mac地址</strong>，进而导致不同vlan之间无法进行通信。**[ 但实际上即便知道了mac地址并手动绑定进ARP表中，也无法跨vlan通信；交换机不仅隔绝了广播包，不同vlan之间的单播包也会被拦截。]**</p>
 <p>不过，也有很多人将这一问题视为vlan的优点，认为这<strong>增加了网络的安全性</strong>。  </p>
@@ -238,13 +232,11 @@
 <p>CFI（Canonical Format Identifier）：CFI字段是VLAN标签的第三个字段，占据1个比特位。CFI字段用于指示MAC地址是否采用规范格式。当CFI字段的值为0时，表示MAC地址采用规范格式；当CFI字段的值为1时，表示MAC地址采用非规范格式。</p>
 <p><strong>VID</strong>（VLAN Identifier）：VID字段是VLAN标签的最后一个字段，占据12个比特位。<strong>VID字段用于标识数据帧所属的VLAN</strong>。每个VLAN都有一个唯一的VLAN ID，可以支持最多4096个不同的VLAN。<strong>通过VID字段，交换机可以根据VLAN ID来识别并转发数据帧到相应的VLAN</strong>。(<strong>协议规定了VLAN0与VLAN4095作为保留，因此真正可使用的为4094个</strong>)</p>
 </blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2fc22496b3710e1214cf0.png" style="zoom: 80%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/6f0a5b5eb68ea089a9db4.png" alt="图3——vlan标签"></p>
 <p>请记住一点：<strong>VLAN是在交换设备上的技术，网络终端（PC）是不会发送与接收带有VLAN的数据帧。</strong></p>
 <p>人为的在交换机上配置VLAN的划分规则后，PC发送过来的数据帧在经过交换机时，就会被交换机添加上VLAN标签。</p>
 <p>交换机根据vlan标签来确定数据帧的发送范围，而当下一跳就为目的终端时，交换机会先将vlan标签剥离再发送。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/4752ef0f75797c048f585.png" style="zoom: 67%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/ccfa1235bb485bb68b304.png" alt="图4——vlan标签的作用"></p>
 <p><strong>打标签与剥离标签是vlan技术的重点内容。</strong>为了更好更方便的管理vlan标签，就引入了接口类型的概念。</p>
 <p>实际上vlan的实现方式有好几种，但<strong>目前广泛采用的都是基于接口的方式</strong>。</p>
 <p>简单说一下其他方式吧：【以下方式不被广泛采用都是因为配置繁琐、后期维护与拓展不易或有较大的漏洞（比如mac地址可被人为修改）】</p>
@@ -311,10 +303,7 @@
 <p>因为access接口在设定上是与无法识别带vlan标签的终端连接的。</p>
 <p>因此，当一个带标签数据帧的目标链路是access接口所在的链路，那么交换机在发送数据帧时会将标签剔除。</p>
 </blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/3e632a34c3ac1e8e73515.png" style="zoom: 33%;" />
-
-
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/8e4311234a6ed980c5d3f.png" alt="图5——access接口标签处理"></p>
 <h2 id="Trunk接口"><a href="#Trunk接口" class="headerlink" title="Trunk接口"></a>Trunk接口</h2><p><strong>Trunk接口一般用于连接交换机</strong>、路由器、AP。</p>
 <p>它可以<strong>允许多个VLAN的帧带Tag通过</strong>，但只允许<strong>属于默认VLAN的帧从该类接口上发出时不带Tag</strong>（即剥离标签）。</p>
 <blockquote>
@@ -324,10 +313,7 @@
 </blockquote>
 <p>Trunk接口上的默认VLAN，有的厂商也将它定义为native VLAN。</p>
 <p>当Trunk接口收到Untagged帧时，会为Untagged帧打上Native VLAN对应的Tag。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/da443d2f87560f8f7a5fd.png" style="zoom: 33%;" />
-
-
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/331010dae222f3b35a3ff.png" alt="图6——trunk接口标签处理"></p>
 <h2 id="Hybrid接口"><a href="#Hybrid接口" class="headerlink" title="Hybrid接口"></a>Hybrid接口</h2><p>Hybrid接口既可以用于连接不能识别Tag的用户终端（如用户主机、服务器）和网络设备（如Hub），也可以用于连接交换机、路由器、AP。</p>
 <p>它<strong>可以允许多个VLAN的帧带Tag通过，且允许从该类接口发出的帧根据需要配置某些VLAN的帧带Tag（即不剥除Tag）、某些VLAN的帧不带Tag（即剥除Tag）。</strong></p>
 <blockquote>
@@ -408,8 +394,7 @@
 <li>采用hybrid接口来剥离与目标终端相连接口的数据帧标签。</li>
 </ul>
 <h4 id="基于access与trunk的配置"><a href="#基于access与trunk的配置" class="headerlink" title="基于access与trunk的配置"></a>基于access与trunk的配置</h4><p>基于前两点就可以实现跨vlan通信了，以下就举一个拓扑案例。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/9b3b850b17425fbe0a00b.png" style="zoom:67%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/3ef9129ec58b6f4196c7f.png" alt="图7——跨vlan通信拓扑1"></p>
 <p>三台交换机串联在一起，每台交换机底下有一台PC，其中交换机1与3下的PC划分为vlan10；交换机2下的PC划分为vlan20。</p>
 <p>PC无法识别带标签的数据帧，那么交换机与PC之间的接口就必须采用access接口。同时已经划分好了vlan，所以该接口的配置命令就完全确定下来了。</p>
 <blockquote>
@@ -438,8 +423,7 @@
 <p>好的，按照以上两点去配置交换机1与交换机2后，PC1与PC2就可以互相通信了。</p>
 <p>再按这个思路去配置交换机2与交换机3之间的接口，那么三台PC之间就能互相通信了。</p>
 <p>其中，PC1与PC3虽然同属vlan10，但数据帧在接触到交换机2的接口时，会被打上20的标签，发出时根据默认vlan的配置，会剥离20标签。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c50c3a5f6d2bc0f234f24.png" style="zoom:67%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/77a9d3c048764f31d0ba2.png" alt="图8——标签过程.png"></p>
 <p>在交换机之间抓包的话，都是无标签。标签的变动都是在交换机内部进行的，进入交换机时打上标签，离开交换机时剥离标签。</p>
 <p>交换机1与交换机3的配置一样：</p>
 <blockquote>
@@ -462,8 +446,7 @@
 <p>修改后，PC1与PC2依旧可以互相通信，但PC1与PC3就无法通信了（明明是同一个vlan）。</p>
 <p>因为PC1发送的数据帧在交换机1剥离了标签，在交换机2的2号口打上了20的标签，因为vlan不同，所以交换机不会将数据帧从3号口发送出去。</p>
 <p>同样的，PC2与PC3也因为vlan不同，在同交换机下，无法互相通信。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/ca51a36f37d397b6ba7ce.png" style="zoom:80%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c20393b35d48c02da12b5.png" alt="图9——拓扑修改"></p>
 <h4 id="引入hybrid接口的配置"><a href="#引入hybrid接口的配置" class="headerlink" title="引入hybrid接口的配置"></a>引入hybrid接口的配置</h4><p>上面这种拓扑要求已经无法使用access接口与trunk接口来完成跨vlan通信了。</p>
 <p>引入hybrid接口的话，以交换机2为焦点。</p>
 <p>想让PC2与PC3通信，同时保持他们处于vlan20与vlan10。</p>
@@ -480,8 +463,7 @@
 <p>当然，也可以把其他的接口都修改为hybrid接口，有兴趣的话，建议自己尝试一下。</p>
 <h3 id="使用网关的方式"><a href="#使用网关的方式" class="headerlink" title="使用网关的方式"></a>使用网关的方式</h3><p>一般来说，在企业中会基于部门、职能或办公区划分子网，再同时划分vlan来隔绝广播域。（很多管理设备与方案都是基于ip地址的）</p>
 <p>在这种情形下，<strong>不同网段的设备之间就可以借助网关实现跨vlan通信。</strong></p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/bc8f187b3d6c1411dc8c1.png" style="zoom:50%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2eb9af0aa1f4255227fc4.png" alt="图10——路由跨vlan"></p>
 <p>这是本文一开始的拓扑图，在路由器的接口配置好IP地址，PC上的网关填写为路由器的ip地址。</p>
 <p>再给交换机与路由器相连的接口配置好默认vlan，以保证发送无标签数据帧给路由器。</p>
 <p>这样PC1与PC3就可以互相通信了（三层通信）。</p>
@@ -495,8 +477,7 @@
 <li>执行命令<strong>ip address</strong> <em>IP地址 子网掩码</em>  ，为该子接口配置ip地址，作为该vlan的网关</li>
 <li>执行命令<strong>arp broadcast enable</strong> ，使接口可以收发ARP广播包（旧型号的华为设备默认不开启该功能，不开启的话无法通信）</li>
 </ol>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/50a7a8ed771c22dd3a5bf.png" style="zoom:50%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/eeeddfa296bcdf6e6e74f.png" alt="图11——单臂路由"></p>
 <p>之前的拓扑图就可以修改为这样。AR1路由器上虚拟出了两个接口，配置了两个不同的ip地址作为10网段与30网段的网关地址。</p>
 <p>交换机2这边按正常的trunk方式配置，方向vlan10与vlan30的数据帧。</p>
 <blockquote>
@@ -515,13 +496,9 @@
 <p>使用单臂路由结合vlan技术，是完美做到了削减广播数据。</p>
 <p>但是，进行跨vlan通信时，都需要跑到路由器上，并且还是单条链路进行收与发（一次双向通信，对上层链路的带宽占用是双倍的）。</p>
 <p>以我们科普篇的一张企业拓扑图举例，明明只是与隔壁交换机下的一台主机互相通信，却要绕一大圈，这不仅降低效率，也占用了太多额外网络资源。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2e501a5217ba45e4f7cfb.png" style="zoom: 33%;" />
-
-
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/806480ad0d572120876ea.png" alt="图12——单路复用"></p>
 <p>为了解决这一问题，就发展出了三层交换机，由三层交换机作为下行设备的网关，以缩小跨网段通信的“通勤”范围。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/ee47c3dc74642d1eff628.png" style="zoom:50%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/db93425ec7a33881dfd94.png" alt="图13——三层交换"></p>
 <p>vlanif就是三层交换机上的技术，在交换机上虚拟出拥有路由功能的三层接口，并自动绑定vlan。后期很多技术都是在该接口上配置（dns等）。</p>
 <p>注意：</p>
 <blockquote>
@@ -535,8 +512,7 @@
 <li>执行命令<strong>interface Vlanif</strong> <em>vlan-id</em> ，创建vlanif接口，注意id号必须为已创建的vlan。</li>
 <li>执行命令 <strong>ip address</strong> <em>IP地址 子网掩码</em> ， 为vlanif接口绑定ip地址，作为其vlan-id的网关。</li>
 </ol>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/6da346d765ecf8067b4bf.png" style="zoom:50%;" />
-
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/8dac6ce949d43ef80a79f.png" alt="图14——vlanif"></p>
 <p>将单臂路由的拓扑中的路由器替换为三层交换机，拓扑中其他设备的配置不变。</p>
 <p>只需要配置交换机3：</p>
 <blockquote>

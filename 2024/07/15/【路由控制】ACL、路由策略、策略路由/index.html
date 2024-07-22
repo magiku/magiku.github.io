@@ -162,7 +162,7 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
   const $loadingBox = document.getElementById('loading-box')
   const $body = document.body
   const preloader = {
@@ -394,16 +394,20 @@
 <li><strong>ACL</strong></li>
 </ul>
 <p>ACL是将报文中的入接口、源或目的地址、协议类型、源或目的端口号作为匹配条件的过滤器，在各路由协议发布、接收路由时单独使用。在Route-Policy的<strong>If-match</strong>子句中<strong>只支持基本ACL</strong>。</p>
+<blockquote>
+<p>在基本ACL中，虽然配置的是“<strong>source</strong> <em>ip mask</em>”，但应用在路由策略中时，是匹配路由条目中的目标网段。</p>
+<p>因此ip字段建议配置为网段的网络地址；mask字段配置为0.0.0.0，表示严格匹配该网络地址。</p>
+</blockquote>
 <ul>
 <li><strong>地址前缀列表（IP Prefix List）</strong></li>
 </ul>
 <p>地址前缀列表将源地址、目的地址和下一跳的地址前缀作为匹配条件的过滤器，可在各路由协议发布和接收路由时单独使用。</p>
-<p>每个地址前缀列表可以包含多个索引（index），每个索引对应一个节点。路由按索引号从小到大依次检查各个节点是否匹配，任意一个节点匹配成功，将不再检查其他节点。若所有节点都匹配失败，路由信息将被过滤。</p>
+<p>每个地址前缀列表可以包含多个索引（index），每个索引对应一个节点。路由按索引号从小到大依次检查各个节点是否匹配，任意一个节点匹配成功，将不再检查其他节点。</p>
 <p>根据匹配的前缀不同，前缀过滤列表可以进行精确匹配，也可以进行在一定掩码长度范围内匹配。</p>
 <p>当IP地址为0.0.0.0时表示通配地址，表示掩码长度范围内的所有路由都被Permit或Deny。</p>
 <blockquote>
-<p>因为if-match语句携带的ACL只支持基本ACL，在Route-Policy只能用作过滤指定目的地址；</p>
-<p>所以对于需要将源地址作为条件的场景就需要使用地址前缀列表了。</p>
+<p>因为if-match语句携带的ACL只支持<u>基本ACL</u>，在Route-Policy只能用作过滤指定目标网段的路由信息；</p>
+<p>所以对于需要将源地址作为条件的场景就需要使用<u>地址前缀列表</u>了。</p>
 </blockquote>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
 <li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
@@ -421,8 +425,9 @@
 <li>如果ACL规则的动作是<strong>deny</strong>时，那么被此条rule规则匹配的路由信息被认为未通过<strong>if-match</strong>子句的检查。</li>
 <li>如果路由信息不在ACL规则指定的范围内，那么这些路由信息被认为未通过<strong>if-match</strong>子句的检查。</li>
 <li>如果ACL中不存在规则，那么在此节点检查的所有路由信息被认为未通过<strong>if-match</strong>子句的检查。</li>
-<li>对于<strong>route-policy</strong>中的<strong>permit</strong>节点，路由信息如果通过<strong>if-match</strong>子句的检查，则执行<strong>apply</strong>子句的相应动作；未通过<strong>if-match</strong>子句的检查则匹配<strong>route-policy</strong>下一个节点中<strong>apply</strong>子句的相应动作。</li>
-<li>对于<strong>route-policy</strong>中的<strong>deny</strong>节点，路由信息如果通过<strong>if-match</strong>子句的检查，则不被执行<strong>apply</strong>子句的相应动作；未通过<strong>if-match</strong>子句的检查则匹配<strong>route-policy</strong>下一个节点中<strong>apply</strong>子句的相应动作。</li>
+<li>未通过<strong>if-match</strong>子句的检查则匹配<strong>route-policy</strong>下一个节点（如果有）。</li>
+<li>对于<strong>route-policy</strong>中的<strong>permit</strong>节点，路由信息如果通过<strong>if-match</strong>子句的检查，则执行<strong>apply</strong>子句的相应动作。</li>
+<li>对于<strong>route-policy</strong>中的<strong>deny</strong>节点，路由信息如果通过<strong>if-match</strong>子句的检查，则不被执行<strong>apply</strong>子句的相应动作。</li>
 </ul>
 </blockquote>
 </li>
@@ -462,14 +467,15 @@
 <h4 id="使用地址前缀列表作为过滤器，在引入静态路由时，进行筛选"><a href="#使用地址前缀列表作为过滤器，在引入静态路由时，进行筛选" class="headerlink" title="使用地址前缀列表作为过滤器，在引入静态路由时，进行筛选"></a>使用地址前缀列表作为过滤器，在引入静态路由时，进行筛选</h4><p>如果继续使用刚刚的拓扑图，那么采用地址前缀列表的方式，配置如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#提前删除之前配置的route-policy与路由引入</span><br><span class="line">#创建名为no3的地址前缀过滤器，设置过滤规则</span><br><span class="line">[R1]ip ip-prefix no3 permit 10.0.1.0 24</span><br><span class="line">[R1]ip ip-prefix no3 permit 10.0.2.0 24</span><br><span class="line">#创建名为no3的route-policy，绑定地址前缀过滤器</span><br><span class="line">[R1]route-policy no3 permit node 10</span><br><span class="line">[R1-route-policy]if-match ip-prefix no3</span><br><span class="line">[R1-route-policy]q</span><br><span class="line">#进入ospf，引入直连路由的同时绑定route-policy。</span><br><span class="line">[R1]ospf 1</span><br><span class="line">[R1-ospf-1]import-route direct route-policy no3</span><br></pre></td></tr></table></figure>
 
-<p>解释一下，<strong>ip-prefix默认动作为deny</strong>，也就是说对于没有匹配到规则的报文都一律拒绝通过。因此此处才没有专门配置“ip ip-prefix no3 deny 10.0.3.0 24”。</p>
+<p>解释一下，<strong>ip-prefix默认动作为deny</strong>，也就是说对于没有匹配到规则的报文都一律拒绝通过。</p>
+<p>因此此处才没有专门配置“ip ip-prefix no3 deny 10.0.3.0 24”。</p>
 <p>关于ip-prefix的语法，还有三个可选参数，分别是：</p>
 <ul>
 <li>index：编号，默认步长为10。与acl的rule编号、route-policy的node编号是一个用途。</li>
 <li>greater-equal：要求掩码长度大于等于指定数值。</li>
 <li>less-equal：要求掩码长度小于等于指定数值。</li>
 </ul>
-<p>ip-prefix的默认动作为deny，如果我们的需求是只禁止某几条路由信息，那么我们就可以配置以下命令。</p>
+<p><strong>ip-prefix的默认动作为deny</strong>，如果我们的需求是只禁止某几条路由信息，那么我们就可以配置以下命令。（index编号值大于要deny的那几条）</p>
 <ul>
 <li><p><strong>ip ip-prefix</strong> name <strong>index</strong> 10 <strong>permit</strong> 0.0.0.0 0 <strong>less-equal</strong> 32</p>
 <blockquote>
@@ -483,10 +489,10 @@
 <h2 id="Filter-Policy"><a href="#Filter-Policy" class="headerlink" title="Filter-Policy"></a>Filter-Policy</h2><p>本节将介绍另外一款用于路由过滤的工具——Filter-Policy (过滤-策略)，可以将其视为一种路由过滤器。</p>
 <p>filter-policy工作在协议的进程下，可以作用于进程的进出两个方向。</p>
 <blockquote>
-<p>但它只能过滤路由信息，并不检查过滤链路状态信息，因此在OSPF协议下，它不适合用在出方向。</p>
-<p>而在入方向，过滤只会影响lsdb的加表过程，不会影响到lsa。</p>
-<p>如果ospf的边界路由器执行过滤，他只会对其他area泛洪自身已加表的路由。</p>
-<p>有关这部分内容，我们稍后探讨。</p>
+<p>但它<strong>只能过滤路由信息</strong>，并不检查&#x2F;过滤<u>链路状态信息</u>，因此在OSPF协议下，它不适合用在出方向。</p>
+<p>而在入方向，过滤只会影响OSPF路由表加载进ip路由表，对LSDB表与OSPF路由表没有影响（不过实际要看各厂商设备的设定）</p>
+<p>（系统会从多个协议的路由表中挑选最优的路由加载进ip路由表中，实际报文的转发就是依照ip路由表进行的。）</p>
+<p>有关这部分内容，我们稍后用一个实验演示。</p>
 </blockquote>
 <p>filter-policy本身无法设置滤条件，需要调用其它过滤条件来完成路由信息过滤。</p>
 <p><strong>一般可以调用acl、ip-prefix、route-policy这三项进行过滤。</strong></p>
@@ -895,7 +901,23 @@ if ('Gitalk' === 'Gitalk' || !false) {
     console.log('已挂载magnet')
     parent.insertAdjacentHTML("afterbegin",child)}
      </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
-    <style></style><script data-pjax>
+    <style></style><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
   function butterfly_clock_anzhiyu_injector_config(){
     var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
     var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
@@ -926,20 +948,4 @@ if ('Gitalk' === 'Gitalk' || !false) {
   else if (epage === cpage){
     butterfly_clock_anzhiyu_injector_config();
   }
-  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '1s');
-    arr[i].setAttribute('data-wow-delay', '0.5s');
-    arr[i].setAttribute('data-wow-offset', '0');
-    arr[i].setAttribute('data-wow-iteration', '1');
-  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><!-- hexo injector body_end end --></body></html>

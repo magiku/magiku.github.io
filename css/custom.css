@@ -4,6 +4,19 @@
   background-position:right top !important;
 } */
 
+.pagination-post .prev-post{
+  background-color: rgb(87, 240, 169);
+}
+
+.pagination-post .next-post{
+  background-color: rgb(87, 240, 169);
+}
+
+.relatedPosts-list .cover{
+  background-color: rgb(163, 181, 235) !important;
+}
+
+
 /*个人签名*/
 .author-info__name {
 	color:#39c5bb;

@@ -1,3 +1,11 @@
+/* 修改置顶轮播文章左侧的贴图 */
+.blog-slider__img .entered{
+  background-image: url('/image/top-loading.gif');
+  background-size: contain;
+  background-position: center;
+}
+
+
 /* 文章封面右侧置顶 */
  /* {
   background-repeat:no-repeat !important;

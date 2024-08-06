@@ -1,0 +1,822 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>B14【动态路由】BGP | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文将一种常用于运营商与大型机构之间的动态路由——BGP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B14【动态路由】BGP">
+<meta property="og:url" content="https://magiku.github.io/2024/07/24/B14[%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1]BGP/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="本文将一种常用于运营商与大型机构之间的动态路由——BGP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png">
+<meta property="article:published_time" content="2024-07-24T08:59:22.000Z">
+<meta property="article:modified_time" content="2024-07-24T08:59:22.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="华为">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png"><link rel="shortcut icon" href="https://telegraph-image-713.pages.dev/file/35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/2024/07/24/B14[%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1]BGP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'B14【动态路由】BGP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-24 16:59:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Magiku's药剂屋"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">B14【动态路由】BGP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-24T08:59:22.000Z" title="发表于 2024-07-24 16:59:22">2024-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-24T08:59:22.000Z" title="更新于 2024-07-24 16:59:22">2024-07-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>为方便管理规模不断扩大的网络，网络被分成了不同的自治系统AS（Autonomous System）。</p>
+<p>AS是指在一个机构&#x2F;企业管辖下的IP网络。</p>
+<p>我们之前学习过的RIP、OSPF、IS-IS等都是用于AS内的，它们被统称为IGP（Interior Gateway Protocol，内部网关协议）。</p>
+<p>1982年，外部网关协议EGP（Exterior Gateway Protocol）被用于实现在AS之间动态交换路由信息。</p>
+<p>但是EGP设计得比较简单，只发布网络可达的路由信息，而不对路由信息进行优选，同时也没有考虑环路避免等问题，很快就无法满足网络管理的要求。</p>
+<p>边界网关协议BGP（Border Gateway Protocol）是为取代最初的EGP而设计的另一种外部网关协议；以原理划分的话，它是一种距离矢量路由协议。</p>
+<p>不同于最初的EGP，BGP能够进行路由优选、避免路由环路、更高效率的传递路由和维护大量的路由信息。</p>
+<p>虽然BGP用于在AS之间传递路由信息，但并不是所有AS之间传递路由信息都需要运行BGP。</p>
+<blockquote>
+<p>比如在数据中心上行的连入Internet的出口上，为了避免Internet海量路由对数据中心内部网络的影响，设备采用静态路由代替BGP与外部网络通信。</p>
+</blockquote>
+<p>BGP早期发布的三个版本分别是BGP-1、BGP-2和BGP-3，1994年开始使用BGP-4，2006年至今单播IPv4网络使用的版本是BGP-4。</p>
+<p>最新的MP-BGP用于组播网络与IPv6网段，它是对BGP-4进行了扩展，来达到在不同网络中应用的目的，BGP-4原有的消息机制和路由机制并没有改变。</p>
+<p>MP-BGP在IPv6单播网络上的应用称为BGP4+，在IPv4组播网络上的应用称为MBGP（Multicast BGP）。</p>
+<p>本文将介绍的是普通的BGP-4，<u>并且不会过于深入</u>，毕竟这是运用于超大型网络<strong>之间</strong>的路由协议；一般来说，我们在企业网内不会使用到它。</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="对等体、EBGP、IBGP"><a href="#对等体、EBGP、IBGP" class="headerlink" title="对等体、EBGP、IBGP"></a>对等体、EBGP、IBGP</h2><p>在BGP中，邻居并不需要真的“邻”，只要网络可达，不管距离多少台路由器，都可以构建BGP关系。</p>
+<p>因此<strong>在BGP中，不将构建关系的路由器称为邻居，而是叫做 “对等体（peer）”。</strong></p>
+<blockquote>
+<p>这个翻译确实拗口，但已经被广泛接受了。</p>
+</blockquote>
+<p>而因为可以跨设备构建关系，同时BGP又是用于在不同AS网络之间构建路由关系的协议，所以对等体关系可以划分为两类：</p>
+<ul>
+<li><strong>EBGP</strong>对等体关系(External BGP Peer)：指处于不同AS网络中的两台BGP设备构建的关系。</li>
+<li><strong>IBGP</strong>对等体关系(Internal BGP Peer)：指处于同一个AS网络中的两台BGP设备构建的关系。</li>
+</ul>
+<h2 id="BGP的报文交互"><a href="#BGP的报文交互" class="headerlink" title="BGP的报文交互"></a>BGP的报文交互</h2><p><strong>BGP是采用TCP进行数据传输的</strong>（端口号179），这是为了跨设备、跨网络进行可靠的报文交互。</p>
+<p>BGP对等体间通过以下5种报文进行交互，其中Keepalive报文为周期性发送，其余报文为触发式发送：</p>
+<ul>
+<li>Open报文：用于建立BGP对等体连接。（是在TCP三次握手连接成功后，才发送Open报文。）</li>
+<li>Update报文：用于在对等体之间交换路由信息。</li>
+<li>Notification报文：用于中断BGP连接。</li>
+<li>Keepalive报文：用于保持BGP连接。（TCP连接的特点，没有数据传输后会断开连接）</li>
+<li>Route-refresh报文：用于在改变路由策略后请求对等体重新发送路由信息。只有支持路由刷新（Route-refresh）能力的BGP设备会发送和响应此报文。</li>
+</ul>
+<h2 id="BGP的路由"><a href="#BGP的路由" class="headerlink" title="BGP的路由"></a>BGP的路由</h2><p><strong>BGP与众多IGP协议最大的不同点在于，它不会自主发现路由。</strong></p>
+<blockquote>
+<p>不管是在RIP还是OSPF，我们宣告网段、激活接口后，协议就会自动将接口的直连路由纳入协议的路由表中。</p>
+</blockquote>
+<p>BGP 是在整个路由器上配置的，而不是针对特定的接口，同时BGP也不会自发现直连路由。</p>
+<p>需要人工手动配置将设备路由表中的路由信息引入到BGP路由表中，之后BGP再根据情况去使用与发布路由给其他BGP对等体。</p>
+<p>BGP提供了两种引入路由的方式：</p>
+<ul>
+<li><strong>Import</strong>方式是按协议类型，将RIP、OSPF、ISIS等协议的路由引入到BGP路由表中。为了保证引入的IGP路由的有效性，Import方式还可以引入静态路由和直连路由。</li>
+<li><strong>Network</strong>方式是逐条将IP路由表中已经存在的路由引入到BGP路由表中，比Import方式更精确。<ul>
+<li>其他IGP中也有这个命令，但请注意，在其他IGP协议中，network命令是用来宣告网段（指示归属该网段的接口激活该路由协议）。</li>
+<li><strong>在BGP中，network命令是引入路由</strong>。注意，是“引入”，即路由信息是必须<strong>已经存在</strong>设备的其他路由表中，才可以使用该命令添加到BGP路由表中。</li>
+</ul>
+</li>
+</ul>
+<p>为了更好的规划网络，BGP在引入IGP的路由时，可以使用路由策略进行路由过滤和路由属性设置，也可以设置MED (Multi-Exit Discriminator)值指导EBGP对等体判断流量进入AS时选路。</p>
+<h2 id="BGP路由属性"><a href="#BGP路由属性" class="headerlink" title="BGP路由属性"></a>BGP路由属性</h2><p>在BGP路由表中，到达同一目的地可能存在多条路由。</p>
+<p><strong>此时BGP会选择其中一条路由作为优选路由，并只把此路由发送给其对等体。</strong></p>
+<p>BGP为了选出优选路由，会根据BGP的路由优选规则依次比较这些路由的BGP属性。</p>
+<blockquote>
+<p>具体的路由优选规则我们稍后详细介绍。</p>
+</blockquote>
+<p>路由属性是对路由的特定描述，BGP会生成&#x2F;记录各种路由属性，并在传递路由信息给其他对等体时，也会携带部分路由属性。</p>
+<p>下面介绍几种常用的BGP路由属性：</p>
+<ul>
+<li><p><strong>Origin属性</strong></p>
+<p>Origin属性用来<strong>定义路径信息的来源</strong>，标记一条路由是怎么成为BGP路由的。它有以下3种类型：</p>
+<blockquote>
+<ul>
+<li>IGP：具有最高的优先级。通过<strong>network</strong>命令注入到BGP路由表的路由，其Origin属性为IGP。</li>
+<li>EGP：优先级次之。通过EGP得到的路由信息，其Origin属性为EGP。</li>
+<li>Incomplete：优先级最低。通过其他方式学习到的路由信息。比如BGP通过<strong>import-route</strong>命令引入的路由，其Origin属性为Incomplete。</li>
+<li>请注意，此处说明的优先级是在比较Origin属性时的优先级；当其他比Origin属性更优先的属性比较不出孰优孰劣后才开始比较Origin属性。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>AS_Path属性</strong></p>
+<p>AS_Path属性按矢量顺序记录了某条路由从本地<strong>到目的地址所要经过的所有AS编号。</strong></p>
+<p>在接收路由时，设备如果发现AS_Path列表中有自身所在的AS号，则不接收该路由，从而<strong>避免了AS间的路由环路</strong>。</p>
+<blockquote>
+<p>当BGP设备将自身的路由信息发送给其他对等体时：</p>
+<ul>
+<li>如果是通告给EBGP对等体，其Update报文中的AS_Path列表为本地AS号。</li>
+<li>如果是通告给IBGP对等体，其Update报文中的AS_Path列表为空。</li>
+</ul>
+<p>当BGP设备将从其他对等体收到的路由信息发送给其他对等体时：</p>
+<ul>
+<li><p>如果是通告给EBGP对等体，便会把本地AS编号添加在AS_Path列表的最前面（最左面）。</p>
+<p>收到此路由的BGP设备根据AS_Path属性就可以知道去目的地址所要经过的AS。离本地AS最近的相邻AS号排在前面，其他AS号按顺序依次排列。</p>
+</li>
+<li><p>如果是通告给IBGP对等体，不会改变这条路由相关的AS_Path属性。</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>Next_Hop属性</strong></p>
+<p>Next_Hop属性记录了路由的下一跳信息。BGP的下一跳属性和IGP的有所不同，不一定就是邻居设备的IP地址。通常情况下，Next_Hop属性遵循下面的规则：</p>
+<blockquote>
+<ul>
+<li>如果BGP设备将路由信息通告给EBGP对等体，会把该路由信息的下一跳属性设置为本地与对端建立BGP邻居关系的接口地址。</li>
+<li>如果BGP设备将自身的路由信息通告给EBGP对等体，会把该路由信息的下一跳属性设置为本地与对端建立BGP邻居关系的接口地址。</li>
+<li>如果BGP设备将从EBGP对等体收到的路由信息发送给IBGP对等体，并不改变该路由信息的下一跳属性。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>Local_Pref属性</strong></p>
+<p>Local_Pref属性表明路由器的BGP优先级，<strong>用于判断流量离开AS时的优选路由</strong>。</p>
+<p>当BGP的设备通过不同的IBGP对等体得到目的地址相同但下一跳不同的多条路由时，将优先选择Local_Pref属性值较高的路由。</p>
+<blockquote>
+<p>Local_Pref属性仅在IBGP对等体之间有效，不通告给其他AS。</p>
+<p>Local_Pref属性可以手动配置，如果路由没有配置Local_Pref属性，BGP选路时将该路由的Local_Pref值按缺省值100来处理。</p>
+</blockquote>
+</li>
+<li><p><strong>MED属性</strong></p>
+<p>MED（Multi-Exit Discriminator）属性<strong>用于判断流量进入AS时的优选路由</strong>。</p>
+<p>当一个运行BGP的设备通过不同的EBGP对等体得到目的地址相同但下一跳不同的多条路由时，在其它条件相同的情况下，将优先选择MED值较小者作为优选路由。</p>
+<blockquote>
+<p>MED属性仅在相邻两个AS之间传递，收到此属性的AS一方不会再将其通告给任何其他第三方AS。</p>
+<p>MED属性可以手动配置，如果路由没有配置MED属性，BGP选路时将该路由的MED值按缺省值0来处理。</p>
+</blockquote>
+</li>
+<li><p><strong>团体属性</strong></p>
+<p>团体属性（Community）<strong>用于标识具有相同特征的BGP路由</strong>（相当于路由tag），使路由策略的应用更加灵活，同时降低了维护管理的难度。</p>
+</li>
+<li><p><strong>Originator_ID属性和Cluster_List属性</strong></p>
+<p>Originator_ID属性和Cluster_List属性用于解决路由反射器场景中的环路问题</p>
+</li>
+</ul>
+<p>所有的BGP路由属性都可以分为以下4类：</p>
+<ul>
+<li>公认必须遵循（Well-known mandatory）：所有BGP设备都可以识别此类属性，且必须存在于Update报文中。如果缺少这类属性，路由信息就会出错。</li>
+<li>公认任意（Well-known discretionary）：所有BGP设备都可以识别此类属性，但不要求必须存在于Update报文中，即就算缺少这类属性，路由信息也不会出错。</li>
+<li>可选过渡（Optional transitive）：BGP设备可以不识别此类属性，如果BGP设备不识别此类属性，但它仍然会接收这类属性，并通告给其他对等体。</li>
+<li>可选非过渡（Optional non-transitive）：BGP设备可以不识别此类属性，如果BGP设备不识别此类属性，则会被忽略该属性，且不会通告给其他对等体。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Origin属性</td>
+<td>公认必须遵循</td>
+</tr>
+<tr>
+<td>AS_Path属性</td>
+<td>公认必须遵循</td>
+</tr>
+<tr>
+<td>Next_Hop属性</td>
+<td>公认必须遵循</td>
+</tr>
+<tr>
+<td>Local_Pref属性</td>
+<td>公认任意</td>
+</tr>
+<tr>
+<td>MED属性</td>
+<td>可选非过渡</td>
+</tr>
+<tr>
+<td>团体属性</td>
+<td>可选过渡</td>
+</tr>
+<tr>
+<td>Originator_ID属性</td>
+<td>可选非过渡</td>
+</tr>
+<tr>
+<td>Cluster_List属性</td>
+<td>可选非过渡</td>
+</tr>
+</tbody></table>
+<h2 id="BGP的防环机制"><a href="#BGP的防环机制" class="headerlink" title="BGP的防环机制"></a>BGP的防环机制</h2><h3 id="AS-Path"><a href="#AS-Path" class="headerlink" title="AS_Path"></a>AS_Path</h3><p>前面提到的BGP的路由信息会携带AS_Path属性信息，用于记录路由信息经过了哪些AS网络。</p>
+<p>如果路由器收到一条BGP路由并且发现该路由携带的AS_Path中出现了自己所在AS的AS号，它就能意识到从本地AS通告出去的BGP路由又被通告到了该AS。</p>
+<p>如果它接收这条路由，那么就有可能引发路由环路，因此针对这种情况，BGP将忽略关于该条路由的更新，从而避免环路。</p>
+<h3 id="水平分割"><a href="#水平分割" class="headerlink" title="水平分割"></a>水平分割</h3><p>AS_Path这个防环机制有个很明显的缺点，那就是对于同属于一个AS网络的路由器来说，它们互相传递的路由信息内的AS_Path不会变化。</p>
+<p>就是说当BGP路由在一个AS内传递时，是无法依赖AS Path提供的防环能力的，那么此时路由环路就有可能发生，BGP水平分割规则就是用于解决这个问题的。</p>
+<p>根据 BGP 的水平分割规则，当一个路由器从一个 IBGP 对等体学习到某条 BGP 路由时，它将不能再将这条路由通告给其他的 IBGP 对等体，但仍可以将该路由通告给其他的 EBGP 对等体。</p>
+<blockquote>
+<p>注意：与其他路由协议里“水平分割”不同点在于，其他协议里的“水平分割”是不会发回给发送者，而BGP里是不会发送给<strong>任何</strong>IBGP路由器。</p>
+</blockquote>
+<p>另外，因为水平分割这一特性，会出现一种问题：</p>
+<p>当同一个AS网络内存在3台及以上的BGP路由器，并且没有两两相连，那么将无法满足“全网互通”。</p>
+<blockquote>
+<p>比如说，R1、R2、R3串联在一起。</p>
+<p>那么R1的路由发送给R2后，根据水平分割原则，R2不能将R1的路由发送给R3；</p>
+<p>同理，R3的路由也无法传递给R1。</p>
+<p>这种情况下，只能让R1与R3也构建BGP关系，让它们之间直接传递路由信息。（不要忘了，BGP是可以跨设备建立“邻居”的。）</p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>BGP通过TCP的方式可以与任何一台网络可达的路由器建立关系，如果两台路由器处于同一个AS网络，那么它们构建的是IBGP对等体；如果两台路由器处于同一个AS网络，那么它们构建的是EBGP对等体。</p>
+<p>BGP路由器在没收到其他BGP路由器传递的路由前，其路由表为空，需要人为引入路由。</p>
+<p>BGP设备获得路由信息后，会挑选最优路由加入BGP路由表，形成BGP路由。</p>
+<p>BGP设备与对等体建立关系后，采取以下交互原则：</p>
+<ul>
+<li>从IBGP对等体获得的BGP路由，BGP设备只发布给它的EBGP对等体。</li>
+<li>从EBGP对等体获得的BGP路由，BGP设备发布给它所有EBGP和IBGP对等体。</li>
+<li>当存在多条到达同一目的地址的有效路由时，BGP设备只将最优路由发布给对等体。</li>
+<li>路由更新时，BGP设备只发送更新的BGP路由。</li>
+<li>所有对等体发送的路由，BGP设备都会接收。</li>
+</ul>
+<h1 id="路由黑洞问题"><a href="#路由黑洞问题" class="headerlink" title="路由黑洞问题"></a>路由黑洞问题</h1><p>在使用BGP时，需要避免出现路由黑洞的现象。</p>
+<p>我们之前学习过黑洞路由，那是我们人为的添加一条指向没有意义的接口(null 0)的路由信息，使得传递给指定网段的数据报文都会被丢弃。</p>
+<p>而路由黑洞的意思是路由条目指向的是确实存在的ip地址，路由信息无误；但是路由器并没有办法前往该地址，最终丢弃数据报文。</p>
+<p>我们实际举个例子：</p>
+<img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/5ada837b7f8a471e91e61.png" style="zoom:67%;" />
+
+<blockquote>
+<p>如图存在两个AS网络：AS100中存在一台服务器1.1.1.1，和一台BGP路由器R1；</p>
+<p>AS200里存在R2、R3、R4，其中只有R2与R4是BGP路由器，它们为IBGP关系。</p>
+<p>R1与R2构建EBGP对等体关系。</p>
+</blockquote>
+<p>在这种情景下，R1通过BGP协议将1.1.1.1的路由传递给R2，（内容为前往1.1.1.1的的下一跳为10.1.12.1）</p>
+<p>R2再传递10.1.12.1的路由以及刚刚1.1.1.1的路由都发给R4。</p>
+<p>当R4收到前往1.1.1.1的数据报文时，根据BGP路由表，前往前往1.1.1.1的的下一跳为10.1.12.1。而10.1.12.1再根据BGP路由表，要通过R2，再根据AS200内原有的路由表信息，前往R2去找R3。</p>
+<p>于是R4会将数据报文发送给R3。</p>
+<p>当R3收到了R4转发过来的前往1.1.1.1的数据报文时，它会检测路由表，发现没有前往1.1.1.1的路由，因此，它会丢弃该报文。</p>
+<p>以上就是一种路由黑洞。</p>
+<p>不难看出，之所以有路由黑洞，或者说我们到了讲述BGP路由协议时才提及路由黑洞的原因就是<u>BGP协议支持跨设备构建关系</u>。</p>
+<p>这导致了路由协议的范围不是连续的，存在于BGP网络内的路由不被R3这个非BGP路由器感知，进而导致数据报文的路由在它这里中断。</p>
+<p>解决方法有两种：</p>
+<ul>
+<li>一是让R3也成为BGP路由器，R2与R3构建关系，R3与R4也构建关系。</li>
+<li>二是让R2将到达R1的路由引入到AS200原有的网络中来。</li>
+</ul>
+<blockquote>
+<p>此外还有一种另类的解决方法，通过MPLS传递数据报文。MPLS报文不使用传统的路由方式，而是根据标签进行传递，但这很另类，而且我们也还没介绍MPLS，因此暂且不提。</p>
+</blockquote>
+<p>方法二很好理解，但请注意，BGP的路由表非常庞大，引入BGP路由需要做好路由策略过滤到大量不需要的路由。</p>
+<p>而方法一实际就是让路线上所有的路由器都两两构建关系。</p>
+<p>在我们这个案例中设备很少，但实际现网中，可能存在大量的设备。</p>
+<p>假设在一个AS内部有n台设备，那么建立的IBGP连接数就为n(n-1)&#x2F;2。</p>
+<p>而BGP作为跨设备连接的协议，其配置需要手动输入连接方的ip地址；</p>
+<p>如果要配置大量的BGP关系，那将非常的繁琐麻烦，而且配置后网络资源和CPU资源的消耗都很大。</p>
+<p>为此，BGP新增两种机制来处理这个问题——反射器与联邦。</p>
+<h2 id="反射器"><a href="#反射器" class="headerlink" title="反射器"></a>反射器</h2><p>为了更好的介绍反射器，我们将刚刚的拓扑略作修改：</p>
+<img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/3bf0c98edaeefcab17304.png" style="zoom:67%;" />
+
+<blockquote>
+<p>反射器的起名源于其机制类似镜子的反射，不过我认为称作复读机会更加形象。</p>
+</blockquote>
+<p>如果在以上拓扑结构里，配置R2与R3、R3与R4、R3与R5之间构建IBGP关系；接着在R3上配置R3为反射器，R2、R4、R5为客户机。</p>
+<p>那么当R2将服务器与R1的路由发送给R3时，R3会将这些路由复读给R4、R5。</p>
+<p>再加上未配置BGP之前，AS200内部R2、R3、R4、R5之间已经通过其他路由协议实现全网互通了。</p>
+<p>最终R4与R5也能访问到服务器。（去服务器找R1——去R1找R2——去R2查找原有路由表。）</p>
+<p><strong>反射器中的术语：</strong></p>
+<ul>
+<li>路由反射器RR（Route Reflector）：允许把从IBGP对等体学到的路由反射到其他IBGP对等体的BGP设备，类似OSPF网络中的DR。</li>
+<li>客户机（Client）：与RR形成反射邻居关系的IBGP设备。在AS内部客户机只需要与RR直连。</li>
+<li>非客户机（Non-Client）：既不是RR也不是客户机的IBGP设备。在AS内部非客户机与RR之间，以及所有的非客户机之间仍然必须建立全连接关系。</li>
+<li>始发者（Originator）：在AS内部始发路由的设备（记录的router-id）。Originator_ID属性用于防止集群内产生路由环路。（与AS_Path作用类似）</li>
+<li>集群（Cluster）：路由反射器及其客户机的集合。Cluster_List属性用于防止集群间产生路由环路。（与AS_Path作用类似）</li>
+</ul>
+<p><strong>反射器的反射规则：</strong></p>
+<ul>
+<li>从非客户机学到的路由，发布给所有客户机。</li>
+<li>从客户机学到的路由，发布给除了该客户机外的所有非客户机和客户机。</li>
+<li>从EBGP对等体学到的路由，发布给所有的非客户机和客户机。</li>
+</ul>
+<h2 id="联邦"><a href="#联邦" class="headerlink" title="联邦"></a>联邦</h2><p>联邦更好理解了，我们之所以要对同一AS网络下的BGP路由器进行两两互相构建关系，就是为了防环机制。</p>
+<ul>
+<li>AS_Path只能作用于不同AS之间，因此同一AS网络下需要依靠水平分割机制</li>
+<li>水平分割机制让IBGP只能两两之间互传，无法越过其中一台路由器传给第三者。</li>
+</ul>
+<p>而联邦就是将一个AS网络划分成多个小AS网络。从而使得虽然表面都是同一个AS网络，但是设备之间构建的是EBGP关系，因此可以使用AS_Path进行标记，进而做到防环，且无需遵循水平分割机制。</p>
+<p>当我们对某一AS网络下的部分路由器进行联邦划分，划分了多个小AS。</p>
+<p>原本的AS号就成为了它们的联邦AS (Confederation AS)，而划分出的小AS就是成员AS(Member AS)。</p>
+<p>成员AS只在联邦AS内生效，联邦外的路由器不感知成员AS；联邦边缘的成员路由器在对外时会直接使用联邦AS，而不再使用成员AS。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/13dedbbaec2cdcb38d14c.png"></p>
+<p>上图是对一AS进行联邦划分后，路由传递过程中，AS_Path变化的展示图：</p>
+<ol>
+<li><p>R1的路由要传递给R3，AS_Path便标记上R1所在的AS100。</p>
+</li>
+<li><p>R3与R4同属于一个AS，关系是IBGP，因此AS_Path属性不变。</p>
+</li>
+<li><p>R4要传递路由给R5，因为R4处于联邦成员AS64512，因此AS_Path里在左侧新增上该AS号。</p>
+</li>
+<li><p>R5要传递给R6，因为又是跨成员AS传递了，AS_Path就再一次在左侧新增上R6所处的成员AS号；</p>
+</li>
+<li><p>R5要传递给R2，因为这是要传递给联邦外的设备，因此R5会将AS_Path内的成员AS号都删除，修改为联邦AS号。</p>
+<blockquote>
+<p>BGP在AS_Path内定义了多个类型用以区分一个AS号是普通AS号，还是联邦成员AS号。图中就以括号的形式代为表示。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="BGP路由优先规则"><a href="#BGP路由优先规则" class="headerlink" title="BGP路由优先规则"></a>BGP路由优先规则</h1><p>当到达同一目的地存在多条路由时，BGP依次对比下列属性来选择路由：</p>
+<ol>
+<li><p><em>（可忽略）</em>优选协议首选值（PrefVal）最高的路由。</p>
+<p>协议首选值（PrefVal）是<u>华为设备的特有属性</u>，该属性仅在本地有效。</p>
+</li>
+<li><p>优选本地优先级（Local_Pref）最高的路由。</p>
+<p>如果路由没有本地优先级，BGP选路时将该路由按缺省的本地优先级100来处理。</p>
+</li>
+<li><p>依次优选手动聚合路由、自动聚合路由、<strong>network</strong>命令引入的路由、<strong>import-route</strong>命令引入的路由。</p>
+</li>
+<li><p>优选AS路径（AS_Path）最短的路由。</p>
+</li>
+<li><p>依次优选Origin属性为IGP、EGP、Incomplete的路由。</p>
+</li>
+<li><p>对于来自同一AS的路由，优选MED值最低的路由。</p>
+</li>
+<li><p>依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。</p>
+</li>
+<li><p>优选到BGP下一跳IGP度量值（metric）最小的路由。</p>
+<p>在IGP中，对到达同一目的地址的不同路由，IGP根据本身的路由算法计算路由的度量值。</p>
+</li>
+<li><p>优选Cluster_List最短的路由。</p>
+</li>
+<li><p>优选Router ID最小的设备发布的路由。</p>
+<p>如果路由携带Originator_ID属性，选路过程中将比较Originator_ID的大小（不再比较Router ID），并优选Originator_ID最小的路由。</p>
+</li>
+<li><p>优选从具有最小IP Address的对等体学来的路由。</p>
+</li>
+</ol>
+<blockquote>
+<p>以上为方便查看的简略说明，接下面我们逐条进行分析。</p>
+</blockquote>
+<h2 id="0-优选协议首选值（PrefVal）最高的路由"><a href="#0-优选协议首选值（PrefVal）最高的路由" class="headerlink" title="0.优选协议首选值（PrefVal）最高的路由"></a>0.优选协议首选值（PrefVal）最高的路由</h2><p>这是华为设备中自行定义的属性值，只作用于设备本身，对外传递的BGP路由不会添加该信息。</p>
+<p>这个属性值的作用就是让管理员可以人为的确定某条路由一定是最优的。</p>
+<h2 id="1-优选本地优先级（Local-Pref）最高的路由"><a href="#1-优选本地优先级（Local-Pref）最高的路由" class="headerlink" title="1.优选本地优先级（Local_Pref）最高的路由"></a>1.优选本地优先级（Local_Pref）最高的路由</h2><p>单纯的确定优先级的属性值。</p>
+<p>默认为100，如果手动修改该值，则该值会跟随路由一起发给其他路由器。</p>
+<h2 id="2-优先本地发布的路由"><a href="#2-优先本地发布的路由" class="headerlink" title="2.优先本地发布的路由"></a>2.优先本地发布的路由</h2><p>实际上第二条就是标题这个意思，优先BGP设备自己持有的路由（也就是我们进行配置而产生的路由）。</p>
+<p>在这些路由里，再以”手动聚合路由、自动聚合路由、<strong>network</strong>命令引入的路由、<strong>import-route</strong>命令引入的路由、“的顺序进行优选。</p>
+<h2 id="3-优选AS路径（AS-Path）最短的路由。"><a href="#3-优选AS路径（AS-Path）最短的路由。" class="headerlink" title="3.优选AS路径（AS_Path）最短的路由。"></a>3.优选AS路径（AS_Path）最短的路由。</h2><p>也很好理解，路径最短，则大概率最优。</p>
+<h2 id="4-依次优选Origin属性为IGP、EGP、Incomplete的路由。"><a href="#4-依次优选Origin属性为IGP、EGP、Incomplete的路由。" class="headerlink" title="4.依次优选Origin属性为IGP、EGP、Incomplete的路由。"></a>4.依次优选Origin属性为IGP、EGP、Incomplete的路由。</h2><p>Origin属性用来<strong>定义路径信息的来源</strong>，标记一条路由是<strong>怎么成为BGP路由的</strong>。它有以下3种类型：</p>
+<blockquote>
+<ul>
+<li>IGP：具有最高的优先级。通过<strong>network</strong>命令注入到BGP路由表的路由</li>
+<li>EGP：优先级次之。通过EGP得到的路由信息</li>
+<li>Incomplete：优先级最低。通过其他方式学习到的路由信息。比如BGP通过<strong>import-route</strong>命令引入的路由</li>
+<li>请注意，此处的IGP是内部网关协议，也就是表示RIP、OSPF在内的一类路由协议。EGP是外部网关协议，是指已经被淘汰的EGP（BGP的前身）。</li>
+</ul>
+</blockquote>
+<p>注意，如果在优选规则第二项都没选出最优路由来，那么就说明现在需要进行优选的这些路由都不是本地发布的路由，都是从其他路由器那里收到的。另外，越过了第三项优选规则后，此时更看重的不是路径长度了，而是路由是否稳定、可靠、可信任。</p>
+<ul>
+<li>Origin属性为IGP的，因为通过 IGP 学习到的路由信息是在本地网络内部生成的，同时这种路由信息来源于本地网络，也是最可信的。</li>
+<li>Origin属性为EGP的，虽然现在很少使用 EGP，但通过 EGP 学习到的路由信息仍然被认为比 Incomplete 类型的路由信息更可信。</li>
+<li>Origin属性为Incomplete的，这种路由信息的来源不明确，可能来自其他协议或手动配置，因此被认为是最不可信的。</li>
+</ul>
+<h2 id="5-对于来自同一AS的路由，优选MED值最低的路由。"><a href="#5-对于来自同一AS的路由，优选MED值最低的路由。" class="headerlink" title="5.对于来自同一AS的路由，优选MED值最低的路由。"></a>5.对于来自同一AS的路由，优选MED值最低的路由。</h2><blockquote>
+<p>匹配到这，目标差不多已经开始不是选出最优的路由，而是为了选出路由了。</p>
+</blockquote>
+<p>MED 值通常是手工配置的，可以通过网络管理员手动设置。</p>
+<p>如果未手动配置MED值，它的<strong>默认值是 0</strong>。</p>
+<p>当BGP路由器在选择最佳路径时考虑MED值时，会选择具有最低MED值的路由作为最佳路径。</p>
+<h2 id="6-依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。"><a href="#6-依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。" class="headerlink" title="6.依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。"></a>6.依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。</h2><blockquote>
+<p>PE上某个VPN实例的VPNv4路由的ERT匹配其他VPN实例的IRT后复制到该VPN实例，称为LocalCross；</p>
+<p>从远端PE学习到的VPNv4路由的ERT匹配某个VPN实例的IRT后复制到该VPN实例，称为RemoteCross。</p>
+</blockquote>
+<h2 id="7-优选到BGP下一跳IGP度量值（metric）最小的路由。"><a href="#7-优选到BGP下一跳IGP度量值（metric）最小的路由。" class="headerlink" title="7.优选到BGP下一跳IGP度量值（metric）最小的路由。"></a>7.优选到BGP下一跳IGP度量值（metric）最小的路由。</h2><p>还是提醒一下，这里说的IGP是包括RIP、OSPF在内的内部网关协议。</p>
+<p>此处就是优选前往路由的下一跳的路由，其度量值最小的那个。（第一个“路由”是说的优选中的BGP路由，第二个“路由”是指IGP路由表中的路由）</p>
+<h2 id="8-优选Cluster-List最短的路由。"><a href="#8-优选Cluster-List最短的路由。" class="headerlink" title="8.优选Cluster_List最短的路由。"></a>8.优选Cluster_List最短的路由。</h2><p>这里说的是反射器集合。</p>
+<h2 id="9-优选Router-ID最小的设备发布的路由。"><a href="#9-优选Router-ID最小的设备发布的路由。" class="headerlink" title="9.优选Router ID最小的设备发布的路由。"></a>9.优选Router ID最小的设备发布的路由。</h2><blockquote>
+<p>一般来说，router-id都是唯一的。</p>
+</blockquote>
+<p>另外，如果路由携带Originator_ID属性，选路过程中将比较Originator_ID的大小（不再比较Router ID），并优选Originator_ID最小的路由。</p>
+<h2 id="10-优选从具有最小IP-Address的对等体学来的路由。"><a href="#10-优选从具有最小IP-Address的对等体学来的路由。" class="headerlink" title="10.优选从具有最小IP Address的对等体学来的路由。"></a>10.优选从具有最小IP Address的对等体学来的路由。</h2><p>如果router-id有冲突了，那就再根据ip地址比较，至少能构建关系，传递路由，说明ip地址没有冲突。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>bgp</strong> <em>as-number-plain</em> ，启动BGP，指定本地AS编号，并进入BGP视图。 </p>
+</li>
+<li><p>（可选）根据网络类型，选择进入不同地址族视图，配置不同类型网络中的BGP设备。</p>
+<ul>
+<li>执行命令<strong>ipv4-family</strong> { <strong>unicast</strong> | <strong>multicast</strong> }，进入IPv4地址族视图，默认为此模式。</li>
+<li>执行命令<strong>ipv6-family</strong> [ <strong>unicast</strong> ]，进入IPv6地址族视图。</li>
+</ul>
+</li>
+<li><p>执行命令<strong>router-id</strong> <em>ipv4-address</em>，配置BGP的Router ID。 </p>
+<p>如果选中的Router ID是物理接口的IP地址，当IP地址发生变化时，会引起路由的振荡。为了提高网络的稳定性，可以将Router ID手动配置为Loopback接口地址。</p>
+</li>
+<li><p>执行命令<strong>peer</strong> <em>ip-address</em> <em>as-number</em>，指定邻居对等体，ip地址与AS号都是填写目标BGP设备的信息。</p>
+</li>
+<li><p>（可选）执行命令<strong>peer</strong> <em>ipv4-address</em> <strong>next-hop-local</strong>，配置BGP设备向指定IBGP对等体发布路由时，把下一跳地址设为自身的IP地址。</p>
+<p>默认情况下，BGP设备向IBGP对等体发布路由时，不修改下一跳地址。在大型网络中，IBGP对等体可能无法直接访问原始下一跳地址，配置此命令可确保路由可达。（某些场景下，可直接配置反射器实现相同的作用）</p>
+</li>
+<li><p>（可选）执行命令<strong>peer</strong> <em>ip-address</em> <strong>connect-interface</strong> <em>interface-type</em> <em>interface-number</em> [ <em>ip-source-address</em> ]，指定发送BGP报文的源接口，并可指定发起连接时使用的源ip地址。</p>
+<p>默认情况下，都是使用<u>到达目标BGP设备的路由信息</u>指定的出接口作为BGP报文的源接口。</p>
+</li>
+<li><p>（可选）执行命令<strong>peer</strong>  <em>ip-address</em>  <strong>ebgp-max-hop</strong> [ <em>hop-count</em> ]，指定建立EBGP连接允许的最大跳数。</p>
+<p>默认情况下，EBGP连接允许的最大跳数为1，即只能在物理直连链路上建立EBGP连接。</p>
+</li>
+</ol>
+<h2 id="配置路由引入"><a href="#配置路由引入" class="headerlink" title="配置路由引入"></a>配置路由引入</h2><h3 id="Import方式"><a href="#Import方式" class="headerlink" title="Import方式"></a>Import方式</h3><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>bgp</strong> <em>as-numbe</em> ，进入BGP视图。</p>
+</li>
+<li><p>执行命令<strong>import-route</strong> <em>protocol</em> [ <em>process-id</em> ] [ <strong>med</strong> <em>med</em> | <strong>route-policy</strong> <em>route-policy-name</em> ] ，配置BGP引入其他协议的路由。 </p>
+<p>可选配置MED属性（度量值）与进行路由策略过滤。</p>
+</li>
+<li><p>（可选）执行命令<strong>default-route imported</strong>，<u>允许</u>BGP引入本地IP路由表中已经存在的默认路由。</p>
+<p>默认情况下，BGP不能将其他路由协议内的缺省路由引入到BGP路由表中，配置此命令是允许这个操作，也就是说实际还是得需要引入的路由协议内的路由表已经存在默认路由才行。</p>
+</li>
+</ol>
+<h3 id="Network方式"><a href="#Network方式" class="headerlink" title="Network方式"></a>Network方式</h3><ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>bgp</strong> <em>as-numbe</em> ，进入BGP视图。</li>
+<li>执行命令<strong>network</strong> <em>ip-address</em> [ <em>mask</em> | <em>mask-length</em> ] [ <strong>route-policy</strong> <em>route-policy-name</em> ]，配置BGP逐条引入IP路由表中的路由。</li>
+</ol>
+<h2 id="配置反射器"><a href="#配置反射器" class="headerlink" title="配置反射器"></a>配置反射器</h2><p>注意，配置反射器只需要在成为反射器的那一台设备上进行配置，无法去客户机上配置。</p>
+<ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>bgp</strong> <em>as-numbe</em> ，进入BGP视图。</p>
+</li>
+<li><p>执行命令<strong>peer</strong> { <em>group-name</em> | <em>ip-address</em>  } <strong>reflect-client</strong>，配置路由反射器的客户。</p>
+<p>该命令一配置，即表示该设备成为一台反射器。同时再去设定指定的设备成为“我”的客户。</p>
+</li>
+<li><p>（可选）在路由反射器上执行命令<strong>reflector cluster-id</strong> <em>cluster-id</em>，配置路由反射器的集群ID。</p>
+<p>默认情况下，每个路由反射器使用自己的Router ID作为集群ID。</p>
+</li>
+<li><p>（可选）执行命令<strong>undo reflect between-clients</strong>，禁止客户机之间的路由反射。</p>
+<p>默认情况下，路由反射器会将从一个客户机学到的路由反射给其他客户机，这就是”客户机之间的路由反射”。</p>
+<p>启用此命令后，路由反射器收到<u>客户机传来的路由</u>，只会将其反射给非客户机的IBGP对等体。</p>
+</li>
+<li><p>（可选）执行命令<strong>routing-table rib-only</strong> [ <strong>route-policy</strong> <em>route-policy-name</em> ]，禁止BGP将优选的路由下发到IP路由表。</p>
+<p>默认情况下，BGP将优选的路由下发到IP路由表。</p>
+</li>
+</ol>
+<h2 id="配置联邦"><a href="#配置联邦" class="headerlink" title="配置联邦"></a>配置联邦</h2><ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>bgp</strong> <em>as-numbe</em> ，进入BGP视图，配置所属的联邦成员AS号。</li>
+<li>执行命令<strong>confederation id</strong>  <em>as-number</em>，配置联邦AS号。</li>
+<li>执行命令<strong>confederation peer-as</strong> <em>as-number</em> ，指定属于同一个联盟的相邻成员AS号。</li>
+</ol>
+<p>注意：一共出现了三次AS号配置，它们都是不同的，注意区分清楚。</p>
+<p>尤其是创建并进入BGP视图的地方，是输入的成员AS号，并非联邦AS号。</p>
+<h1 id="案例实验"><a href="#案例实验" class="headerlink" title="案例实验"></a>案例实验</h1><h2 id="案例一"><a href="#案例一" class="headerlink" title="案例一"></a>案例一</h2><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/a1c4c50e28adfc09407e7.png" style="zoom:80%;" />
+
+
+
+<p>我们先从简单一点的开始，顺便也做完整一点，从0开始搭建。</p>
+<p>这是之前软考题中的一副拓扑图：某网络拓扑如图所示，路由器R1、R2、R3通过OSPF实现网络互通，R1和R3建立iBGP邻居关系，R3和R5建立eBGP邻居关系，R1和R4建立eBGP邻居关系。</p>
+<blockquote>
+<p>虚线为表示R1与R3构建了IBGP关系，实际物理上不存在该链路。</p>
+</blockquote>
+<h3 id="配置校园网内R1、R2、R3的OSPF网络互通："><a href="#配置校园网内R1、R2、R3的OSPF网络互通：" class="headerlink" title="配置校园网内R1、R2、R3的OSPF网络互通："></a>配置校园网内R1、R2、R3的OSPF网络互通：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R1</span><br><span class="line"></span><br><span class="line">[R1]interface GigabitEthernet 0/0/0</span><br><span class="line">[R1-GigabitEthernet0/0/0]ip address 192.168.12.1 24</span><br><span class="line">[R1-GigabitEthernet0/0/0]q</span><br><span class="line"></span><br><span class="line">[R1]interface LoopBack 0</span><br><span class="line">[R1-LoopBack0]ip address 1.1.1.1 24</span><br><span class="line">[R1-LoopBack0]q</span><br><span class="line"></span><br><span class="line">[R1]ospf 1 router-id 1.1.1.1</span><br><span class="line">[R1-ospf-1]area 0	</span><br><span class="line">[R1-ospf-1-area-0.0.0.0]network 1.1.1.1 0.0.0.0</span><br><span class="line">[R1-ospf-1-area-0.0.0.0]network 192.168.12.0 0.0.0.255</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R2</span><br><span class="line"></span><br><span class="line">[R2]interface GigabitEthernet 0/0/0</span><br><span class="line">[R2-GigabitEthernet0/0/0]ip address 192.168.12.2 24</span><br><span class="line">[R2-GigabitEthernet0/0/0]q</span><br><span class="line"></span><br><span class="line">[R2]interface GigabitEthernet 0/0/1</span><br><span class="line">[R2-GigabitEthernet0/0/1]ip address 192.168.23.2 24</span><br><span class="line">[R2-GigabitEthernet0/0/1]q</span><br><span class="line"></span><br><span class="line">[R2]interface LoopBack 0</span><br><span class="line">[R2-LoopBack0]ip address 2.2.2.2 24</span><br><span class="line">[R2-LoopBack0]q</span><br><span class="line"></span><br><span class="line">[R2]ospf 1 router-id 2.2.2.2</span><br><span class="line">[R2-ospf-1]area 0</span><br><span class="line">[R2-ospf-1-area-0.0.0.0]network 2.2.2.2 0.0.0.0</span><br><span class="line">[R2-ospf-1-area-0.0.0.0]network 192.168.12.0 0.0.0.255</span><br><span class="line">[R2-ospf-1-area-0.0.0.0]network 192.168.23.0 0.0.0.255</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R3</span><br><span class="line"></span><br><span class="line">[R3]interface GigabitEthernet 0/0/0</span><br><span class="line">[R3-GigabitEthernet0/0/0]ip address 192.168.23.3 24</span><br><span class="line">[R3-GigabitEthernet0/0/0]q</span><br><span class="line"></span><br><span class="line">[R3]interface LoopBack 0</span><br><span class="line">[R3-LoopBack0]ip address 3.3.3.3 24</span><br><span class="line">[R3-LoopBack0]q</span><br><span class="line"></span><br><span class="line">[R3]ospf 1 router-id 3.3.3.3	</span><br><span class="line">[R3-ospf-1]area 0</span><br><span class="line">[R3-ospf-1-area-0.0.0.0]network 3.3.3.3 0.0.0.0</span><br><span class="line">[R3-ospf-1-area-0.0.0.0]network 192.168.23.3 0.0.0.255</span><br><span class="line">[R3-ospf-1-area-0.0.0.0]q</span><br></pre></td></tr></table></figure>
+
+<p>配置完后，验证一下，R3可以ping通R1的回环地址1.1.1.1。（就不查路由表了）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R3]ping 1.1.1.1</span><br><span class="line">  PING 1.1.1.1: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 1.1.1.1: bytes=56 Sequence=1 ttl=254 time=40 ms</span><br><span class="line">    Reply from 1.1.1.1: bytes=56 Sequence=2 ttl=254 time=30 ms</span><br><span class="line">    Reply from 1.1.1.1: bytes=56 Sequence=3 ttl=254 time=30 ms</span><br><span class="line">    Reply from 1.1.1.1: bytes=56 Sequence=4 ttl=254 time=20 ms</span><br><span class="line">    Reply from 1.1.1.1: bytes=56 Sequence=5 ttl=254 time=20 ms</span><br><span class="line"></span><br><span class="line">  --- 1.1.1.1 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 20/28/40 ms</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置与R4、R5构建BGP网络"><a href="#配置与R4、R5构建BGP网络" class="headerlink" title="配置与R4、R5构建BGP网络"></a>配置与R4、R5构建BGP网络</h3><h4 id="R1与R4："><a href="#R1与R4：" class="headerlink" title="R1与R4："></a>R1与R4：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;R1&gt;system-view </span><br><span class="line">[R1]interface GigabitEthernet 0/0/1</span><br><span class="line">[R1-GigabitEthernet0/0/1]ip address 10.14.14.1 24</span><br><span class="line">[R1-GigabitEthernet0/0/1]q</span><br><span class="line"></span><br><span class="line">[R1]bgp 100</span><br><span class="line">[R1-bgp]peer 10.14.14.4 as	</span><br><span class="line">[R1-bgp]peer 10.14.14.4 as-number 200</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R4</span><br><span class="line">[R4]interface g0/0/0</span><br><span class="line">[R4-GigabitEthernet0/0/0]ip address 10.14.14.4 24</span><br><span class="line">[R4-GigabitEthernet0/0/0]q</span><br><span class="line"></span><br><span class="line">[R4]interface LoopBack 0</span><br><span class="line">[R4-LoopBack0]ip address 210.23.3.4 32</span><br><span class="line">[R4-LoopBack0]q</span><br><span class="line"></span><br><span class="line">[R4]bgp 200</span><br><span class="line">[R4-bgp]peer 10.14.14.1 as-number 100</span><br><span class="line">[R4-bgp]q</span><br></pre></td></tr></table></figure>
+
+<p>由于AS号不相同，因此会判断处于不同的AS网络，构建EBGP对等体关系。</p>
+<p>我们可以检验一下：</p>
+<ul>
+<li><strong>display bgp peer</strong> 为检查所有邻居对等体的简要信息；</li>
+<li><strong>display bgp peer</strong> <em>10.14.14.4</em> <strong>verbose</strong>为检查指定邻居对等体的详细信息。（其中可以看到<u>Type: EBGP link</u>）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">[R1]display bgp peer</span><br><span class="line"></span><br><span class="line"> BGP local router ID : 192.168.12.1</span><br><span class="line"> Local AS number : 100</span><br><span class="line"> Total number of peers : 1		  Peers in established state : 1</span><br><span class="line"></span><br><span class="line">  Peer            V          AS  MsgRcvd  MsgSent  OutQ  Up/Down   State        PrefRcv</span><br><span class="line">  10.14.14.4      4         200        5        6     0 00:03:27 Established     0</span><br><span class="line"></span><br><span class="line">[R1]display bgp peer 10.14.14.4 verbose</span><br><span class="line"></span><br><span class="line">	BGP Peer is 10.14.14.4,  remote AS 200  </span><br><span class="line">	Type: EBGP link</span><br><span class="line">	BGP version 4, Remote router ID 10.14.14.4</span><br><span class="line">	Update-group ID: 1  </span><br><span class="line">	BGP current state: Established, Up for 00h05m58s </span><br><span class="line">	BGP current event: RecvKeepalive</span><br><span class="line">	BGP last state: OpenConfirm</span><br><span class="line">	BGP Peer Up count: 1</span><br><span class="line">	Received total routes: 0</span><br><span class="line">	Received active routes total: 0</span><br><span class="line">	Advertised total routes: 0</span><br><span class="line">	Port:  Local - 179	Remote - 50885</span><br><span class="line">	Configured: Connect-retry Time: 32 sec</span><br><span class="line">	Configured: Active Hold Time: 180 sec	Keepalive Time:60 sec</span><br><span class="line">	Received  : Active Hold Time: 180 sec</span><br><span class="line">	Negotiated: Active Hold Time: 180 sec	Keepalive Time:60 sec</span><br><span class="line">	Peer optional capabilities:</span><br><span class="line">	Peer supports bgp multi-protocol extension</span><br><span class="line">	Peer supports bgp route refresh capability</span><br><span class="line">	Peer supports bgp 4-byte-as capability</span><br><span class="line">	Address family IPv4 Unicast: advertised and received</span><br><span class="line"> Received: Total 7 messages</span><br><span class="line">		 Update messages 		0 </span><br><span class="line">		 Open messages 			1 </span><br><span class="line">		 KeepAlive messages 		6 </span><br><span class="line">		 Notification messages  	0 </span><br><span class="line">		 Refresh messages 		0</span><br><span class="line"> Sent: Total 8 messages</span><br><span class="line">		 Update messages 		0 </span><br><span class="line">		 Open messages 			2 </span><br><span class="line">		 KeepAlive messages 		6 </span><br><span class="line">		 Notification messages  	0 </span><br><span class="line">		 Refresh messages 		0</span><br><span class="line"> Authentication type configured: None</span><br><span class="line"> Last keepalive received: 2024/07/25 16:58:09 UTC-08:00    </span><br><span class="line"> Last keepalive sent    : 2024/07/25 16:58:09 UTC-08:00    </span><br><span class="line"> Minimum route advertisement interval is 30 seconds</span><br><span class="line"> Optional capabilities:</span><br><span class="line"> Route refresh capability has been enabled</span><br><span class="line"> 4-byte-as capability has been enabled</span><br><span class="line"> Peer Preferred Value: 0</span><br><span class="line"> Routing policy configured:</span><br><span class="line"> No routing policy is configured</span><br></pre></td></tr></table></figure>
+
+<h4 id="接着配置R1与R3的BGP关系："><a href="#接着配置R1与R3的BGP关系：" class="headerlink" title="接着配置R1与R3的BGP关系："></a>接着配置R1与R3的BGP关系：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R1&gt;system-view </span><br><span class="line">[R1]bgp 100	</span><br><span class="line">[R1-bgp]peer 192.168.23.3 as-number 100</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R3&gt;system-view </span><br><span class="line">[R3]bgp 100</span><br><span class="line">[R3-bgp]peer 192.168.12.1 as-number 100</span><br></pre></td></tr></table></figure>
+
+<p>检查一下R1的bgp邻居对等体列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[R1]display bgp peer</span><br><span class="line"></span><br><span class="line"> BGP local router ID : 192.168.12.1</span><br><span class="line"> Local AS number : 100</span><br><span class="line"> Total number of peers : 2		  Peers in established state : 2</span><br><span class="line"></span><br><span class="line">  Peer            V          AS  MsgRcvd  MsgSent  OutQ  Up/Down    State   PrefRcv</span><br><span class="line">  10.14.14.4      4         200       18       19     0 00:16:47 Established   0</span><br><span class="line">  192.168.23.3    4         100        2        3     0 00:00:15 Established   0</span><br></pre></td></tr></table></figure>
+
+<p>状态已经Established了，关系建立完毕；再检查详细信息，其Type: IBGP link（就不贴出来了，详细信息太长了）</p>
+<h4 id="R3与R5"><a href="#R3与R5" class="headerlink" title="R3与R5"></a>R3与R5</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;R3&gt;system-view </span><br><span class="line">[R3]interface g0/0/1</span><br><span class="line">[R3-GigabitEthernet0/0/1]ip address 10.35.35.3 24</span><br><span class="line">[R3-GigabitEthernet0/0/1]q</span><br><span class="line"></span><br><span class="line">[R3]bgp 100</span><br><span class="line">[R3-bgp]peer 10.35.35.5 as-number 300</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R5</span><br><span class="line"></span><br><span class="line">[R5]interface g0/0/0</span><br><span class="line">[R5-GigabitEthernet0/0/0]ip address 10.35.35.5 24</span><br><span class="line">[R5-GigabitEthernet0/0/0]q</span><br><span class="line"></span><br><span class="line">[R5]bgp 300</span><br><span class="line">[R5-bgp]peer 10.35.35.3 as-number 100</span><br></pre></td></tr></table></figure>
+
+<h3 id="在R4上引入路由，并解决无路由问题"><a href="#在R4上引入路由，并解决无路由问题" class="headerlink" title="在R4上引入路由，并解决无路由问题"></a>在R4上引入路由，并解决无路由问题</h3><p>我们将R4上的210.23.3.4 &#x2F;32引入到BGP网络中，让其他BGP设备都能学习到该路由。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[R4]bgp 200</span><br><span class="line">[R4-bgp]network 210.23.3.4 32</span><br></pre></td></tr></table></figure>
+
+<p>这时，我们去R3上检查bgp路由表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[R3]display bgp routing-table </span><br><span class="line"></span><br><span class="line"> BGP Local router ID is 192.168.23.3 </span><br><span class="line"> Status codes: * - valid, &gt; - best, d - damped,</span><br><span class="line">               h - history,  i - internal, s - suppressed, S - Stale</span><br><span class="line">               Origin : i - IGP, e - EGP, ? - incomplete</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> Total Number of Routes: 1</span><br><span class="line">      Network            NextHop        MED        LocPrf    PrefVal Path/Ogn</span><br><span class="line">   i  210.23.3.4/32      10.14.14.4      0          100        0      200i</span><br></pre></td></tr></table></figure>
+
+<p>可以发现R4引入的210.23.3.4 &#x2F;32路由已经被R3获取并加入到其bgp路由表中。</p>
+<p>不过，在R5上却检查不到该路由信息，并且如果在链路上进行抓包的话，能够发现R3不会发送路由给R5，也就是说问题出在R3上。</p>
+<p>这是因为对于R3来说，它获得的路由信息是NextHop&#x3D;10.14.14.4，而实际它并没有前往10.14.14.4网段的路由信息，因此它认为该路由是无效的，于是就不会将该路由发送给R5。</p>
+<p>想解决这个问题，很简单，我们可以在R1上引入路由，但是这并不够通用。</p>
+<p>最好的解决方式是在R1上配置传递路由是将NextHop修改为本身。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R1&gt;system-view </span><br><span class="line">[R1]bgp 100</span><br><span class="line">[R1-bgp]peer 192.168.23.3 next-hop-local</span><br></pre></td></tr></table></figure>
+
+<p>再检查R3的路由表就可以看到NextHop&#x3D;192.168.12.1</p>
+<p>而对于R3来说，它是知道如何前往192.168.12.1的（通过OSPF路由表），因此它就认为这条BGP路由是有效的，便会传递给R5了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[R3]display bgp routing-table </span><br><span class="line"></span><br><span class="line"> BGP Local router ID is 192.168.23.3 </span><br><span class="line"> Status codes: * - valid, &gt; - best, d - damped,</span><br><span class="line">               h - history,  i - internal, s - suppressed, S - Stale</span><br><span class="line">               Origin : i - IGP, e - EGP, ? - incomplete</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> Total Number of Routes: 1</span><br><span class="line">      Network            NextHop        MED        LocPrf    PrefVal Path/Ogn</span><br><span class="line"> *&gt;i  210.23.3.4/32      192.168.12.1    0          100        0      200i</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决路由黑洞问题——反射器"><a href="#解决路由黑洞问题——反射器" class="headerlink" title="解决路由黑洞问题——反射器"></a>解决路由黑洞问题——反射器</h3><p>理论上，R5已经持有210.23.3.4的路由信息了，并且下一跳是可达的，那么应该能够访问210.23.3.4。</p>
+<p>让我们一步步分析一下：</p>
+<ol>
+<li><p>R5根据bgp路由，查到210.23.3.4的NextHop&#x3D;10.35.35.3，也就是R3，将数据报文发送给R3。</p>
+</li>
+<li><p>R3再经过路由迭代，最终将R5访问210.23.3.4的报文传递给R2。</p>
+<blockquote>
+<p>先根据bgp路由查到210.23.3.4的NextHop&#x3D;192.168.12.1，再根据OSPF路由查到192.168.12.1的NextHop&#x3D;192.168.23.2，也就是R2</p>
+</blockquote>
+</li>
+<li><p>R2检查其路由表，并没有找到前往210.23.3.4的路由，因此会将数据报文丢弃，也就是在R2处形成了路由黑洞。</p>
+</li>
+</ol>
+<p>要解决这个问题，可以配置R1与R2构建BGP关系，R2与R3也构建BGP关系。</p>
+<p>也可以只配置R1与R2构建BGP关系，然后将R1配置为反射器。</p>
+<p>我们这边就演示反射器的配置。</p>
+<p>首先配置R2与R1构建BGP关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R2&gt;system-view </span><br><span class="line">[R2]bgp 100</span><br><span class="line">[R2-bgp]peer 192.168.12.1 as-number 100</span><br></pre></td></tr></table></figure>
+
+<p>接着配置反射器与客户：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;R1&gt;system-view </span><br><span class="line">[R1]bgp 100</span><br><span class="line">[R1-bgp]peer 192.168.12.2 as-number 100</span><br><span class="line">[R1-bgp]peer 192.168.12.2 next-hop-local</span><br><span class="line"></span><br><span class="line">[R1-bgp]peer 192.168.12.2 reflect-client </span><br><span class="line">[R1-bgp]peer 192.168.23.3 reflect-client </span><br></pre></td></tr></table></figure>
+
+<p>请注意，不要忘了新配置R2作为R1的对等体后，配置<strong>next-hop-local</strong>。</p>
+<p>经过以上配置，AS 100内所有路由器都有了到达210.23.3.4的路由信息了。</p>
+<p>但通信是双向的，我们还需要为R4准备好路由。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;R1&gt;system-view </span><br><span class="line">[R1]bgp 100</span><br><span class="line">[R1-bgp]import-route ospf 1</span><br></pre></td></tr></table></figure>
+
+<p>配置完后，我们在R3上测试一下，已经可以与210.23.3.4互通了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R3]ping 210.23.3.4</span><br><span class="line">  PING 210.23.3.4: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=1 ttl=253 time=30 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=2 ttl=253 time=40 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=3 ttl=253 time=40 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=4 ttl=253 time=40 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=5 ttl=253 time=30 ms</span><br><span class="line"></span><br><span class="line">  --- 210.23.3.4 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 30/36/40 ms</span><br></pre></td></tr></table></figure>
+
+<p>但R5还不行，因为R1依旧还是没有R5的路由信息。</p>
+<p>我们需要在R3上引入到达R5&#x3D;10.35.35.5的路由信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[R3]bgp 100</span><br><span class="line">[R3-bgp]network 10.35.35.5 24</span><br></pre></td></tr></table></figure>
+
+<p>引入完成后，在R5上进行测试，可以ping通210.23.3.4了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R5]ping 210.23.3.4</span><br><span class="line">  PING 210.23.3.4: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=1 ttl=252 time=50 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=2 ttl=252 time=50 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=3 ttl=252 time=40 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=4 ttl=252 time=30 ms</span><br><span class="line">    Reply from 210.23.3.4: bytes=56 Sequence=5 ttl=252 time=50 ms</span><br><span class="line"></span><br><span class="line">  --- 210.23.3.4 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 30/44/50 ms</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>ASBR往自己AS内部传递路由最好是配置next-hop-local，避免AS内部的BGP路由器因无法路由到外部AS而放弃路由。</p>
+<p>AS内部如果跨设备构建BGP对等体关系，则需要确认物理链路上的所有路由器是否有对应路由，避免出现路由黑洞。</p>
+<p>解决路由黑洞的方式有配置全互联或者配置反射器。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/2024/07/24/B14[%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1]BGP/">https://magiku.github.io/2024/07/24/B14[%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1]BGP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，转载请注明出处！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%8E%E4%B8%BA/">华为</a></div><div class="post_share"><div class="social-share" data-image="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/28/B01%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5D%E6%B3%9B%E6%B4%AA%E4%B8%8EARP/" title="B01【交换基础】泛洪与ARP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">B01【交换基础】泛洪与ARP</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/15/B13%5B%E8%B7%AF%E7%94%B1%E6%8E%A7%E5%88%B6%5DACL%E3%80%81%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E3%80%81%E7%AD%96%E7%95%A5%E8%B7%AF%E7%94%B1/" title="B13【路由控制】ACL、路由策略、策略路由"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">B13【路由控制】ACL、路由策略、策略路由</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Magiku</div><div class="author-info__description">个人博客，用于记录知识库。<br>希望这些笔记能对你有所帮助！<br>要是有什么需要交流的，欢迎联系我~</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E7%AD%89%E4%BD%93%E3%80%81EBGP%E3%80%81IBGP"><span class="toc-text">对等体、EBGP、IBGP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BGP%E7%9A%84%E6%8A%A5%E6%96%87%E4%BA%A4%E4%BA%92"><span class="toc-text">BGP的报文交互</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BGP%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="toc-text">BGP的路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BGP%E8%B7%AF%E7%94%B1%E5%B1%9E%E6%80%A7"><span class="toc-text">BGP路由属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BGP%E7%9A%84%E9%98%B2%E7%8E%AF%E6%9C%BA%E5%88%B6"><span class="toc-text">BGP的防环机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AS-Path"><span class="toc-text">AS_Path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E5%88%86%E5%89%B2"><span class="toc-text">水平分割</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%BB%91%E6%B4%9E%E9%97%AE%E9%A2%98"><span class="toc-text">路由黑洞问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%99%A8"><span class="toc-text">反射器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E9%82%A6"><span class="toc-text">联邦</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BGP%E8%B7%AF%E7%94%B1%E4%BC%98%E5%85%88%E8%A7%84%E5%88%99"><span class="toc-text">BGP路由优先规则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E4%BC%98%E9%80%89%E5%8D%8F%E8%AE%AE%E9%A6%96%E9%80%89%E5%80%BC%EF%BC%88PrefVal%EF%BC%89%E6%9C%80%E9%AB%98%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="toc-text">0.优选协议首选值（PrefVal）最高的路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BC%98%E9%80%89%E6%9C%AC%E5%9C%B0%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%88Local-Pref%EF%BC%89%E6%9C%80%E9%AB%98%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="toc-text">1.优选本地优先级（Local_Pref）最高的路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BC%98%E5%85%88%E6%9C%AC%E5%9C%B0%E5%8F%91%E5%B8%83%E7%9A%84%E8%B7%AF%E7%94%B1"><span class="toc-text">2.优先本地发布的路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BC%98%E9%80%89AS%E8%B7%AF%E5%BE%84%EF%BC%88AS-Path%EF%BC%89%E6%9C%80%E7%9F%AD%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">3.优选AS路径（AS_Path）最短的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BE%9D%E6%AC%A1%E4%BC%98%E9%80%89Origin%E5%B1%9E%E6%80%A7%E4%B8%BAIGP%E3%80%81EGP%E3%80%81Incomplete%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">4.依次优选Origin属性为IGP、EGP、Incomplete的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AF%B9%E4%BA%8E%E6%9D%A5%E8%87%AA%E5%90%8C%E4%B8%80AS%E7%9A%84%E8%B7%AF%E7%94%B1%EF%BC%8C%E4%BC%98%E9%80%89MED%E5%80%BC%E6%9C%80%E4%BD%8E%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">5.对于来自同一AS的路由，优选MED值最低的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BE%9D%E6%AC%A1%E4%BC%98%E9%80%89EBGP%E8%B7%AF%E7%94%B1%E3%80%81IBGP%E8%B7%AF%E7%94%B1%E3%80%81LocalCross%E8%B7%AF%E7%94%B1%E3%80%81RemoteCross%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">6.依次优选EBGP路由、IBGP路由、LocalCross路由、RemoteCross路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%BC%98%E9%80%89%E5%88%B0BGP%E4%B8%8B%E4%B8%80%E8%B7%B3IGP%E5%BA%A6%E9%87%8F%E5%80%BC%EF%BC%88metric%EF%BC%89%E6%9C%80%E5%B0%8F%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">7.优选到BGP下一跳IGP度量值（metric）最小的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%BC%98%E9%80%89Cluster-List%E6%9C%80%E7%9F%AD%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">8.优选Cluster_List最短的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E4%BC%98%E9%80%89Router-ID%E6%9C%80%E5%B0%8F%E7%9A%84%E8%AE%BE%E5%A4%87%E5%8F%91%E5%B8%83%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">9.优选Router ID最小的设备发布的路由。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E4%BC%98%E9%80%89%E4%BB%8E%E5%85%B7%E6%9C%89%E6%9C%80%E5%B0%8FIP-Address%E7%9A%84%E5%AF%B9%E7%AD%89%E4%BD%93%E5%AD%A6%E6%9D%A5%E7%9A%84%E8%B7%AF%E7%94%B1%E3%80%82"><span class="toc-text">10.优选从具有最小IP Address的对等体学来的路由。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-text">基础配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E5%BC%95%E5%85%A5"><span class="toc-text">配置路由引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Import%E6%96%B9%E5%BC%8F"><span class="toc-text">Import方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Network%E6%96%B9%E5%BC%8F"><span class="toc-text">Network方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%B0%84%E5%99%A8"><span class="toc-text">配置反射器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%81%94%E9%82%A6"><span class="toc-text">配置联邦</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%AE%9E%E9%AA%8C"><span class="toc-text">案例实验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E4%B8%80"><span class="toc-text">案例一</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%A0%A1%E5%9B%AD%E7%BD%91%E5%86%85R1%E3%80%81R2%E3%80%81R3%E7%9A%84OSPF%E7%BD%91%E7%BB%9C%E4%BA%92%E9%80%9A%EF%BC%9A"><span class="toc-text">配置校园网内R1、R2、R3的OSPF网络互通：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%8ER4%E3%80%81R5%E6%9E%84%E5%BB%BABGP%E7%BD%91%E7%BB%9C"><span class="toc-text">配置与R4、R5构建BGP网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#R1%E4%B8%8ER4%EF%BC%9A"><span class="toc-text">R1与R4：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E7%9D%80%E9%85%8D%E7%BD%AER1%E4%B8%8ER3%E7%9A%84BGP%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">接着配置R1与R3的BGP关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R3%E4%B8%8ER5"><span class="toc-text">R3与R5</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8R4%E4%B8%8A%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%86%B3%E6%97%A0%E8%B7%AF%E7%94%B1%E9%97%AE%E9%A2%98"><span class="toc-text">在R4上引入路由，并解决无路由问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%AF%E7%94%B1%E9%BB%91%E6%B4%9E%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94%E5%8F%8D%E5%B0%84%E5%99%A8"><span class="toc-text">解决路由黑洞问题——反射器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Magiku</div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'd55e9307ca605124a542',
+      clientSecret: '73a85d39b9bda1aa0f24ac51ea5a9504edf02277',
+      repo: 'magiku.github.io',
+      owner: 'magiku',
+      admin: ['magiku'],
+      id: '5c4fc195d81ec786ff209ef16bdafe8c',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/计算机网络/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 计算机网络 (17)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/个人杂谈/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 磨叽墨迹 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://magiku.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #74d6cf}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:black}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "/image/loading.gif" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = '/2023/,/2024/,/2025/,/2026/,/2027/,/2028/,/2029/,/2030/'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '39b2c1fede67489eb9265b983874c66d';
+  var gaud_map_key = '84b1f52230bfdc06111b20984a0b04d9';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.324587,23.106574';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/10/19/A00[科普]计算机网络概述/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-10-19</span><a class="blog-slider__title" href="2023/10/19/A00[科普]计算机网络概述/" alt="">A00【科普]】计算机网络概述</a><div class="blog-slider__text">本文以实际出发，介绍计算机网络的入门知识，让读者对计算机网络有个总体的知识体系</div><a class="blog-slider__button" href="2023/10/19/A00[科普]计算机网络概述/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-08</span><a class="blog-slider__title" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">A03【科普-运维】网络故障排查手册</a><div class="blog-slider__text">本文将介绍一些常见的网络故障与排查思路，主要适用于家庭与公司内部网络，运营商一侧的维护不介绍（只要会判断是不是它们的问题即可</div><a class="blog-slider__button" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-28</span><a class="blog-slider__title" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">B01【交换基础】泛洪与ARP</a><div class="blog-slider__text">本文将介绍设备之前是如何通过MAC地址通信的，包括交换机的泛洪学习，设备的ARP协议，网关的代理ARP等。</div><a class="blog-slider__button" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-04</span><a class="blog-slider__title" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">B08【路由基础】静态路由、RIP协议</a><div class="blog-slider__text">本文将介绍路由相关知识，也就是路由器相关的内容。上篇介绍的交换与vlan都是二层技术，基于mac地址信息所在的数据帧。而路由是三层技术（网络层），是基于ip地址信息所在的数据包。</div><a class="blog-slider__button" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-22</span><a class="blog-slider__title" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">B03【多链路问题】环路、广播风暴、链路聚合</a><div class="blog-slider__text">本篇是针对交换部分的多链路进行讨论，探讨了环路的危害与预防措施，进而延申出链路聚合的概念与知识点。</div><a class="blog-slider__button" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>

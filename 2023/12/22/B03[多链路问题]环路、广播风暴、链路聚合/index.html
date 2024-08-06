@@ -1,0 +1,617 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>B03【多链路问题】环路、广播风暴、链路聚合 | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本篇是针对交换部分的多链路进行讨论，探讨了环路的危害与预防措施，进而延申出链路聚合的概念与知识点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B03【多链路问题】环路、广播风暴、链路聚合">
+<meta property="og:url" content="https://magiku.github.io/2023/12/22/B03[%E5%A4%9A%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98]%E7%8E%AF%E8%B7%AF%E3%80%81%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4%E3%80%81%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="本篇是针对交换部分的多链路进行讨论，探讨了环路的危害与预防措施，进而延申出链路聚合的概念与知识点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png">
+<meta property="article:published_time" content="2023-12-22T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-22T02:00:00.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="交换">
+<meta property="article:tag" content="链路聚合">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png"><link rel="shortcut icon" href="https://telegraph-image-713.pages.dev/file/35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/2023/12/22/B03[%E5%A4%9A%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98]%E7%8E%AF%E8%B7%AF%E3%80%81%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4%E3%80%81%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'B03【多链路问题】环路、广播风暴、链路聚合',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-22 10:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Magiku's药剂屋"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">B03【多链路问题】环路、广播风暴、链路聚合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-22T02:00:00.000Z" title="发表于 2023-12-22 10:00:00">2023-12-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-22T02:00:00.000Z" title="更新于 2023-12-22 10:00:00">2023-12-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="回顾交换过程"><a href="#回顾交换过程" class="headerlink" title="回顾交换过程"></a>回顾交换过程</h1><p>一般的交换机是二层设备，负责转发数据帧；只会解封装数据帧，获取源mac与目标mac，对数据帧的转发就是基于mac地址的。</p>
+<p>收到一个数据帧：</p>
+<blockquote>
+<p>读取到源mac地址，就进行学习——记录在交换机内部的地址表中。</p>
+<p>读取到目标地址，如果内部地址表中有该mac地址的信息，就根据表格指定的接口转发出去。</p>
+<p>读取到目标地址，如果内部地址表中没有该mac地址的信息，就从其他所有接口转发出去；等目标设备回包了自然就能通过读取源mac学习到。</p>
+<p>如果目标地址为全f，也就是广播地址，就会从所有接口直接转发出去（比如ARP包）</p>
+</blockquote>
+<h1 id="环路与广播风暴"><a href="#环路与广播风暴" class="headerlink" title="环路与广播风暴"></a>环路与广播风暴</h1><h2 id="环路"><a href="#环路" class="headerlink" title="环路"></a>环路</h2><p>环路是指交换机之间的链路形成了一个圈、一个循环。</p>
+<p>可以是多台交换机彼此串联，最后形成一个圆环；也可以是两台交换机之间有多条链路互联；甚至可以是一台交换机同时连在网线的头尾。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/307ca84936b5512702b02.png" alt="图1——三种环路"></p>
+<p>现网中常出现的情况有两种：</p>
+<blockquote>
+<p>一是机房到办公区拉了多条网线（其中有作为备用的），备用的网线在机房已经接上交换机，在办公区这边只是打上水晶头未接上。某天有人将这条网线接上交换机的话，就形成环路了。（图中第二种）</p>
+<p>二是办公区的交换机连了多台设备，有设备移动了，网线还留在交换机上。某天有人将这条因设备移动、未连接设备的网线接回交换机的话，就形成环路了。（图中第三种）</p>
+</blockquote>
+<p>如果形成环路的交换机之间有广播包存在，那么该广播包将无限制的循环下去。</p>
+<h2 id="广播风暴"><a href="#广播风暴" class="headerlink" title="广播风暴"></a>广播风暴</h2><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/92c1f0df16297214f1245.png" alt="图2——广播风暴"></p>
+<p>比如图中PC1想访问PC2，由于不知道PC2的mac地址，于是发送了ARP广播包。</p>
+<p>基于广播特性，交换机2收到ARP包时会转发给交换1与3，交换机1再转发给交换机3，在交换机3这就一共有2份广播包了，最终PC2会收到2份广播包。（指单方向的一次通信，图中绿色箭头）</p>
+<p>实际上交换机3分别收到交换机1与2发来的广播包，不会只发给PC2，也会转发到另一台交换机（图中红色箭头）。</p>
+<p><strong>最终这两红箭头的广播包就会一直转发下去</strong>，在环路中形成一个“顺时针”与一个“逆时针”方向的“圈”。</p>
+<p>另外<strong>对于PC1与PC2来说，也会收到无限多的该广播包。</strong></p>
+<p><strong>这就是广播风暴。</strong></p>
+<p>设备越多，形成环路后造成的广播风暴就越猛烈，很快就会导致网络资源被占满，导致一般的网络通信无法正常进行。</p>
+<p>另外，基于交换机的mac地址学习机制——收到数据帧会学习记录数据帧的源mac地址。</p>
+<p>以上述拓扑为例，对其中任何交换机来说，当他们收到“顺时针方向”的数据帧，就会记录PC1的mac地址来自于此；可收到“逆时针方向”的数据帧时，就又检测到PC1的mac地址来自于这另一个接口。</p>
+<p>最终这个mac在交换机的地址表中，表现为在两个接口之间反复切换，这种现象被称为为mac地址漂移、或mac地址震荡。</p>
+<p>这种现象会导致在广播风暴的初期——网络资源还未被完全消耗时，就出现网络时断时续的情况。</p>
+<h2 id="预防措施"><a href="#预防措施" class="headerlink" title="预防措施"></a>预防措施</h2><p>一是对备用线缆做好标签，最好是不打水晶头，需要时再打水晶头。</p>
+<p>二是做好管理教育，普通员工不要碰网络设备，哪怕是不小心撞到了，以为自己把网线碰松掉下来了，也不要自己接回去。（等有人上不了网报障了，运维人员再去处理。）</p>
+<p>三是在可网管的交换机设备开启STP一类的防环路功能。（STP的内容在另一篇文章详细介绍）</p>
+<h2 id="衍生"><a href="#衍生" class="headerlink" title="衍生"></a>衍生</h2><p>我们辩证的看一下环路，其还是能存在优点的。</p>
+<p>就上面的拓扑图，假如这三台交换机之间某一条链路故障了，并不会造成局部网络不通，PC1与PC2依旧能访问到任何一台交换机。</p>
+<p>如果是两台交换机之间存在环路（图1的第二种环路情况），一样也能保证单条链路故障后，依旧有链路能访问；甚至可以考虑同时使用这两条链路来收发数据，实现带宽的翻倍，网络性能的优化。</p>
+<p>后面将介绍两种技术——链路聚合、生成树协议，就能实现以上功能，且不会造成广播风暴。</p>
+<blockquote>
+<p>打算一口气介绍完STP与RSTP，碍于篇幅，STP与RSTP本文暂不介绍，所以先介绍链路聚合技术。</p>
+</blockquote>
+<h1 id="链路聚合"><a href="#链路聚合" class="headerlink" title="链路聚合"></a>链路聚合</h1><p>以太网链路聚合Eth-Trunk简称链路聚合，通过将多个物理接口捆绑为一个逻辑接口，可以在不进行硬件升级的条件下，达到增加链路带宽的目的。</p>
+<p>链路聚合技术主要有以下三个优势：</p>
+<ul>
+<li><p>增加带宽</p>
+<p>链路聚合接口的最大带宽可以达到各成员接口带宽之和。（比如千兆交换机，原本只有1条链路时只能跑千兆；链路聚合3条链路的话就可以跑到三千兆。）</p>
+</li>
+<li><p>提高可靠性</p>
+<p>当某条活动链路出现故障时，流量可以切换到其他可用的成员链路上，从而提高链路聚合接口的可靠性。（链路聚合了3条链路，其中一条链路故障了，其他2条还正常，所以不影响通信。）</p>
+</li>
+<li><p>负载分担</p>
+<p>在一个链路聚合组内，可以实现在各成员活动链路上的负载分担。（聚合了3条链路，同时进行收发，将数据流量分摊。）</p>
+</li>
+</ul>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/8f4122ccdee05f9c9d2ec.png" alt="图3——链路聚合构成"></p>
+<blockquote>
+<p>注：链路聚合后，针对接口的配置只需要在链路聚合接口下直接配置即可。</p>
+</blockquote>
+<h2 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h2><ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>interface eth-trunk</strong> <em>trunk-id</em>，创建Eth-Trunk接口，并进入Eth-Trunk接口视图。 </li>
+<li>执行命令<strong>trunkport</strong> <em>interface-type</em> <em>interface-number1</em>，增加成员接口，可批量添加，规则同批量添加vlan一样。</li>
+</ol>
+<blockquote>
+<p>将成员接口加入Eth-Trunk后，需要注意以下问题：</p>
+<ul>
+<li>一个以太网接口只能加入到一个Eth-Trunk接口，如果需要加入其它Eth-Trunk接口，必须先退出原来的Eth-Trunk接口。</li>
+<li>当成员接口加入Eth-Trunk后，学习MAC地址或ARP地址时是按照Eth-Trunk来学习的，而不是按照成员接口来学习。</li>
+<li>删除聚合组时需要先删除聚合组中的成员接口，另外切换接口类型&#x2F;模式需要清空接口配置。</li>
+</ul>
+</blockquote>
+<p>聚合接口创建之后，对于交换机来说，这就是一个普通的接口，可以在该Eth-Trunk接口视图直接进行常规的配置（比如vlan）。</p>
+<p>在交换机的内部地址表中，也只会显示为Eth-Trunk接口。</p>
+<h3 id="小案例——手工模式"><a href="#小案例——手工模式" class="headerlink" title="小案例——手工模式"></a>小案例——手工模式</h3><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/d4acdad8bc522c3ff220c.png" alt="图4——链路聚合拓扑1"></p>
+<p>以上图拓扑为例，交换机1与交换机2之间使用3条链路连接。</p>
+<p>因为接口号都一样，两台交换机上都使用以下命令进行配置</p>
+<blockquote>
+<p><strong>interface Eth-Trunk</strong> 1</p>
+<p><strong>trunkport</strong> g 0&#x2F;0&#x2F;1 to 0&#x2F;0&#x2F;3</p>
+</blockquote>
+<p>再执行命令<strong>dis eth-trunk</strong> <em>trunk-id</em>查看接口信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[magiku]dis eth-trunk 1</span><br><span class="line">Eth-Trunk1&#x27;s state information is:</span><br><span class="line">WorkingMode: NORMAL         Hash arithmetic: According to SIP-XOR-DIP         </span><br><span class="line">Least Active-linknumber: 1  Max Bandwidth-affected-linknumber: 8              </span><br><span class="line">Operate status: up          Number Of Up Port In Trunk: 3                     </span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">PortName                      Status      Weight </span><br><span class="line">GigabitEthernet0/0/1          Up          1      </span><br><span class="line">GigabitEthernet0/0/2          Up          1      </span><br><span class="line">GigabitEthernet0/0/3          Up          1    </span><br></pre></td></tr></table></figure>
+
+<p>非常的简单，三个接口都加入聚合组了，完成了链路聚合。</p>
+<p>使用几台PC互相通信后，再查看交换机的地址表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[SW1]display mac-address</span><br><span class="line">MAC address table of slot 0:</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">MAC Address    VLAN/       PEVLAN CEVLAN Port            Type      LSP/LSR-ID  </span><br><span class="line">               VSI/SI                                              MAC-Tunnel  </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">5489-98bc-cc44 1           -      -      Eth-Trunk1      dynamic   0/-         </span><br><span class="line">5489-9857-cc33 1           -      -      GE0/0/5         dynamic   0/-         </span><br><span class="line">5489-9853-cc22 1           -      -      Eth-Trunk1      dynamic   0/-         </span><br><span class="line">5489-9873-cc11 1           -      -      GE0/0/4         dynamic   0/-         </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Total matching items on slot 0 displayed = 4 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[SW2]display mac-address</span><br><span class="line">MAC address table of slot 0:</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">MAC Address    VLAN/       PEVLAN CEVLAN Port            Type      LSP/LSR-ID  </span><br><span class="line">               VSI/SI                                              MAC-Tunnel  </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">5489-9857-cc33 1           -      -      Eth-Trunk1      dynamic   0/-         </span><br><span class="line">5489-98bc-cc44 1           -      -      GE0/0/5         dynamic   0/-         </span><br><span class="line">5489-9853-cc22 1           -      -      GE0/0/4         dynamic   0/-         </span><br><span class="line">5489-9873-cc11 1           -      -      Eth-Trunk1      dynamic   0/-         </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Total matching items on slot 0 displayed = 4 </span><br></pre></td></tr></table></figure>
+
+<p><strong>可以看到mac地址对应的接口显示为聚合接口Eth-Trunk1，对交换机来说，已经不存g0&#x2F;0&#x2F;1 g0&#x2F;0&#x2F;2 g0&#x2F;0&#x2F;3这三个接口了。</strong></p>
+<h3 id="手工模式的注意事项"><a href="#手工模式的注意事项" class="headerlink" title="手工模式的注意事项"></a>手工模式的注意事项</h3><p>以上这种配置方式为手工模式（还有一些可选命令就不介绍了），手动模式因其灵活性差，目前已很少使用。</p>
+<p><strong>手工模式不感知对端设备</strong>，可能交换机1聚合的链路中有一条被接到其他的设备，而不是交换机2；对于交换机1来说，它并不知道。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/634fcb20b134e7a46661f.png" alt="图5——手动模式的缺陷"></p>
+<blockquote>
+<p>在上图示例中SW1将四个接口加入到同一个聚合接口，但是其中一个接口的对端为SW3，而不是SW2，导致部分流量被负载分担到SW3，从而导致通信异常。</p>
+</blockquote>
+<p><strong>手工模式下，只感知自身的接口状态</strong>，如果链路中间有其他设备提供了链路状态（简单来说就是交换机接口亮灯），那么实际出现故障后，另一端交换机也感知不到异常。（比如电口交换机与光口交换机做链路聚合，中间使用了光电转换器；当一侧交换机接口故障时，由于光电转换器到另一端的交换机还是保持链路的，所以该交换机依旧以为聚合链路正常。）</p>
+<p>因此，<strong>配置手工模式需要注意一个聚合接口的所有成员接口，其链路的另一头接口必须属于同一台设备，且属于同一个聚合接口。</strong></p>
+<p>（一个交换机可创建多个聚合接口，所有要保证在一个聚合接口中）</p>
+<p>为解决手工模式的缺陷，人们便考虑让聚合接口之间进行协议通信，交流彼此接口信息，这种新的配置模式就是LACP。</p>
+<h2 id="LACP模式的链路聚合"><a href="#LACP模式的链路聚合" class="headerlink" title="LACP模式的链路聚合"></a>LACP模式的链路聚合</h2><h3 id="手工模式与LACP模式的对比"><a href="#手工模式与LACP模式的对比" class="headerlink" title="手工模式与LACP模式的对比"></a>手工模式与LACP模式的对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>手工模式</th>
+<th>LACP模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Eth-Trunk的建立方式</td>
+<td>Eth-Trunk的建立、成员接口的加入由手工配置，<br />没有链路聚合控制协议的参与。</td>
+<td>Eth-Trunk的建立是基于LACP协议的，<br />LACP为交换数据的设备提供一种标准的协商方式，<br />以供系统根据自身配置自动形成聚合链路并启动聚合链路收发数据。<br />聚合链路形成以后，负责维护链路状态。<br />在聚合条件发生变化时，自动调整或解散链路聚合。</td>
+</tr>
+<tr>
+<td>设备是否需要支持LACP协议</td>
+<td>不需要</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>数据转发</td>
+<td>正常情况下，所有链路都是活动链路。<br />如果某条活动链路故障，链路聚合组自动在剩余的活动链路中分担流量。</td>
+<td>正常情况下，部分链路是活动链路。<br />如果某条活动链路故障，链路聚合组自动在非活动链路中选择一条链路作为活动链路，参与数据转发的链路数目不变。</td>
+</tr>
+<tr>
+<td>是否支持跨设备的链路聚合</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>检测故障</td>
+<td>只能检测到同一聚合组内的成员链路有断路等有限故障，但是无法检测到链路断连、错连等故障。</td>
+<td>不仅能够检测到同一聚合组内的成员链路有断路等有限故障，还可以检测到链路故障、链路错连等故障。</td>
+</tr>
+</tbody></table>
+<p><strong>所谓的活动链路就是指投入使用，负责数据转发的链路的。</strong></p>
+<p><strong>手工模式默认所有链路都负责收发数据，LACP模式下可自定义启用多少条链路。</strong></p>
+<h3 id="配置LACP模式的链路聚合"><a href="#配置LACP模式的链路聚合" class="headerlink" title="配置LACP模式的链路聚合"></a>配置LACP模式的链路聚合</h3><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface eth-trunk</strong> <em>trunk-id</em>，创建并进入Eth-Trunk接口视图。</p>
+</li>
+<li><p>执行命令<strong>mode</strong> <strong>lacp</strong>，配置Eth-Trunk的工作模式为LACP。</p>
+<ul>
+<li><p>不执行此命令时，工作模式默认为手工模式，正常配置为手工模式的命令为<em>mode manual load-balance</em>。</p>
+</li>
+<li><p>配置时需要保证本端和对端的聚合模式一致。即如果本端配置为LACP模式，那么对端设备也必须要配置为LACP模式。</p>
+</li>
+</ul>
+</li>
+<li><p>执行命令<strong>trunkport</strong> <em>interface-type</em> <em>interface-number</em>，增加成员接口。</p>
+</li>
+<li><p>（可选）执行命令<strong>max active-linknumber</strong> <em>link-number</em>，配置链路聚合活动接口数上限阈值。</p>
+<ul>
+<li>不执行此命令时，默认上限需要看设备型号，一般至少大于4。</li>
+<li>如果要执行此命令，最好本端和对端都做相同的修改。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>一般执行以上命令就可以完成配置了，但还有两个信息可做修改，一个是优先级，另一个是负载分担方式。</p>
+<p>在给出命令之前，得先学习一下什么是lacp的优先级与负载分担。</p>
+</blockquote>
+<h3 id="LACP优先级"><a href="#LACP优先级" class="headerlink" title="LACP优先级"></a>LACP优先级</h3><h4 id="系统优先级"><a href="#系统优先级" class="headerlink" title="系统优先级"></a>系统优先级</h4><p>在lacp模式下，链路分活动链路与非活动链路（备用的不启用的链路）。如果交换机1选择链路1与2所在的接口为活动接口，交换机2链路3与4所在的接口为活动接口，这就会导致聚合链路的构建失败。</p>
+<p>因此引入了系统LACP优先级的概念，优先级高的设备为主动端。</p>
+<p>主动端选择好什么接口为活动接口，也就意味着活动链路确定了，于是优先级低的被动端就依此确定其活动接口。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/3550a1562cd495ab5ddb1.png" alt="图6——优先级与活动接口"></p>
+<p><strong>系统LACP优先级默认32768，越小越优</strong>，通常保持默认。</p>
+<p>当优先级—致时LACP会通过比较MAC地址选择主动端，MAc地址越小越优。</p>
+<blockquote>
+<h6 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤:"></a>操作步骤:</h6><ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>lacp priority</strong> <em>number</em>，配置当前设备的系统LACP优先级。</li>
+</ol>
+</blockquote>
+<h4 id="接口优先级"><a href="#接口优先级" class="headerlink" title="接口优先级"></a>接口优先级</h4><p>系统优先级是选出主动端与被动端，而接口优先级则是选出活动接口与非活动接口。</p>
+<p>接口LACP优先级默认为32768，越小越优，通常保持默认。</p>
+<p>当优先级—致时LACP会通过接口编号选择活动接口,越小越优。</p>
+<blockquote>
+<h6 id="操作步骤-（注意是进入物理接口修改）"><a href="#操作步骤-（注意是进入物理接口修改）" class="headerlink" title="操作步骤:（注意是进入物理接口修改）"></a>操作步骤:（注意是进入物理接口修改）</h6><ol>
+<li>执行命令<strong>system-view</strong>，进入系统视图。</li>
+<li>执行命令<strong>interface</strong> <em>interface-type</em> <em>interface-number</em>，进入接口视图。</li>
+<li>执行命令<strong>lacp priority</strong> <em>number</em>，配置当前接口的LACP优先级。</li>
+</ol>
+</blockquote>
+<h5 id="接口抢占功能与其延时时间"><a href="#接口抢占功能与其延时时间" class="headerlink" title="接口抢占功能与其延时时间"></a>接口抢占功能与其延时时间</h5><p><strong>开启LACP抢占功能可以保持接口LACP优先级最高的接口为活动接口。</strong></p>
+<blockquote>
+<p>当一条高优先级的接口因故障切换为非活动状态而后又恢复时；</p>
+<p>如果开启了抢占，则高优先级的接口将重新成为活动接口；</p>
+<p>如果未开启抢占，该接口不能重新成为活动接口。</p>
+</blockquote>
+<p>抢占延时即抢占等待时间，是指在LACP模式的Eth-Trunk中非活动接口切换为活动接口需要等待的时间。</p>
+<p>配置抢占延时可以避免由于某些链路状态频繁变化而导致Eth-Trunk数据传输不稳定的情况。</p>
+<blockquote>
+<h6 id="操作步骤-1"><a href="#操作步骤-1" class="headerlink" title="操作步骤"></a>操作步骤</h6><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface eth-trunk</strong> <em>trunk-id</em>，进入Eth-Trunk接口视图。</p>
+</li>
+<li><p>执行命令<strong>lacp preempt enable</strong>，开启当前Eth-Trunk接口的LACP抢占功能。</p>
+<ul>
+<li><p><strong>默认情况下，LACP抢占处于关闭状态</strong>。</p>
+</li>
+<li><p>为保证Eth-Trunk正常工作，要求Eth-Trunk两端统一配置LACP抢占开启或关闭。</p>
+</li>
+</ul>
+</li>
+<li><p>执行命令<strong>lacp preempt delay</strong> <em>delay-time</em>，配置当前Eth-Trunk接口的LACP抢占等待时间。</p>
+<ul>
+<li><p>默认情况下，LACP抢占等待时间为30秒。</p>
+</li>
+<li><p>当链路两端设备配置的抢占等待时间不一致时，以等待时间最长的作为实际抢占等待时间。</p>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="负载分担"><a href="#负载分担" class="headerlink" title="负载分担"></a>负载分担</h3><p>在使用Eth-Trunk转发数据时，由于聚合组两端设备之间有多条物理链路；</p>
+<p>可能会产生同一数据流的第一个数据帧在一条物理链路上传输，而第二个数据帧在另外一条物理链路上传输的情况。</p>
+<p>这样一来同一数据流的第二个数据帧就有可能比第一个数据帧先到达对端设备，从而产生接收数据包乱序的情况。</p>
+<p>为了避免这种情况的发生，<strong>Eth-Trunk采用逐流负载分担的机制</strong>。</p>
+<p>把数据帧中的地址通过HASH算法生成HASH-KEY值，然后根据这个数值在Eth-Trunk转发表中寻找对应的出接口。</p>
+<p>不同的MAC或IP地址HASH得出的HASH-KEY值不同，从而出接口也就不同；源目地址不变的同一数据流，其出接口就保持为同一个。</p>
+<p>这样既保证了同一数据流的帧在同一条物理链路转发，又实现了流量在聚合组内各物理链路上的负载分担。</p>
+<p>逐流负载分担能保证包的顺序，但不能保证带宽利用率。</p>
+<p>Eth-trunk支持基于报文的IP地址或MAc地址来进行负载分担，可以配置不同的模式将数据流分担到不同的成员接口上。</p>
+<p>常见的模式有:源lP、源MAc、目的IlP、目的MAc、源IP+目的IP、源MAC+目的MAC，共6种。</p>
+<p>实际业务中用户需要根据业务流星特征选择配置合适的负载分担方式。业务流量中某种参数变化越频繁，选择与此参数相<br>关的负载分担方式就越容易实现负载均衡。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/904fd832e0aa5b1aa2aa0.png" alt="图7——负担算法"></p>
+<blockquote>
+<p>图中这种数据流可能发生在两台路由器间。</p>
+</blockquote>
+<p><strong>默认的负载分担方式为源IP+目的IP，可适用于大多数场景，一般不需要做修改。</strong></p>
+<blockquote>
+<h6 id="操作步骤-2"><a href="#操作步骤-2" class="headerlink" title="操作步骤"></a>操作步骤</h6><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface eth-trunk</strong> <em>trunk-id</em>，进入Eth-Trunk接口视图。</p>
+</li>
+<li><p>执行命令<strong>load-balance</strong> ?  ，配置Eth-Trunk负载分担方式。(从下方参数6选1)</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dst-ip</td>
+<td>根据目的IP进行哈希算法</td>
+</tr>
+<tr>
+<td>dst-mac</td>
+<td>根据目的MAC进行哈希算法</td>
+</tr>
+<tr>
+<td>src-dst-ip</td>
+<td>根据源IP+目的IP进行哈希算法</td>
+</tr>
+<tr>
+<td>src-dst-mac</td>
+<td>根据源MAC+目的MAC进行哈希算法</td>
+</tr>
+<tr>
+<td>src-ip</td>
+<td>根据源IP进行哈希算法</td>
+</tr>
+<tr>
+<td>src-mac</td>
+<td>根据源MAC进行哈希算法</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>注：手工模式也可以配置负载分担。</p>
+</blockquote>
+<h2 id="综合实验"><a href="#综合实验" class="headerlink" title="综合实验"></a>综合实验</h2><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/67d8cf294021160f2dce3.png" alt="图8——链路聚合实验"></p>
+<p>就图例拓扑，进行LACP模式链路聚合的配置，同时再配上vlan。</p>
+<blockquote>
+<p>路由器的0、1、2口与交换机1的1、2、3口进行链路聚合。活动2条，备用1条。</p>
+<p>交换机2处于vlan10  10.1.1.0&#x2F;24，且1、2口与交换机1的4、5口链路聚合。活动1条，备用1条。</p>
+<p>交换机3处于vlan20  20.1.1.0&#x2F;24，且1、2口与交换机1的6、7口链路聚合。活动1条，备用1条。</p>
+</blockquote>
+<p>先完成底下交换部分的配置：</p>
+<p>对于交换机2，进行如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br><span class="line">sysname SW2</span><br><span class="line">vlan batch 10 20</span><br><span class="line"></span><br><span class="line">interface GigabitEthernet0/0/3</span><br><span class="line">port link-type access</span><br><span class="line">port default vlan 10</span><br><span class="line"></span><br><span class="line">interface Eth-Trunk 1</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 1</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	trunkport GigabitEthernet 0/0/1 0/0/2</span><br><span class="line">	</span><br><span class="line">	port link-type trunk</span><br><span class="line">	port trunk allow-pass vlan 10 20</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于交换机3，进行如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br><span class="line">sysname SW3</span><br><span class="line">vlan batch 10 20</span><br><span class="line"></span><br><span class="line">interface GigabitEthernet0/0/3</span><br><span class="line">port link-type access</span><br><span class="line">port default vlan 20</span><br><span class="line"></span><br><span class="line">interface Eth-Trunk 1</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 1</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	trunkport GigabitEthernet 0/0/1 0/0/2</span><br><span class="line">	</span><br><span class="line">	port link-type trunk</span><br><span class="line">	port trunk allow-pass vlan 10 20</span><br></pre></td></tr></table></figure>
+
+
+
+<p>交换机1进行如下配置，以完成交换机之间的通信：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br><span class="line">sysname SW1</span><br><span class="line">vlan batch 10 20</span><br><span class="line"></span><br><span class="line">interface Eth-Trunk 1</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 1</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	trunkport GigabitEthernet 0/0/4 0/0/5</span><br><span class="line">	</span><br><span class="line">	port link-type trunk</span><br><span class="line">	port trunk allow-pass vlan 10 20</span><br><span class="line">	</span><br><span class="line">interface Eth-Trunk 2</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 1</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	trunkport GigabitEthernet 0/0/6 0/0/7</span><br><span class="line">	</span><br><span class="line">	port link-type trunk</span><br><span class="line">	port trunk allow-pass vlan 10 20</span><br><span class="line">	</span><br><span class="line">interface Vlanif 10</span><br><span class="line">	ip address 10.1.1.254 24</span><br><span class="line">	</span><br><span class="line">interface Vlanif 20</span><br><span class="line">	ip address 20.1.1.254 24</span><br></pre></td></tr></table></figure>
+
+<p>经过以上配置，PC1与PC2即可通信。聚合的链路只启用一条，另外一条作为备用。</p>
+<hr>
+<p>对于路由器R1，其配置为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br><span class="line">sysname R1</span><br><span class="line">ip route-static 10.1.1.0 24 30.1.1.1</span><br><span class="line">ip route-static 20.1.1.0 24 30.1.1.1</span><br><span class="line"></span><br><span class="line">lacp priority 100</span><br><span class="line"></span><br><span class="line">interface Eth-Trunk 1</span><br><span class="line">	undo portswitch</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 2</span><br><span class="line">	trunkport GigabitEthernet 0/0/0 to 0/0/2</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	ip address 30.1.1.254 24</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ip route-static命令为配置静态路由，有关这部分的内容之后会单独介绍，目前这么配置即可。</p>
+<p>对于路由器而言，配置链路聚合接口后需要使用undo portswitch命令切换接口层级，否则无法添加接口成员。</p>
+</blockquote>
+<p>则交换机1再追加以下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface Eth-Trunk 0</span><br><span class="line">	mode lacp-static</span><br><span class="line">	max active-linknumber 2</span><br><span class="line">	trunkport GigabitEthernet 0/0/1 to 0/0/3</span><br><span class="line">	lacp preempt enable</span><br><span class="line">	</span><br><span class="line">interface Vlanif 1</span><br><span class="line">	ip address 30.1.1.1 24</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Eth-Trunk默认vlan接口类型为hybrid。其次所有交换机接口vlan默认为vlan1。因此可直接创建vlan1的vlanif接口，配置ip地址。</p>
+</blockquote>
+<p>以上配置完之后，PC1、PC2、交换机1、路由器1就都可以互相访问了。聚合链路也都保持着1条备用的非活动链路。</p>
+<hr>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>ensp模拟器与真机是存在差距的，真机中聚合链路的活动链路故障后，切换为其他链路是很快的，几乎感受不到网络的异常。</p>
+<p>实验没有带着一行一行命令进行解释是希望各位能翻着看之前的命令介绍，同时多动手敲一敲。</p>
+<p>另外关于链路聚合的原理，个人觉得不是很重要，所以没有介绍，有兴趣的话，可以自行查阅学习。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/2023/12/22/B03[%E5%A4%9A%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98]%E7%8E%AF%E8%B7%AF%E3%80%81%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4%E3%80%81%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/">https://magiku.github.io/2023/12/22/B03[%E5%A4%9A%E9%93%BE%E8%B7%AF%E9%97%AE%E9%A2%98]%E7%8E%AF%E8%B7%AF%E3%80%81%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4%E3%80%81%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，转载请注明出处！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a><a class="post-meta__tags" href="/tags/%E4%BA%A4%E6%8D%A2/">交换</a><a class="post-meta__tags" href="/tags/%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88/">链路聚合</a></div><div class="post_share"><div class="social-share" data-image="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/03/B04%5B%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE%5DSTP%E4%B8%8ERSTP/" title="B04【生成树协议】STP与RSTP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">B04【生成树协议】STP与RSTP</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/11/B05%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5Dvlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/" title="B05【交换基础】vlan、接口类型、vlanif"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">B05【交换基础】vlan、接口类型、vlanif</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/12/11/B05%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5Dvlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/" title="B05【交换基础】vlan、接口类型、vlanif"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-11</div><div class="title">B05【交换基础】vlan、接口类型、vlanif</div></div></a></div><div><a href="/2024/06/19/A01%5B%E7%A7%91%E6%99%AE%5D%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%90%91%EF%BC%89%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="A01【科普】（软件向）网络运维工具的介绍与使用技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-19</div><div class="title">A01【科普】（软件向）网络运维工具的介绍与使用技巧</div></div></a></div><div><a href="/2024/06/17/A02%5B%E7%A7%91%E6%99%AE%5D%EF%BC%88%E7%A1%AC%E4%BB%B6%E5%90%91%EF%BC%89%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="A02【科普】（硬件向）网络运维工具的介绍与使用技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-17</div><div class="title">A02【科普】（硬件向）网络运维工具的介绍与使用技巧</div></div></a></div><div><a href="/2023/10/19/A00%5B%E7%A7%91%E6%99%AE%5D%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" title="A00【科普]】计算机网络概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="title">A00【科普]】计算机网络概述</div></div></a></div><div><a href="/2024/07/28/B01%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5D%E6%B3%9B%E6%B4%AA%E4%B8%8EARP/" title="B01【交换基础】泛洪与ARP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-28</div><div class="title">B01【交换基础】泛洪与ARP</div></div></a></div><div><a href="/2024/07/08/A03%5B%E7%A7%91%E6%99%AE-%E8%BF%90%E7%BB%B4%5D%E7%BD%91%E7%BB%9C%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/" title="A03【科普-运维】网络故障排查手册"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-08</div><div class="title">A03【科普-运维】网络故障排查手册</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Magiku</div><div class="author-info__description">个人博客，用于记录知识库。<br>希望这些笔记能对你有所帮助！<br>要是有什么需要交流的，欢迎联系我~</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BE%E4%BA%A4%E6%8D%A2%E8%BF%87%E7%A8%8B"><span class="toc-text">回顾交换过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E8%B7%AF%E4%B8%8E%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4"><span class="toc-text">环路与广播风暴</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E8%B7%AF"><span class="toc-text">环路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E9%A3%8E%E6%9A%B4"><span class="toc-text">广播风暴</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E9%98%B2%E6%8E%AA%E6%96%BD"><span class="toc-text">预防措施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8D%E7%94%9F"><span class="toc-text">衍生</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88"><span class="toc-text">链路聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-text">基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E6%A1%88%E4%BE%8B%E2%80%94%E2%80%94%E6%89%8B%E5%B7%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">小案例——手工模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">手工模式的注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LACP%E6%A8%A1%E5%BC%8F%E7%9A%84%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88"><span class="toc-text">LACP模式的链路聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%A8%A1%E5%BC%8F%E4%B8%8ELACP%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">手工模式与LACP模式的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AELACP%E6%A8%A1%E5%BC%8F%E7%9A%84%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88"><span class="toc-text">配置LACP模式的链路聚合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LACP%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">LACP优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">系统优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-text">操作步骤:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">接口优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-%EF%BC%88%E6%B3%A8%E6%84%8F%E6%98%AF%E8%BF%9B%E5%85%A5%E7%89%A9%E7%90%86%E6%8E%A5%E5%8F%A3%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="toc-text">操作步骤:（注意是进入物理接口修改）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E6%8A%A2%E5%8D%A0%E5%8A%9F%E8%83%BD%E4%B8%8E%E5%85%B6%E5%BB%B6%E6%97%B6%E6%97%B6%E9%97%B4"><span class="toc-text">接口抢占功能与其延时时间</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-1"><span class="toc-text">操作步骤</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%88%86%E6%8B%85"><span class="toc-text">负载分担</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4-2"><span class="toc-text">操作步骤</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C"><span class="toc-text">综合实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Magiku</div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'd55e9307ca605124a542',
+      clientSecret: '73a85d39b9bda1aa0f24ac51ea5a9504edf02277',
+      repo: 'magiku.github.io',
+      owner: 'magiku',
+      admin: ['magiku'],
+      id: '8b0d6031eafb042e62411c2cfb05b922',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/计算机网络/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 计算机网络 (17)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/个人杂谈/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 磨叽墨迹 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://magiku.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #74d6cf}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:black}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "/image/loading.gif" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = '/2023/,/2024/,/2025/,/2026/,/2027/,/2028/,/2029/,/2030/'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '39b2c1fede67489eb9265b983874c66d';
+  var gaud_map_key = '84b1f52230bfdc06111b20984a0b04d9';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.324587,23.106574';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/10/19/A00[科普]计算机网络概述/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-10-19</span><a class="blog-slider__title" href="2023/10/19/A00[科普]计算机网络概述/" alt="">A00【科普]】计算机网络概述</a><div class="blog-slider__text">本文以实际出发，介绍计算机网络的入门知识，让读者对计算机网络有个总体的知识体系</div><a class="blog-slider__button" href="2023/10/19/A00[科普]计算机网络概述/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-08</span><a class="blog-slider__title" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">A03【科普-运维】网络故障排查手册</a><div class="blog-slider__text">本文将介绍一些常见的网络故障与排查思路，主要适用于家庭与公司内部网络，运营商一侧的维护不介绍（只要会判断是不是它们的问题即可</div><a class="blog-slider__button" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-28</span><a class="blog-slider__title" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">B01【交换基础】泛洪与ARP</a><div class="blog-slider__text">本文将介绍设备之前是如何通过MAC地址通信的，包括交换机的泛洪学习，设备的ARP协议，网关的代理ARP等。</div><a class="blog-slider__button" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-04</span><a class="blog-slider__title" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">B08【路由基础】静态路由、RIP协议</a><div class="blog-slider__text">本文将介绍路由相关知识，也就是路由器相关的内容。上篇介绍的交换与vlan都是二层技术，基于mac地址信息所在的数据帧。而路由是三层技术（网络层），是基于ip地址信息所在的数据包。</div><a class="blog-slider__button" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-22</span><a class="blog-slider__title" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">B03【多链路问题】环路、广播风暴、链路聚合</a><div class="blog-slider__text">本篇是针对交换部分的多链路进行讨论，探讨了环路的危害与预防措施，进而延申出链路聚合的概念与知识点。</div><a class="blog-slider__button" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>

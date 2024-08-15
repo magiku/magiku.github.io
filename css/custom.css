@@ -1,10 +1,20 @@
+
+
 /* 修改置顶轮播文章左侧的贴图 */
-.blog-slider__img .entered{
-  background-image: url('/image/top-loading.gif');
-  background-size: contain;
-  background-position: center;
+.blog-slider__img .entered .loaded{
+  background-image: url('/image/top-loading.gif') !important;
+  background-size: contain !important;
+  background-position: center !important;
 }
 
+/* 修改主页文章卡片的箭头颜色与字体颜色 */
+.article-content{
+  background: #5dece3 !important;
+}
+.article-content-text{
+  color: #000000 !important;
+  text-shadow: 0 0 2px rgba(36, 197, 241, 0.7) !important;
+}
 
 /* 文章封面右侧置顶 */
  /* {

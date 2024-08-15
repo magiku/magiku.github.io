@@ -1,0 +1,786 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>B18【广域网技术】PPP、PPPoE | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本课程主要讲解广域网技术中的PPP（Point-to-Point Protocol ，点对点协议）原理与相关应用（PPPoE拨号）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B18【广域网技术】PPP、PPPoE">
+<meta property="og:url" content="https://magiku.github.io/2024/08/15/B15[%E5%B9%BF%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF]PPP%E3%80%81PPPoE/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="本课程主要讲解广域网技术中的PPP（Point-to-Point Protocol ，点对点协议）原理与相关应用（PPPoE拨号）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png">
+<meta property="article:published_time" content="2024-08-15T09:19:00.000Z">
+<meta property="article:modified_time" content="2024-08-15T09:19:00.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png"><link rel="shortcut icon" href="https://telegraph-image-713.pages.dev/file/35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/2024/08/15/B15[%E5%B9%BF%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF]PPP%E3%80%81PPPoE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'B18【广域网技术】PPP、PPPoE',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-15 17:19:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Magiku's药剂屋"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">B18【广域网技术】PPP、PPPoE</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-15T09:19:00.000Z" title="发表于 2024-08-15 17:19:00">2024-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-15T09:19:00.000Z" title="更新于 2024-08-15 17:19:00">2024-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>全球各机构、企业、家庭等分支的网络被认为一个LAN（Local Area Network，局域网），各分支之间通信需要跨越地理位置。</p>
+<p>因此，就需要通过WAN（Wide Area Network，广域网）将这些分散在不同地理位置的分支网络连接起来，以便更好全网互联。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c265e066a3e3977b61a49.png"></p>
+<p>初期广域网常用的<strong>物理层</strong>标准：</p>
+<ul>
+<li><u>EIA（Electronic Industries Alliance，电子工业协会）</u>和<u>TIA（Telecommunications Industry Association，电信工业协会）</u>制定的公共物理层接口标准EIA&#x2F;TIA-232（即<strong>RS-232</strong>）；</li>
+<li><u>ITU（International Telecommunication Union，国际电信联盟）</u>制定的<strong>串行线路接口标准V.24和V.35</strong>以及有关各种数字接口的物理和电气特性的G.703标准等。</li>
+</ul>
+<p>广域网常见的<strong>数据链路层</strong>标准：</p>
+<ul>
+<li><strong>HDLC</strong>（High-level Data Link Control，高级数据链路控制）；</li>
+<li><strong>PPP</strong>（Point-to-Point Protocol，点到点协议）；</li>
+<li><strong>FR</strong>（Frame Relay，帧中继）、<strong>ATM</strong>异步传输模式等。</li>
+</ul>
+<blockquote>
+<p>其中：<br>HDLC协议是一种通用的协议，工作在数据链路层。数据报文加上头开销和尾开销后封装成HDLC帧，只支持在点到点的同步链路上的数据传输，不支持IP地址协商与认证，过于追求高可靠性，导致数据帧开销较大，传输效率较低。</p>
+<p>PPP协议工作在数据链路层，主要用在支持全双工的同、异步链路上，进行点到点之间的数据传输。由于它能够提供用户认证，易于扩充，并且支持同、异步通信，因而获得广泛应用。</p>
+<p>FR是一种工业标准的、交换式的数据链路协议，通过使用无差错校验机制，加快了数据转发速度。</p>
+<p>ATM是建立在电路交换和分组交换基础上的一种面向连接的交换技术，ATM传送信息的基本载体是53 Byte固定长度ATM信元。</p>
+</blockquote>
+<p>当然，广域网技术，也不是只能用于广域网，在局域网内一样可以使用，比如RS232我们经常用于设备调试。</p>
+<p>本课程主要讲解广域网技术基础概述以及PPP（Point-to-Point Protocol ，点对点协议）原理与相关应用。</p>
+<blockquote>
+<p>重点在于理解PPP的用处与配置，报文格式与类型什么的不是很重要。</p>
+</blockquote>
+<h1 id="PPP"><a href="#PPP" class="headerlink" title="PPP"></a>PPP</h1><p>PPP协议的前身是SLIP (Serial Line Internet Protocol)协议和CSLIP (CompressedSLIP)协议，这两种协议现在已基本不再使用，但PPP协议自20世纪90年代推出以来,一直得到了广泛的应用。</p>
+<p>PPP（Point-to-Point Protocol）协议是一种点到点链路层协议，处于TCP&#x2F;IP协议栈的数据链路层，主要用于在全双工的同异步链路上进行点到点的数据传输。</p>
+<p>由于to谐音two，因此由PPP构成的网络也称为P2P网络。</p>
+<p>PPP主要由三类协议族组成：</p>
+<ul>
+<li>链路控制协议族LCP（Link Control Protocol），主要用来建立、拆除和监控PPP数据链路。</li>
+<li>网络层控制协议族NCP（Network Control Protocol），主要用来协商在该数据链路上所传输的数据包的格式与类型。</li>
+<li>扩展协议族CHAP（Challenge-Handshake Authentication Protocol）和PAP（Password Authentication Protocol），主要用于网络安全方面的认证。</li>
+</ul>
+<h2 id="PPP工作过程"><a href="#PPP工作过程" class="headerlink" title="PPP工作过程"></a>PPP工作过程</h2><h3 id="状态阶段"><a href="#状态阶段" class="headerlink" title="状态阶段"></a>状态阶段</h3><p><strong>Dead阶段（链路不可用阶段）</strong></p>
+<ul>
+<li>PPP链路都需从这个阶段开始和结束。</li>
+<li>当通信双方的两端检测到物理线路激活（通常是检测到链路上有载波信号）时，就会从Dead阶段跃迁至Establish阶段，即链路建立阶段。</li>
+<li>链路被断开后也同样会返回到链路不可用阶段。</li>
+</ul>
+<p><strong>Establish阶段（链路建立阶段）</strong></p>
+<ul>
+<li>在Establish阶段，PPP链路进行LCP协商。</li>
+<li>协商内容包括工作方式是SP（Single-link PPP）还是MP（Multilink PPP）、最大接收单元MRU、认证方式和魔术字（magic number）等选项。</li>
+<li>当完成配置报文的交换后，则会继续向下一个阶段跃迁。</li>
+<li>下一个阶段既可能是认证阶段，也可能是网络层协商阶段；下一阶段的选择是依据链路两端的设备配置的，未配置认证则进入网络层协商阶段。</li>
+</ul>
+<p><strong>Authenticate阶段（认证阶段）</strong></p>
+<ul>
+<li>默认情况下，PPP链路不进行认证。如果要求认证，在链路建立阶段必须指定认证协议。</li>
+<li>PPP认证主要是用于主机和设备之间，通过PPP网络服务器交换电路或拨号接入连接的链路，偶尔也用于专用线路。</li>
+<li>PPP提供密码认证协议PAP（Password Authentication Protocol）和质询握手认证协议CHAP（Challenge-Handshake Authentication Protocol）两种认证方式。</li>
+</ul>
+<p><strong>Network阶段（网络层协商阶段）</strong></p>
+<ul>
+<li>PPP完成了前面几个阶段，通过NCP协商来选择和配置一个网络层协议并进行网络层参数协商。</li>
+<li>每个NCP协议可在任何时间打开和关闭，当一个NCP的状态机变成Opened状态时，则PPP就可以开始在链路上承载网络层数据传输。</li>
+</ul>
+<p><strong>Terminate阶段（网络终止阶段）</strong></p>
+<ul>
+<li>PPP能在任何时候终止链路。当载波丢失、认证失败或管理员人为关闭链路等情况均会导致链路终止。</li>
+</ul>
+<h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/2a7e56820352e08b27c11.png"></p>
+<p>PPP运行的过程简单描述如下：</p>
+<ol>
+<li><p>通信双方开始建立PPP链路时，先进入到<strong>Establish阶段（链路建立阶段）</strong>。</p>
+</li>
+<li><p>在<strong>Establish阶段（链路建立阶段）</strong>，PPP链路进行LCP协商。</p>
+<p>协商内容包括工作方式是SP（Single-link PPP）还是MP（Multilink PPP）、最大接收单元MRU（Maximum Receive Unit）、认证方式和魔术字（magic number）等选项。</p>
+<p>LCP协商成功后进入Opened状态，表示底层链路已经建立。</p>
+</li>
+<li><p>如果配置了认证，将进入<strong>Authenticate阶段（认证阶段）</strong>，开始CHAP或PAP认证。</p>
+<p>如果没有配置认证，则直接进入<strong>Network阶段（网络层协商阶段）</strong>。</p>
+</li>
+<li><p>在<strong>Authenticate阶段（认证阶段）</strong>，如果认证失败，进入<strong>Terminate阶段（网络终止阶段）</strong>，拆除链路，LCP状态转为Down。</p>
+<p>如果认证成功，进入<strong>Network阶段（网络层协商阶段）</strong>，此时LCP状态仍为Opened。</p>
+</li>
+<li><p>在<strong>Network阶段（网络层协商阶段）</strong>，PPP链路进行NCP协商。</p>
+<p>通过NCP协商来选择和配置一个网络层协议并进行网络层参数协商。只有相应的网络层协议协商成功后，该网络层协议才可以通过这条PPP链路发送报文。</p>
+<p>NCP协商包括IPCP（IP Control Protocol）、MPLSCP（MPLS Control Protocol）等协商。IPCP协商内容主要包括双方的IP地址。</p>
+</li>
+<li><p>NCP协商成功后，PPP链路将一直保持通信。</p>
+<p>PPP运行过程中，可以随时中断连接，物理链路断开、认证失败、超时定时器时间到、管理员通过配置关闭连接等动作都可能导致链路进入<strong>Terminate阶段（网络终止阶段）</strong>。</p>
+</li>
+<li><p>在<strong>Terminate阶段（网络终止阶段）</strong>，如果所有的资源都被释放，通信双方将回到<strong>Dead阶段（链路不可用阶段）</strong>，直到通信双方重新建立PPP连接，开始新的PPP链路建立。</p>
+</li>
+</ol>
+<h3 id="认证方式"><a href="#认证方式" class="headerlink" title="认证方式"></a>认证方式</h3><p>首先我们确定一下接下来会重复提到的两个代词——“认证方”与“被认证方”的含义：</p>
+<blockquote>
+<p>假设存在设备A与设备B，两者使用串行链路连接，运行PPP协议。</p>
+<p>如果在设备A上配置认证条件，B需要满足认证条件，A才会“搭理”B；在此场景下A为认证方，B为被认证方。</p>
+<p>另外，认证不只是单向的，B也可以配置认证条件，这时角色就互换了。</p>
+<p>总之，提到认证与被认证时，是针对一个来回的PPP报文，谁去“登录”&#x2F;“满足”另一方的要求时，我们就叫它是被认证方。</p>
+</blockquote>
+<p><strong>用于进行认证的方式有两种：PAP与CHAP。</strong></p>
+<ul>
+<li><p>PAP认证中，密码以明文方式在链路上发送，完成PPP底层链路建立后，被认证方可以主动地、不停地在链路上发送用户名和密码，直到身份认证成功为止，所以安全性不高。</p>
+<p>实际应用过程中，对安全性要求不高时，可以采用PAP认证建立PPP连接。</p>
+</li>
+<li><p>CHAP认证中，认证协议为三次握手认证协议，由认证方发送一个用于加密的报文后，被认证方才可以进行一次认证。</p>
+<p>同时它只在网络上传输用户名，而并不传输用户密码，因此安全性比PAP认证高。</p>
+<p>实际应用过程中，对安全性要求较高时，可以采用CHAP认证建立PPP连接。</p>
+</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置接口协议与IP地址："><a href="#配置接口协议与IP地址：" class="headerlink" title="配置接口协议与IP地址："></a>配置接口协议与IP地址：</h3><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入指定的接口视图。</p>
+</li>
+<li><p>执行命令<strong>link-protocol ppp</strong>，配置当前接口封装的链路层协议为PPP。</p>
+<p>PPP协议通常运行在串行接口上，而串行接口默认使用PPP协议。因此一般无需配置该命令。</p>
+</li>
+<li><p>执行命令<strong>ip address</strong> <em>ip-address</em> { <em>mask</em> | <em>mask-length</em> }，配置接口的IP地址。</p>
+<blockquote>
+<p>另外也可以通过配置服务器与自动获取IP，有兴趣可以查阅相应的产品文档。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="配置PAP方式认证："><a href="#配置PAP方式认证：" class="headerlink" title="配置PAP方式认证："></a>配置PAP方式认证：</h3><h4 id="配置认证方"><a href="#配置认证方" class="headerlink" title="配置认证方"></a>配置认证方</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入指定的接口视图。</p>
+</li>
+<li><p>执行命令<strong>ppp authentication-mode</strong> <strong>pap</strong> [ <strong>domain</strong> <em>domain-name</em> ]，配置PPP认证方式为PAP。</p>
+<p>默认情况下，PPP协议不进行认证。</p>
+<p>匹配域中的用户与密码。如果不指定域，指使用默认域。</p>
+<p>如果配置<strong>domain</strong> <em>domain-name</em>，则指定的域必须已经通过命令<strong>domain（AAA视图）</strong>创建。 </p>
+</li>
+<li><p>执行命令<strong>restart</strong>重启接口，或执行命令<strong>shutdown</strong>关闭接口再<strong>undo shutdown</strong>开启接口，这样PAP认证才能生效。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>配置域及用户。</p>
+<p>这里仅介绍默认域下AAA本地认证的配置方式。</p>
+<ol>
+<li>执行命令<strong>aaa</strong>，进入AAA视图。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> **password { cipher | irreversible-cipher } ** <em>password</em>，创建本地帐号，并配置本地账号的登录密码。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> <strong>service-type</strong> <strong>ppp</strong>，配置该本地用户用于PPP服务。</li>
+</ol>
+</li>
+</ol>
+<h4 id="配置被认证方"><a href="#配置被认证方" class="headerlink" title="配置被认证方"></a>配置被认证方</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入指定的接口视图。</p>
+</li>
+<li><p>执行命令<strong>ppp pap local-user</strong> <em>username</em> <strong>password</strong> { <strong>cipher</strong> | <strong>simple</strong> } <em>password</em>，配置本地被对端以PAP方式认证时，本地发送的PAP用户名和密码。</p>
+<p>配置的用户名和密码要和认证方配置的用户名和密码一致。</p>
+<p>选择<strong>simple</strong>选项时，密码将以明文形式保存在配置文件中，存在安全风险。建议使用<strong>cipher</strong>选项，将密码加密保存（仅是保存在本地配置文件时为密文）。</p>
+<blockquote>
+<p>PAP认证时，密码会在网络中是以明文形式传输，存在安全风险。<strong>因此更推荐使用CHAP认证。</strong></p>
+</blockquote>
+</li>
+<li><p>执行命令<strong>restart</strong>重启接口，或执行命令<strong>shutdown</strong>关闭接口再<strong>undo shutdown</strong>开启接口，这样PAP认证才能生效。</p>
+</li>
+</ol>
+<h3 id="配置CHAP方式认证："><a href="#配置CHAP方式认证：" class="headerlink" title="配置CHAP方式认证："></a>配置CHAP方式认证：</h3><h4 id="配置认证方-1"><a href="#配置认证方-1" class="headerlink" title="配置认证方"></a>配置认证方</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入指定的接口视图。</p>
+</li>
+<li><p>执行命令<strong>ppp authentication-mode</strong> <strong>chap</strong> [ <strong>domain</strong> <em>domain-name</em> ]，配置PPP认证方式为CHAP。 </p>
+<p>默认情况下，PPP协议不进行认证。</p>
+<p>匹配域中的用户与密码。如果不指定域，指使用默认域。</p>
+<p>如果配置<strong>domain</strong> <em>domain-name</em>，则指定的域必须已经通过命令<strong>domain（AAA视图）</strong>创建。</p>
+</li>
+<li><p>（可选）执行命令<strong>ppp chap user</strong> <em>user-name</em>，配置采用CHAP认证时，认证方的用户名必须为指定用户名。</p>
+<blockquote>
+<p><strong>在被认证方上为认证方配置的本地用户的用户名必须跟此处配置的一致。</strong></p>
+<p>一般推荐配置该命令。</p>
+</blockquote>
+</li>
+<li><p>执行命令<strong>restart</strong>重启接口，或执行命令<strong>shutdown</strong>关闭接口再<strong>undo shutdown</strong>开启接口，这样PAP认证才能生效。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>配置域及用户。</p>
+<p>这里仅介绍默认域下AAA本地认证的配置方式。</p>
+<ol>
+<li>执行命令<strong>aaa</strong>，进入AAA视图。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> **password { cipher | irreversible-cipher } ** <em>password</em>，创建本地帐号，并配置本地账号的登录密码。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> <strong>service-type</strong> <strong>ppp</strong>，配置该本地用户用于PPP服务。</li>
+</ol>
+</li>
+</ol>
+<h4 id="配置被认证方-1"><a href="#配置被认证方-1" class="headerlink" title="配置被认证方"></a>配置被认证方</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入指定的接口视图。</p>
+</li>
+<li><p>执行命令<strong>ppp chap user</strong> <em>user-name</em>，配置用于CHAP认证的用户。</p>
+<blockquote>
+<p>如果认证方配置了用户名检测，则此处配置的本地用户名必须跟认证方要求的用户名一致。</p>
+</blockquote>
+</li>
+<li><p>执行命令<strong>restart</strong>重启接口，或执行命令<strong>shutdown</strong>关闭接口再<strong>undo shutdown</strong>开启接口，这样PAP认证才能生效。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>配置域及用户。</p>
+<p>这里仅介绍默认域下AAA本地认证的配置方式。</p>
+<ol>
+<li>执行命令<strong>aaa</strong>，进入AAA视图。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> **password { cipher | irreversible-cipher } ** <em>password</em>，创建本地帐号，并配置本地账号的登录密码。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> <strong>service-type</strong> <strong>ppp</strong>，配置该本地用户用于PPP服务。</li>
+</ol>
+</li>
+</ol>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/bf9b447fb62410b104a4a.png"></p>
+<p>以最简单的拓扑进行配置演示，注意如果要在模拟器进行实验，需要在路由器未开机时，右键设置，从下方选择串口卡拖拽安装在设备上。</p>
+<h3 id="配置基础参数，设备互通"><a href="#配置基础参数，设备互通" class="headerlink" title="配置基础参数，设备互通"></a>配置基础参数，设备互通</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R1</span><br><span class="line">[R1]interface Serial 4/0/0</span><br><span class="line">[R1-Serial4/0/0]ip address 12.1.1.1 24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R2</span><br><span class="line">[R2]interface Serial 4/0/0</span><br><span class="line">[R2-Serial4/0/0]ip address 12.1.1.2 24</span><br></pre></td></tr></table></figure>
+
+<p>配置协议为ppp，以及配置ip地址后，R1与R2即可进行通信。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R1]ping 12.1.1.2</span><br><span class="line">  PING 12.1.1.2: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 12.1.1.2: bytes=56 Sequence=1 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.2: bytes=56 Sequence=2 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.2: bytes=56 Sequence=3 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.2: bytes=56 Sequence=4 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.2: bytes=56 Sequence=5 ttl=255 time=20 ms</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.2 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 20/24/30 ms</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置PAP方式的PPP连接"><a href="#配置PAP方式的PPP连接" class="headerlink" title="配置PAP方式的PPP连接"></a>配置PAP方式的PPP连接</h3><p>假设R1为认证方（进行“验证”），R2为被认证方(进行“登录”)</p>
+<p>在R1配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建名为magiku，密码为magiku030的账号，并配置该账号用于ppp协议。</span><br><span class="line">[R1]aaa</span><br><span class="line">[R1-aaa]local-user magiku password cipher magiku030</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[R1-aaa]local-user magiku service-type ppp</span><br><span class="line">[R1-aaa]q</span><br><span class="line"># 在串口下配置开启PAP认证，并重启接口以启用配置。</span><br><span class="line">[R1]interface Serial 4/0/0</span><br><span class="line">[R1-Serial4/0/0]ppp authentication-mode pap</span><br><span class="line">[R1-Serial4/0/0]restart</span><br></pre></td></tr></table></figure>
+
+<p>此时再去测试，就会发现R1与R2无法互通了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[R1]ping 12.1.1.2</span><br><span class="line">  PING 12.1.1.2: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.2 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    0 packet(s) received</span><br><span class="line">    100.00% packet loss</span><br></pre></td></tr></table></figure>
+
+<p>接下来配置R2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[R2]interface Serial 4/0/0</span><br><span class="line">[R2-Serial4/0/0]ppp pap local-user magiku password cipher magiku030</span><br><span class="line">[R2-Serial4/0/0]restart</span><br></pre></td></tr></table></figure>
+
+<p>现在R1与R2又能通信了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R2]ping 12.1.1.1</span><br><span class="line">  PING 12.1.1.1: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=1 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=2 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=3 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=4 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=5 ttl=255 time=10 ms</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.1 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 10/20/30 ms</span><br></pre></td></tr></table></figure>
+
+<p>另外我们可以看看所谓的密文保存，可以看到原本配置的密码，保存在配置里时，是以密文的方式存储。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c1604660e0cccc7930800.png"></p>
+<h3 id="配置CHAP方式的PPP连接"><a href="#配置CHAP方式的PPP连接" class="headerlink" title="配置CHAP方式的PPP连接"></a>配置CHAP方式的PPP连接</h3><p>假设R1为认证方（进行“验证”），R2为被认证方(进行“登录”)</p>
+<p>在R1配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建名为magiku，密码为magiku030的账号，并配置该账号用于ppp协议。</span><br><span class="line">[R1]aaa</span><br><span class="line">[R1-aaa]local-user magiku password cipher magiku030</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[R1-aaa]local-user magiku service-type ppp</span><br><span class="line">[R1-aaa]q</span><br><span class="line"># 在串口下配置开启chap认证，并重启接口以启用配置。</span><br><span class="line">[R1]interface Serial 4/0/0</span><br><span class="line">[R1-Serial4/0/0]ppp authentication-mode chap</span><br><span class="line">[R1-Serial4/0/0]ppp chap user magiku</span><br><span class="line">[R1-Serial4/0/0]restart</span><br></pre></td></tr></table></figure>
+
+<p>此时再去测试，就会发现R1与R2无法互通了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[R1]ping 12.1.1.2</span><br><span class="line">  PING 12.1.1.2: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line">    Request time out</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.2 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    0 packet(s) received</span><br><span class="line">    100.00% packet loss</span><br></pre></td></tr></table></figure>
+
+<p>接下来配置R2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建名为magiku，密码为magiku030的账号，并配置该账号用于ppp协议。</span><br><span class="line">[R2]aaa</span><br><span class="line">[R2-aaa]local-user magiku password cipher magiku030</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[R2-aaa]local-user magiku service-type ppp</span><br><span class="line">[R2-aaa]q</span><br><span class="line"># 在串口下配置使用账号magiku进行chap认证，并重启接口以启用配置。</span><br><span class="line">[R2]interface Serial 4/0/0</span><br><span class="line">[R2-Serial4/0/0]ppp chap user magiku</span><br><span class="line">[R2-Serial4/0/0]restart</span><br></pre></td></tr></table></figure>
+
+<p>现在R1与R2又能通信了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[R2]ping 12.1.1.1</span><br><span class="line">  PING 12.1.1.1: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=1 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=2 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=3 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=4 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=5 ttl=255 time=30 ms</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.1 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 20/26/30 ms</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="PPPoE"><a href="#PPPoE" class="headerlink" title="PPPoE"></a>PPPoE</h1><p>PPPoE（PPP over Ethernet）协议是一种把PPP帧封装到以太网帧中的链路层协议。</p>
+<p>运营商&#x2F;服务商希望把一个站点上的多台主机连接到同一台远程接入设备，同时接入设备能够提供与拨号上网类似的访问控制和计费功能（比如校园网）。</p>
+<p>在众多的接入技术中，把多个主机连接到接入设备的最经济的方法就是以太网，而PPP协议可以提供良好的访问控制和计费功能，于是产生了在以太网上传输PPP报文的技术，即PPPoE。</p>
+<p>PPPoE利用以太网将大量主机组成网络，通过一个远端接入设备连入因特网，并运用PPP协议对接入的每个主机进行控制，具有适用范围广、安全性高、计费方便的特点。</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/93bab05ea20926d20cc31.png"></p>
+<h2 id="工作原理与过程"><a href="#工作原理与过程" class="headerlink" title="工作原理与过程"></a>工作原理与过程</h2><p>要在以太网中，满足该需求，需要配置PPPoE Server，也就是服务端；以Client&#x2F;Server模型进行组网。</p>
+<p>其他一般主机作为PPPoE Client向PPPoE Server发起连接请求，而PPPoE Server则为PPPoE Client提供接入控制、认证等功能。</p>
+<p>主机的这个请求动作，我们称为PPPoE拨号。</p>
+<p>PPPoE拨号可分为三个阶段，即Discovery(发现)阶段、Session(会话)阶段和Terminate(终止)阶段。</p>
+<h4 id="Discovery-发现-阶段"><a href="#Discovery-发现-阶段" class="headerlink" title="Discovery(发现)阶段"></a>Discovery(发现)阶段</h4><p>Discovery阶段，相当于原始PPP协议的底层链路建立阶段，该阶段由四个过程组成：</p>
+<p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/c0dcbc3f488fd449972d3.png"></p>
+<blockquote>
+<p>注意图片内的顺序。</p>
+</blockquote>
+<ol>
+<li><p>PPPoE Client广播发送一个PADI（PPPoE Active Discovery Initial）报文，在此报文中包含PPPoE Client想要得到的服务类型信息。</p>
+</li>
+<li><p>所有的PPPoE Server收到PADI报文之后，将其中请求的服务与自己能够提供的服务进行比较，如果可以提供，则单播回复一个PADO（PPPoE Active Discovery Offer）报文。</p>
+</li>
+<li><p>根据网络的拓扑结构，PPPoE Client可能收到多个PPPoE Server发送的PADO报文；</p>
+<p>PPPoE Client选择最先收到的PADO报文对应的PPPoE Server做为自己的PPPoE Server，并向其单播发送一个PADR（PPPoE Active Discovery Request）报文。</p>
+</li>
+<li><p>PPPoE Server产生一个唯一的会话ID（Session ID），标识和PPPoE Client的这个会话；即通过发送一个PADS（PPPoE Active Discovery Session-confirmation）报文把会话ID发送给PPPoE Client。</p>
+<p>完成之后通信双方都会知道PPPoE的Session_ID以及对方的以太网地址，它们共同确定了唯一的PPPoE Session。</p>
+</li>
+</ol>
+<p>而会话建立成功后便进入PPPoE Session阶段。</p>
+<h4 id="Session-会话-阶段"><a href="#Session-会话-阶段" class="headerlink" title="Session(会话)阶段"></a>Session(会话)阶段</h4><p>PPPoE Session阶段可划分为两部分，一是PPP协商阶段，二是PPP数据传输阶段。</p>
+<p>PPPoE Session上的PPP协商和普通的PPP协商方式一致，分为LCP、认证、NCP三个阶段。</p>
+<ol>
+<li>LCP阶段主要完成建立、配置和检测数据链路连接。</li>
+<li>LCP协商成功后，开始进行认证，认证协议类型由LCP协商结果（CHAP或者PAP）决定。</li>
+<li>认证成功后，PPP进入NCP阶段，即数据传输阶段。</li>
+<li>NCP是一个协议族，用于配置不同的网络层协议，常用的是IP控制协议（IPCP），它主要负责协商用户的IP地址和DNS服务器地址。</li>
+<li>PPPoE Session的PPP协商成功后，就可以承载PPP数据报文。在PPPoE Session阶段所有的以太网数据包都是单播发送的。</li>
+</ol>
+<h4 id="Terminate-终止-阶段"><a href="#Terminate-终止-阶段" class="headerlink" title="Terminate(终止)阶段"></a>Terminate(终止)阶段</h4><p>PPP通信双方可以使用PPP协议自身来结束PPPoE会话，当无法使用PPP协议结束会话时可以使用PADT（PPPoE Active Discovery Terminate）报文。</p>
+<p>进入PPPoE Session阶段后，PPPoE Client和PPPoE Server都可以通过发送PADT报文的方式来结束PPPoE连接。</p>
+<p>PADT数据包可以在会话建立以后的任意时刻单播发送。</p>
+<p>在发送或接收到PADT后，就不允许再使用该会话发送PPP流量了。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>总的来说，Discovery(发现)阶段是通过以太网与PPPoE去搭建底层链路；</p>
+<p>Session(会话)阶段与Terminate(终止)阶段就都是原始PPP协议的技术内容。</p>
+<h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><h3 id="服务端配置"><a href="#服务端配置" class="headerlink" title="服务端配置"></a>服务端配置</h3><h4 id="基础配置："><a href="#基础配置：" class="headerlink" title="基础配置："></a>基础配置：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface virtual-template</strong> <em>vt-number</em>，创建并进入虚拟接口模板视图。</p>
+<p>相当于虚拟出一个用于PPP通信的接口，之后需要将该虚拟接口绑定在互联网通信接口上。</p>
+</li>
+<li><p>执行命令<strong>ip address</strong> <em>ip-address</em> { <em>mask</em> | <em>mask-length</em> }，配置虚拟接口模板的IP地址。</p>
+</li>
+<li><p>（可选）执行命令<strong>ppp keepalive in-traffic check</strong>，配置设备作为PPPoE Server时，有入方向的流量就不发送心跳报文。</p>
+<p>默认情况下，设备作为PPPoE Server会定时发送心跳报文。</p>
+<p>设备作为PPPoE Server接入大量用户时，为了减少心跳报文对网络资源的占用，可以配置在有入方向的流量时，PPPoE Server不发送心跳报文。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入接口视图。 </p>
+</li>
+<li><p>执行命令<strong>pppoe-server bind virtual-template</strong> <em>vt-number</em>，将指定的虚拟模板绑定到接口上，并在接口上启用PPPoE Server功能。</p>
+</li>
+</ol>
+<h4 id="配置为客户端分配IP："><a href="#配置为客户端分配IP：" class="headerlink" title="配置为客户端分配IP："></a>配置为客户端分配IP：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>ip pool</strong> <em>ip-pool-name</em>，创建全局地址池并进入全局地址池视图。</p>
+</li>
+<li><p>执行命令<strong>network</strong> <em>ip-address</em> [ <strong>mask</strong> { <em>mask</em> | <em>mask-length</em> } ]，配置地址池下的IP地址范围。</p>
+</li>
+<li><p>执行命令<strong>gateway-list</strong> <em>ip-address</em>，配置地址池的出口网关地址。 </p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface virtual-template</strong> <em>vt-number</em>，进入虚拟接口模板视图。</p>
+</li>
+<li><p>执行命令<strong>remote address</strong> <strong>pool</strong> <em>pool-name</em>，指定为PPPoE Client分配IP地址的地址池。</p>
+<p>注意：虚拟接口模板的IP地址必须和地址池的地址在同一网段，否则，会造成用户无法上线。</p>
+</li>
+<li><p>（可选）执行命令<strong>ppp ipcp dns</strong> <em>primary-dns-address</em> [ <em>secondary-dns-address</em> ]，配置PPPoE Server为PPPoE Client指定DNS服务器地址。</p>
+</li>
+</ol>
+<h4 id="配置开启认证："><a href="#配置开启认证：" class="headerlink" title="配置开启认证："></a>配置开启认证：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface virtual-template</strong> <em>vt-number</em>，进入虚拟接口模板视图。</p>
+</li>
+<li><p>执行命令<strong>ppp authentication-mode</strong> { <strong>chap</strong> | <strong>pap</strong> } [ <strong>domain</strong> <em>domain-name</em> ]，配置虚拟接口模板的PPP认证方式。</p>
+<p>如果配置<strong>domain</strong>参数，则指定的域必须已经通过命令<strong>domain</strong> <em>domain-name</em>创建。</p>
+<p>PAP认证时，密码会在网络中以明文形式传输，存在安全风险。推荐使用CHAP认证。</p>
+</li>
+<li><p>（可选）执行命令<strong>ppp chap user</strong> <em>username</em>，配置采用CHAP认证时认证方的用户名。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>配置PPPoE认证用户。</p>
+<p>这里仅介绍缺省域下AAA本地认证的配置方式：</p>
+<ol>
+<li>执行命令<strong>aaa</strong>，进入AAA视图。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> **password { cipher | irreversible-cipher } ** <em>password</em>，创建本地帐号，并配置本地账号的登录密码。</li>
+<li>执行命令<strong>local-user</strong> <em>user-name</em> <strong>service-type</strong> <strong>ppp</strong>，配置本地用户使用的服务类型为PPP。</li>
+</ol>
+</li>
+</ol>
+<h3 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h3><h4 id="基础配置：-1"><a href="#基础配置：-1" class="headerlink" title="基础配置："></a>基础配置：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface dialer</strong> <em>number</em>，创建Dialer接口并进入Dialer接口视图。</p>
+<p>与服务端的虚拟接口模板一样，客户端的Dialer接口稍后也需要绑定互联网接口。</p>
+</li>
+<li><p>执行命令<strong>dialer user</strong> <em>user-name</em>，配置接口用户名，该用户名必须与对端服务器的PPP用户的用户名一致。</p>
+</li>
+<li><p>执行命令<strong>dialer bundle</strong> <em>number</em>，指定Dialer接口使用的Dialer bundle，用于后续配置拨号时绑定该接口。</p>
+</li>
+<li><ul>
+<li>直接配置IP地址：</li>
+</ul>
+<p>执行命令<strong>ip address</strong> <em>ip-address</em> { <em>mask</em> | <em>mask-length</em> }，配置Dialer接口的IP地址。</p>
+<ul>
+<li><p>配置由对端分配IP地址：</p>
+<p>执行命令<strong>ip address ppp-negotiate</strong>，配置本端接口的IP地址由对端的PPP服务端分配。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="启用配置-配置拨号："><a href="#启用配置-配置拨号：" class="headerlink" title="启用配置&#x2F;配置拨号："></a>启用配置&#x2F;配置拨号：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface</strong> <em>interface-type interface-number</em>，进入接口视图。</p>
+</li>
+<li><p>执行命令<strong>pppoe-client dial-bundle-number</strong> <em>number</em> [ <strong>on-demand</strong> ] [ <strong>no-hostuniq</strong> ] [ <strong>ppp-max-payload</strong> <em>value</em> ] [ <strong>service-name</strong> <em>name</em> ]，指定PPPoE会话所对应的Dialer bundle。相当于将前面配置的PPP接口绑定到该互联网接口。</p>
+<p>指定的Dialer bundle编号必须和基础配置中接口的<strong>dialer bundle</strong>命令配置的编号保持一致。</p>
+<blockquote>
+<ul>
+<li><p>如果不配置参数<strong>on-demand</strong>，则PPPoE拨号方式为永久在线方式：</p>
+<p>当物理线路Up后，设备会立即发起PPPoE呼叫，建立PPPoE会话。除非用户使用命令<strong>undo pppoe-client dial-bundle-number</strong>删除PPPoE会话，否则此PPPoE会话将一直存在。</p>
+</li>
+<li><p>如果配置参数<strong>on-demand</strong>，则PPPoE拨号方式为按需拨号方式，目前设备支持的按需拨号方式为报文触发方式。</p>
+<p>报文触发方式：当物理线路Up后，设备不会立即发起PPPoE呼叫，<strong>只有当有数据需要传送时，设备才会发起PPPoE呼叫，建立PPPoE会话。</strong></p>
+<p>如果PPPoE链路的空闲时间超过用户在Dialer接口下配置的<strong>dialer timer idle</strong> <em>seconds</em>，设备会自动终止PPPoE会话，直到有新的数据需要被传送，PPPoE会话才会被重新建立。 </p>
+</li>
+<li><p>无论PPPoE拨号方式为永久在线方式或报文触发方式，使用<strong>undo pppoe-client dial-bundle-number</strong>命令都会永久删除PPPoE会话。如果需要重新建立PPPoE会话，用户需要重新配置。</p>
+</li>
+<li><p>如果不配置参数<strong>no-hostuniq</strong>，则表示在PPPoE Client发起的呼叫中携带Host-Uniq字段，用于与主机的某个唯一特定的请求联系起来，使检查更加严格。</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>执行命令<strong>quit</strong>，回到系统视图。</p>
+</li>
+<li><p>执行命令<strong>ip route-static</strong> <strong>0.0.0.0 0</strong> { <em>nexthop-address</em> | <em>interface-type</em> <em>interface-number</em> } [ <strong>preference</strong> <em>preference</em> ]，配置到PPPoE Server的静态路由。</p>
+</li>
+</ol>
+<h4 id="如果采用按需拨号的方式，需进行如下配置："><a href="#如果采用按需拨号的方式，需进行如下配置：" class="headerlink" title="如果采用按需拨号的方式，需进行如下配置："></a>如果采用按需拨号的方式，需进行如下配置：</h4><ol>
+<li><p>执行命令<strong>dialer-rule</strong>，进入Dialer-rule视图（拨号访问控制视图）。</p>
+</li>
+<li><p>执行命令<strong>dialer-rule</strong> <em>dialer-rule-number</em> { <strong>acl</strong> { <em>acl-number</em> | <strong>name</strong> <em>acl-name</em> } | <strong>ip</strong> { <strong>deny</strong> | <strong>permit</strong> } | <strong>ipv6</strong> { <strong>deny</strong> | <strong>permit</strong> } }</p>
+<p>创建拨号访问控制列表，并指定规则。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface dialer</strong> <em>number</em>，创建Dialer接口并进入Dialer接口视图。</p>
+</li>
+<li><p>执行命令<strong>dialer-group</strong> <em>group-number</em>，配置接口所属的拨号访问组，即采用哪个拨号访问控制列表（规则）。</p>
+<p>必须确保命令<strong>dialer-group</strong>中的参数<em>group-number</em>和命令<strong>dialer-rule</strong>中的<em>dialer-rule-number</em>保持一致。</p>
+</li>
+</ol>
+<h4 id="配置被认证："><a href="#配置被认证：" class="headerlink" title="配置被认证："></a>配置被认证：</h4><ol>
+<li><p>执行命令<strong>system-view</strong>，进入系统视图。</p>
+</li>
+<li><p>执行命令<strong>interface dialer</strong> <em>number</em>，进入Dialer接口视图。</p>
+</li>
+<li><p>配置PPP认证的用户名和密码。</p>
+<ul>
+<li><p>配置PAP认证：</p>
+<blockquote>
+<ol>
+<li><p>执行命令<strong>ppp pap local-user</strong> <em>username</em> <strong>password</strong> { <strong>cipher</strong> | <strong>simple</strong> } <em>password</em>，配置PPPoE Client被PPPoE Server以PAP方式认证时，PPPoE Client发送的PAP用户名和密码。</p>
+<p>配置的用户名和密码要和PPPoE Server的用户名和密码一致。</p>
+<p>选择<strong>simple</strong>选项时，密码将以明文形式保存在配置文件中，存在安全风险。建议使用<strong>cipher</strong>选项，将密码加密保存。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>配置CHAP认证，且PPPoE Server配置认证用户名：</p>
+<blockquote>
+<ol>
+<li><p>执行命令<strong>ppp chap user</strong> <em>username</em>，配置CHAP认证的用户名。</p>
+<p>配置的用户名要和PPPoE Server的用户名保持一致。</p>
+</li>
+<li><p>执行命令<strong>quit</strong>，退回到系统视图。</p>
+</li>
+<li><p>配置PPPoE认证用户。</p>
+<ol>
+<li><p>执行命令<strong>aaa</strong>，进入AAA视图。</p>
+</li>
+<li><p>执行命令<strong>local-user</strong> <em>user-name</em> **password { cipher | irreversible-cipher } ** <em>password</em>，创建本地帐号，并配置本地账号的登录密码。</p>
+<p>配置的密码要和PPPoE Server的认证密码一致。</p>
+</li>
+<li><p>执行命令<strong>local-user</strong> <em>user-name</em> <strong>service-type</strong> <strong>ppp</strong>，配置本地用户使用的服务类型为PPP。</p>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>配置CHAP认证，且PPPoE Server没有配置认证用户名：</p>
+<blockquote>
+<ol>
+<li><p>执行命令<strong>ppp chap user</strong> <em>username</em>，配置CHAP认证的用户名。</p>
+</li>
+<li><p>执行命令<strong>ppp chap password</strong> { <strong>cipher</strong> | <strong>simple</strong> } <em>password</em>，配置CHAP认证的密码。</p>
+<p>选择<strong>simple</strong>选项时，密码将以明文形式保存在配置文件中，存在安全风险。建议使用<strong>cipher</strong>选项，将密码加密保存。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h2><p><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/4fe9f910aa0d1bfebb3a6.png"></p>
+<p>依旧使用简单的拓扑，但这次我们是使用以太网链路。</p>
+<p>当前两台路由器都清空配置了。</p>
+<h3 id="配置基础互通"><a href="#配置基础互通" class="headerlink" title="配置基础互通"></a>配置基础互通</h3><h4 id="服务端配置-1"><a href="#服务端配置-1" class="headerlink" title="服务端配置"></a>服务端配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R1</span><br><span class="line"># 创建给客户端分配ip的地址池，并配置网关</span><br><span class="line">[R1]ip pool p1</span><br><span class="line">[R1-ip-pool-p1]network 12.1.1.0 mask 24</span><br><span class="line">[R1-ip-pool-p1]gateway-list 12.1.1.1</span><br><span class="line">[R1-ip-pool-p1]q</span><br><span class="line"># 创建虚拟接口模板，配置IP，启用ip地址池进行分配，启用dns分配</span><br><span class="line">[R1]interface Virtual-Template 1</span><br><span class="line">[R1-Virtual-Template1]ip address 12.1.1.1 24</span><br><span class="line">[R1-Virtual-Template1]remote address pool p1</span><br><span class="line">[R1-Virtual-Template1]ppp ipcp dns 223.5.5.5 8.8.8.8</span><br><span class="line">[R1-Virtual-Template1]q</span><br><span class="line"># 将虚拟接口模板绑定在以太网接口g0/0/0上</span><br><span class="line">[R1]interface g0/0/0	</span><br><span class="line">[R1-GigabitEthernet0/0/0]pppoe-server bind virtual-template 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端配置-1"><a href="#客户端配置-1" class="headerlink" title="客户端配置"></a>客户端配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt;system-view </span><br><span class="line">[Huawei]sysname R2</span><br><span class="line">[R2]interface Dialer 1</span><br><span class="line">[R2-Dialer1]dialer user magiku</span><br><span class="line">[R2-Dialer1]dialer bundle 1</span><br><span class="line">[R2-Dialer1]ip address ppp-negotiate </span><br><span class="line">[R2-Dialer1]q</span><br><span class="line">[R2]interface g0/0/0</span><br><span class="line">[R2-GigabitEthernet0/0/0]pppoe-client dial-bundle-number 1</span><br><span class="line">[R2-GigabitEthernet0/0/0]q</span><br><span class="line">[R2]ip route-static 0.0.0.0 0 g0/0/0</span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，如果不配置<strong>dialer user</strong>，就无法配置<strong>dialer bundle</strong>，提示如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[R2-Dialer1]dialer bundle 1</span><br><span class="line">INFO:  Enable RS-DCC first ( dialer user ).</span><br></pre></td></tr></table></figure>
+
+<p>而如果不配置<strong>dialer bundle</strong>，那么就没办法在以太网接口下配置<strong>pppoe-client dial-bundle-number</strong>绑定PPP虚拟接口。</p>
+<p>但是呢！可以看到我配置了<strong>dialer user</strong> magiku，而实际上我并没有在服务端配置该用户，但这样配置后，R1已经可以与R2通信了。</p>
+<p>同时，我们查看路由表可以推断出R2被分配了12.1.1.254的ip地址。（因为存在该主机路由，且路由的下一跳为127.0.0.1，即自己）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[R2]ping 12.1.1.1</span><br><span class="line">  PING 12.1.1.1: 56  data bytes, press CTRL_C to break</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=1 ttl=255 time=40 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=2 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=3 ttl=255 time=20 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=4 ttl=255 time=30 ms</span><br><span class="line">    Reply from 12.1.1.1: bytes=56 Sequence=5 ttl=255 time=20 ms</span><br><span class="line"></span><br><span class="line">  --- 12.1.1.1 ping statistics ---</span><br><span class="line">    5 packet(s) transmitted</span><br><span class="line">    5 packet(s) received</span><br><span class="line">    0.00% packet loss</span><br><span class="line">    round-trip min/avg/max = 20/26/40 ms</span><br><span class="line">    </span><br><span class="line">[R2]display ip routing-table </span><br><span class="line">Route Flags: R - relay, D - download to fib</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">Routing Tables: Public</span><br><span class="line">         Destinations : 6        Routes : 6        </span><br><span class="line"></span><br><span class="line">Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface</span><br><span class="line"></span><br><span class="line">       12.1.1.1/32  Direct  0    0           D   12.1.1.1        Dialer1</span><br><span class="line">     12.1.1.254/32  Direct  0    0           D   127.0.0.1       Dialer1</span><br><span class="line">      127.0.0.0/8   Direct  0    0           D   127.0.0.1       InLoopBack0</span><br><span class="line">      127.0.0.1/32  Direct  0    0           D   127.0.0.1       InLoopBack0</span><br><span class="line">127.255.255.255/32  Direct  0    0           D   127.0.0.1       InLoopBack0</span><br><span class="line">255.255.255.255/32  Direct  0    0           D   127.0.0.1       InLoopBack0</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置开启chap认证："><a href="#配置开启chap认证：" class="headerlink" title="配置开启chap认证："></a>配置开启chap认证：</h3><h4 id="服务端配置-2"><a href="#服务端配置-2" class="headerlink" title="服务端配置"></a>服务端配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建用于认证的账号、密码</span><br><span class="line">[R1]aaa</span><br><span class="line">[R1-aaa]local-user magiku password cipher magiku030</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[R1-aaa]local-user magiku service-type ppp</span><br><span class="line">[R1-aaa]q</span><br><span class="line"># 在ppp虚拟接口下启用认证，并指定必须使用名为magiku的账密进行认证。</span><br><span class="line">[R1]interface Virtual-Template 1</span><br><span class="line">[R1-Virtual-Template1]ppp authentication-mode chap</span><br><span class="line">[R1-Virtual-Template1]ppp chap user magiku</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端配置-2"><a href="#客户端配置-2" class="headerlink" title="客户端配置"></a>客户端配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 创建用于认证的账号、密码</span><br><span class="line">[R2]aaa</span><br><span class="line">[R2-aaa]local-user magiku password cipher magiku030</span><br><span class="line">Info: Add a new user.</span><br><span class="line">[R2-aaa]local-user magiku service-type ppp</span><br><span class="line">[R2-aaa]q</span><br><span class="line"># 在ppp虚拟接口下启用被认证，并指定必须使用名为magiku的账密进行认证。</span><br><span class="line">[R2]interface Dialer 1</span><br><span class="line">[R2-Dialer1]ppp chap user magiku</span><br></pre></td></tr></table></figure>
+
+<p>现在也能互相通信。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/2024/08/15/B15[%E5%B9%BF%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF]PPP%E3%80%81PPPoE/">https://magiku.github.io/2024/08/15/B15[%E5%B9%BF%E5%9F%9F%E7%BD%91%E6%8A%80%E6%9C%AF]PPP%E3%80%81PPPoE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，转载请注明出处！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></div><div class="post_share"><div class="social-share" data-image="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/12/B10%5B%E7%BD%91%E5%85%B3%E5%86%97%E4%BD%99%5DVRRP/" title="B10【网关冗余】VRRP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">B10【网关冗余】VRRP</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/06/19/A01%5B%E7%A7%91%E6%99%AE%5D%EF%BC%88%E8%BD%AF%E4%BB%B6%E5%90%91%EF%BC%89%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="A01【科普】（软件向）网络运维工具的介绍与使用技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-19</div><div class="title">A01【科普】（软件向）网络运维工具的介绍与使用技巧</div></div></a></div><div><a href="/2024/06/17/A02%5B%E7%A7%91%E6%99%AE%5D%EF%BC%88%E7%A1%AC%E4%BB%B6%E5%90%91%EF%BC%89%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" title="A02【科普】（硬件向）网络运维工具的介绍与使用技巧"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-17</div><div class="title">A02【科普】（硬件向）网络运维工具的介绍与使用技巧</div></div></a></div><div><a href="/2023/10/19/A00%5B%E7%A7%91%E6%99%AE%5D%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/" title="A00【科普]】计算机网络概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="title">A00【科普]】计算机网络概述</div></div></a></div><div><a href="/2024/07/28/B01%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5D%E6%B3%9B%E6%B4%AA%E4%B8%8EARP/" title="B01【交换基础】泛洪与ARP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-28</div><div class="title">B01【交换基础】泛洪与ARP</div></div></a></div><div><a href="/2024/07/08/A03%5B%E7%A7%91%E6%99%AE-%E8%BF%90%E7%BB%B4%5D%E7%BD%91%E7%BB%9C%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%89%8B%E5%86%8C/" title="A03【科普-运维】网络故障排查手册"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-08</div><div class="title">A03【科普-运维】网络故障排查手册</div></div></a></div><div><a href="/2023/12/11/B05%5B%E4%BA%A4%E6%8D%A2%E5%9F%BA%E7%A1%80%5Dvlan%E3%80%81%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%81vlanif/" title="B05【交换基础】vlan、接口类型、vlanif"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-11</div><div class="title">B05【交换基础】vlan、接口类型、vlanif</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/image/loading.gif" data-lazy-src="https://c4893f9d.telegraph-image-713.pages.dev/file/dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Magiku</div><div class="author-info__description">个人博客，用于记录知识库。<br>希望这些笔记能对你有所帮助！<br>要是有什么需要交流的，欢迎联系我~</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PPP"><span class="toc-text">PPP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PPP%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">PPP工作过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E9%98%B6%E6%AE%B5"><span class="toc-text">状态阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">工作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-text">认证方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE%E4%B8%8EIP%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="toc-text">配置接口协议与IP地址：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEPAP%E6%96%B9%E5%BC%8F%E8%AE%A4%E8%AF%81%EF%BC%9A"><span class="toc-text">配置PAP方式认证：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81%E6%96%B9"><span class="toc-text">配置认证方</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A2%AB%E8%AE%A4%E8%AF%81%E6%96%B9"><span class="toc-text">配置被认证方</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AECHAP%E6%96%B9%E5%BC%8F%E8%AE%A4%E8%AF%81%EF%BC%9A"><span class="toc-text">配置CHAP方式认证：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81%E6%96%B9-1"><span class="toc-text">配置认证方</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A2%AB%E8%AE%A4%E8%AF%81%E6%96%B9-1"><span class="toc-text">配置被认证方</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B"><span class="toc-text">案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%EF%BC%8C%E8%AE%BE%E5%A4%87%E4%BA%92%E9%80%9A"><span class="toc-text">配置基础参数，设备互通</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEPAP%E6%96%B9%E5%BC%8F%E7%9A%84PPP%E8%BF%9E%E6%8E%A5"><span class="toc-text">配置PAP方式的PPP连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AECHAP%E6%96%B9%E5%BC%8F%E7%9A%84PPP%E8%BF%9E%E6%8E%A5"><span class="toc-text">配置CHAP方式的PPP连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PPPoE"><span class="toc-text">PPPoE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%BF%87%E7%A8%8B"><span class="toc-text">工作原理与过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Discovery-%E5%8F%91%E7%8E%B0-%E9%98%B6%E6%AE%B5"><span class="toc-text">Discovery(发现)阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Session-%E4%BC%9A%E8%AF%9D-%E9%98%B6%E6%AE%B5"><span class="toc-text">Session(会话)阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Terminate-%E7%BB%88%E6%AD%A2-%E9%98%B6%E6%AE%B5"><span class="toc-text">Terminate(终止)阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">服务端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-text">基础配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%86%E9%85%8DIP%EF%BC%9A"><span class="toc-text">配置为客户端分配IP：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%90%AF%E8%AE%A4%E8%AF%81%EF%BC%9A"><span class="toc-text">配置开启认证：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-text">客户端配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%EF%BC%9A-1"><span class="toc-text">基础配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E9%85%8D%E7%BD%AE-%E9%85%8D%E7%BD%AE%E6%8B%A8%E5%8F%B7%EF%BC%9A"><span class="toc-text">启用配置&#x2F;配置拨号：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E9%87%87%E7%94%A8%E6%8C%89%E9%9C%80%E6%8B%A8%E5%8F%B7%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%8C%E9%9C%80%E8%BF%9B%E8%A1%8C%E5%A6%82%E4%B8%8B%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-text">如果采用按需拨号的方式，需进行如下配置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A2%AB%E8%AE%A4%E8%AF%81%EF%BC%9A"><span class="toc-text">配置被认证：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="toc-text">案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E4%BA%92%E9%80%9A"><span class="toc-text">配置基础互通</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="toc-text">服务端配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE-1"><span class="toc-text">客户端配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%90%AFchap%E8%AE%A4%E8%AF%81%EF%BC%9A"><span class="toc-text">配置开启chap认证：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE-2"><span class="toc-text">服务端配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE-2"><span class="toc-text">客户端配置</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By Magiku</div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "/image/loading.gif" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'd55e9307ca605124a542',
+      clientSecret: '73a85d39b9bda1aa0f24ac51ea5a9504edf02277',
+      repo: 'magiku.github.io',
+      owner: 'magiku',
+      admin: ['magiku'],
+      id: '035b07191b31bc9ad0caa2ceba75e462',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.textContent= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/计算机网络/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 计算机网络 (20)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://magiku.github.io/categories/个人杂谈/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 磨叽墨迹 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="https://magiku.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #74d6cf}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:black}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "/image/loading.gif" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = '/2023/,/2024/,/2025/,/2026/,/2027/,/2028/,/2029/,/2030/'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '39b2c1fede67489eb9265b983874c66d';
+  var gaud_map_key = '84b1f52230bfdc06111b20984a0b04d9';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.324587,23.106574';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu@1.1.8/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/10/19/A00[科普]计算机网络概述/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-10-19</span><a class="blog-slider__title" href="2023/10/19/A00[科普]计算机网络概述/" alt="">A00【科普]】计算机网络概述</a><div class="blog-slider__text">本文以实际出发，介绍计算机网络的入门知识，让读者对计算机网络有个总体的知识体系</div><a class="blog-slider__button" href="2023/10/19/A00[科普]计算机网络概述/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-08</span><a class="blog-slider__title" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">A03【科普-运维】网络故障排查手册</a><div class="blog-slider__text">本文将介绍一些常见的网络故障与排查思路，主要适用于家庭与公司内部网络，运营商一侧的维护不介绍（只要会判断是不是它们的问题即可</div><a class="blog-slider__button" href="2024/07/08/A03[科普-运维]网络故障排查手册/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-07-28</span><a class="blog-slider__title" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">B01【交换基础】泛洪与ARP</a><div class="blog-slider__text">本文将介绍设备之前是如何通过MAC地址通信的，包括交换机的泛洪学习，设备的ARP协议，网关的代理ARP等。</div><a class="blog-slider__button" href="2024/07/28/B01[交换基础]泛洪与ARP/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-06-04</span><a class="blog-slider__title" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">B08【路由基础】静态路由、RIP协议</a><div class="blog-slider__text">本文将介绍路由相关知识，也就是路由器相关的内容。上篇介绍的交换与vlan都是二层技术，基于mac地址信息所在的数据帧。而路由是三层技术（网络层），是基于ip地址信息所在的数据包。</div><a class="blog-slider__button" href="2024/06/04/B08[路由基础]静态路由、RIP协议/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt=""><img width="48" height="48" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-12-22</span><a class="blog-slider__title" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">B03【多链路问题】环路、广播风暴、链路聚合</a><div class="blog-slider__text">本篇是针对交换部分的多链路进行讨论，探讨了环路的危害与预防措施，进而延申出链路聚合的概念与知识点。</div><a class="blog-slider__button" href="2023/12/22/B03[多链路问题]环路、广播风暴、链路聚合/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>

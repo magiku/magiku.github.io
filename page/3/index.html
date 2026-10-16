@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="要是有什么需要交流的，欢迎联系我~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Magiku&#39;s药剂屋">
+<meta property="og:url" content="https://magiku.github.io/page/3/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="要是有什么需要交流的，欢迎联系我~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png">
+<meta property="article:author" content="Magiku">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="https://cloudflare-imgbed-etc.pages.dev/file/1792086658368_35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/page/3/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Magiku\'s药剂屋',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/lib/swiper/swiper.min.css"><link rel="stylesheet" href="/lib/swiper/swiperstyle.css"><link rel="stylesheet" href="/lib/wowjs/animate.min.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Magiku's药剂屋</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">Magiku's药剂屋</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2024/09/09/C01/" title="C01【AdGuard】使用自定义规则拦截与修改网站内容——以B站为例"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086626422_35f3446da3e276862d3b7.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="C01【AdGuard】使用自定义规则拦截与修改网站内容——以B站为例"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/09/09/C01/" title="C01【AdGuard】使用自定义规则拦截与修改网站内容——以B站为例">C01【AdGuard】使用自定义规则拦截与修改网站内容——以B站为例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-09T08:00:28.000Z" title="发表于 2024-09-09 16:00:28">2024-09-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%98%E8%85%BE-%E8%BF%90%E7%BB%B4%E6%A1%88%E4%BE%8B/">折腾/运维案例</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/AdGuard/">AdGuard</a><span class="article-meta-link">•</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA/">广告拦截</a></span></div><div class="content">本篇演示怎么使用广告拦截插件——【AdGuard】去自定义拦截。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/08/22/B02/" title="B02【TCP/IP概述】常见协议:HTTP、DNS、TCP、UDP等"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086856656_92627294e65e88396a788.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B02【TCP/IP概述】常见协议:HTTP、DNS、TCP、UDP等"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/22/B02/" title="B02【TCP/IP概述】常见协议:HTTP、DNS、TCP、UDP等">B02【TCP/IP概述】常见协议:HTTP、DNS、TCP、UDP等</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-22T02:55:33.000Z" title="发表于 2024-08-22 10:55:33">2024-08-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">暂不详细介绍，就当作一个索引目录吧。找一本计算机网络相关的书籍去观看这些知识更为合适。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/08/20/B18/" title="B18【端口安全】port-security、MAC地址表管理"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086590982_8dc26f66ea716b65e724e.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B18【端口安全】port-security、MAC地址表管理"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/20/B18/" title="B18【端口安全】port-security、MAC地址表管理">B18【端口安全】port-security、MAC地址表管理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-20T02:36:49.000Z" title="发表于 2024-08-20 10:36:49">2024-08-20</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">交换机MAC地址表的容量是有限的为了避免因地址表项填满，无法再进行MAC地址学习了，影响数据帧的转发，有几种措施可以保证指定设备保持通信。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/08/18/B00/" title="B00【目录与概述】计算机网络系列"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086424306_3a336b50324eab143c878.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B00【目录与概述】计算机网络系列"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/18/B00/" title="B00【目录与概述】计算机网络系列">B00【目录与概述】计算机网络系列</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-18T12:34:54.000Z" title="发表于 2024-08-18 20:34:54">2024-08-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%BF%90%E7%BB%B4/">运维</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">本文用于归档B系列，也就是计算机网络系列的文章，作为目录与摘要使用；同时，本文也对本系列所有文章作一个前提补充以及个人建议。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/08/16/B16/" title="B16【广域网技术】标签路由MPLS"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B16【广域网技术】标签路由MPLS"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/16/B16/" title="B16【广域网技术】标签路由MPLS">B16【广域网技术】标签路由MPLS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-16T02:50:57.000Z" title="发表于 2024-08-16 10:50:57">2024-08-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">本文将介绍特殊的路由技术MPLS，这是一种常被用构建VPN隧道的标签转发协议。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/08/15/B15/" title="B15【广域网技术】PPP、PPPoE"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086626422_35f3446da3e276862d3b7.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B15【广域网技术】PPP、PPPoE"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/15/B15/" title="B15【广域网技术】PPP、PPPoE">B15【广域网技术】PPP、PPPoE</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-15T09:19:00.000Z" title="发表于 2024-08-15 17:19:00">2024-08-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">本文主要讲解广域网技术中的PPP（Point-to-Point Protocol ，点对点协议）原理与相关应用（PPPoE拨号）。</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/08/12/B10/" title="B10【网关冗余】VRRP"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B10【网关冗余】VRRP"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/12/B10/" title="B10【网关冗余】VRRP">B10【网关冗余】VRRP</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-12T01:18:47.000Z" title="发表于 2024-08-12 09:18:47">2024-08-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">本文将继续讨论【多链路问题】，只不过这次介绍的是作用于路由网关的协议，通过将两台路由设备“聚合”为一台以避免环路，并提供冗余性。</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/08/08/B07/" title="B07【多链路问题】生成树协议之MSTP与其他技术概要"><img class="post-bg" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086856656_92627294e65e88396a788.jpg" onerror="this.onerror=null;this.src='/image/top-loading.gif'" alt="B07【多链路问题】生成树协议之MSTP与其他技术概要"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/08/B07/" title="B07【多链路问题】生成树协议之MSTP与其他技术概要">B07【多链路问题】生成树协议之MSTP与其他技术概要</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-08T02:10:40.000Z" title="发表于 2024-08-08 10:10:40">2024-08-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content">前面我们介绍过STP与RSTP，本文将介绍更先进的生成树协议——MSTP，另外再介绍一些可以代替生成树协议的其他技术。</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Magiku</div><div class="author-info-description">要是有什么需要交流的，欢迎联系我~</div><div class="site-data"><a href="/summarize/"><div class="headline">文章</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-10-16T17:37:56.348Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Magiku</span></div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="/image/loading.gif" data-lazy-src="/img/badge/github.svg" title="本站项目由Github托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="/image/loading.gif" data-lazy-src="/img/badge/cc-by-nc-sa.svg" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script src="/pluginsSrc/pjax/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script id="pjax-tweaks">
+(function () {
+  if (!window.globalFn || !window.globalFn.pjaxSend) return
+  delete window.globalFn.pjaxSend.preloader_init
+})()
+</script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/08/18/B00/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086424306_3a336b50324eab143c878.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-18</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/08/18/B00/&quot;);" href="javascript:void(0);" alt="">B00【目录与概述】计算机网络系列</a><div class="blog-slider__text">本文用于归档B系列，也就是计算机网络系列的文章，作为目录与摘要使用；同时，本文也对本系列所有文章作一个前提补充以及个人建议。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/08/18/B00/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/09/09/C01/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086626422_35f3446da3e276862d3b7.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-09-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/09/09/C01/&quot;);" href="javascript:void(0);" alt="">C01【AdGuard】使用自定义规则拦截与修改网站内容——以B站为例</a><div class="blog-slider__text">本篇演示怎么使用广告拦截插件——【AdGuard】去自定义拦截。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/09/09/C01/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2026/06/24/C04/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086432805_2c80461490482ee5b8267.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-06-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2026/06/24/C04/&quot;);" href="javascript:void(0);" alt="">C04【正则表达式】B站用弹幕屏蔽正则</a><div class="blog-slider__text">介绍一些B站用的正则表达式与编写规则</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2026/06/24/C04/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2026/08/23/C06/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086424306_3a336b50324eab143c878.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-08-23</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2026/08/23/C06/&quot;);" href="javascript:void(0);" alt="">C06【开源输入法】RIME输入法使用教程与自制词库</a><div class="blog-slider__text">推荐一款开源的本地输入法，并介绍词库制作以满足输入一些特定词汇</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2026/08/23/C06/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2026/07/29/M07/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-07-29</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2026/07/29/M07/&quot;);" href="javascript:void(0);" alt="">M07【哲学】谈谈我对哲学的了解与我个人的方法论</a><div class="blog-slider__text">这期来简单聊一下我对哲学的了解与我个人的人生哲学，看完这篇可以再往前看看我前几期的杂谈文章。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2026/07/29/M07/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2026/09/11/M10/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086626422_35f3446da3e276862d3b7.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-09-11</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2026/09/11/M10/&quot;);" href="javascript:void(0);" alt="">M10【旧文收束总结】在复杂的世界中保持主体性——不盲信、不内耗、不越界</a><div class="blog-slider__text">这期是对之前的M01-M09文章进行一次综合性回溯与总结，把文章中的内核提炼出来。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2026/09/11/M10/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2026/09/20/M11/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086856656_92627294e65e88396a788.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-09-20</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2026/09/20/M11/&quot;);" href="javascript:void(0);" alt="">M11【社会学】读罗萨，谈在加速的世界里，如何真正地活着</a><div class="blog-slider__text">为什么一切都越来越快，人却没有更自由？为什么我们拼命追赶，却越来越难感到成长？哈特穆特·罗萨的社会加速理论，为这些体验提供了一种解释。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2026/09/20/M11/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="/lib/swiper/swiper.min.js"></script><script defer data-pjax src="/lib/swiper/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="/lib/wowjs/wow.min.js"></script><script defer src="/lib/wowjs/wow_init.js"></script><!-- hexo injector body_end end --><script id="lazy-preload">
+(function () {
+  var LOOKAHEAD = 1000
+
+  // 没有原生 observer 就完全不干预，交给主题原样处理
+  if (typeof window.IntersectionObserver !== 'function') return
+
+  var observer = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      var entry = entries[i]
+      if (!entry.isIntersecting) continue
+      var img = entry.target
+      observer.unobserve(img)
+      var url = img.getAttribute('data-lazy-src')
+      // 已经被 LazyLoad 赋过 src（或不是懒加载图）就跳过
+      if (!url || img.getAttribute('src') === url) continue
+      img.src = url
+    }
+  }, { rootMargin: LOOKAHEAD + "px 0px" })
+
+  function observeAll () {
+    var imgs = document.querySelectorAll('img[data-lazy-src]')
+    for (var i = 0; i < imgs.length; i++) observer.observe(imgs[i])
+  }
+
+  function start () {
+    observeAll()
+    // pjax 换页后新插入的图片要重新纳入观察
+    if (window.btf && typeof window.btf.addGlobalFn === "function") {
+      window.btf.addGlobalFn("pjaxComplete", observeAll, "lazyPreload")
+    }
+  }
+
+  // 关键：必须等 load 之后才开始。
+  // 在 load 之前给 img 赋 src 会让图片进入文档资源树，拖长 load；
+  // load 之后赋 src 只影响下载时机，不再阻塞任何东西。
+  if (document.readyState === "complete") start()
+  else window.addEventListener("load", start)
+})()
+</script>
+<script data-pjax data-local-quote>
+(function () {
+  var QUOTES = ["我唯一知道的，就是我一无所知","未经审视的人生不值得过","人是万物的尺度","存在即被感知","吾爱吾师，吾更爱真理","人的本质是一切社会关系的总和","哲学家们只是解释世界，问题在于改变世界","存在先于本质","人是被判定为自由的","我们必须想象西西弗是幸福的","真正严肃的哲学问题只有一个，那就是自杀","语言的界限即世界的界限","凡不可说的，应当沉默","语言游戏是生活形式","凡有所学，皆成性格","上帝已死，价值需要重估","人最容易忘记的是自己","人性一个最特别的弱点就是：在意别人如何看待自己","幸福不过是欲望的暂时停止","真理是时间的产物，而不是权威的产物","人生最遗憾的，莫过于轻易地放弃了不该放弃的，固执地坚持了不该坚持的","智者说话，是因为他们有话要说；愚者说话，则是因为他们想说","把你的脸迎朝阳光，那就不会有阴影","人生最终的价值在于觉醒和思考的能力，而不只在于生存","事物的本身是不变的，变的只是人的感觉","没有人生活在过去，也没有人生活在未来，现在是生命确实占有的唯一形态","要么庸俗，要么孤独","人类从历史学到的唯一的教训，就是人类没有从历史中吸取任何教训","真正的悲剧不是产生在善恶之间，而是出自两难之间，是两种合理性的碰撞","自由不是让你想做什么就做什么，自由是教你不想做什么，就可以不做什么","三样东西有助于缓解生命的辛劳：希望，睡眠和微笑","只要我能拥抱世界，那拥抱得笨拙又有什么关系","当我听某个人说话听烦了，想要摆脱他时，就装出欣然同意的样子","人之所以走入迷途，并不是由于他的无知，而是由于他自以为知","你能在浪费时间中获得乐趣，就不是浪费时间","战争不决定谁对了，只决定谁留下了","读书不是为了雄辩和驳斥，也不是为了轻信和盲从，而是为了思考和权衡","真正可怕的不是难以避免的一念之差，而是深入习俗、盘踞于人心深处的谬误与偏见","从今以后，别再过你应该过的人生，去过你想过的人生吧","仅仅具备出色的智力是不够的，主要的问题是如何出色地使用它","凡是过去，皆为序章","和平不是没有冲突，而是用和平方式处理冲突","我们终此一生，就是要摆脱他人的期待，找到真正的自己","怀疑是智慧的开端","活在别人眼里就会死在别人嘴里","文本一旦被阅读，就必然会产生误读","人生有两大悲剧：一个是得不到想要的东西，另一个是得到了","缺乏执行力的想法一文不值"];
+  var el = document.getElementById("subtitle");
+  if (!el || !QUOTES.length) return;
+  el.textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+})();
+</script>
+</body></html>

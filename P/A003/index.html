@@ -1,0 +1,1179 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>A003【项目管理】一个信息系统项目从立项到运维：各方分工 | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="以政府或国企的信息系统建设项目为样本，从业务部门提需求开始，一直讲到质保期满移交运维。每一段写清楚项目走到哪一步，甲方、乙方、监理、测评机构、专家各自在做什么。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A003【项目管理】一个信息系统项目从立项到运维：各方分工">
+<meta property="og:url" content="https://magiku.github.io/P/A003/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="以政府或国企的信息系统建设项目为样本，从业务部门提需求开始，一直讲到质保期满移交运维。每一段写清楚项目走到哪一步，甲方、乙方、监理、测评机构、专家各自在做什么。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg">
+<meta property="article:published_time" content="2026-07-21T18:15:24.000Z">
+<meta property="article:modified_time" content="2026-10-21T18:15:24.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="软考">
+<meta property="article:tag" content="项目管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A003【项目管理】一个信息系统项目从立项到运维：各方分工",
+  "url": "https://magiku.github.io/P/A003/",
+  "image": "https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg",
+  "datePublished": "2026-07-21T18:15:24.000Z",
+  "dateModified": "2026-10-21T18:15:24.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Magiku",
+      "url": "https://magiku.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://cloudflare-imgbed-etc.pages.dev/file/1792086658368_35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/P/A003/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'A003【项目管理】一个信息系统项目从立项到运维：各方分工',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/lib/swiper/swiper.min.css"><link rel="stylesheet" href="/lib/swiper/swiperstyle.css"><link rel="stylesheet" href="/lib/wowjs/animate.min.css"><!-- hexo injector head_end end --></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/summarize/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Magiku's药剂屋</span></a><a class="nav-page-title" href="/"><span class="site-name">A003【项目管理】一个信息系统项目从立项到运维：各方分工</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">A003【项目管理】一个信息系统项目从立项到运维：各方分工</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-21T18:15:24.000Z" title="发表于 2026-07-22 02:15:24">2026-07-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-10-21T18:15:24.000Z" title="更新于 2026-10-22 02:15:24">2026-10-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><!--
+文章 front matter 字段说明（本注释不会显示在页面上，填写字段后可删除）：
+
+ · title：文章标题
+ · description：文章简介，显示在首页文章卡片与页面 meta 中
+ · cover：文章封面图，显示在首页/归档页文章卡片上，留空则不显示
+ · swiper_index：置顶轮播图顺序，需填非负整数，数字越大越靠前
+ · date：发布时间（新建时自动取当前时间）
+ · updated：更新日期，文章有修改时改成当天
+ · categories：分类，可多级（如「折腾/运维案例」）
+ · tags：标签，可多个
+ · note：备注（选填），显示在归档页该文章条目之后，如「暂不填坑」
+-->
+
+<h2 id="一、参与方一览"><a href="#一、参与方一览" class="headerlink" title="一、参与方一览"></a>一、参与方一览</h2><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>正式叫法</th>
+<th>钱从哪来</th>
+<th>核心职责</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>甲方</td>
+<td>建设单位、业主、采购人</td>
+<td>负责筹资或使用项目资金</td>
+<td>提需求、组织建设、协调资源、验收或使用系统</td>
+</tr>
+<tr>
+<td>乙方</td>
+<td>承建单位、中标人、集成商</td>
+<td>按合同取得价款</td>
+<td>按合同约定完成建设、集成或服务</td>
+</tr>
+<tr>
+<td>监理</td>
+<td>信息系统工程监理单位</td>
+<td>通常由建设单位委托并支付费用</td>
+<td>按合同和适用规范开展过程监督，提供独立意见</td>
+</tr>
+<tr>
+<td>测评机构</td>
+<td>第三方检测、等级测评机构</td>
+<td>按合同约定付费</td>
+<td>对特定技术或安全要求开展检测评估，形成报告</td>
+</tr>
+<tr>
+<td>专家</td>
+<td>评标专家、评审专家、验收专家</td>
+<td>按规定领取评审劳务费或不另付费</td>
+<td>按相应程序提供评审意见</td>
+</tr>
+<tr>
+<td>招标代理</td>
+<td>招标代理机构</td>
+<td>甲方付费</td>
+<td>组织招标程序</td>
+</tr>
+<tr>
+<td>审计</td>
+<td>国家审计机关、内部审计部门等</td>
+<td>依各自制度开展</td>
+<td>检查资金、管理和相关事项；具体范围取决于审计主体与项目安排</td>
+</tr>
+</tbody></table>
+<p>还可能出现两个角色。<strong>咨询设计单位</strong>受托编制项目建议书、可行性研究报告或初步设计方案；建设单位也可能自行组织编制，是否委托取决于项目要求和自身能力。<strong>财政部门</strong>负责预算、政府采购管理或财政投资评审等职责，但项目审批、资金安排和评审分属不同程序，不能概括成所有项目都由财政部门直接出钱。</p>
+<p>监理和测评机构的工作侧重点不同。监理按合同约定参与项目过程管理与监督；测评机构针对软件功能、性能、网络安全或商用密码应用等特定事项开展检测评估。监理是否常驻、测评机构进场几次，都要看项目规模、合同和工作方案。</p>
+<p><em>图：各方在各阶段的在场情况</em></p>
+<div>
+  <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+    <g font-family="Microsoft YaHei" font-size="12" fill="#3c5063" text-anchor="middle">
+      <text x="152.5" y="58">立项</text>
+      <text x="217.5" y="58">初设</text>
+      <text x="282.5" y="58">招标</text>
+      <text x="347.5" y="58">实施</text>
+      <text x="412.5" y="58">初验</text>
+      <text x="477.5" y="58">试运行</text>
+      <text x="542.5" y="58">终验</text>
+      <text x="607.5" y="58">运维</text>
+    </g>
+    <g font-family="Microsoft YaHei" font-size="12.5" fill="#3c5063" text-anchor="end">
+      <text x="110" y="92">甲方</text>
+      <text x="110" y="128">乙方</text>
+      <text x="110" y="164">监理</text>
+      <text x="110" y="200">测评机构</text>
+      <text x="110" y="236">专家</text>
+    </g>
+    <g fill="#4a7fa8">
+      <rect x="126" y="75" width="53" height="26" rx="4"/>
+      <rect x="191" y="75" width="53" height="26" rx="4"/>
+      <rect x="256" y="75" width="53" height="26" rx="4"/>
+      <rect x="321" y="75" width="53" height="26" rx="4"/>
+      <rect x="386" y="75" width="53" height="26" rx="4"/>
+      <rect x="451" y="75" width="53" height="26" rx="4"/>
+      <rect x="516" y="75" width="53" height="26" rx="4"/>
+      <rect x="256" y="111" width="53" height="26" rx="4"/>
+      <rect x="321" y="111" width="53" height="26" rx="4"/>
+      <rect x="386" y="111" width="53" height="26" rx="4"/>
+      <rect x="451" y="111" width="53" height="26" rx="4"/>
+      <rect x="516" y="111" width="53" height="26" rx="4"/>
+      <rect x="256" y="147" width="53" height="26" rx="4"/>
+      <rect x="321" y="147" width="53" height="26" rx="4"/>
+      <rect x="386" y="147" width="53" height="26" rx="4"/>
+      <rect x="451" y="147" width="53" height="26" rx="4"/>
+      <rect x="516" y="147" width="53" height="26" rx="4"/>
+      <rect x="386" y="183" width="53" height="26" rx="4"/>
+      <rect x="516" y="183" width="53" height="26" rx="4"/>
+      <rect x="126" y="219" width="53" height="26" rx="4"/>
+      <rect x="191" y="219" width="53" height="26" rx="4"/>
+      <rect x="256" y="219" width="53" height="26" rx="4"/>
+      <rect x="516" y="219" width="53" height="26" rx="4"/>
+    </g>
+    <g fill="#c9dcec">
+      <rect x="581" y="75" width="53" height="26" rx="4"/>
+      <rect x="126" y="111" width="53" height="26" rx="4"/>
+      <rect x="191" y="111" width="53" height="26" rx="4"/>
+      <rect x="581" y="111" width="53" height="26" rx="4"/>
+      <rect x="191" y="147" width="53" height="26" rx="4"/>
+      <rect x="321" y="183" width="53" height="26" rx="4"/>
+    </g>
+    <g font-family="Microsoft YaHei" font-size="11" fill="#3c5063">
+      <rect x="120" y="268" width="14" height="10" rx="2" fill="#4a7fa8"/>
+      <text x="140" y="277">主要参与</text>
+      <rect x="212" y="268" width="14" height="10" rx="2" fill="#c9dcec"/>
+      <text x="232" y="277">配合、抽查</text>
+      <text x="330" y="277">空白表示这一阶段基本不介入</text>
+    </g>
+  </svg>
+</div>
+
+
+
+<h2 id="二、从需求到立项批复"><a href="#二、从需求到立项批复" class="headerlink" title="二、从需求到立项批复"></a>二、从需求到立项批复</h2><p>起点通常是业务部门的一张需求申请单，上面写着“现在的系统不好用”或者“上级要求我们建一个平台”。信息化部门汇总后纳入年度信息化计划，才开始走立项程序。</p>
+<p>国家政务信息化项目的审批管理，可参考《国家政务信息化项目建设管理办法》。原则上包括项目建议书、可行性研究报告、初步设计方案等环节；已纳入国家政务信息化建设规划的项目，可以直接编报可研。对于文件规定的特殊情形，可以直接编报可研、初设方案和投资概算。地方政务项目、国企项目及其他信息化项目，还要看本级制度和项目类型，不能直接套用国家项目的全部流程。</p>
+<p>项目建议书通常用于说明建设必要性、目标、初步方案、投资匡算和建设周期等，帮助审批方判断是否有必要继续开展前期工作。具体内容和篇幅没有统一的“几十页”要求。</p>
+<p>可行性研究报告通常进一步分析需求、建设方案、技术路线、投资估算、预期效益和风险等。所需章节、深度和篇幅由适用规范及审批要求决定，大型项目的报告可能很长。</p>
+<p><strong>甲方业务部门</strong>：提出业务需求，参加调研，确认业务流程和业务规则，并参与测试、试用和验收。业务部门是否承担项目管理职责，要看组织分工；即使不负责整体管理，也通常需要持续参与需求和业务确认。</p>
+<p><strong>甲方信息化部门</strong>：牵头编建议书和可研。很多单位没有专职人员，会委托咨询公司代编，甲方负责组织和把关。</p>
+<p><strong>甲方财务部门</strong>：确认资金来源。政务信息化项目的钱来自财政预算，要先进预算项目库。</p>
+<p><strong>咨询设计单位</strong>：受托编制建议书和可研。按合同收费，不与后续的承建单位有利益关系，否则要回避。</p>
+<p><strong>评审专家</strong>：参加可研评审会。技术专家看方案可不可行、架构合不合理；经济专家看投资估算有没有水分。评审意见是批复的依据之一。</p>
+<p><strong>审批部门</strong>：可能是发展改革部门、行业主管部门或其他有审批权限的单位，具体取决于项目类型和审批权限。批复会约束建设内容、规模和投资等事项；后续确需调整时，应按适用规定履行变更、调整或备案程序，不能简单理解为任何内容都绝对不能改。</p>
+<p><strong>乙方</strong>：这个阶段还没有正式的乙方。大型项目常见厂商售前提前介入，做技术交流、送方案、陪着调研。这些活动不产生合同关系，费用由厂商自己承担。</p>
+<p><strong>监理</strong>：还没进场。</p>
+<p>这一阶段最常卡住的地方：</p>
+<ul>
+<li>需求写成“建设一个综合管理平台”，没写清解决什么业务问题，可研编不下去，来回改几轮。</li>
+<li>项目建议书的投资匡算与可研估算差异较大时，审批或评审方可能要求说明差异原因；是否触发重新报批，要按适用的审批规定判断，不能把 10% 当作全国通用门槛。</li>
+<li>初设阶段如果调整了已批复的建设目标、主要内容或投资安排，应先判断是否属于允许调整的范围，并按适用规定履行审批、备案或其他程序。</li>
+</ul>
+<h2 id="三、初步设计与概算"><a href="#三、初步设计与概算" class="headerlink" title="三、初步设计与概算"></a>三、初步设计与概算</h2><p>可研批复之后编初步设计。初步设计通常会进一步细化系统架构、功能、部署、设备配置、安全方案和投资概算等内容；具体章节取决于项目要求。涉及商用密码应用的，还应按适用规定考虑密码应用方案。</p>
+<p>对实行概算管理的项目，批复概算会约束项目投资。招标控制价、采购预算和合同金额各有适用规则，不能把概算直接等同于每个采购包的最高限价；如建设内容或投资安排超出批准范围，应按项目适用规定办理调整。</p>
+<p>初设也要评审。技术评审重点看架构合理性、云资源测算依据、安全方案完整性、密码应用方案。不少政务信息化项目会要求统筹使用政务云或既有基础设施，并论证云资源需求；是否必须上云、资源如何配置，应以适用政策和项目批复为准。</p>
+<p><strong>甲方</strong>：组织编制，报批，配合评审答疑。</p>
+<p><strong>设计单位</strong>：出初设方案和概算。这一份文件的技术深度直接决定后面招标顺不顺。</p>
+<p><strong>评审专家</strong>：技术评审会，出意见。意见里常出现“功能清单颗粒度不够”“安全方案未覆盖数据分级”“概算中软件开发工作量的测算依据不足”。</p>
+<p><strong>审批部门</strong>：批复初设和概算。</p>
+<p>这一阶段有个两难。功能清单写细了，招标时乙方逐条对标报价，甲方想要的整体效果没人负责；写粗了，评标没有可比性，报价差异巨大没法比。</p>
+<h2 id="四、招标"><a href="#四、招标" class="headerlink" title="四、招标"></a>四、招标</h2><p>采购方式要先区分项目适用《招标投标法》还是《政府采购法》及其配套规定。政府采购方式包括公开招标、邀请招标、竞争性谈判、单一来源、询价等，符合条件时还可采用竞争性磋商等方式；依法必须招标的项目则按招标投标规则办理。公开招标数额标准、适用条件和例外情形需按预算级次、地区及项目性质判断，不能将这些方式当作一张可任意选择的清单。</p>
+<p>公开招标的流程：</p>
+<ol>
+<li>编制招标文件，包括技术需求书、评标办法、合同主要条款、投标人资格要求。</li>
+<li>发布招标公告。依法必须招标的项目，自招标文件开始发出之日起至投标截止之日止，最短不得少于 20 日；政府采购货物、服务采用招标方式的，也有相应的法定期限。具体还需区分项目适用的法律制度。</li>
+<li>发售招标文件，投标人购买。</li>
+<li>答疑和澄清。投标人对招标文件有疑问的，在规定时间内提出，甲方书面答复，答复要发给所有投标人。</li>
+<li>投标人编制投标文件。技术方案、商务报价、资质证明、项目团队。</li>
+<li>开标。当众拆封，宣读报价。</li>
+<li>评标。依法组建的评标委员会通常由 5 人以上单数组成，技术、经济等方面专家人数不得少于成员总数的三分之二；特定项目和采购制度可能有不同的具体规定。专家抽取、招标人代表比例及回避要求，应按适用规则执行。</li>
+<li>推荐中标候选人，一般 1 到 3 名，标明排序。</li>
+<li>依法必须招标项目的中标候选人公示期限，按适用招标投标规定执行；不同采购制度的公告、公示要求并不完全相同。</li>
+<li>定标，发中标通知书。</li>
+</ol>
+<p><strong>甲方</strong>：确定技术需求，编技术需求书，派代表进评标委员会（作为招标人代表，不占专家名额），定标。</p>
+<p><strong>招标代理机构</strong>：编招标文件，组织开标评标，发布公告和中标公示。甲方自己有能力也可以自行招标。</p>
+<p><strong>评标专家</strong>：独立打分，推荐候选人。评标委员会成员名单在中标结果确定前保密。</p>
+<p><strong>监理</strong>：部分项目会在招标阶段委托监理参与需求文件审查或提供咨询意见。监理是否参与招标、能否参与特定评审活动，要结合采购程序、委托范围和回避要求判断，不能视为普遍职责。</p>
+<p><strong>乙方</strong>：买标书，编投标文件，答疑，投标。投标文件的编制质量直接决定能不能中标，技术方案和报价要匹配。</p>
+<p><strong>测评机构</strong>：不介入。</p>
+<p>这一阶段的风险点：</p>
+<ul>
+<li>技术需求书写成某厂商产品的参数，形成指向性，被其他投标人质疑甚至投诉。</li>
+<li>评标办法价格分权重过高，低价中标，后面做不下去，变更和索赔不断。</li>
+<li>投标人不足 3 家，流标，重新招标，工期整体后推。</li>
+</ul>
+<h2 id="五、签约与开工"><a href="#五、签约与开工" class="headerlink" title="五、签约与开工"></a>五、签约与开工</h2><p>依法适用《招标投标法》的项目，招标人与中标人通常应自中标通知书发出之日起 30 日内，按照招标文件和中标人的投标文件订立书面合同。履约保证金的比例上限及是否收取，要看适用法律和采购规则；不能将单一规则不加区分地套用到所有信息化项目。</p>
+<p>合同内容至少包括：建设内容与范围、工期、合同价款、付款方式与节点、验收标准、违约责任、知识产权归属、保密条款、质保期。</p>
+<p>合同签完，两边各自启动内部程序。</p>
+<p><strong>乙方</strong>：合同评审（法务、财务、交付部门一起看条款风险），内部立项，任命项目经理，组建项目组，划拨预算。</p>
+<p><strong>甲方</strong>：组建项目组，任命甲方项目经理，明确对接人。甲方项目经理要拿到授权，否则协调不动业务部门。</p>
+<p><strong>双方</strong>：甲乙双方可能分别开展内部立项、任命项目负责人和内部授权。项目管理方法中常用“项目章程”描述项目授权文件，但企业实际文件名称、签发人和流程不统一；它不能替代双方签订的合同。</p>
+<p><strong>监理</strong>：签监理合同，组建监理项目部，任命总监理工程师，编制监理规划和监理细则。</p>
+<p><strong>开工会</strong>：也叫项目启动会。参加人有甲方项目组、乙方项目组、监理。内容是介绍项目背景、明确各方接口人、确认沟通机制和例会安排、确认总体计划。</p>
+<p><strong>乙方编制项目实施计划</strong>，按合同和项目管理制度提交甲方、监理审查或确认。谁审核、谁批准，以及该计划是否作为正式进度基准，应以合同和项目约定为准。</p>
+<p>这一阶段的坑：</p>
+<ul>
+<li>合同范围跟招标文件、投标承诺不一致。乙方投标时答应的功能没写进合同，后面甲方要，乙方不认。</li>
+<li>付款条件苛刻，节点付款比例低，乙方垫资严重，影响投入。</li>
+<li>甲方项目经理没有实际授权，业务部门不配合，需求调研推不动。</li>
+</ul>
+<h2 id="六、实施"><a href="#六、实施" class="headerlink" title="六、实施"></a>六、实施</h2><p>实施阶段从需求调研开始，到系统具备初验条件结束。典型顺序是需求调研、概要设计、详细设计、开发与集成、内部测试、部署、培训。</p>
+<p><strong>甲方业务部门</strong>：参加需求调研，确认需求规格说明书，提供测试数据和业务场景，参加用户验收测试。</p>
+<p><strong>甲方信息化部门</strong>：提供机房、网络、云资源、第三方系统接口，协调内部资源，监督进度。</p>
+<p><strong>甲方项目经理</strong>：日常对接，组织内部协调会，处理业务部门提出的新需求。</p>
+<p><strong>乙方项目经理</strong>：编计划、排资源、管进度、管质量、管风险、管沟通。项目周报、月报由他出。</p>
+<p><strong>乙方需求人员</strong>：调研，写需求规格说明书，跟甲方确认签字。</p>
+<p><strong>乙方设计人员</strong>：概要设计、详细设计、数据库设计、接口设计。</p>
+<p><strong>乙方开发与实施人员</strong>：编码、配置、集成、部署。</p>
+<p><strong>乙方测试人员</strong>：单元测试、集成测试、系统测试，出测试报告。</p>
+<p><strong>监理</strong>：审乙方提交的各类方案和计划，旁站关键工序（设备上架、系统割接、数据迁移），巡检抽检，主持监理例会，签发监理通知单，审核付款申请并签认支付证书，出监理月报。</p>
+<p><strong>测评机构</strong>：一般在系统开发完成、准备初验前介入，做第三方软件测评。有的项目在实施中期就进场做过程检查。</p>
+<p><strong>专家</strong>：一般不在实施阶段介入。出现重大技术方案变更时，甲方可能组织专家论证。</p>
+<p>变更控制是这一阶段的主线。任何一方提出变更，都要走变更申请、影响评估、审批、实施、验证。评估要覆盖范围、进度、成本、质量、风险五个方面。监理通常对变更的必要性、技术影响和进度成本影响提出审查意见；最终审批主体和授权范围由合同、项目制度及建设单位内部授权确定。</p>
+<p>常见问题：</p>
+<ul>
+<li>需求蔓延。业务部门边用边提，不写变更单，乙方先做了再说，最后工期和成本失控。</li>
+<li>甲方环境不到位。机房没准备好、云资源没开通、第三方接口不通，工期延误，责任扯皮。</li>
+<li>乙方关键人员更换。需求人员和开发人员中途走人，知识没交接，返工。</li>
+<li>测试不充分。乙方自己测没问题，甲方一用就出问题，根子在需求理解和真实数据差异。</li>
+</ul>
+<h2 id="七、初验与试运行"><a href="#七、初验与试运行" class="headerlink" title="七、初验与试运行"></a>七、初验与试运行</h2><p>初验也叫初步验收、预验收。有些项目管它叫“用户验收”，这个叫法值得单独说一下。</p>
+<p>在常见的软件交付语境中，UAT（用户验收测试）指由用户或业务代表参与的测试活动，用于确认系统是否满足业务使用要求。它通常与项目的初验、终验区分，但实际项目对“用户验收”“初验”等名称的使用并不完全一致，应以合同、测试方案和验收方案对各节点的定义为准。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>性质</th>
+<th>时点</th>
+<th>谁组织</th>
+<th>产出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户验收测试 UAT</td>
+<td>测试活动</td>
+<td>乙方系统测试之后、上线之前</td>
+<td>业务用户执行，乙方配合</td>
+<td>测试用例、UAT 报告、缺陷清单</td>
+</tr>
+<tr>
+<td>初验</td>
+<td>验收节点</td>
+<td>UAT 通过之后</td>
+<td>甲方组织</td>
+<td>初验报告，之后进试运行</td>
+</tr>
+<tr>
+<td>终验</td>
+<td>验收节点</td>
+<td>试运行期满</td>
+<td>甲方组织，必要时主管部门参加</td>
+<td>验收报告，项目结束</td>
+</tr>
+</tbody></table>
+<p>三个环节的判据不同。UAT 看的是业务场景跑不跑得通，初验看的是合同和需求规格说明书的符合性，终验看的是试运行期的问题有没有闭环、各类测评报告齐不齐。</p>
+<p>实际项目可能把用户测试、用户确认和初步验收安排在同一阶段，也可能分开进行。名称本身不能说明完成了哪些工作，关键要核对合同和验收方案中的测试范围、验收条件、缺陷处理要求及签字主体。</p>
+<p>项目管理教材中的过程划分与具体项目的交付制度并不完全相同。理解实际项目时，应以合同、测试方案和验收文件为准。</p>
+<p>乙方完成开发和内部测试后，提交初验申请，附自测报告、需求规格说明书、设计文档、测试报告、用户手册、部署文档。</p>
+<p>监理审核材料，出质量评估报告。甲方组织初验，业务部门派人参加，按合同和需求规格说明书逐项核对功能。</p>
+<p><strong>初验通过后是否进入试运行、试运行多长时间</strong>，由项目合同和验收方案约定。试运行期间通常会记录运行情况、故障和待整改事项，并安排运维人员熟悉系统；具体期限不宜一概写成 3 到 6 个月。</p>
+<p><strong>甲方</strong>：组织初验，安排业务部门试用，收集问题，监督整改。</p>
+<p><strong>乙方</strong>：配合初验，驻场支持，处理试运行期间的问题。</p>
+<p><strong>监理</strong>：审核初验材料，参加初验，跟踪问题整改闭环。</p>
+<p><strong>测评机构</strong>：初验前完成软件测评，报告作为初验依据之一。</p>
+<p>试运行期常见的分歧：什么算缺陷、什么算新需求。缺陷乙方免费改，新需求要走变更。判断时要对照经确认的需求、合同范围、变更记录和验收标准。某项功能未写入最初的需求规格说明书，不代表任何情况下都自动属于新需求；后续经批准的变更同样可能构成合同范围。</p>
+<h2 id="八、竣工验收"><a href="#八、竣工验收" class="headerlink" title="八、竣工验收"></a>八、竣工验收</h2><p>终验也叫竣工验收，是项目正式结束的标志。</p>
+<p>申请终验要满足这些条件：</p>
+<ul>
+<li>试运行期满，试运行期间的问题全部整改完毕并经甲方确认。</li>
+<li>第三方软件测评报告。</li>
+<li>适用等级保护要求的系统，按规定完成定级、备案、测评及整改等工作，并准备相应材料。具体材料和时间点应结合系统等级、主管要求及项目验收方案确定。</li>
+<li>依法或按项目要求需要开展商用密码应用安全性评估的系统，准备相应评估报告及整改材料。是否需要密评，应结合系统属性、适用规定和密码应用情况判断。</li>
+<li>监理总结报告。</li>
+<li>完整的竣工文档，包括需求、设计、测试、部署、运维、培训各类文档。</li>
+<li>培训记录和移交清单。</li>
+<li>合同约定的其他条件。</li>
+</ul>
+<p>流程：</p>
+<ol>
+<li>乙方提交终验申请和全套材料。</li>
+<li>监理审核，出监理总结报告，明确是否同意验收。</li>
+<li>甲方组织验收组。验收组一般由甲方代表、监理、外聘专家组成，重大项目邀请主管部门参加。</li>
+<li>现场检查、文档审查、功能抽测。</li>
+<li>验收组出验收意见，签字。</li>
+<li>是否需要向主管部门备案或报批，以及由谁办理，取决于项目管理制度和验收程序。</li>
+</ol>
+<p><strong>甲方</strong>：组织验收，邀请专家，出验收结论。</p>
+<p><strong>乙方</strong>：准备材料，现场演示，回答质询。</p>
+<p><strong>监理</strong>：审核材料，出总结报告，参加验收。</p>
+<p><strong>测评机构</strong>：报告已经出了，验收时可能被要求解释结论。</p>
+<p><strong>专家</strong>：验收组里的技术专家，负责判断系统是否达到合同要求。专家签字要担责，所以看得比较细。</p>
+<p><strong>审计</strong>：有的项目在终验前就介入，做过程跟踪审计。</p>
+<p>验收不通过的情况不少见。常见原因是测评报告有未整改的高风险项、文档缺失、试运行问题没闭环。整改完再申请，重新组织验收。</p>
+<h2 id="九、结算、决算、审计"><a href="#九、结算、决算、审计" class="headerlink" title="九、结算、决算、审计"></a>九、结算、决算、审计</h2><p>三个词经常混用。</p>
+<p><strong>结算</strong>是甲乙双方算钱。乙方编结算书，内容是合同价加上变更、索赔、签证。甲方或委托造价咨询公司审核，双方确认结算金额。结算完了付尾款，留质保金。</p>
+<p><strong>竣工财务决算</strong>用于反映项目从筹建到竣工交付的实际财务支出及资产形成等情况。是否需要报财政部门或主管部门审核、批复，以及具体程序，取决于项目资金来源、投资管理制度和单位规定。</p>
+<p><strong>审计</strong>由依法具有相应职责的审计机关、单位内部审计部门或受托机构按各自权限开展。审计范围可能涉及程序、资金使用、合同履行和工程造价等；是否开展以及何时开展，取决于审计计划和项目安排。</p>
+<p><strong>造价咨询公司</strong>：编或审工程量清单、招标控制价、结算书。按项目收费。</p>
+<p><strong>财政部门</strong>：审批竣工财务决算，拨付资金。</p>
+<p><strong>审计机关</strong>：出审计报告，发现问题要求整改，严重的移送处理。</p>
+<p>审计发现的问题集中在：变更没有审批手续、结算量超过实际、设备采购价格明显高于市场、监理签证与实际不符。</p>
+<h2 id="十、移交与运维"><a href="#十、移交与运维" class="headerlink" title="十、移交与运维"></a>十、移交与运维</h2><p>终验通过后系统移交给运维部门。</p>
+<p>移交内容包括：系统管理权限、全部文档、源代码（合同有约定的）、设备清单、账号清单、第三方接口说明、运维手册。</p>
+<p>质保期限、免费服务范围、响应时限、质保金或质量保证方式都应以合同为准。项目中可能约定 1 年、2 年或更长的质保期，也可能采用保函等方式替代现金质保金；不能把某个比例视为通用标准。</p>
+<p>质保期结束后，系统仍需持续运维。相关服务可能由甲方内部团队承担，也可能委托原承建单位或通过新的采购程序选择服务商；质保期与运维服务期也可能存在重叠。运维内容包括日常巡检、监控告警、备份恢复、故障响应、版本升级、安全加固、数据维护。</p>
+<p><strong>甲方运维部门</strong>：接管系统，日常运维，提运维需求。</p>
+<p><strong>乙方</strong>：质保期内免费支持，之后按运维合同服务。</p>
+<p><strong>监理</strong>：一般不参与运维。运维阶段如果需要第三方监督，会另找运维监理。</p>
+<p><strong>测评机构</strong>：等级保护测评周期要结合系统等级、适用规定、主管部门要求和风险情况确定。三级系统常见年度测评安排，但不宜把所有等级、所有系统的周期简单概括为统一的“一年或两年”；发现问题后还应按要求整改。</p>
+<p><strong>专家</strong>：运维阶段基本不介入。系统要重大升级或重构时，会重新走立项程序。</p>
+<h2 id="十一、监理这条线"><a href="#十一、监理这条线" class="headerlink" title="十一、监理这条线"></a>十一、监理这条线</h2><p>监理通常由建设单位委托，对项目过程实施监督，并按合同和适用规范保持独立、客观。监理与承建单位通常不存在同一项目上的委托合同关系，但监理权限并非仅由这一点产生；能否签发暂停指令、如何生效，应看适用规范、合同约定和授权范围。</p>
+<p>监理费不在乙方的中标金额里。它属于甲方项目概算里的“工程建设其他费用”，跟设计费、咨询费、招标代理费并列。项目总投资的构成大致是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">建设项目总投资</span><br><span class="line">├─ 建设投资</span><br><span class="line">│  ├─ 工程费用</span><br><span class="line">│  │  ├─ 建筑工程费</span><br><span class="line">│  │  ├─ 设备购置费</span><br><span class="line">│  │  └─ 安装工程费</span><br><span class="line">│  ├─ 工程建设其他费用</span><br><span class="line">│  │  ├─ 勘察设计费</span><br><span class="line">│  │  ├─ 监理费</span><br><span class="line">│  │  ├─ 招标代理费</span><br><span class="line">│  │  ├─ 造价咨询费</span><br><span class="line">│  │  └─ 建设管理费</span><br><span class="line">│  └─ 预备费</span><br><span class="line">└─ 建设期利息</span><br></pre></td></tr></table></figure>
+
+<p>监理费用通常列入建设单位的项目费用，并由委托方按合同支付。是否必须单独签订监理合同、采用何种采购方式，要结合项目制度和采购要求判断。付款来源本身不能完全决定监理是否独立，独立性还取决于委托关系、职责边界、利益冲突控制和实际履职情况。</p>
+<p>监理服务价格的管理方式需要区分项目性质。国家发展改革委相关文件规定，部分建设项目监理服务实行市场调节价，但政府投资项目及政府委托服务曾有不同的价格管理安排，后续还需核对现行政策。实际费用可按工作量、人员投入、服务范围等协商确定；“合同额的 1% 到 3%”只能视为某些项目中的经验区间，不是统一收费标准。政府投资项目的费用应纳入相应预算或概算管理，调整时按规定办理。</p>
+<p>在总承包或代建模式下，合同关系和管理界面会发生变化，但不能据此直接认定监理独立性必然下降。需要查看建设单位、代建单位、总承包单位与监理单位之间的委托关系、合同权限和实际履职安排。</p>
+<p>监理进场时间和服务范围由项目要求、合同及适用制度决定。有的项目从招标或设计阶段开始，有的只覆盖实施阶段；不能简单按“政府项目”和“企业项目”一刀切。进场越早，对后面越有利，因为招标文件的技术漏洞监理能提前看出来。</p>
+<p>监理项目部一般配三类人：总监理工程师、监理工程师、监理员。大项目按专业分组，每组配一名监理工程师。</p>
+<p>监理要出三份文件。投标时提交<strong>监理大纲</strong>，说明打算怎么监。中标进场后编<strong>监理规划</strong>，落到具体措施。再往下编<strong>监理细则</strong>，按专业或按阶段分。</p>
+<p>监理的工作内容，行业里归纳成四控三管一协调。</p>
+<p>四控：质量控制、进度控制、投资控制、变更控制。</p>
+<p>三管：合同管理、信息管理、安全管理。</p>
+<p>一协调：组织协调，协调甲方、乙方、以及涉及的其他单位。</p>
+<p>实际动作清单：</p>
+<ul>
+<li>审查乙方提交的实施计划、需求规格说明书、设计方案、测试方案、上线方案。</li>
+<li>旁站关键工序。设备上架、网络割接、数据迁移、系统上线，监理要在现场。</li>
+<li>巡检和抽检。看代码管理是否规范、测试记录是否完整、现场是否按方案施工。</li>
+<li>主持监理例会。周例会或月度例会，出会议纪要，跟踪待办。</li>
+<li>签发监理通知单。发现问题书面通知乙方整改，严重的签发工程暂停令，整改合格后签发复工令。</li>
+<li>审核付款申请。按合同节点核对完成情况，签认工程款支付证书。没这个签认，甲方一般不付款。</li>
+<li>处理变更。评估变更对范围、进度、成本的影响，提出审核意见。</li>
+<li>组织或参加初验、终验。</li>
+<li>出监理月报和监理总结报告。</li>
+</ul>
+<p>监理的权力边界要说清楚。监理可在合同授权和适用规范范围内提出整改要求、签发相应通知，并对进度款申请等提出审核意见。是否有权签发暂停令、付款审核如何生效，要看项目合同及制度。监理通常不能代替建设单位决定合同范围、投资和重大变更，也不应取代承建单位的内部人员管理。</p>
+<h2 id="十二、测评、检测、评估、审计的分工"><a href="#十二、测评、检测、评估、审计的分工" class="headerlink" title="十二、测评、检测、评估、审计的分工"></a>十二、测评、检测、评估、审计的分工</h2><p>这些词在项目里频繁出现，做的事完全不同。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>谁做</th>
+<th>做什么</th>
+<th>什么时候做</th>
+<th>出什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>软件测评</td>
+<td>具备项目要求能力或资质的检测机构</td>
+<td>按合同和测试方案开展功能、性能、兼容性等测试</td>
+<td>约定测试阶段</td>
+<td>测试或检测报告</td>
+</tr>
+<tr>
+<td>等保测评</td>
+<td>符合适用要求的等级测评机构</td>
+<td>按适用标准开展等级测评</td>
+<td>按法规、主管要求和风险确定</td>
+<td>等级测评报告</td>
+</tr>
+<tr>
+<td>密评</td>
+<td>符合要求的商用密码应用安全性评估机构</td>
+<td>评估商用密码应用的合规性和有效性</td>
+<td>按适用规定及项目要求确定</td>
+<td>密评报告</td>
+</tr>
+<tr>
+<td>造价咨询</td>
+<td>造价咨询公司</td>
+<td>编审预算、控制价、结算</td>
+<td>招标前、结算时</td>
+<td>造价审核报告</td>
+</tr>
+<tr>
+<td>财政投资评审</td>
+<td>财政部门评审中心</td>
+<td>审投资概算合理性</td>
+<td>立项、初设阶段</td>
+<td>评审意见</td>
+</tr>
+<tr>
+<td>绩效评价</td>
+<td>财政部门或第三方评价机构</td>
+<td>评项目实际效益</td>
+<td>运行 1 到 2 年后</td>
+<td>绩效评价报告</td>
+</tr>
+<tr>
+<td>审计</td>
+<td>审计机关、内审部门</td>
+<td>查程序合规、造价真实</td>
+<td>决算后，可能追溯</td>
+<td>审计报告</td>
+</tr>
+<tr>
+<td>监理</td>
+<td>监理单位</td>
+<td>过程监督</td>
+<td>全程</td>
+<td>监理月报、总结报告</td>
+</tr>
+</tbody></table>
+<p>软件测试或检测关注合同约定的功能、性能、兼容性等指标；等级保护测评关注信息系统是否符合相应等级的安全要求。两者目标和依据不同，但并非所有项目都必然需要两份报告，是否作为验收材料应以适用规定、合同和验收方案为准。</p>
+<p>商用密码应用安全性评估的适用范围，应结合《密码法》及相关配套规定、系统属性、重要程度和具体密码应用情况判断。不能仅凭“用了商用密码”或“达到等保三级”就直接推定所有系统都适用同一要求。</p>
+<h2 id="十三、几组容易混的关系"><a href="#十三、几组容易混的关系" class="headerlink" title="十三、几组容易混的关系"></a>十三、几组容易混的关系</h2><p><strong>监理和甲方项目经理</strong>：甲方项目经理管项目，监理管监督。监理不替代甲方做管理，甲方也不能让监理替自己写方案、做决策。监理如果替甲方干活，独立性就没了。</p>
+<p><strong>监理和测评机构</strong>：监理主要按约定监督项目过程并跟踪问题；测评机构针对特定指标开展测试或评估。双方工作可能交叉配合，但不能仅按是否常驻来区分。</p>
+<p><strong>初验和终验</strong>：初验通过进试运行，终验通过进质保。初验是阶段性确认，终验是项目结束。</p>
+<p><strong>结算和决算</strong>：结算对乙方，算这个合同该付多少钱。决算对项目整体，算这个项目总共花了多少钱。</p>
+<p><strong>质保期和运维期</strong>：质保期内承建单位按合同承担约定的缺陷修复和支持义务；额外服务是否收费要看合同。运维服务可以另签合同，也可以由内部团队承担，时间安排和收费方式并无统一模式。</p>
+<p><strong>甲方项目经理和乙方项目经理</strong>：各自对各自的组织负责，不是上下级。甲方项目经理给乙方下指令，走的是合同和监理渠道，不能直接指挥乙方的人。</p>
+<p><strong>项目章程和合同</strong>：合同是法律文件，约束甲乙双方。章程是内部授权文件，授权项目经理。乙方项目章程的依据是合同，但章程不能替代合同。</p>
+<h2 id="十四、两边内部的分工"><a href="#十四、两边内部的分工" class="headerlink" title="十四、两边内部的分工"></a>十四、两边内部的分工</h2><p>前面按阶段讲，这一节按组织讲。同一个项目，甲乙双方内部都有好几拨人，搞清楚谁管什么，比记住流程更有用。</p>
+<h3 id="甲方内部"><a href="#甲方内部" class="headerlink" title="甲方内部"></a>甲方内部</h3><table>
+<thead>
+<tr>
+<th>部门</th>
+<th>管什么</th>
+<th>在项目里的位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>业务部门</td>
+<td>提需求、确认需求、试用、最终使用</td>
+<td>需求方，不承担项目管理责任</td>
+</tr>
+<tr>
+<td>信息化部门</td>
+<td>技术方案把关、项目日常管理、对接乙方</td>
+<td>项目主管部门，通常出甲方项目经理</td>
+</tr>
+<tr>
+<td>财务部门</td>
+<td>预算、资金拨付、决算</td>
+<td>卡钱的一环，付款要走它</td>
+</tr>
+<tr>
+<td>采购或招采部门</td>
+<td>组织招标、签合同</td>
+<td>程序主导，技术判断靠信息化部门</td>
+</tr>
+<tr>
+<td>分管领导</td>
+<td>立项决策、重大变更审批</td>
+<td>决策层，签字的人</td>
+</tr>
+<tr>
+<td>一把手</td>
+<td>重大项目的最终决策</td>
+<td>一般不直接介入</td>
+</tr>
+</tbody></table>
+<p>甲方项目经理多数出自信息化部门，少数项目由业务部门出人。业务部门出人的好处是业务熟，坏处是不懂技术，容易被乙方牵着走。</p>
+<p>甲方内部最常见的问题是业务部门和信息化部门意见不一致。业务部门想要的功能，信息化部门认为技术上不合理或者超出预算，两边僵住，乙方在中间等。这种事没有流程能解决，只能靠分管领导拍板。</p>
+<h3 id="乙方内部"><a href="#乙方内部" class="headerlink" title="乙方内部"></a>乙方内部</h3><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>管什么</th>
+<th>什么时候介入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>销售</td>
+<td>客户关系、拿单、商务谈判</td>
+<td>立项之前就开始</td>
+</tr>
+<tr>
+<td>售前</td>
+<td>技术方案、投标文件、演示</td>
+<td>招标阶段，中标后退出</td>
+</tr>
+<tr>
+<td>商务</td>
+<td>报价、合同条款、开票、回款</td>
+<td>投标到收尾全程</td>
+</tr>
+<tr>
+<td>项目经理</td>
+<td>交付全过程，对进度、成本、质量负责</td>
+<td>签约后到质保期满</td>
+</tr>
+<tr>
+<td>需求与设计人员</td>
+<td>调研、需求规格、方案设计</td>
+<td>实施前期</td>
+</tr>
+<tr>
+<td>开发与实施人员</td>
+<td>编码、配置、部署</td>
+<td>实施中期</td>
+</tr>
+<tr>
+<td>测试人员</td>
+<td>测试用例、测试执行、缺陷跟踪</td>
+<td>实施后期</td>
+</tr>
+<tr>
+<td>PMO 或质量部门</td>
+<td>过程检查、文档审计、项目健康度</td>
+<td>定期抽查</td>
+</tr>
+<tr>
+<td>运维人员</td>
+<td>交付后接管，或者转给运维合同</td>
+<td>终验后</td>
+</tr>
+</tbody></table>
+<p>销售和项目经理的目标经常不一致。销售希望合同签下来，答应客户的条件越多越好；项目经理希望范围清晰、工期合理。这个矛盾在乙方内部普遍存在，<strong>交接环节最容易出问题，售前承诺的东西没写进合同，项目经理接手后才发现。</strong></p>
+<h3 id="签字人与对应文件"><a href="#签字人与对应文件" class="headerlink" title="签字人与对应文件"></a>签字人与对应文件</h3><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>甲方签字人</th>
+<th>乙方签字人</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>项目建议书</td>
+<td>建设单位负责人</td>
+<td>无</td>
+</tr>
+<tr>
+<td>可行性研究报告</td>
+<td>建设单位负责人</td>
+<td>无</td>
+</tr>
+<tr>
+<td>初步设计与概算</td>
+<td>建设单位负责人</td>
+<td>无</td>
+</tr>
+<tr>
+<td>招标文件</td>
+<td>采购或招采负责人</td>
+<td>无</td>
+</tr>
+<tr>
+<td>投标文件</td>
+<td>无</td>
+<td>法定代表人授权代表</td>
+</tr>
+<tr>
+<td>合同</td>
+<td>法定代表人授权代表</td>
+<td>法定代表人授权代表</td>
+</tr>
+<tr>
+<td>项目章程</td>
+<td>甲方发起人</td>
+<td>乙方发起人</td>
+</tr>
+<tr>
+<td>需求规格说明书</td>
+<td>甲方项目经理和业务负责人</td>
+<td>乙方项目经理</td>
+</tr>
+<tr>
+<td>变更单</td>
+<td>甲方项目经理或变更控制委员会</td>
+<td>乙方项目经理</td>
+</tr>
+<tr>
+<td>初验报告</td>
+<td>甲方项目经理和验收组</td>
+<td>乙方项目经理</td>
+</tr>
+<tr>
+<td>监理通知单</td>
+<td>甲方不签，监理直接签发</td>
+<td>乙方项目经理签收</td>
+</tr>
+<tr>
+<td>付款申请</td>
+<td>甲方项目经理和财务</td>
+<td>乙方项目经理提交</td>
+</tr>
+<tr>
+<td>验收报告</td>
+<td>验收组全体签字</td>
+<td>乙方项目经理</td>
+</tr>
+<tr>
+<td>结算书</td>
+<td>甲方造价审核人</td>
+<td>乙方商务和项目经理</td>
+</tr>
+</tbody></table>
+<p>在项目管理方法中，项目章程通常由发起人或有授权的管理层批准，项目经理负责组织编制或参与编制。现实组织中的文件名称、签批流程和授权人可能不同，应以组织制度为准，不能把某一种教材表述当作所有单位的统一签字规则。</p>
+<h2 id="十五、分包和外包：链条变长"><a href="#十五、分包和外包：链条变长" class="headerlink" title="十五、分包和外包：链条变长"></a>十五、分包和外包：链条变长</h2><p>前面讲的都是甲方对乙方这一层。实际项目里，乙方下面还有一层甚至两层。</p>
+<h3 id="法条依据"><a href="#法条依据" class="headerlink" title="法条依据"></a>法条依据</h3><p>《招标投标法》第四十八条：中标人不得向他人转让中标项目，也不得将中标项目肢解后分别向他人转让。按照合同约定或者经招标人同意，可以将中标项目的部分非主体、非关键性工作分包给他人完成。接受分包的人应当具备相应的资格条件，并不得再次分包。中标人应当就分包项目向招标人负责，接受分包的人就分包项目承担连带责任。</p>
+<p>《政府采购法》第四十八条：经采购人同意，中标、成交供应商可以依法采取分包方式履行合同。分包履行的，中标供应商就采购项目和分包项目向采购人负责，分包供应商就分包项目承担责任。</p>
+<p>即以下四条约束：</p>
+<ol>
+<li>整体转让不行。把项目整个转给别人，自己只收管理费，这是转包。</li>
+<li>肢解转让也不行。把项目切成几块分别转出去，同样是转包。</li>
+<li>分包要甲方同意，而且只能分非主体、非关键性的部分。核心功能、主体工程不能分。</li>
+<li>接受分包的人不能再分包。链条只能两层。</li>
+</ol>
+<p>分包商能否再分包，需按项目适用法律和合同判断。对《招标投标法》所规范的中标项目，接受分包者不得再次分包；建设工程领域还存在转包、违法分包等专门规则。具体项目是否违法，要看工作性质、合同链条、资质要求和实际履行情况，不能仅凭“分包后又找施工队”这一描述作结论。</p>
+<h3 id="链条变长以后的关系"><a href="#链条变长以后的关系" class="headerlink" title="链条变长以后的关系"></a>链条变长以后的关系</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">甲方（建设单位）</span><br><span class="line">  │  合同</span><br><span class="line">  ▼</span><br><span class="line">乙方（总包 / 中标人）</span><br><span class="line">  ├── 分包合同 ── 软件分包商</span><br><span class="line">  ├── 分包合同 ── 硬件集成商</span><br><span class="line">  ├── 分包合同 ── 弱电施工方</span><br><span class="line">  │                 └── 实际施工的工程队（法律上不允许这一层）</span><br><span class="line">  └── 采购合同 ── 设备厂商</span><br></pre></td></tr></table></figure>
+
+<p>四条关系变化：</p>
+<p><strong>合同关系只有一层对甲方。</strong> 通常由总包与建设单位签订主合同，再由总包与分包商签订分包合同。分包商的合同请求一般先依据分包合同向总包主张，但是否存在法律规定的例外、建设单位的直接付款义务或其他责任，应结合具体合同和适用法律判断。分包商的工期延误，甲方找总包索赔。</p>
+<p><strong>监理只对总包下指令。</strong> 监理发现分包的问题，签发监理通知单给总包，由总包去管分包。程序上监理不能直接指挥分包商的人。实际操作中监理经常直接找分包问情况，但书面指令必须走总包。</p>
+<p><strong>界面责任要提前划。</strong> 多家分包干不同内容，接口在哪、谁负责联调、出问题谁背锅，这些要在分包合同里写死。一个系统上线出故障，网络是 A 家的、软件是 B 家的、服务器是 C 家的，三家互相推，最后是总包兜底。</p>
+<p><strong>付款链容易出事。</strong> 总包收甲方的钱有账期，付分包也有账期，中间压一段。分包拿不到钱就停工、堵门、找甲方闹。分包合同里常见的“背靠背”条款，意思是总包收到甲方付款后才付分包，这个条款在司法实践中的效力有争议。</p>
+<h3 id="总包对分包的管理"><a href="#总包对分包的管理" class="headerlink" title="总包对分包的管理"></a>总包对分包的管理</h3><ul>
+<li>分包商资格审查。营业执照、资质证书、类似业绩、人员配置。</li>
+<li>按主合同和适用规定向建设单位或监理提交分包信息、合同或资质材料；是否需要备案、审批或书面同意，以项目适用规则为准。</li>
+<li>分包人员纳入总包管理。出入证、安全培训、现场纪律，都按总包的规矩来。</li>
+<li>分包进度并入总包计划。总包报给甲方的进度计划里，要体现分包的节点。</li>
+<li>分包价款通常由总包按分包合同支付；是否存在建设单位直接支付或其他特别安排，应看法律规定和合同约定。</li>
+</ul>
+<h3 id="判断分包安排时要核对什么"><a href="#判断分包安排时要核对什么" class="headerlink" title="判断分包安排时要核对什么"></a>判断分包安排时要核对什么</h3><p>需要核对项目适用的法律制度、招标文件、主合同、分包合同、建设单位是否同意、分包内容是否允许，以及分包商的资质和实际履行情况。总包通常仍需按主合同向建设单位承担责任；分包商自身承担何种责任，则要看具体法律规则和合同安排。</p>
+<h2 id="十六、设备厂商的位置"><a href="#十六、设备厂商的位置" class="headerlink" title="十六、设备厂商的位置"></a>十六、设备厂商的位置</h2><p>设备厂商在项目里通常是供应商，不是承建方。它和乙方的关系是买卖，不是分包。</p>
+<h3 id="甲供还是乙供"><a href="#甲供还是乙供" class="headerlink" title="甲供还是乙供"></a>甲供还是乙供</h3><p>设备由谁采购，会影响合同关系和责任划分，但不能单凭采购方就判断全部质量责任。还要看设备采购合同、安装集成合同、验收记录和故障原因。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>甲供设备</th>
+<th>乙供设备</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>谁签采购合同</td>
+<td>甲方直接和厂商签</td>
+<td>乙方和厂商或代理商签</td>
+</tr>
+<tr>
+<td>价格透明度</td>
+<td>高，甲方看得见原价</td>
+<td>低，含在集成报价里</td>
+</tr>
+<tr>
+<td>质量责任</td>
+<td>按甲供合同、施工&#x2F;集成合同和验收记录划分</td>
+<td>按乙供合同约定承担选型、供货、安装及售后等责任</td>
+</tr>
+<tr>
+<td>到货风险</td>
+<td>甲方承担，晚到影响工期</td>
+<td>乙方承担，晚到算乙方违约</td>
+</tr>
+<tr>
+<td>常见场景</td>
+<td>大额硬件、甲方有框架协议、信创目录产品</td>
+<td>中小项目、软硬一体交付</td>
+</tr>
+</tbody></table>
+<p>甲供设备容易出现责任界面争议，例如设备故障究竟来自产品质量、运输保管还是安装调试。合同应明确到货验收、保管、安装、联调、故障判定和售后责任。三方共同验收、签字后由乙方保管，只是可能采用的一种安排，不能视为统一规则。</p>
+<h3 id="厂商在项目里的四个动作"><a href="#厂商在项目里的四个动作" class="headerlink" title="厂商在项目里的四个动作"></a>厂商在项目里的四个动作</h3><p><strong>授权。</strong> 部分招标文件会要求原厂授权函或售后服务承诺，但是否可以设置此类条件、条件是否合理，应符合采购规则并与项目需求相适应。代理商的授权等级可能影响厂商支持和价格政策，但不能推断所有项目都必须提供原厂授权。</p>
+<p><strong>供货。</strong> 按合同型号、配置、数量发货，附原厂证明、保修卡、序列号清单。</p>
+<p><strong>实施服务。</strong> 设备上架、加电、配置、调试，有时由厂商自己做，有时由厂商认证的服务商做，有时由乙方自己做。这一块经常单独计价，叫“原厂实施服务费”。</p>
+<p><strong>维保。</strong> 原厂质保期限、项目质保期限和服务范围可能不同，具体看设备厂商政策、采购合同及项目合同。若原厂服务期限短于项目承诺期限，应在采购和投标阶段明确后续服务责任及费用。乙方在投标时承诺“3 年免费维保”，实际是先把厂商的 3 年服务买下来再转售，成本早算进报价了。</p>
+<h3 id="厂商报备制度"><a href="#厂商报备制度" class="headerlink" title="厂商报备制度"></a>厂商报备制度</h3><p>这是实际项目里影响报价的一个机制。厂商对项目做报备，谁先报备谁拿到特价保护，其他代理商拿不到同样的折扣。所以同一个项目，几家代理商来投标，报价差异可能很大，根子不在集成能力，在于有没有拿到厂商的特价。</p>
+<p>甲方在评标时如果只看总价，容易选中一家拿了特价但交付能力一般的代理商。有些招标文件会要求投标人说明与厂商的合作关系，就是为了减少这种情况。</p>
+<h3 id="验货环节"><a href="#验货环节" class="headerlink" title="验货环节"></a>验货环节</h3><p>如果合同或监理方案要求参与设备到货验收，监理可能开展以下核查：</p>
+<ol>
+<li>开箱验货，甲方、乙方、监理三方在场。</li>
+<li>核对型号、配置、数量与合同清单，必要时核对序列号。</li>
+<li>按合同要求检查合格证明、保修资料和其他随货文件。</li>
+<li>对适合现场测试的设备，按验收方案进行通电或功能检查。</li>
+<li>签署验货记录，三方签字。</li>
+</ol>
+<p>型号替换是常见问题。合同写的是某个型号，到货是配置相近的另一款，代理商说是“升级替代”。监理要按合同清单卡，型号或配置与合同不符时，应按合同约定和验收程序记录、提出异议，并由有权主体决定退换货或办理正式变更，监理不应单方面替代采购人作出所有处置决定。</p>
+<h3 id="厂商直接投标的情况"><a href="#厂商直接投标的情况" class="headerlink" title="厂商直接投标的情况"></a>厂商直接投标的情况</h3><p>厂商也可以直接作为投标人。这时候它的身份是乙方，不是供应商。原厂投标的优势是价格和政策，劣势是集成能力弱，通常还要找集成商做实施。这种情况下，原厂是总包，集成商变成分包，前面那一节的规则照样适用。</p>
+<h2 id="十七、如何理解实际项目的流程"><a href="#十七、如何理解实际项目的流程" class="headerlink" title="十七、如何理解实际项目的流程"></a>十七、如何理解实际项目的流程</h2><p>项目管理教材会用启动、规划、执行、监控和收尾等过程组织工作；真实项目还会受到行政审批、预算管理、采购制度、合同约定和单位内部授权的影响。这些流程彼此交叉，未必严格按一条直线推进。</p>
+<p>例如，需求调研可能在立项前后反复进行；采购阶段可能要求进一步澄清技术需求；实施阶段发现范围需要调整时，要先评估影响，再按授权审批；初验后是否试运行、是否还要终验，也取决于项目文件。理解某个角色的职责时，可以沿着三条线核对：<strong>谁与谁签了合同，谁有权批准这件事，项目文件把责任写给了谁。</strong></p>
+<p>项目经理通常无权自行批准超出授权的重大变更；监理不能替代建设单位作出其保留的决策；如果合同约定初验后还要试运行和终验，初验通过就不代表所有交付义务已经完成。</p>
+<h3 id="和软考教材的对应"><a href="#和软考教材的对应" class="headerlink" title="和软考教材的对应"></a>和软考教材的对应</h3><p>教材的 49 个过程从“制定项目章程”开始。实际的立项和招标在章程之前，教材把它们放在立项管理、项目招投标那部分讲，不属于 49 个过程。</p>
+<table>
+<thead>
+<tr>
+<th>实际阶段</th>
+<th>教材对应</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>需求提出、建议书、可研、初设、批复</td>
+<td>立项管理章节，不属于 49 个过程</td>
+</tr>
+<tr>
+<td>招标、投标、评标、定标</td>
+<td>项目招投标章节，不属于 49 个过程</td>
+</tr>
+<tr>
+<td>签约、内部立项、签章程、开工会</td>
+<td>启动过程组：制定项目章程、识别干系人</td>
+</tr>
+<tr>
+<td>编实施计划、需求调研、设计</td>
+<td>规划过程组：制定项目管理计划、收集需求、定义范围等</td>
+</tr>
+<tr>
+<td>开发、集成、部署、培训</td>
+<td>执行过程组：指导与管理项目工作、管理项目知识、管理质量等</td>
+</tr>
+<tr>
+<td>监理监督、变更控制、绩效跟踪</td>
+<td>监控过程组：监控项目工作、实施整体变更控制、控制质量等</td>
+</tr>
+<tr>
+<td>初验、终验</td>
+<td>监控过程组的确认范围、控制质量，加收尾过程组的结束项目或阶段</td>
+</tr>
+<tr>
+<td>分包、设备采购、厂商管理</td>
+<td>规划过程组：规划采购管理；执行过程组：实施采购、管理采购</td>
+</tr>
+<tr>
+<td>结算、决算、审计</td>
+<td>收尾过程组的部分内容，教材讲得不多</td>
+</tr>
+<tr>
+<td>移交、质保、运维</td>
+<td>教材不涉及</td>
+</tr>
+</tbody></table>
+<p>关于软考中项知识点，可续看：</p>
+<p><a href="https://magiku.github.io/P/A004/">A004【项目管理】软考中项知识点集锦（十大管理领域版）</a></p>
+<p><a href="https://magiku.github.io/P/A005/">A005【项目管理】软考中项-项目管理图表速查手册</a></p>
+<p><a href="https://magiku.github.io/P/A006/">A006【项目管理】计算题专项：从原理到解题</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/P/A003/">https://magiku.github.io/P/A003/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://magiku.github.io" target="_blank">Magiku's药剂屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post-share"><div class="social-share" data-image="https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/P/A004/" title="A004【项目管理】软考中项知识点集锦（十大管理领域版）"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" onerror="onerror=null;src='/image/top-loading.gif'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">A004【项目管理】软考中项知识点集锦（十大管理领域版）</div></div><div class="info-2"><div class="info-item-1">教材按过程组（启动 → 规划 → 执行 → 监控 → 收尾）排列，本文档改按十大知识领域排列，把散落在五个过程组里的同一领域过程归拢到一处。</div></div></div></a><a class="pagination-related" href="/P/C005/" title="C005【局域网共享】一款局域网内访问操作安卓设备的应用推荐"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086997189_ed421359a9913b27c146a.jpg" onerror="onerror=null;src='/image/top-loading.gif'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">C005【局域网共享】一款局域网内访问操作安卓设备的应用推荐</div></div><div class="info-2"><div class="info-item-1">plain-app是一款开源应用，在安卓端打开应用启动服务，即可让任何连接到同一Wi-Fi网络的台式机或笔记本，打开浏览器输入网址，获得完整的仪表盘来管理你的安卓设备。</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/P/A004/" title="A004【项目管理】软考中项知识点集锦（十大管理领域版）"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A004【项目管理】软考中项知识点集锦（十大管理领域版）</div></div><div class="info-2"><div class="info-item-1">教材按过程组（启动 → 规划 → 执行 → 监控 → 收尾）排列，本文档改按十大知识领域排列，把散落在五个过程组里的同一领域过程归拢到一处。</div></div></div></a><a class="pagination-related" href="/P/A006/" title="A006【项目管理】计算题专项：从原理到解题"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A006【项目管理】计算题专项：从原理到解题</div></div><div class="info-2"><div class="info-item-1">对软考中项的案例分析大题中的计算题进行专项解析，含6大类计算题型/16道例题</div></div></div></a><a class="pagination-related" href="/P/A005/" title="A005【项目管理】软考中项-项目管理图表速查手册"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086432805_2c80461490482ee5b8267.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A005【项目管理】软考中项-项目管理图表速查手册</div></div><div class="info-2"><div class="info-item-1">软考中项-全知识领域图表/图形工具/模型-分类整理，含图形特征、使用场景、所属过程与高频考点。</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Magiku</div><div class="author-info-description">要是有什么需要交流的，欢迎联系我~</div><div class="site-data"><a href="/summarize/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8F%82%E4%B8%8E%E6%96%B9%E4%B8%80%E8%A7%88"><span class="toc-text">一、参与方一览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E7%AB%8B%E9%A1%B9%E6%89%B9%E5%A4%8D"><span class="toc-text">二、从需求到立项批复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%A6%82%E7%AE%97"><span class="toc-text">三、初步设计与概算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8B%9B%E6%A0%87"><span class="toc-text">四、招标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%AD%BE%E7%BA%A6%E4%B8%8E%E5%BC%80%E5%B7%A5"><span class="toc-text">五、签约与开工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E6%96%BD"><span class="toc-text">六、实施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%88%9D%E9%AA%8C%E4%B8%8E%E8%AF%95%E8%BF%90%E8%A1%8C"><span class="toc-text">七、初验与试运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E7%AB%A3%E5%B7%A5%E9%AA%8C%E6%94%B6"><span class="toc-text">八、竣工验收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%BB%93%E7%AE%97%E3%80%81%E5%86%B3%E7%AE%97%E3%80%81%E5%AE%A1%E8%AE%A1"><span class="toc-text">九、结算、决算、审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E7%A7%BB%E4%BA%A4%E4%B8%8E%E8%BF%90%E7%BB%B4"><span class="toc-text">十、移交与运维</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E7%9B%91%E7%90%86%E8%BF%99%E6%9D%A1%E7%BA%BF"><span class="toc-text">十一、监理这条线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E6%B5%8B%E8%AF%84%E3%80%81%E6%A3%80%E6%B5%8B%E3%80%81%E8%AF%84%E4%BC%B0%E3%80%81%E5%AE%A1%E8%AE%A1%E7%9A%84%E5%88%86%E5%B7%A5"><span class="toc-text">十二、测评、检测、评估、审计的分工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E5%87%A0%E7%BB%84%E5%AE%B9%E6%98%93%E6%B7%B7%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">十三、几组容易混的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E4%B8%A4%E8%BE%B9%E5%86%85%E9%83%A8%E7%9A%84%E5%88%86%E5%B7%A5"><span class="toc-text">十四、两边内部的分工</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B2%E6%96%B9%E5%86%85%E9%83%A8"><span class="toc-text">甲方内部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%99%E6%96%B9%E5%86%85%E9%83%A8"><span class="toc-text">乙方内部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%BE%E5%AD%97%E4%BA%BA%E4%B8%8E%E5%AF%B9%E5%BA%94%E6%96%87%E4%BB%B6"><span class="toc-text">签字人与对应文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E5%88%86%E5%8C%85%E5%92%8C%E5%A4%96%E5%8C%85%EF%BC%9A%E9%93%BE%E6%9D%A1%E5%8F%98%E9%95%BF"><span class="toc-text">十五、分包和外包：链条变长</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%95%E6%9D%A1%E4%BE%9D%E6%8D%AE"><span class="toc-text">法条依据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%9D%A1%E5%8F%98%E9%95%BF%E4%BB%A5%E5%90%8E%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">链条变长以后的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E5%8C%85%E5%AF%B9%E5%88%86%E5%8C%85%E7%9A%84%E7%AE%A1%E7%90%86"><span class="toc-text">总包对分包的管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%88%86%E5%8C%85%E5%AE%89%E6%8E%92%E6%97%B6%E8%A6%81%E6%A0%B8%E5%AF%B9%E4%BB%80%E4%B9%88"><span class="toc-text">判断分包安排时要核对什么</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%E3%80%81%E8%AE%BE%E5%A4%87%E5%8E%82%E5%95%86%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">十六、设备厂商的位置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B2%E4%BE%9B%E8%BF%98%E6%98%AF%E4%B9%99%E4%BE%9B"><span class="toc-text">甲供还是乙供</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%82%E5%95%86%E5%9C%A8%E9%A1%B9%E7%9B%AE%E9%87%8C%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%8A%A8%E4%BD%9C"><span class="toc-text">厂商在项目里的四个动作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%82%E5%95%86%E6%8A%A5%E5%A4%87%E5%88%B6%E5%BA%A6"><span class="toc-text">厂商报备制度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%B4%A7%E7%8E%AF%E8%8A%82"><span class="toc-text">验货环节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%82%E5%95%86%E7%9B%B4%E6%8E%A5%E6%8A%95%E6%A0%87%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">厂商直接投标的情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-text">十七、如何理解实际项目的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%92%8C%E8%BD%AF%E8%80%83%E6%95%99%E6%9D%90%E7%9A%84%E5%AF%B9%E5%BA%94"><span class="toc-text">和软考教材的对应</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Magiku</span></div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="/image/loading.gif" data-lazy-src="/img/badge/github.svg" title="本站项目由Github托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="/image/loading.gif" data-lazy-src="/img/badge/cc-by-nc-sa.svg" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"data-mapping":"pathname","data-reactions-enabled":"1","data-emit-metadata":"0","data-input-position":"top","data-lang":"zh-CN","data-loading":"lazy"}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark_dimmed' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'magiku/magiku.github.io',
+      'data-repo-id': '707233881',
+      'data-category-id': 'DIC_kwDOKieIWc4DIiDR',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script src="/pluginsSrc/pjax/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script id="pjax-tweaks">
+(function () {
+  if (!window.globalFn || !window.globalFn.pjaxSend) return
+  delete window.globalFn.pjaxSend.preloader_init
+})()
+</script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-18</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt="">B000【目录与概述】计算机网络系列</a><div class="blog-slider__text">本文用于归档B系列，也就是计算机网络系列的文章，作为目录与摘要使用；同时，本文也对本系列所有文章作一个前提补充以及个人建议。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086856656_92627294e65e88396a788.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-09-03</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt="">C008【B站优化】为B站的网页全屏模式增加一个侧边评论区</a><div class="blog-slider__text">看B站总想一边看视频，一边看评论；于是手搓了一个脚本，把评论区挪到侧边，同时不影响平时的观看。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086590982_8dc26f66ea716b65e724e.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-03-29</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt="">M001【方法论】从哲学说起：我如何怀疑、如何更新</a><div class="blog-slider__text">本系列第一篇。聊我对哲学的理解、一套能照着做的思辨动作，以及这套动作落到“与人、与世、与己”上是什么样。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-08-23</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt="">C006【开源输入法】RIME输入法使用教程与自制词库</a><div class="blog-slider__text">推荐一款开源的本地输入法，并介绍词库制作以满足输入一些特定词汇</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-06-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt="">C004【正则表达式】B站用弹幕屏蔽正则</a><div class="blog-slider__text">介绍一些B站用的正则表达式与编写规则</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="/lib/swiper/swiper.min.js"></script><script defer data-pjax src="/lib/swiper/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="/lib/wowjs/wow.min.js"></script><script defer src="/lib/wowjs/wow_init.js"></script><!-- hexo injector body_end end --><script id="lazy-preload">
+(function () {
+  var LOOKAHEAD = 1000
+
+  // 没有原生 observer 就完全不干预，交给主题原样处理
+  if (typeof window.IntersectionObserver !== 'function') return
+
+  var observer = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      var entry = entries[i]
+      if (!entry.isIntersecting) continue
+      var img = entry.target
+      observer.unobserve(img)
+      var url = img.getAttribute('data-lazy-src')
+      // 已经被 LazyLoad 赋过 src（或不是懒加载图）就跳过
+      if (!url || img.getAttribute('src') === url) continue
+      img.src = url
+    }
+  }, { rootMargin: LOOKAHEAD + "px 0px" })
+
+  function observeAll () {
+    var imgs = document.querySelectorAll('img[data-lazy-src]')
+    for (var i = 0; i < imgs.length; i++) observer.observe(imgs[i])
+  }
+
+  function start () {
+    observeAll()
+    // pjax 换页后新插入的图片要重新纳入观察
+    if (window.btf && typeof window.btf.addGlobalFn === "function") {
+      window.btf.addGlobalFn("pjaxComplete", observeAll, "lazyPreload")
+    }
+  }
+
+  // 关键：必须等 load 之后才开始。
+  // 在 load 之前给 img 赋 src 会让图片进入文档资源树，拖长 load；
+  // load 之后赋 src 只影响下载时机，不再阻塞任何东西。
+  if (document.readyState === "complete") start()
+  else window.addEventListener("load", start)
+})()
+</script>
+</body></html>

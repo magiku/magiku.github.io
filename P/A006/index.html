@@ -1,0 +1,1401 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>A006【项目管理】计算题专项：从原理到解题 | Magiku's药剂屋</title><meta name="author" content="Magiku"><meta name="copyright" content="Magiku"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对软考中项的案例分析大题中的计算题进行专项解析，含6大类计算题型&#x2F;16道例题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A006【项目管理】计算题专项：从原理到解题">
+<meta property="og:url" content="https://magiku.github.io/P/A006/index.html">
+<meta property="og:site_name" content="Magiku&#39;s药剂屋">
+<meta property="og:description" content="对软考中项的案例分析大题中的计算题进行专项解析，含6大类计算题型&#x2F;16道例题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg">
+<meta property="article:published_time" content="2026-07-21T18:15:27.000Z">
+<meta property="article:modified_time" content="2026-10-21T18:15:29.000Z">
+<meta property="article:author" content="Magiku">
+<meta property="article:tag" content="软考">
+<meta property="article:tag" content="项目管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A006【项目管理】计算题专项：从原理到解题",
+  "url": "https://magiku.github.io/P/A006/",
+  "image": "https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg",
+  "datePublished": "2026-07-21T18:15:27.000Z",
+  "dateModified": "2026-10-21T18:15:29.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Magiku",
+      "url": "https://magiku.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://cloudflare-imgbed-etc.pages.dev/file/1792086658368_35fde8abe3ef661685f2b.png"><link rel="canonical" href="https://magiku.github.io/P/A006/index.html"><link rel="preconnect"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: '/pluginsSrc/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'A006【项目管理】计算题专项：从原理到解题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="/lib/swiper/swiper.min.css"><link rel="stylesheet" href="/lib/swiper/swiperstyle.css"><link rel="stylesheet" href="/lib/wowjs/animate.min.css"><!-- hexo injector head_end end --></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/summarize/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Magiku's药剂屋</span></a><a class="nav-page-title" href="/"><span class="site-name">A006【项目管理】计算题专项：从原理到解题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/summarize/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">A006【项目管理】计算题专项：从原理到解题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-21T18:15:27.000Z" title="发表于 2026-07-22 02:15:27">2026-07-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-10-21T18:15:29.000Z" title="更新于 2026-10-22 02:15:29">2026-10-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><!--
+文章 front matter 字段说明（本注释不会显示在页面上，填写字段后可删除）：
+
+ · title：文章标题
+ · description：文章简介，显示在首页文章卡片与页面 meta 中
+ · cover：文章封面图，显示在首页/归档页文章卡片上，留空则不显示
+ · swiper_index：置顶轮播图顺序，需填非负整数，数字越大越靠前
+ · date：发布时间（新建时自动取当前时间）
+ · updated：更新日期，文章有修改时改成当天
+ · categories：分类，可多级（如「折腾/运维案例」）
+ · tags：标签，可多个
+ · note：备注（选填），显示在归档页该文章条目之后，如「暂不填坑」
+-->
+
+<h2 id="计算题考点与失分点"><a href="#计算题考点与失分点" class="headerlink" title="计算题考点与失分点"></a>计算题考点与失分点</h2><p>软考中项的计算题，几乎全部集中在五个地方：进度（关键路径、三点估算）、成本（挣值）、风险（决策树 EMV）、沟通（渠道数）、采购（合同与自制外购）。常见题型相对集中，题目通常会调整具体数据。</p>
+<p>计算题常见的失分原因有三类：<strong>公式记混</strong>、<strong>题意理解偏了</strong>、<strong>算完没回头验证</strong>。本文按这三个方面展开：</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>先讲“为什么”</strong></td>
+<td>先说明公式对应的问题，再解释公式的构成，便于区分相近公式。</td>
+</tr>
+<tr>
+<td><strong>再讲“怎么算”</strong></td>
+<td>列出解题步骤和书写格式，方便作答时逐项核对。</td>
+</tr>
+<tr>
+<td><strong>最后讲“哪里错”</strong></td>
+<td>每类题后列出常见错误，便于检查计算过程。</td>
+</tr>
+</tbody></table>
+<p>计算题通常有明确的计算过程和结果，适合通过练习稳定掌握；案例分析和论文则还涉及分析与表达。</p>
+<h2 id="一、进度计算：关键路径法"><a href="#一、进度计算：关键路径法" class="headerlink" title="一、进度计算：关键路径法"></a>一、进度计算：关键路径法</h2><p>关键路径法是软考计算题的重要内容，案例题常会涉及。它要解决的是：在“活动有先后依赖”的约束下，算出项目最短要多久，以及每个活动有多少缓冲余地。</p>
+<h3 id="1-关键路径是最长路径的推导"><a href="#1-关键路径是最长路径的推导" class="headerlink" title="1. 关键路径是最长路径的推导"></a>1. 关键路径是最长路径的推导</h3><p>关键路径是项目网络图中持续时间最长的路径，可以从项目活动的依赖关系推导出来：</p>
+<p>项目里所有活动必须<strong>全部完成</strong>项目才算结束。任取一条从起点到终点的路径，这条路径上的活动必须一个接一个做完，所以<strong>项目总工期不可能短于这条路径的长度</strong>。既然对所有路径都成立，那么：</p>
+<blockquote>
+<p><strong>项目工期 ≥ max（每条路径的长度）</strong></p>
+</blockquote>
+<p>如果各活动在满足前置条件后立即开始，项目完成时间由最长路径决定。因此：</p>
+<blockquote>
+<p><strong>项目最短工期 &#x3D; 最长路径长度</strong><br>这条最长路径就叫关键路径，它上面的活动就是关键活动</p>
+</blockquote>
+<blockquote>
+<p><strong>应用</strong><br>当题目问“关键路径变了没有”，可以先比较各条路径的长度，只要看哪条路径最长。当题目说“某活动延误了，关键路径会不会转移”，判断时同样要看：<strong>有没有另一条路径变得比原来那条更长</strong>。</p>
+</blockquote>
+<p>因此，<strong>关键路径可能不止一条</strong>（两条路径一样长），而且<strong>关键路径会随进度变化而转移</strong>（原来的次长路径因延误变长，就成了新的关键路径）。</p>
+<h3 id="2-六个参数的两趟推导"><a href="#2-六个参数的两趟推导" class="headerlink" title="2. 六个参数的两趟推导"></a>2. 六个参数的两趟推导</h3><p>四个时间参数靠两趟推导：<strong>正推</strong>求“最早”，<strong>逆推</strong>求“最迟”。</p>
+<h4 id="正推：从起点往终点走"><a href="#正推：从起点往终点走" class="headerlink" title="正推：从起点往终点走"></a>正推：从起点往终点走</h4><blockquote>
+<p><strong>ES &#x3D; max（所有紧前活动的 EF）</strong><br>一个活动必须等它所有的前置活动都完成才能开始，所以取“最晚完成的那个”，即最大值。起点活动 ES &#x3D; 0。</p>
+<p><strong>EF &#x3D; ES + 工期</strong><br>最早完成 &#x3D; 最早开始 + 干多久</p>
+</blockquote>
+<h4 id="逆推：从终点往起点走"><a href="#逆推：从终点往起点走" class="headerlink" title="逆推：从终点往起点走"></a>逆推：从终点往起点走</h4><blockquote>
+<p><strong>LF &#x3D; min（所有紧后活动的 LS）</strong><br>一个活动必须在它的每一个后续活动“最迟可以开始”之前完成，所以要取最早的那个约束，即最小值。终点活动 LF &#x3D; 项目工期。</p>
+<p><strong>LS &#x3D; LF − 工期</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>为什么一个取 max、一个取 min</strong><br>正推时，“开始”要满足<strong>所有</strong>前置条件，是“都满足了才能动”，所以取最晚满足的那个（max）。<br>逆推时，“完成”要满足<strong>所有</strong>后续要求，是“哪个催得最急就按哪个”，所以取最早催的那个（min）。<br>记住“前置条件全部满足”和“后续约束中最紧的一项”，即可区分正推与逆推。</p>
+</blockquote>
+<h4 id="两个浮动时间：含义完全不同"><a href="#两个浮动时间：含义完全不同" class="headerlink" title="两个浮动时间：含义完全不同"></a>两个浮动时间：含义完全不同</h4><blockquote>
+<p><strong>总浮动时间 TF &#x3D; LS − ES &#x3D; LF − EF</strong><br>在不影响<strong>项目总工期</strong>的前提下，这个活动可以拖多久</p>
+<p><strong>自由浮动时间 FF &#x3D; min（紧后活动的 ES）− 本活动的 EF</strong><br>在不影响<strong>任何紧后活动最早开始</strong>的前提下，这个活动可以拖多久</p>
+</blockquote>
+<p>两者的关系：<strong>FF ≤ TF</strong>。因为“不影响别人”比“不影响总工期”要求更严。一个活动可以拖延很久但不影响总工期（TF 大），却可能一拖就害得下一个活动没法按时开工（FF &#x3D; 0）。</p>
+<h4 id="例-1｜完整网络图计算：工期、关键路径、六参数"><a href="#例-1｜完整网络图计算：工期、关键路径、六参数" class="headerlink" title="例 1｜完整网络图计算：工期、关键路径、六参数"></a>例 1｜完整网络图计算：工期、关键路径、六参数</h4><p>某项目共 6 个活动，依赖关系与工期如下（单位：天）：<br>A 无前置，工期 3；B 前置 A，工期 4；C 前置 A，工期 6；D 前置 B，工期 5；E 前置 C，工期 4；F 前置 D、E，工期 2。<br>求：项目最短工期、关键路径、各活动的总浮动时间与自由浮动时间。</p>
+<p><em>图：已填好六参数的网络图</em></p>
+<div>
+  <svg viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#8fa8bd"/>
+      </marker>
+    </defs>
+    <!-- A -->
+    <rect x="30" y="92" width="104" height="72" rx="6" fill="#e8f3ec" stroke="#1e8a70" stroke-width="1.8"/>
+    <text x="38" y="108" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">0</text>
+    <text x="126" y="108" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">3</text>
+    <text x="38" y="158" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">0</text>
+    <text x="126" y="158" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">3</text>
+    <text x="82" y="130" font-size="13" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">A</text>
+    <text x="82" y="147" font-size="10" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei">3 天</text>
+    <!-- B -->
+    <rect x="186" y="26" width="104" height="72" rx="6" fill="#f4f8fb" stroke="#c9dcec" stroke-width="1.4"/>
+    <text x="194" y="42" font-size="9.5" fill="#8095a8" font-family="Microsoft YaHei">3</text>
+    <text x="282" y="42" font-size="9.5" fill="#8095a8" text-anchor="end" font-family="Microsoft YaHei">7</text>
+    <text x="194" y="92" font-size="9.5" fill="#8095a8" font-family="Microsoft YaHei">4</text>
+    <text x="282" y="92" font-size="9.5" fill="#8095a8" text-anchor="end" font-family="Microsoft YaHei">8</text>
+    <text x="238" y="64" font-size="13" fill="#3c5063" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">B</text>
+    <text x="238" y="81" font-size="10" fill="#8095a8" text-anchor="middle" font-family="Microsoft YaHei">4 天</text>
+    <!-- C -->
+    <rect x="186" y="162" width="104" height="72" rx="6" fill="#e8f3ec" stroke="#1e8a70" stroke-width="1.8"/>
+    <text x="194" y="178" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">3</text>
+    <text x="282" y="178" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">9</text>
+    <text x="194" y="228" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">3</text>
+    <text x="282" y="228" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">9</text>
+    <text x="238" y="200" font-size="13" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">C</text>
+    <text x="238" y="217" font-size="10" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei">6 天</text>
+    <!-- D -->
+    <rect x="346" y="26" width="104" height="72" rx="6" fill="#f4f8fb" stroke="#c9dcec" stroke-width="1.4"/>
+    <text x="354" y="42" font-size="9.5" fill="#8095a8" font-family="Microsoft YaHei">7</text>
+    <text x="442" y="42" font-size="9.5" fill="#8095a8" text-anchor="end" font-family="Microsoft YaHei">12</text>
+    <text x="354" y="92" font-size="9.5" fill="#8095a8" font-family="Microsoft YaHei">8</text>
+    <text x="442" y="92" font-size="9.5" fill="#8095a8" text-anchor="end" font-family="Microsoft YaHei">13</text>
+    <text x="398" y="64" font-size="13" fill="#3c5063" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">D</text>
+    <text x="398" y="81" font-size="10" fill="#8095a8" text-anchor="middle" font-family="Microsoft YaHei">5 天</text>
+    <!-- E -->
+    <rect x="346" y="162" width="104" height="72" rx="6" fill="#e8f3ec" stroke="#1e8a70" stroke-width="1.8"/>
+    <text x="354" y="178" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">9</text>
+    <text x="442" y="178" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">13</text>
+    <text x="354" y="228" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">9</text>
+    <text x="442" y="228" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">13</text>
+    <text x="398" y="200" font-size="13" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">E</text>
+    <text x="398" y="217" font-size="10" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei">4 天</text>
+    <!-- F -->
+    <rect x="512" y="92" width="104" height="72" rx="6" fill="#e8f3ec" stroke="#1e8a70" stroke-width="1.8"/>
+    <text x="520" y="108" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">13</text>
+    <text x="608" y="108" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">15</text>
+    <text x="520" y="158" font-size="9.5" fill="#2d7a63" font-family="Microsoft YaHei">13</text>
+    <text x="608" y="158" font-size="9.5" fill="#2d7a63" text-anchor="end" font-family="Microsoft YaHei">15</text>
+    <text x="564" y="130" font-size="13" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei" font-weight="bold">F</text>
+    <text x="564" y="147" font-size="10" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei">2 天</text>
+    <!-- edges -->
+    <path d="M134,116 L160,116 L160,62 L182,62" stroke="#8fa8bd" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+    <path d="M134,140 L160,140 L160,198 L182,198" stroke="#8fa8bd" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+    <path d="M290,62 L342,62" stroke="#8fa8bd" stroke-width="1.5" marker-end="url(#a1)"/>
+    <path d="M290,198 L342,198" stroke="#8fa8bd" stroke-width="1.5" marker-end="url(#a1)"/>
+    <path d="M450,62 L480,62 L480,116 L508,116" stroke="#8fa8bd" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+    <path d="M450,198 L480,198 L480,140 L508,140" stroke="#8fa8bd" stroke-width="1.5" fill="none" marker-end="url(#a1)"/>
+    <text x="30" y="256" font-size="10.5" fill="#8095a8" font-family="Microsoft YaHei">节点四角：左上 ES · 右上 EF · 左下 LS · 右下 LF　　绿色节点 = 关键活动</text>
+  </svg>
+</div>
+
+
+
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>先列所有路径，直接看出关键路径。</strong><br>A→B→D→F：3+4+5+2 &#x3D; <strong>14</strong><br>A→C→E→F：3+6+4+2 &#x3D; <strong>15</strong><br>最长是 15，所以<strong>项目最短工期 15 天</strong>，关键路径 <strong>A→C→E→F</strong>。<br><em>路径少的时候，路径较少时，可以先比较路径长度，再用六参数计算核对结果。</em></li>
+<li><strong>正推求 ES &#x2F; EF。</strong><br>A：ES &#x3D; 0，EF &#x3D; 0+3 &#x3D; 3<br>B：ES &#x3D; A 的 EF &#x3D; 3，EF &#x3D; 3+4 &#x3D; 7<br>C：ES &#x3D; 3，EF &#x3D; 3+6 &#x3D; 9<br>D：ES &#x3D; B 的 EF &#x3D; 7，EF &#x3D; 7+5 &#x3D; 12<br>E：ES &#x3D; C 的 EF &#x3D; 9，EF &#x3D; 9+4 &#x3D; 13<br>F：ES &#x3D; max(D 的 12, E 的 13) &#x3D; <strong>13</strong>，EF &#x3D; 13+2 &#x3D; 15<br>EF 的最大值为 15，与路径法结果一致。</li>
+<li><strong>逆推求 LS &#x2F; LF</strong>。令 F 的 LF &#x3D; 15。<br>F：LF &#x3D; 15，LS &#x3D; 15−2 &#x3D; 13<br>D：LF &#x3D; F 的 LS &#x3D; 13，LS &#x3D; 13−5 &#x3D; 8<br>E：LF &#x3D; 13，LS &#x3D; 13−4 &#x3D; 9<br>B：LF &#x3D; D 的 LS &#x3D; 8，LS &#x3D; 8−4 &#x3D; 4<br>C：LF &#x3D; E 的 LS &#x3D; 9，LS &#x3D; 9−6 &#x3D; 3<br>A：LF &#x3D; min(B 的 4, C 的 3) &#x3D; <strong>3</strong>，LS &#x3D; 3−3 &#x3D; 0</li>
+<li><strong>算浮动时间。</strong><br>TF &#x3D; LS − ES：A 0，B 4−3&#x3D;1，C 0，D 8−7&#x3D;1，E 0，F 0<br>FF &#x3D; min(紧后 ES) − 本活动 EF：<br>A：min(3,3) − 3 &#x3D; 0　B：7 − 7 &#x3D; 0　C：9 − 9 &#x3D; 0<br>D：13 − 12 &#x3D; <strong>1</strong>　E：13 − 13 &#x3D; 0　F：15 − 15 &#x3D; 0</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：工期 15 天；关键路径 A→C→E→F；关键活动 A、C、E、F 的 TF 均为 0；B 的 TF &#x3D; 1、FF &#x3D; 0；D 的 TF &#x3D; 1、FF &#x3D; 1。</p>
+</blockquote>
+<blockquote>
+<p><strong>注意 B 这个活动</strong><br>B 的 <strong>TF &#x3D; 1 但 FF &#x3D; 0</strong>，这是最容易被忽略的组合。含义是：B 拖延 1 天不会让整个项目晚交（总工期还有 1 天余量），但它<strong>一天都不能拖</strong>再拖就会推迟 D 的最早开始。因此，B 的延误可能影响后续活动的开始时间，但在总浮动时间范围内不会推迟项目完工。</p>
+</blockquote>
+<h3 id="3-工期压缩：不是压最长的就行"><a href="#3-工期压缩：不是压最长的就行" class="headerlink" title="3. 工期压缩：不是压最长的就行"></a>3. 工期压缩：不是压最长的就行</h3><p>题目要求“把工期从 15 天压到 13 天，成本最低”，考的是<strong>赶工（Crashing）</strong>。判断时依次考虑以下几点：</p>
+<ul>
+<li>要缩短总工期，需要缩短当前的<strong>关键路径</strong>。缩短非关键活动通常不会立即改变项目工期，因为工期取决于最长路径。</li>
+<li>关键路径上可能有很多活动，优先压<strong>单位时间成本最低</strong>的那个（成本斜率 &#x3D; 赶工成本 ÷ 可压缩天数）。</li>
+<li>每压一天，<strong>必须重新检查关键路径有没有变</strong>。因为原关键路径变短后，次长路径可能变成新的关键路径，此时再压原来的活动就白花钱了。</li>
+<li>一旦出现<strong>多条关键路径</strong>，要同时压缩每一条（每条各压一天），否则总工期不会变，成本却翻倍。</li>
+</ul>
+<h4 id="例-2｜赶工决策：压到-13-天的最低成本"><a href="#例-2｜赶工决策：压到-13-天的最低成本" class="headerlink" title="例 2｜赶工决策：压到 13 天的最低成本"></a>例 2｜赶工决策：压到 13 天的最低成本</h4><p>承接例 1，关键路径 A→C→E→F 共 15 天，次长路径 A→B→D→F 共 14 天。各活动的可压缩天数与赶工成本如下。若要求 13 天完工，最低赶工成本是多少？</p>
+<table>
+<thead>
+<tr>
+<th>活动</th>
+<th>正常工期</th>
+<th>最多可压</th>
+<th>每天赶工成本</th>
+<th>是否在关键路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>3</td>
+<td>1</td>
+<td>2 万</td>
+<td>是</td>
+</tr>
+<tr>
+<td>B</td>
+<td>4</td>
+<td>2</td>
+<td>4 万</td>
+<td>否</td>
+</tr>
+<tr>
+<td>C</td>
+<td>6</td>
+<td>2</td>
+<td>3 万</td>
+<td>是</td>
+</tr>
+<tr>
+<td>D</td>
+<td>5</td>
+<td>1</td>
+<td>6 万</td>
+<td>否</td>
+</tr>
+<tr>
+<td>E</td>
+<td>4</td>
+<td>2</td>
+<td>5 万</td>
+<td>是</td>
+</tr>
+<tr>
+<td>F</td>
+<td>2</td>
+<td>1</td>
+<td>8 万</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>关键路径上按成本从低到高排</strong>：A(2) &lt; C(3) &lt; E(5) &lt; F(8)。B、D 不在关键路径上，先不考虑。</li>
+<li><strong>压 A 一天</strong>（花 2 万）。关键路径 15→14。<br>此时检查次长路径：A→B→D→F 原为 14，A 也在这条路径上，所以同步变成 13。<br>两条路径分别是 14 和 13，<strong>关键路径仍是 A→C→E→F</strong>，没变。</li>
+<li><strong>再压一天，选 C</strong>（花 3 万，A 已压到上限）。关键路径 14→13。<br>此时 A→B→D→F &#x3D; 13，A→C→E→F &#x3D; 13，<strong>两条路径同时成为关键路径</strong>。</li>
+<li><strong>目标达成，停止</strong>。累计 2 + 3 &#x3D; <strong>5 万</strong>。</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：压 A 一天、C 一天，总成本 <strong>5 万元</strong>，工期降至 13 天。<br><strong>延伸</strong>：若要求 12 天，就必须<strong>同时</strong>压缩两条关键路径。可选组合是「C 再压 1 天 + D 压 1 天」＝ 3 + 6 &#x3D; 9 万，或「E 压 1 天 + B 压 1 天」＝ 5 + 4 &#x3D; 9 万，两者相同，此时成本从 5 万涨到 14 万——<strong>每多压一天，边际成本陡增</strong>，这说明随着工期继续压缩，新增的赶工成本可能明显上升。</p>
+</blockquote>
+<blockquote>
+<p><strong>常见错误</strong></p>
+<ul>
+<li>压完不检查关键路径是否转移，继续压原活动——白花钱，工期不动。</li>
+<li>出现两条关键路径后只压一条，以为工期会缩短。</li>
+<li>只压缩非关键活动（如 B、D），通常无法缩短当前项目工期。</li>
+</ul>
+</blockquote>
+<h2 id="二、进度计算：三点估算与概率"><a href="#二、进度计算：三点估算与概率" class="headerlink" title="二、进度计算：三点估算与概率"></a>二、进度计算：三点估算与概率</h2><p>当工期不确定时，用“乐观、最可能、悲观”三个估计值，推出一个期望工期和一个波动范围，再据此算“按期完工的概率”。这部分主要考查公式运用，以及对正态分布概率的理解。</p>
+<h3 id="1-三个公式的构成"><a href="#1-三个公式的构成" class="headerlink" title="1. 三个公式的构成"></a>1. 三个公式的构成</h3><blockquote>
+<p><strong>期望工期 tE &#x3D; (O + 4M + P) &#x2F; 6</strong><br>O 乐观、M 最可能、P 悲观。分母 6 &#x3D; 1+4+1，即三个估计值的加权平均</p>
+<p><strong>标准差 σ &#x3D; (P − O) &#x2F; 6</strong><br>用乐观与悲观的差距衡量不确定性，除以 6 是因为正态分布约 99.7% 落在 ±3σ 内</p>
+<p><strong>方差 σ² &#x3D; [(P − O) &#x2F; 6]²</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>为什么 M 的权重是 4</strong><br>三点估算假设工期服从一个<strong>单峰的偏态分布</strong>（β 分布），最可能值 M 是峰值所在，可信度最高；O 和 P 是两端的极端情况，出现的可能性低。用 1:4:1 的权重，既让 M 主导结果，又不完全忽略两端——这是“加权平均”的直观体现。</p>
+<p>也正因为权重是 1:4:1，<strong>tE 一定落在 O 和 P 之间</strong>，且离 M 更近。计算后可用这一性质检查结果。</p>
+</blockquote>
+<h3 id="2-多条路径的合成：方差相加，不是标准差相加"><a href="#2-多条路径的合成：方差相加，不是标准差相加" class="headerlink" title="2. 多条路径的合成：方差相加，不是标准差相加"></a>2. 多条路径的合成：方差相加，不是标准差相加</h3><p>这里需要特别区分方差与标准差。当一条路径由多个活动串联组成时：</p>
+<blockquote>
+<p><strong>路径期望工期 &#x3D; 各活动 tE 之和</strong><br>期望值可以直接相加</p>
+<p><strong>路径方差 &#x3D; 各活动 σ² 之和</strong><br>注意是方差相加</p>
+<p><strong>路径标准差 &#x3D; √(各活动 σ² 之和)</strong><br>最后开根号，才得到标准差</p>
+</blockquote>
+<blockquote>
+<p><strong>为什么不能直接把标准差相加</strong><br>标准差是“开了根号”的量，不能线性叠加；能叠加的是方差（标准差的平方）。<br>多个独立随机变量相加时，总方差等于各自方差之和；因此，总标准差不能直接用各活动标准差相加得到。数学上，独立随机变量之和的方差等于方差之和，这条性质决定了必须“先平方、相加、再开方”。</p>
+<p><strong>如果直接把 σ 相加，答案会系统性偏大</strong>，后面查概率就会偏小。这是常见的失分点。</p>
+</blockquote>
+<h3 id="3-计算概率：常用区间"><a href="#3-计算概率：常用区间" class="headerlink" title="3. 计算概率：常用区间"></a>3. 计算概率：常用区间</h3><p>假设工期服从正态分布，落在各区间内的概率是固定的：</p>
+<p><em>图：正态分布下常用的概率区间</em></p>
+<div>
+  <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e8a70" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#1e8a70" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    <!-- baseline -->
+    <line x1="50" y1="190" x2="640" y2="190" stroke="#b6c8d8" stroke-width="1.2"/>
+    <!-- curve -->
+    <path d="M60,190 C150,188 200,176 250,132 C290,96 310,52 345,52 C380,52 400,96 440,132 C490,176 540,188 630,190"
+          fill="none" stroke="#1e8a70" stroke-width="2.4"/>
+    <path d="M60,190 C150,188 200,176 250,132 C290,96 310,52 345,52 C380,52 400,96 440,132 C490,176 540,188 630,190 L630,190 L60,190 Z"
+          fill="url(#g1)"/>
+    <!-- center -->
+    <line x1="345" y1="52" x2="345" y2="190" stroke="#1e8a70" stroke-width="1.2"/>
+    <text x="345" y="208" font-size="11" fill="#1e8a70" text-anchor="middle" font-family="Microsoft YaHei">tE</text>
+    <!-- sigma ticks -->
+    <g stroke="#c9dcec" stroke-width="1" stroke-dasharray="3 3">
+      <line x1="235" y1="120" x2="235" y2="190"/>
+      <line x1="455" y1="120" x2="455" y2="190"/>
+      <line x1="125" y1="172" x2="125" y2="190"/>
+      <line x1="565" y1="172" x2="565" y2="190"/>
+    </g>
+    <g font-size="10.5" fill="#8095a8" font-family="Microsoft YaHei" text-anchor="middle">
+      <text x="235" y="208">−1σ</text>
+      <text x="455" y="208">+1σ</text>
+      <text x="125" y="208">−2σ</text>
+      <text x="565" y="208">+2σ</text>
+    </g>
+    <!-- pct labels -->
+    <text x="345" y="222" font-size="11.5" fill="#2d7a63" text-anchor="middle" font-family="Microsoft YaHei">从 tE 开始往两侧每一个σ区间的概率分别是 34.13%、13.6%、2.13%</text>
+    <text x="90" y="60" font-size="11" fill="#2d7a63" font-family="Microsoft YaHei">±1σ → 68.26%</text>
+    <text x="90" y="78" font-size="11" fill="#2d7a63" font-family="Microsoft YaHei">±2σ → 95.46%</text>
+    <text x="90" y="96" font-size="11" fill="#2d7a63" font-family="Microsoft YaHei">±3σ → 99.73%</text>
+  </svg>
+</div>
+
+
+
+
+<table>
+<thead>
+<tr>
+<th>要求的时间点</th>
+<th>换算成 z 值</th>
+<th>完工概率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tE − 3σ</td>
+<td>−3</td>
+<td>0.13%</td>
+</tr>
+<tr>
+<td>tE − 2σ</td>
+<td>−2</td>
+<td>2.28%</td>
+</tr>
+<tr>
+<td>tE − 1σ</td>
+<td>−1</td>
+<td>15.87%</td>
+</tr>
+<tr>
+<td><strong>tE</strong></td>
+<td>0</td>
+<td><strong>50%</strong></td>
+</tr>
+<tr>
+<td>tE + 1σ</td>
+<td>+1</td>
+<td><strong>84.13%</strong></td>
+</tr>
+<tr>
+<td>tE + 2σ</td>
+<td>+2</td>
+<td>97.73%</td>
+</tr>
+<tr>
+<td>tE + 3σ</td>
+<td>+3</td>
+<td>99.87%</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>怎么用</strong><br>z &#x3D; (要求工期 − tE) &#x2F; σ。算出 z 后对照上表。题目常使用 z &#x3D; 0、±1、±2、±3 等数值；若出现其他数值，则需要结合题目提供的正态分布表计算。<br>如果 z 算出来是 1.5 这类数，说明题目可能给了分布表，或者实际在考“落在某区间内的概率”（用两个累计值相减）。</p>
+</blockquote>
+<h4 id="例-3｜单活动三点估算"><a href="#例-3｜单活动三点估算" class="headerlink" title="例 3｜单活动三点估算"></a>例 3｜单活动三点估算</h4><p>某活动乐观估计 3 天，最可能 6 天，悲观 15 天。求期望工期、标准差，以及该活动在 10 天内完成的概率。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>tE &#x3D; (3 + 4×6 + 15) &#x2F; 6 &#x3D; (3 + 24 + 15) &#x2F; 6 &#x3D; 42 &#x2F; 6 &#x3D; <strong>7 天</strong><br><em>检查：7 确实落在 3 和 15 之间且靠近 6，合理。</em></li>
+<li>σ &#x3D; (15 − 3) &#x2F; 6 &#x3D; 12 &#x2F; 6 &#x3D; <strong>2 天</strong></li>
+<li>z &#x3D; (10 − 7) &#x2F; 2 &#x3D; <strong>1.5</strong>。<br>1.5σ 不在标准值上，用 1σ 和 2σ 夹逼：84.13% &lt; 概率 &lt; 97.73%，大致在 93% 左右。</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：tE &#x3D; 7 天，σ &#x3D; 2 天，10 天内完成概率约 <strong>93%</strong>（严格值 93.32%）。</p>
+</blockquote>
+<h4 id="例-4｜路径合成-概率（考点核心）"><a href="#例-4｜路径合成-概率（考点核心）" class="headerlink" title="例 4｜路径合成 + 概率（考点核心）"></a>例 4｜路径合成 + 概率（考点核心）</h4><p>某关键路径由三个活动串联组成，各活动三点估计如下。求整条路径的期望工期与标准差，以及项目在 23 天内完工的概率。</p>
+<table>
+<thead>
+<tr>
+<th>活动</th>
+<th>tO</th>
+<th>tM</th>
+<th>tP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>3</td>
+<td>6</td>
+<td>15</td>
+</tr>
+<tr>
+<td>B</td>
+<td>2</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr>
+<td>C</td>
+<td>4</td>
+<td>7</td>
+<td>16</td>
+</tr>
+</tbody></table>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><p><strong>逐个活动算 tE 和 σ：</strong><br>A：(3+24+15)&#x2F;6 &#x3D; 7，σ &#x3D; (15−3)&#x2F;6 &#x3D; 2<br>B：(2+20+8)&#x2F;6 &#x3D; 5，σ &#x3D; (8−2)&#x2F;6 &#x3D; 1<br>C：(4+28+16)&#x2F;6 &#x3D; 8，σ &#x3D; (16−4)&#x2F;6 &#x3D; 2</p>
+</li>
+<li><p><strong>期望工期相加</strong>：7 + 5 + 8 &#x3D; <strong>20 天</strong></p>
+</li>
+<li><p><strong>求项目标准差，活动方差相加再开方</strong>：<br>σ² &#x3D; 4 + 1 + 4 &#x3D; 9<br>σ &#x3D; √9 &#x3D; <strong>3 天</strong></p>
+<blockquote>
+<p><em>如果错误地把标准差相加，会得到 2+1+2 &#x3D; 5，后面的概率就会严重偏低。</em></p>
+</blockquote>
+</li>
+<li><p><strong>算 z</strong>：z &#x3D; (23 − 20) &#x2F; 3 &#x3D; <strong>1</strong></p>
+</li>
+<li><p>z &#x3D; 1 对应概率 <strong>84.13%</strong>。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：期望工期 20 天，标准差 3 天，23 天内完工概率 <strong>84.13%</strong>。</p>
+<p>也可以得出标准差后，易得题目要求的23天内完工，就是期望tE+σ，即50%+34.13%&#x3D;<strong>84.13%</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>三点估算的坑</strong></p>
+<ul>
+<li><strong>标准差直接相加</strong>——必须先平方求和再开方，这是最高频错误。</li>
+<li><strong>只算关键路径的方差</strong>：如果题目给出多条路径，不确定性最大的路径可能不是期望工期最长的路径。严谨做法是对每条路径都算，取“概率意义下的关键路径”。</li>
+<li><strong>把 tE 当成“一定能在 tE 内完成”</strong>：tE 对应的概率只有 50%，正好一半一半。</li>
+</ul>
+</blockquote>
+<h2 id="三、成本计算：挣值分析"><a href="#三、成本计算：挣值分析" class="headerlink" title="三、成本计算：挣值分析"></a>三、成本计算：挣值分析</h2><p>挣值是软考最稳定的计算考点，几乎每年案例大题必有一问。公式不多，但初学者常年在 CV、SV 的正负号和 CPI 的分子分母上打转。根源在于没搞清三个量的定义。</p>
+<h3 id="1-三个量各自的含义"><a href="#1-三个量各自的含义" class="headerlink" title="1. 三个量各自的含义"></a>1. 三个量各自的含义</h3><p>先看三个英文全称，它们的信息量比中文译名大得多：</p>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>英文</th>
+<th>它到底在量什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PV</strong></td>
+<td>Planned Value<br>计划价值</td>
+<td>按计划，<strong>到现在这个时点</strong>应该完成多少工作，折成钱是多少</td>
+</tr>
+<tr>
+<td><strong>EV</strong></td>
+<td>Earned Value<br>挣值</td>
+<td><strong>实际已经完成</strong>的工作，按预算价折成钱是多少</td>
+</tr>
+<tr>
+<td><strong>AC</strong></td>
+<td>Actual Cost<br>实际成本</td>
+<td>完成这些工作，<strong>实际花掉</strong>了多少钱</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>最关键的一点</strong><br><strong>EV 和 PV 都用“预算单价”，只有 AC 用“实际单价”。</strong></p>
+<p>假设 EV 也用实际价格计算。那么 EV 就等于 AC 了——你花了 100 万，完成的活就“值” 100 万，永远不会有偏差。这样一来，“活干得少”和“东西买贵了”两种情况就混在一起，完全分不清。</p>
+<p>统一用预算价折算，EV 才<strong>纯粹反映工作量</strong>：<br>· EV 和 PV 比 → 只差在“工作量”，比出来是<strong>进度</strong>问题<br>· EV 和 AC 比 → 工作量相同，差在“单价”，比出来是<strong>成本</strong>问题</p>
+<p>这就是为什么两个偏差公式看起来对称，却分别指向进度和成本。</p>
+</blockquote>
+<h3 id="2-两个偏差、两个指数"><a href="#2-两个偏差、两个指数" class="headerlink" title="2. 两个偏差、两个指数"></a>2. 两个偏差、两个指数</h3><blockquote>
+<p><strong>CV 成本偏差 &#x3D; EV − AC</strong><br>同样这些活，预算认为值 EV，实际花了 AC。差值为正 &#x3D; 花得比预算少 &#x3D; 节约</p>
+<p><strong>SV 进度偏差 &#x3D; EV − PV</strong><br>计划该完成 PV，实际只完成 EV。差值为正 &#x3D; 干得比计划多 &#x3D; 提前</p>
+<p><strong>CPI 成本绩效指数 &#x3D; EV &#x2F; AC</strong><br>每花 1 元钱，挣回多少元的预算价值。&gt;1 说明“买得便宜”</p>
+<p><strong>SPI 进度绩效指数 &#x3D; EV &#x2F; PV</strong><br>每计划 1 元的活，实际干了多少。&gt;1 说明“干得快”</p>
+</blockquote>
+<p><em>图：挣值三条曲线。看 EV 与谁的距离，就知道哪方面出了问题</em></p>
+<div>
+  <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+    <line x1="80" y1="228" x2="630" y2="228" stroke="#b6c8d8" stroke-width="1.2"/>
+    <line x1="80" y1="26" x2="80" y2="228" stroke="#b6c8d8" stroke-width="1.2"/>
+    <text x="36" y="40" font-size="11" fill="#8095a8" font-family="Microsoft YaHei">金额</text>
+    <text x="600" y="250" font-size="11" fill="#8095a8" font-family="Microsoft YaHei">时间</text>
+    <!-- grid -->
+    <g stroke="#f4f8fb" stroke-width="1">
+      <line x1="80" y1="176" x2="630" y2="176"/><line x1="80" y1="124" x2="630" y2="124"/>
+      <line x1="80" y1="72" x2="630" y2="72"/>
+    </g>
+    <!-- PV -->
+    <path d="M80,228 C170,222 230,198 290,164 C350,130 410,94 480,70 C530,52 580,42 630,38"
+          fill="none" stroke="#1e4a73" stroke-width="2.4"/>
+    <!-- AC -->
+    <path d="M80,228 C170,220 230,192 290,154 C350,116 410,78 480,56 C530,42 580,34 630,30"
+          fill="none" stroke="#c0392b" stroke-width="2.4"/>
+    <!-- EV -->
+    <path d="M80,228 C170,224 230,208 290,180 C350,152 410,122 480,102 C530,88 580,82 630,78"
+          fill="none" stroke="#1e8a70" stroke-width="2.4"/>
+    <!-- now -->
+    <line x1="410" y1="26" x2="410" y2="228" stroke="#8095a8" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="414" y="20" font-size="10.5" fill="#8095a8" font-family="Microsoft YaHei">数据日期</text>
+    <!-- points -->
+    <circle cx="410" cy="94" r="4" fill="#1e4a73"/>
+    <circle cx="410" cy="78" r="4" fill="#c0392b"/>
+    <circle cx="410" cy="122" r="4" fill="#1e8a70"/>
+    <!-- braces -->
+    <line x1="418" y1="94" x2="418" y2="122" stroke="#c0392b" stroke-width="1.2"/>
+    <text x="424" y="112" font-size="10.5" fill="#c0392b" font-family="Microsoft YaHei">SV = EV − PV</text>
+    <line x1="418" y1="78" x2="418" y2="122" stroke="#7d5ba6" stroke-width="1.2" stroke-dasharray="2 2"/>
+    <!-- legend -->
+    <g font-family="Microsoft YaHei" font-size="11.5">
+      <rect x="470" y="150" width="14" height="3" fill="#1e4a73"/>
+      <text x="490" y="155" fill="#1e4a73">PV</text>
+      <rect x="470" y="170" width="14" height="3" fill="#1e8a70"/>
+      <text x="490" y="175" fill="#1e8a70">EV</text>
+      <rect x="470" y="190" width="14" height="3" fill="#c0392b"/>
+      <text x="490" y="195" fill="#c0392b">AC</text>
+    </g>
+    <text x="90" y="266" font-size="10.5" fill="#8095a8" font-family="Microsoft YaHei">图中状态：EV 低于 PV（进度落后），AC 高于 EV（成本超支）</text>
+  </svg>
+</div>
+
+
+
+<h3 id="3-预测完工的三种情形"><a href="#3-预测完工的三种情形" class="headerlink" title="3. 预测完工的三种情形"></a>3. 预测完工的三种情形</h3><p>预测类公式（EAC、ETC、VAC、TCPI）看着多，主线只有一条：<strong>剩下的活要花多少钱</strong>。而“剩下的活值多少”是确定的（BAC − EV），不确定的只是“未来效率如何”。三种情形就是对未来的三种假设。</p>
+<blockquote>
+<p><strong>情形一：非典型偏差</strong><br>假设：目前的偏差是偶发事件，<strong>未来会恢复正常</strong>，剩余工作按原预算价完成。ETC &#x3D; BAC − EV<br><strong>EAC &#x3D; AC + ETC &#x3D; AC + (BAC − EV)</strong></p>
+<p><strong>情形二：典型偏差</strong><br>假设：偏差是系统性的，无法纠偏，<strong>未来仍保持当前效率</strong>。这是考试默认情形<br><strong>EAC &#x3D; BAC &#x2F; CPI</strong></p>
+<blockquote>
+<p>CPI 的含义是“<strong>每花 1 元，能挣回 CPI 元的预算价值</strong>”。效率保持不变时，把需要的钱（即EAC）记作 X：<br>则 X × CPI &#x3D; BAC<br>可推出 X &#x3D; BAC &#x2F; CPI</p>
+<p>或者换个思路，CPI &#x3D; EV &#x2F; AC 。完工时，EV&#x3D;BAC，AC&#x3D;EAC，则完工时的 CPI &#x3D; BAC &#x2F; EAC ，因而 EAC &#x3D; BAC &#x2F; CPI</p>
+<p>预测工期 &#x3D; 计划工期 &#x2F; SPI 也是同一个逻辑，总工作量除以单位时间的产出率。</p>
+</blockquote>
+<p><strong>情形三：进度也影响成本</strong><br>假设：成本和进度双双失控，剩余工作既慢又贵。教材正文只给了情形一和情形二两条公式，情形三是通用补充，题干明确提到“进度也影响成本”时才用。（一般不考）<br><strong>EAC &#x3D; AC + (BAC − EV) &#x2F; (CPI × SPI)</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>ETC 完工尚需估算 &#x3D; EAC − AC</strong><br>总共还要花多少 &#x3D; 最终总共要花 − 已经花了</p>
+<p><strong>VAC 完工偏差 &#x3D; BAC − EAC</strong><br>最终会超支还是节约。为负 &#x3D; 超支</p>
+<p><strong>TCPI 完工尚需绩效指数 &#x3D; (BAC − EV) &#x2F; (BAC − AC)</strong><br>剩余工作量 ÷ 剩余预算。&gt;1 表示剩余的钱不够干剩余的活，必须提高效率</p>
+</blockquote>
+<blockquote>
+<p><strong>TCPI 的分子分母</strong><br>分子 (BAC − EV) 是<strong>还剩多少活</strong>（按预算价）；分母 (BAC − AC) 是<strong>还剩多少钱</strong>。两个一除，就是“以后每 1 元钱必须干出多少活”。<br>如果 TCPI &gt; 1，说明按原预算已经不可能完成，除非效率比现在更高——而现实中效率往往只会持平或更低，所以 TCPI 明显大于 1 时，实务上通常意味着<strong>必须申请追加预算或缩减范围</strong>。</p>
+</blockquote>
+<h4 id="例-5｜挣值全套计算（案例题标准形态）"><a href="#例-5｜挣值全套计算（案例题标准形态）" class="headerlink" title="例 5｜挣值全套计算（案例题标准形态）"></a>例 5｜挣值全套计算（案例题标准形态）</h4><p>某系统集成项目总预算 BAC &#x3D; 1200 万元，计划工期 12 个月。项目进行到第 6 个月末时统计：按计划应完成 50% 的工作，实际只完成 40%；已发生实际成本 600 万元。<br>求：(1) PV、EV、AC；(2) CV、SV、CPI、SPI 并判断状态；(3) 若偏差将持续，求 EAC、ETC、VAC 及预测工期；(4) 若剩余工作恢复正常效率，求 EAC；(5) 按原预算完工的 TCPI。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>先把三个量翻译成数字。</strong><br>PV &#x3D; 计划完成比例 × BAC &#x3D; 50% × 1200 &#x3D; <strong>600 万</strong><br>EV &#x3D; 实际完成比例 × BAC &#x3D; 40% × 1200 &#x3D; <strong>480 万</strong><br>AC &#x3D; <strong>600 万</strong>（题目直接给出）<br><em>注意 EV 用的是 BAC 乘以完成比例，也就是预算单价，不是实际花的钱。</em></li>
+<li><strong>偏差与指数。</strong><br>CV &#x3D; EV − AC &#x3D; 480 − 600 &#x3D; <strong>−120 万</strong>　→ 负值，<strong>成本超支</strong><br>SV &#x3D; EV − PV &#x3D; 480 − 600 &#x3D; <strong>−120 万</strong>　→ 负值，<strong>进度落后</strong><br>CPI &#x3D; EV &#x2F; AC &#x3D; 480 &#x2F; 600 &#x3D; <strong>0.8</strong>　→ 小于 1，每花 1 元只挣回 0.8 元<br>SPI &#x3D; EV &#x2F; PV &#x3D; 480 &#x2F; 600 &#x3D; <strong>0.8</strong>　→ 小于 1，只达到计划的 80%</li>
+<li><strong>典型偏差预测。</strong><br>EAC &#x3D; BAC &#x2F; CPI &#x3D; 1200 &#x2F; 0.8 &#x3D; <strong>1500 万</strong><br>ETC &#x3D; EAC − AC &#x3D; 1500 − 600 &#x3D; <strong>900 万</strong><br>VAC &#x3D; BAC − EAC &#x3D; 1200 − 1500 &#x3D; <strong>−300 万</strong>（预计超支 300 万）<br>预测工期 &#x3D; 计划工期 &#x2F; SPI &#x3D; 12 &#x2F; 0.8 &#x3D; <strong>15 个月</strong></li>
+<li><strong>非典型偏差预测。</strong><br>ETC &#x3D; BAC − EV &#x3D; 1200 − 480 &#x3D; 720 万<br>EAC &#x3D; AC + ETC &#x3D; 600 + 720 &#x3D; <strong>1320 万</strong><br>VAC &#x3D; 1200 − 1320 &#x3D; −120 万</li>
+<li><strong>TCPI。</strong><br>TCPI &#x3D; (BAC − EV) &#x2F; (BAC − AC) &#x3D; (1200 − 480) &#x2F; (1200 − 600) &#x3D; 720 &#x2F; 600 &#x3D; <strong>1.2</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：CV &#x3D; −120 万、SV &#x3D; −120 万，项目<strong>成本超支且进度落后</strong>；CPI &#x3D; SPI &#x3D; 0.8；典型偏差下 EAC &#x3D; 1500 万、ETC &#x3D; 900 万、VAC &#x3D; −300 万、预计 15 个月完工；非典型偏差下 EAC &#x3D; 1320 万；TCPI &#x3D; 1.2，意味着剩余阶段每花 1 元必须干出 1.2 元的活，<strong>难度较大，需采取纠偏措施</strong>。</p>
+</blockquote>
+<blockquote>
+<p><strong>挣值的高频错误</strong></p>
+<ul>
+<li><strong>用 AC 代替 EV 算完成比例</strong>：EV 必须用预算单价 × 实际完成量，不是“花了多少钱就算完成了多少”。这是最根本的错误。</li>
+<li><strong>CV、SV 的正负号搞反</strong>：EV 在前，负值就是“不好”。</li>
+<li><strong>EAC 该用哪种情形判断错</strong>：题干出现“偏差将持续”“按当前绩效继续”“照此趋势”→ 典型（BAC&#x2F;CPI）；出现“剩余工作按计划完成”“偏差是偶然的”→ 非典型（AC + BAC − EV）。<strong>没说明时默认典型</strong>。</li>
+<li><strong>把 VAC 算成 EAC − BAC</strong>：方向反了，VAC &#x3D; BAC − EAC，负值表示超支。</li>
+<li><strong>ETC 和 EAC 混淆</strong>：ETC 是“还要花”，EAC 是“总共要花”，EAC &#x3D; AC + ETC。</li>
+</ul>
+</blockquote>
+<h4 id="例-6｜已知偏差反推当前进度"><a href="#例-6｜已知偏差反推当前进度" class="headerlink" title="例 6｜已知偏差反推当前进度"></a>例 6｜已知偏差反推当前进度</h4><p>某项目 BAC &#x3D; 800 万元，当前 CPI &#x3D; 0.9，AC &#x3D; 400 万元。求当前的 EV、CV，以及典型偏差下的 EAC。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>由 CPI &#x3D; EV &#x2F; AC 反推：EV &#x3D; CPI × AC &#x3D; 0.9 × 400 &#x3D; <strong>360 万</strong></li>
+<li>CV &#x3D; EV − AC &#x3D; 360 − 400 &#x3D; <strong>−40 万</strong>（超支）</li>
+<li>EAC &#x3D; BAC &#x2F; CPI &#x3D; 800 &#x2F; 0.9 &#x3D; <strong>888.9 万</strong>（约 889 万）</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：EV &#x3D; 360 万，CV &#x3D; −40 万，EAC ≈ 889 万元。<br><em>这类“反推题”的关键是把公式当方程用，已知两个量求第三个。不需要额外技巧。</em></p>
+</blockquote>
+<h2 id="四、风险计算：决策树与期望值"><a href="#四、风险计算：决策树与期望值" class="headerlink" title="四、风险计算：决策树与期望值"></a>四、风险计算：决策树与期望值</h2><p>这部分计算量小、逻辑清晰，条件容易漏。核心是一个概念：用概率加权把不确定的多种结果折算成一个可比较的数字。</p>
+<h3 id="1-EMV-的含义"><a href="#1-EMV-的含义" class="headerlink" title="1. EMV 的含义"></a>1. EMV 的含义</h3><blockquote>
+<p><strong>EMV &#x3D; Σ（每种结果的概率 × 该结果的损益）</strong><br>期望货币值。把所有可能结果按概率加权平均，得到一个“平均意义上”的结果</p>
+<p><strong>若方案有前期投入：EMV &#x3D; Σ（概率 × 收益） − 投入成本</strong><br>投入是确定要花的，无论成败都收不回，所以要减掉</p>
+</blockquote>
+<blockquote>
+<p><strong>为什么可以这样加权</strong><br>假设同样的事做 1000 次：700 次成功，每次赚 600 万；300 次失败，每次赚 100 万。那么总收入大约是 1000 次的总和，平均到每次就是 0.7×600 + 0.3×100。</p>
+<p>这就是期望值的全部含义：<strong>它描述的是“反复做同一决策”时的平均结果</strong>，不是某一次的具体结果。所以 EMV 适用于可重复的、有大量类似决策的场景；如果是一次性、不可重复的重大决策，只看 EMV 可能会误导——这是它的适用边界。</p>
+</blockquote>
+<h4 id="例-7｜决策树选方案"><a href="#例-7｜决策树选方案" class="headerlink" title="例 7｜决策树选方案"></a>例 7｜决策树选方案</h4><p>某项目有两个技术方案可选，另可选择不投标（收益为 0）：<br>· 方案 A：需投入 200 万元。成功概率 0.7，成功后收益 600 万元；失败概率 0.3，失败后收益 100 万元。<br>· 方案 B：需投入 80 万元。成功概率 0.9，成功后收益 200 万元；失败概率 0.1，失败后收益 40 万元。<br>用 EMV 判断应选择哪个方案。</p>
+<p><em>图：决策树，从右往左算 EMV</em></p>
+<div>
+  <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#a98ec4"/>
+      </marker>
+    </defs>
+    <rect x="26" y="108" width="66" height="34" rx="4" fill="#7d5ba6"/>
+    <text x="59" y="130" font-size="11.5" fill="#f7fbff" text-anchor="middle" font-family="Microsoft YaHei">决策</text>
+    <!-- A -->
+    <path d="M92,125 L150,125 L150,66" stroke="#a98ec4" stroke-width="1.5" fill="none" marker-end="url(#a2)"/>
+    <text x="100" y="118" font-size="10.5" fill="#5b4570" font-family="Microsoft YaHei">A 投 200 万</text>
+    <circle cx="150" cy="58" r="12" fill="#d8cae8" stroke="#7d5ba6" stroke-width="1.5"/>
+    <path d="M162,58 L228,34" stroke="#d8cae8" stroke-width="1.3" marker-end="url(#a2)"/>
+    <path d="M162,58 L228,82" stroke="#d8cae8" stroke-width="1.3" marker-end="url(#a2)"/>
+    <text x="170" y="34" font-size="10" fill="#5b4570" font-family="Microsoft YaHei">0.7 成功</text>
+    <text x="170" y="90" font-size="10" fill="#5b4570" font-family="Microsoft YaHei">0.3 失败</text>
+    <rect x="232" y="20" width="96" height="26" rx="4" fill="#ffffff" stroke="#d8cae8"/>
+    <text x="280" y="38" font-size="10.5" fill="#5b4570" text-anchor="middle" font-family="Microsoft YaHei">收益 600 万</text>
+    <rect x="232" y="70" width="96" height="26" rx="4" fill="#ffffff" stroke="#d8cae8"/>
+    <text x="280" y="88" font-size="10.5" fill="#5b4570" text-anchor="middle" font-family="Microsoft YaHei">收益 100 万</text>
+    <!-- B -->
+    <path d="M92,125 L150,125 L150,186" stroke="#a98ec4" stroke-width="1.5" fill="none" marker-end="url(#a2)"/>
+    <text x="100" y="145" font-size="10.5" fill="#5b4570" font-family="Microsoft YaHei">B 投 80 万</text>
+    <circle cx="150" cy="192" r="12" fill="#d8cae8" stroke="#7d5ba6" stroke-width="1.5"/>
+    <path d="M162,192 L228,168" stroke="#d8cae8" stroke-width="1.3" marker-end="url(#a2)"/>
+    <path d="M162,192 L228,216" stroke="#d8cae8" stroke-width="1.3" marker-end="url(#a2)"/>
+    <text x="170" y="166" font-size="10" fill="#5b4570" font-family="Microsoft YaHei">0.9 成功</text>
+    <text x="170" y="224" font-size="10" fill="#5b4570" font-family="Microsoft YaHei">0.1 失败</text>
+    <rect x="232" y="154" width="96" height="26" rx="4" fill="#ffffff" stroke="#d8cae8"/>
+    <text x="280" y="172" font-size="10.5" fill="#5b4570" text-anchor="middle" font-family="Microsoft YaHei">收益 200 万</text>
+    <rect x="232" y="204" width="96" height="26" rx="4" fill="#ffffff" stroke="#d8cae8"/>
+    <text x="280" y="222" font-size="10.5" fill="#5b4570" text-anchor="middle" font-family="Microsoft YaHei">收益 40 万</text>
+    <!-- result box -->
+    <rect x="366" y="60" width="290" height="132" rx="6" fill="#ede4f5" stroke="#d8cae8"/>
+    <text x="380" y="84" font-size="11" fill="#5b4570" font-family="Microsoft YaHei">EMV(A) = 0.7×600 + 0.3×100 − 200 = 250 万</text>
+    <text x="380" y="108" font-size="11" fill="#5b4570" font-family="Microsoft YaHei">EMV(B) = 0.9×200 + 0.1×40 − 80 = 104 万</text>
+    <text x="380" y="132" font-size="11" fill="#5b4570" font-family="Microsoft YaHei">EMV(不投标) = 0</text>
+    <line x1="380" y1="144" x2="642" y2="144"/>
+    <text x="380" y="166" font-size="11.5" fill="#c0392b" font-family="Microsoft YaHei">选 A（EMV 最大）</text>
+    <text x="380" y="184" font-size="10" fill="#8095a8" font-family="Microsoft YaHei">□ 决策点　○ 机会点</text>
+  </svg>
+</div>
+
+
+
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>先验概率之和是否等于 1</strong>。方案 A：0.7 + 0.3 &#x3D; 1 ✓；方案 B：0.9 + 0.1 &#x3D; 1 ✓。<br><em>这一步是检查题干有没有漏掉某种情形，考试里偶尔会故意给不完整的分支。</em></li>
+<li><strong>算加权收益（先不减投入）。</strong><br>A：0.7×600 + 0.3×100 &#x3D; 420 + 30 &#x3D; 450 万<br>B：0.9×200 + 0.1×40 &#x3D; 180 + 4 &#x3D; 184 万</li>
+<li><strong>减掉各自投入。</strong><br>EMV(A) &#x3D; 450 − 200 &#x3D; <strong>250 万</strong><br>EMV(B) &#x3D; 184 − 80 &#x3D; <strong>104 万</strong></li>
+<li><strong>与“不投标”的 0 比较</strong>。250 &gt; 104 &gt; 0，选 A。</li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：选择<strong>方案 A</strong>，其 EMV &#x3D; 250 万元，高于方案 B 的 104 万元。<br><strong>但</strong>：方案 A 的期望值更高，它有 30% 的概率只赚 100 万，扣掉投入后是亏损 100 万；方案 B 几乎稳赚。如果企业<strong>风险承受能力弱</strong>，可能仍选 B。EMV 是“平均最优”，不一定是“最稳”。</p>
+</blockquote>
+<blockquote>
+<p><strong>EMV 的坑</strong></p>
+<ul>
+<li><strong>忘了减投入成本</strong>：直接拿 450 和 184 比，结论虽然一样，但数值全错，案例题按步给分就会丢分。</li>
+<li><strong>概率加起来不等于 1</strong>：说明还有分支没考虑，或题干给了“其余情况”需要自己算。</li>
+<li><strong>把损失当负数再减一次</strong>：如果某分支是“亏损 50 万”，它本身就是负数，直接乘概率参与求和即可，不要再额外做减法。</li>
+</ul>
+</blockquote>
+<h3 id="2-风险曝光度"><a href="#2-风险曝光度" class="headerlink" title="2. 风险曝光度"></a>2. 风险曝光度</h3><blockquote>
+<p><strong>风险曝光度（风险值 &#x2F; 期望损失）&#x3D; 风险发生概率 × 风险造成的损失</strong><br>用于给风险排序，本质和 EMV 是同一个乘法，只是不涉及收益</p>
+</blockquote>
+<h4 id="例-8｜风险排序"><a href="#例-8｜风险排序" class="headerlink" title="例 8｜风险排序"></a>例 8｜风险排序</h4><p>某项目识别出三个风险：R1 概率 30%、损失 200 万；R2 概率 80%、损失 50 万；R3 概率 10%、损失 800 万。按风险曝光度排序，哪个应优先应对？</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>R1：0.3 × 200 &#x3D; <strong>60 万</strong><br>R2：0.8 × 50 &#x3D; <strong>40 万</strong><br>R3：0.1 × 800 &#x3D; <strong>80 万</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：排序为 R3（80 万）&gt; R1（60 万）&gt; R2（40 万），<strong>R3 应优先应对</strong>。<br><em>注意：单看损失金额 R3 最大，单看概率 R2 最大，但只有乘积才能反映“综合威胁”。这正是期望值的意义。</em></p>
+</blockquote>
+<h2 id="五、沟通渠道数"><a href="#五、沟通渠道数" class="headerlink" title="五、沟通渠道数"></a>五、沟通渠道数</h2><p>公式极短，但每年都有人算错，原因多半是没想清楚“为什么除以 2”。</p>
+<blockquote>
+<p><strong>沟通渠道数 &#x3D; n × (n − 1) &#x2F; 2</strong><br>n 为参与沟通的人数（含项目经理）</p>
+</blockquote>
+<blockquote>
+<p><strong>推导</strong><br>n 个人，每个人都要和其他 n−1 个人建立一条沟通线路，于是有 n(n−1) 条。<br>但 A 和 B 之间的线路，在“从 A 数”和“从 B 数”时被数了两次，而它实际上只是<strong>同一条</strong>渠道。所以总数要除以 2。</p>
+<p>这就是组合数 C(n,2) &#x3D; n(n−1)&#x2F;2：从 n 个人里任选 2 人构成一条渠道，无序。</p>
+</blockquote>
+<h4 id="例-9｜人员增加后的渠道增量"><a href="#例-9｜人员增加后的渠道增量" class="headerlink" title="例 9｜人员增加后的渠道增量"></a>例 9｜人员增加后的渠道增量</h4><p>某项目团队原有 8 名成员，加上项目经理共 9 人。项目中期新增 3 名干系人参与沟通。沟通渠道增加了多少条？</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>原来 n &#x3D; 9：9 × 8 &#x2F; 2 &#x3D; <strong>36 条</strong></li>
+<li>后来 n &#x3D; 9 + 3 &#x3D; 12：12 × 11 &#x2F; 2 &#x3D; <strong>66 条</strong></li>
+<li>增量 &#x3D; 66 − 36 &#x3D; <strong>30 条</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：增加 30 条沟通渠道，增幅约 83%。<br><strong>这说明什么</strong>：人数只增加 33%，渠道数却涨了 83%——渠道数随人数呈<strong>平方级</strong>增长。这就是“项目越大，沟通成本越高、越容易失控”的数学依据，也是案例题里“项目规模扩大导致沟通问题”的标准解释。</p>
+</blockquote>
+<blockquote>
+<p><strong>这里容易错</strong></p>
+<ul>
+<li><strong>人数漏算项目经理</strong>：题干说“团队 8 人”时，项目经理是否在内要看表述，多数情况下需要确认。</li>
+<li><strong>用增量人数算渠道</strong>：不能算 3×2&#x2F;2，因为新人和老人之间也会产生渠道，必须用总数相减。</li>
+<li><strong>忘记除以 2</strong>：得到 132 而不是 66。</li>
+</ul>
+</blockquote>
+<h2 id="六、采购计算：合同与自制外购"><a href="#六、采购计算：合同与自制外购" class="headerlink" title="六、采购计算：合同与自制外购"></a>六、采购计算：合同与自制外购</h2><p>合同计算只问一件事：<strong>成本超支的部分，由谁承担、承担多少</strong>。搞清分担比例，所有变体都能推。</p>
+<h3 id="1-合同计价的基本结构"><a href="#1-合同计价的基本结构" class="headerlink" title="1. 合同计价的基本结构"></a>1. 合同计价的基本结构</h3><p>任何合同的价格都可以拆成两部分：</p>
+<blockquote>
+<p><strong>合同价格 &#x3D; 实际成本 + 卖方利润（费用）</strong><br>区别只在于：利润是固定的、按比例浮动的，还是被总价锁死的</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>利润怎么定</th>
+<th>成本风险在谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CPFF</strong><br>成本加固定费用</td>
+<td>固定金额，与实际成本无关</td>
+<td><strong>全部在买方</strong>：成本涨多少，买方付多少</td>
+</tr>
+<tr>
+<td><strong>CPIF</strong><br>成本加激励费</td>
+<td>固定基数 ± 按节约&#x2F;超支比例分成</td>
+<td>买卖双方按比例分担</td>
+</tr>
+<tr>
+<td><strong>FPIF</strong><br>总价加激励费</td>
+<td>有目标利润，但受<strong>最高限价</strong>封顶</td>
+<td>卖方分担，且有上限保护买方</td>
+</tr>
+<tr>
+<td><strong>FFP</strong><br>固定总价</td>
+<td>价格锁死，利润 &#x3D; 总价 − 实际成本</td>
+<td><strong>全部在卖方</strong>：干超了只能自己亏</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>一条主线</strong><br>从左到右，<strong>成本风险从买方逐步转移到卖方</strong>。买方想要确定性（预算可控），就选总价合同；卖方愿意承担风险，就要在报价里加风险溢价。所以“范围越明确越适合总价合同”——范围清楚，卖方才敢锁定价格。</p>
+</blockquote>
+<h3 id="2-FPIF-的五步算法"><a href="#2-FPIF-的五步算法" class="headerlink" title="2. FPIF 的五步算法"></a>2. FPIF 的五步算法</h3><p>这是计算题里最复杂的一类，但只要按固定顺序走，不会乱。题干通常给五个数：<strong>目标成本、目标利润、目标价格、分担比例、最高限价</strong>。</p>
+<blockquote>
+<p><strong>① 成本偏差 &#x3D; 实际成本 − 目标成本</strong><br>正数为超支，负数为节约</p>
+<p><strong>② 卖方分担额 &#x3D; 成本偏差 × 卖方分担比例</strong></p>
+<p><strong>③ 卖方利润 &#x3D; 目标利润 − 卖方分担额</strong><br>超支时利润减少，节约时利润增加</p>
+<p><strong>④ 计算价格 &#x3D; 实际成本 + 卖方利润</strong></p>
+<p><strong>⑤ 若计算价格 &gt; 最高限价，则实际支付 &#x3D; 最高限价</strong></p>
+</blockquote>
+<h4 id="例-10｜FPIF-两种实际成本下的付款"><a href="#例-10｜FPIF-两种实际成本下的付款" class="headerlink" title="例 10｜FPIF 两种实际成本下的付款"></a>例 10｜FPIF 两种实际成本下的付款</h4><p>某合同条款：目标成本 100 万元，目标利润 10 万元，目标价格 110 万元，成本超支&#x2F;节约由买方承担 80%、卖方承担 20%，最高限价 130 万元。<br>分别求实际成本为 (1) 120 万元、(2) 140 万元时，买方应付金额与卖方实际利润。</p>
+<p><strong>情形（1）实际成本 120 万元</strong></p>
+<ol>
+<li>成本偏差 &#x3D; 120 − 100 &#x3D; +20 万（超支）</li>
+<li>卖方分担 &#x3D; 20 × 20% &#x3D; 4 万</li>
+<li>卖方利润 &#x3D; 10 − 4 &#x3D; 6 万</li>
+<li>计算价格 &#x3D; 120 + 6 &#x3D; <strong>126 万</strong></li>
+<li>126 &lt; 130（最高限价），未封顶，<strong>实际支付 126 万</strong></li>
+</ol>
+<blockquote>
+<p>买方支付 <strong>126 万元</strong>，卖方利润 <strong>6 万元</strong>。</p>
+</blockquote>
+<p><strong>情形（2）实际成本 140 万元</strong></p>
+<ol>
+<li>成本偏差 &#x3D; 140 − 100 &#x3D; +40 万（超支）</li>
+<li>卖方分担 &#x3D; 40 × 20% &#x3D; 8 万</li>
+<li>卖方利润 &#x3D; 10 − 8 &#x3D; 2 万</li>
+<li>计算价格 &#x3D; 140 + 2 &#x3D; <strong>142 万</strong></li>
+<li>142 &gt; 130（最高限价），<strong>触发封顶，实际支付 130 万</strong></li>
+<li>卖方实际利润 &#x3D; 支付额 − 实际成本 &#x3D; 130 − 140 &#x3D; <strong>−10 万（亏损）</strong><br><em>注意此时不能再用“目标利润 − 分担额”算利润，因为封顶后分担比例已经失效。</em></li>
+</ol>
+<blockquote>
+<p>买方支付 <strong>130 万元</strong>（封顶），卖方实际<strong>亏损 10 万元</strong>。</p>
+</blockquote>
+<blockquote>
+<p><strong>最高限价的意义</strong><br>在情形（2）里，如果没有限价，买方要付 142 万；有了限价，买方最多付 130 万，<strong>超额部分全部由卖方吞下</strong>。这就是“最高限价保护买方”的具体体现——它把卖方在极端超支情况下的风险敞口锁死了。</p>
+<p>实务含义：卖方在投标时如果判断自己可能大幅超支，就必须在报价里预留风险溢价，否则一旦触顶就是纯亏。</p>
+</blockquote>
+<h3 id="3-CPIF-与-CPFF-的对比"><a href="#3-CPIF-与-CPFF-的对比" class="headerlink" title="3. CPIF 与 CPFF 的对比"></a>3. CPIF 与 CPFF 的对比</h3><h4 id="例-11｜同一实际成本，三种合同谁付得多"><a href="#例-11｜同一实际成本，三种合同谁付得多" class="headerlink" title="例 11｜同一实际成本，三种合同谁付得多"></a>例 11｜同一实际成本，三种合同谁付得多</h4><p>某项目目标成本 100 万、目标费用 10 万。实际成本为 90 万（节约 10 万）。分别按 CPFF（固定费 10 万）、CPIF（节约部分买卖双方 70%:30% 分成）计算买方支付额。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>CPFF</strong>：费用固定为 10 万，与成本无关。<br>支付 &#x3D; 90 + 10 &#x3D; <strong>100 万</strong>。卖方利润始终是 10 万，节约的好处<strong>全归买方</strong>。</li>
+<li><strong>CPIF</strong>：节约 10 万，卖方分得 30% &#x3D; 3 万。<br>费用 &#x3D; 10 + 3 &#x3D; 13 万，支付 &#x3D; 90 + 13 &#x3D; <strong>103 万</strong>。</li>
+</ol>
+<blockquote>
+<p><strong>对比</strong>：CPFF 下买方付 100 万，CPIF 下买方付 103 万，多付 3 万。<br>这 3 万是<strong>激励成本</strong>——买方用 3 万元换来了卖方主动控成本的动力。CPFF 下卖方省成本没有好处，<strong>缺乏节约动机</strong>，这是 CPFF 最大的缺点。</p>
+</blockquote>
+<h3 id="4-自制或外购分析"><a href="#4-自制或外购分析" class="headerlink" title="4. 自制或外购分析"></a>4. 自制或外购分析</h3><p>自制和外购比的是<strong>两条成本曲线</strong>：自制有固定投入（设备、模具、人员），但单位变动成本低；外购没有固定投入，但单价高。两者交叉的地方就是决策分界点。</p>
+<blockquote>
+<p><strong>自制总成本 &#x3D; 固定成本 + 单位变动成本 × 数量</strong></p>
+<p><strong>外购总成本 &#x3D; 外购单价 × 数量</strong></p>
+<p><strong>令两者相等，解出 平衡点数量 &#x3D; 固定成本 &#x2F; (外购单价 − 单位变动成本)</strong><br>分母是“每自制一件比外购省多少钱”</p>
+</blockquote>
+<p><em>图：自制与外购的成本平衡点</em></p>
+<div>
+  <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg">
+    <!-- axes -->
+    <line x1="80" y1="210" x2="630" y2="210" stroke="#b6c8d8" stroke-width="1.2"/>
+    <line x1="80" y1="24" x2="80" y2="210" stroke="#b6c8d8" stroke-width="1.2"/>
+    <text x="34" y="38" font-size="11" fill="#8095a8" font-family="Microsoft YaHei">总成本</text>
+    <text x="596" y="232" font-size="11" fill="#8095a8" font-family="Microsoft YaHei">数量</text>
+    <!-- grid -->
+    <g stroke="#f4f8fb" stroke-width="1">
+      <line x1="80" y1="165" x2="630" y2="165"/>
+      <line x1="80" y1="120" x2="630" y2="120"/>
+      <line x1="80" y1="75" x2="630" y2="75"/>
+      <line x1="80" y1="30" x2="630" y2="30"/>
+    </g>
+    <!-- make line: 60万 + 80x -->
+    <line x1="80" y1="156" x2="620" y2="84" stroke="#1e8a70" stroke-width="2.4"/>
+    <!-- buy line: 200x -->
+    <line x1="80" y1="210" x2="620" y2="30" stroke="#b8860b" stroke-width="2.4"/>
+    <!-- breakeven -->
+    <line x1="350" y1="120" x2="350" y2="210" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <circle cx="350" cy="120" r="4.5" fill="#ffffff" stroke="#c0392b" stroke-width="2.2"/>
+    <text x="350" y="232" font-size="10.5" fill="#c0392b" text-anchor="middle" font-family="Microsoft YaHei">5000 件（平衡点）</text>
+    <!-- labels -->
+    <text x="500" y="70" font-size="11.5" fill="#1e8a70" font-family="Microsoft YaHei">自制总成本</text>
+    <text x="540" y="46" font-size="11.5" fill="#b8860b" font-family="Microsoft YaHei">外购总成本</text>
+    <text x="150" y="86" font-size="10.5" fill="#8095a8" font-family="Microsoft YaHei">固定成本 60 万</text>
+    <text x="120" y="196" font-size="10.5" fill="#c0392b" font-family="Microsoft YaHei">← 量小外购划算</text>
+    <text x="420" y="196" font-size="10.5" fill="#1e8a70" font-family="Microsoft YaHei">量大自制划算 →</text>
+  </svg>
+</div>
+
+
+
+<h4 id="例-12｜自制还是外购"><a href="#例-12｜自制还是外购" class="headerlink" title="例 12｜自制还是外购"></a>例 12｜自制还是外购</h4><p>某项目需用某部件。自制需投入设备与模具共 60 万元，每件变动成本 80 元；外购单价 200 元。需求量分别为 3000 件和 8000 件时，分别应自制还是外购？</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>平衡点 &#x3D; 固定成本 &#x2F; (外购单价 − 单位变动成本) &#x3D; 600000 &#x2F; (200 − 80) &#x3D; 600000 &#x2F; 120 &#x3D; <strong>5000 件</strong></li>
+<li><strong>验证 3000 件：</strong><br>自制 &#x3D; 600000 + 80×3000 &#x3D; 84 万；外购 &#x3D; 200×3000 &#x3D; 60 万 → <strong>外购更省 24 万</strong></li>
+<li><strong>验证 8000 件：</strong><br>自制 &#x3D; 600000 + 80×8000 &#x3D; 124 万；外购 &#x3D; 200×8000 &#x3D; 160 万 → <strong>自制更省 36 万</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：平衡点 5000 件。需求 3000 件时<strong>外购</strong>；需求 8000 件时<strong>自制</strong>。<br><strong>规模决定结论</strong>：固定成本是一次性的，量越大，摊到每件上的固定成本越薄，自制的单位成本优势才显现出来。“要不要自己建能力”这类决策，先要看的是规模。</p>
+</blockquote>
+<h2 id="七、投资与财务计算"><a href="#七、投资与财务计算" class="headerlink" title="七、投资与财务计算"></a>七、投资与财务计算</h2><p>这部分属于项目立项与可行性研究，中项考得不深，但三个指标（回收期、NPV、ROI）几乎每年出现在选择题里。</p>
+<h3 id="1-投资回收期"><a href="#1-投资回收期" class="headerlink" title="1. 投资回收期"></a>1. 投资回收期</h3><p>问的是“多久能把投进去的钱赚回来”。<strong>静态</strong>回收期不考虑资金时间价值，<strong>动态</strong>回收期考虑（把未来现金流折现后再算）。</p>
+<blockquote>
+<p><strong>静态投资回收期 &#x3D; 累计净现金流由负转正的那一年 − 1 + 上年累计未回收额 &#x2F; 当年净现金流</strong><br>即整年数 + 零头那一年的比例</p>
+</blockquote>
+<h4 id="例-13｜静态回收期"><a href="#例-13｜静态回收期" class="headerlink" title="例 13｜静态回收期"></a>例 13｜静态回收期</h4><p>某项目初始投资 1000 万元，投产后第 1～4 年净现金流分别为 300、400、500、300 万元。求静态投资回收期。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>列累计净现金流。</strong><br>第 1 年：−1000 + 300 &#x3D; −700<br>第 2 年：−700 + 400 &#x3D; −300<br>第 3 年：−300 + 500 &#x3D; <strong>+200</strong>　→ 在第 3 年转正</li>
+<li>第 2 年末还差 300 万没收回，第 3 年全年能收 500 万。<br>零头 &#x3D; 300 &#x2F; 500 &#x3D; 0.6 年</li>
+<li>回收期 &#x3D; 2 + 0.6 &#x3D; <strong>2.6 年</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：静态投资回收期 <strong>2.6 年</strong>（约 2 年 7 个月）。</p>
+</blockquote>
+<h3 id="2-净现值-NPV"><a href="#2-净现值-NPV" class="headerlink" title="2. 净现值 NPV"></a>2. 净现值 NPV</h3><p>NPV 回答的是“这个项目按今天的钱算，到底赚不赚”。核心思想：<strong>明年的 100 万不如今天的 100 万值钱</strong>，所以要按折现率把未来现金流换算成今天的价值，再减去投入。</p>
+<blockquote>
+<p><strong>NPV &#x3D; Σ [ 第 t 年净现金流 &#x2F; (1 + 折现率)^t ] − 初始投资</strong><br>NPV &gt; 0 表示项目收益超过要求回报率，可接受；NPV &lt; 0 表示达不到要求，应拒绝</p>
+</blockquote>
+<blockquote>
+<p><strong>为什么要折现</strong><br>折现率可以理解成“你的钱本来能赚到的收益率”。如果这笔钱不投这个项目，拿去做别的能赚 10%，那么项目必须比“赚 10%”更好才值得做。折现就是把未来的钱按这个机会成本打折，折算成“今天的等价金额”，这样不同时间点的钱才能直接相加减。</p>
+</blockquote>
+<h4 id="例-14｜NPV-计算与动态回收期"><a href="#例-14｜NPV-计算与动态回收期" class="headerlink" title="例 14｜NPV 计算与动态回收期"></a>例 14｜NPV 计算与动态回收期</h4><p>承接例 13，折现率 10%。求各年折现现金流、累计 NPV，并判断项目是否可行、动态回收期约多长。</p>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>净现金流</th>
+<th>折现系数 (1.1)^t</th>
+<th>折现后现金流</th>
+<th>累计 NPV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>−1000</td>
+<td>1.000</td>
+<td>−1000.00</td>
+<td>−1000.00</td>
+</tr>
+<tr>
+<td>1</td>
+<td>300</td>
+<td>1.100</td>
+<td>272.73</td>
+<td>−727.27</td>
+</tr>
+<tr>
+<td>2</td>
+<td>400</td>
+<td>1.210</td>
+<td>330.58</td>
+<td>−396.69</td>
+</tr>
+<tr>
+<td>3</td>
+<td>500</td>
+<td>1.331</td>
+<td>375.66</td>
+<td>−21.03</td>
+</tr>
+<tr>
+<td>4</td>
+<td>300</td>
+<td>1.464</td>
+<td>204.90</td>
+<td><strong>+183.87</strong></td>
+</tr>
+</tbody></table>
+<p><strong>解题过程</strong></p>
+<ol>
+<li><strong>逐年折现</strong>：第 t 年的现金流除以 (1.1)^t。<br>第 1 年：300 &#x2F; 1.1 &#x3D; 272.73<br>第 2 年：400 &#x2F; 1.21 &#x3D; 330.58<br>第 3 年：500 &#x2F; 1.331 &#x3D; 375.66<br>第 4 年：300 &#x2F; 1.4641 &#x3D; 204.90</li>
+<li><strong>累加判断转正点</strong>。第 3 年末累计 −21.03，第 4 年末 +183.87，在第 4 年转正。<br>NPV（4 年）&#x3D; <strong>+183.87 万元 &gt; 0</strong>，项目可行。</li>
+<li><strong>动态回收期</strong> &#x3D; 3 + 21.03 &#x2F; 204.90 &#x3D; 3 + 0.10 &#x3D; <strong>3.10 年</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：NPV ≈ <strong>183.87 万元</strong>（正值，可行）；动态回收期约 <strong>3.1 年</strong>。<br><strong>对比</strong>：静态回收期 2.6 年，动态回收期 3.1 年，<strong>动态总是更长</strong>——因为折现让未来的钱“缩水”了。这个大小关系是固定的，可以用来快速检查答案。</p>
+</blockquote>
+<blockquote>
+<p><strong>NPV 的坑</strong></p>
+<ul>
+<li><strong>折现系数用错年份</strong>：第 1 年除以 1.1 的一次方，不是零次方。初始投资发生在第 0 年，不折现。</li>
+<li><strong>折现率越高，NPV 越小</strong>：这是反向关系，选择题常问“折现率上升对 NPV 的影响”。</li>
+<li><strong>NPV 与 IRR 的判断一致性</strong>：单项目决策时两者结论一致；多项目互斥比较时，<strong>以 NPV 为准</strong>。</li>
+</ul>
+</blockquote>
+<h3 id="3-投资收益率-ROI"><a href="#3-投资收益率-ROI" class="headerlink" title="3. 投资收益率 ROI"></a>3. 投资收益率 ROI</h3><blockquote>
+<p><strong>ROI &#x3D; (总收益 − 总成本) &#x2F; 总成本 × 100%</strong><br>也叫投资回报率，衡量单位投入赚了多少，不考虑时间价值</p>
+</blockquote>
+<h4 id="例-15｜ROI"><a href="#例-15｜ROI" class="headerlink" title="例 15｜ROI"></a>例 15｜ROI</h4><p>某项目投入 500 万元，三年累计净收益 200 万元。求 ROI。</p>
+<p><strong>解题过程</strong></p>
+<ol>
+<li>ROI &#x3D; 200 &#x2F; 500 × 100% &#x3D; <strong>40%</strong></li>
+</ol>
+<blockquote>
+<p><strong>答案</strong>：ROI &#x3D; 40%，即每投入 1 元，三年共赚回 0.4 元。</p>
+</blockquote>
+<h2 id="八、综合案例演练"><a href="#八、综合案例演练" class="headerlink" title="八、综合案例演练"></a>八、综合案例演练</h2><p>真实考试中，进度和成本不会分开考。下面这道题把前面几节串起来，形态接近案例分析真题。</p>
+<h4 id="综合题｜进度-成本联合分析"><a href="#综合题｜进度-成本联合分析" class="headerlink" title="综合题｜进度 + 成本联合分析"></a>综合题｜进度 + 成本联合分析</h4><p>某市政务云平台集成项目，合同工期 10 个月，总预算 BAC &#x3D; 1000 万元。项目执行到第 5 个月末时，项目经理统计得到：按计划应完成 50% 的工作量，实际完成 40%，已发生实际成本 450 万元。</p>
+<p>请回答：<br>（1）计算 PV、EV、AC，以及 CV、SV、CPI、SPI，并说明项目当前状态。<br>（2）若当前偏差将持续到项目结束，预测 EAC、VAC 和项目完工时间。<br>（3）计算按原预算完工所需的 TCPI，并说明其含义。<br>（4）若客户要求必须按原定 10 个月完工，项目经理应重点压缩哪类活动？为什么？<br>（5）针对当前局面，列出至少三项可行的纠偏措施。</p>
+<p><strong>解答</strong></p>
+<ol>
+<li><strong>第（1）问：三个量与四个指标。</strong><br>PV &#x3D; 50% × 1000 &#x3D; <strong>500 万</strong><br>EV &#x3D; 40% × 1000 &#x3D; <strong>400 万</strong><br>AC &#x3D; <strong>450 万</strong><br>CV &#x3D; EV − AC &#x3D; 400 − 450 &#x3D; <strong>−50 万</strong>（超支）<br>SV &#x3D; EV − PV &#x3D; 400 − 500 &#x3D; <strong>−100 万</strong>（落后）<br>CPI &#x3D; 400 &#x2F; 450 ≈ <strong>0.889</strong><br>SPI &#x3D; 400 &#x2F; 500 &#x3D; <strong>0.8</strong><br><strong>状态判断</strong>：成本超支、进度落后，属于“双失控”——这是最难处理的组合，因为赶工往往还要多花钱。</li>
+<li><strong>第（2）问：典型偏差预测。</strong><br>EAC &#x3D; BAC &#x2F; CPI &#x3D; 1000 &#x2F; 0.889 ≈ <strong>1125 万</strong><br>VAC &#x3D; BAC − EAC &#x3D; 1000 − 1125 &#x3D; <strong>−125 万</strong>（预计超支 125 万）<br>完工时间 &#x3D; 10 &#x2F; SPI &#x3D; 10 &#x2F; 0.8 &#x3D; <strong>12.5 个月</strong>（延期 2.5 个月）</li>
+<li><strong>第（3）问：TCPI。</strong><br>TCPI &#x3D; (BAC − EV) &#x2F; (BAC − AC) &#x3D; (1000 − 400) &#x2F; (1000 − 450) &#x3D; 600 &#x2F; 550 ≈ <strong>1.09</strong><br><strong>含义</strong>：剩余阶段每花 1 元，必须干出 1.09 元的活，才能按原预算收尾。对比当前 CPI 只有 0.889，<strong>效率需要提升约 23%</strong>，难度较大但不至于完全不可能。</li>
+<li><strong>第（4）问：压缩对象。</strong><br>必须压缩<strong>关键路径上的活动</strong>。原因：项目总工期由最长路径（关键路径）决定，压缩非关键活动不会缩短总工期，只会白白增加成本、消耗浮动时间。<br>具体做法：在关键路径上选择<strong>赶工成本斜率最低</strong>的活动优先压缩；每压一天都要重新检查关键路径是否转移，若出现多条关键路径则需同时压缩。</li>
+<li><strong>第（5）问：纠偏措施（开放题，答出要点即可）。</strong><br>① <strong>进度方面</strong>：对关键活动采取赶工（增加资源、加班）或快速跟进（并行施工，需评估返工风险）。<br>② <strong>成本方面</strong>：分析超支原因，重点控制后续采购与人力成本，必要时调整资源结构（用低成本资源替代高成本资源）。<br>③ <strong>范围方面</strong>：与客户沟通，通过变更控制流程缩减非核心功能或分阶段交付，保住关键里程碑。<br>④ <strong>管理方面</strong>：加强变更控制，防止范围蔓延进一步推高成本；建立更密集的进度与成本监控（缩短检查周期）。<br>⑤ <strong>风险方面</strong>：更新风险登记册，对可能导致进一步延期的风险制定应对预案。</li>
+</ol>
+<blockquote>
+<p><strong>答案汇总</strong>：PV&#x3D;500 万、EV&#x3D;400 万、AC&#x3D;450 万；CV&#x3D;−50 万、SV&#x3D;−100 万、CPI≈0.889、SPI&#x3D;0.8，项目<strong>成本超支且进度落后</strong>；EAC≈1125 万、VAC&#x3D;−125 万、预计 12.5 个月完工；TCPI≈1.09，剩余阶段效率需提升约 23%；压缩应针对<strong>关键路径</strong>活动，按成本斜率由低到高依次赶工，并持续监控关键路径转移。</p>
+</blockquote>
+<h2 id="九、答题规范与自查"><a href="#九、答题规范与自查" class="headerlink" title="九、答题规范与自查"></a>九、答题规范与自查</h2><p>同样的计算，写法和检查习惯会直接决定拿多少分。案例题按步给分，只写最终答案往往只能拿到部分分。</p>
+<h3 id="1-书写格式"><a href="#1-书写格式" class="headerlink" title="1. 书写格式"></a>1. 书写格式</h3><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>先写公式</strong></td>
+<td>每一步先写“CV &#x3D; EV − AC”，再代入数字。阅卷时公式本身就是一个得分点，即使算错也能拿公式分。</td>
+</tr>
+<tr>
+<td><strong>带单位</strong></td>
+<td>金额写“万元”、工期写“天&#x2F;月”、指数和概率不带单位。单位缺失可能被判不规范。</td>
+</tr>
+<tr>
+<td><strong>保留小数</strong></td>
+<td>CPI、SPI 一般保留 2～3 位小数；金额保留 1～2 位。题目没要求时，写“≈”并保留两位最安全。</td>
+</tr>
+<tr>
+<td><strong>结论要写出来</strong></td>
+<td>算出 CV &#x3D; −50 万之后，必须补一句“成本超支”。只给数字不判断，会丢结论分。</td>
+</tr>
+<tr>
+<td><strong>分小问作答</strong></td>
+<td>按 (1)(2)(3) 分条书写，不要写成一大段。阅卷是按点找分的。</td>
+</tr>
+</tbody></table>
+<h3 id="2-算完必做的五项检查"><a href="#2-算完必做的五项检查" class="headerlink" title="2. 算完必做的五项检查"></a>2. 算完必做的五项检查</h3><ul>
+<li><strong>关键路径与路径和是否一致</strong>：正推得到的项目工期，应该等于手工枚举出的最长路径长度。两者不符，说明某处算错了。</li>
+<li><strong>EV 是否介于 0 和 BAC 之间</strong>：超过 BAC 说明完成比例算错，为负说明逻辑反了。</li>
+<li><strong>CPI、SPI 是否在合理范围</strong>：通常在 0.5～1.5 之间。算出 3.0 或 0.1 这种极端值，八成是分子分母颠倒。</li>
+<li><strong>概率是否落在 0～1</strong>：算出负数或大于 1，说明 z 值方向或公式用错。</li>
+<li><strong>量纲是否统一</strong>：万元和元、月和天不能混着算。这是案例题最常见的低级错误。</li>
+</ul>
+<h3 id="3-三轮练法"><a href="#3-三轮练法" class="headerlink" title="3. 三轮练法"></a>3. 三轮练法</h3><p>计算题不需要大量刷题，但需要“每类题吃透一道”：</p>
+<ul>
+<li><strong>第一遍</strong>：照着例题的步骤，自己动手把数字算一遍，不看答案。算错了回头看是哪一步的理解偏了。</li>
+<li><strong>第二遍</strong>：把例题的题干改几个数字，重新算。如果结论跟着合理变化（比如 SPI 变大则预测工期变短），说明变量之间的关系已经清楚。</li>
+<li><strong>第三遍</strong>：做近五年真题里的计算题，<strong>只做不背</strong>。重点看命题人怎么描述“偏差是否持续”“是否含项目经理”这类关键条件。</li>
+</ul>
+<blockquote>
+<p>**要点： **<br>能不能不看材料，向别人解释清楚“为什么 EAC &#x3D; BAC&#x2F;CPI”，以及“为什么三点估算的标准差不能直接相加”。能讲清这两条，公式就不依赖记忆了；考场上即使一时想不起，也能在两分钟内推出来。</p>
+</blockquote>
+<hr>
+<p>其他软考中项知识点，可续看：</p>
+<p><a href="https://magiku.github.io/P/A004/">A004【项目管理】软考中项知识点集锦（十大管理领域版）</a></p>
+<p><a href="https://magiku.github.io/P/A005/">A005【项目管理】软考中项-项目管理图表速查手册</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://magiku.github.io">Magiku</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://magiku.github.io/P/A006/">https://magiku.github.io/P/A006/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://magiku.github.io" target="_blank">Magiku's药剂屋</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post-share"><div class="social-share" data-image="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/butterfly-extsrc/sharejs/dist/css/share.min.css"><script src="/pluginsSrc/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/P/A007/" title="A007【营养学】瘦体重、饮食结构与经济性饮食指南"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg" onerror="onerror=null;src='/image/top-loading.gif'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">A007【营养学】瘦体重、饮食结构与经济性饮食指南</div></div><div class="info-2"><div class="info-item-1">科普有关健身减肥的营养学知识与常见误区</div></div></div></a><a class="pagination-related" href="/P/A005/" title="A005【项目管理】软考中项-项目管理图表速查手册"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086432805_2c80461490482ee5b8267.jpg" onerror="onerror=null;src='/image/top-loading.gif'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">A005【项目管理】软考中项-项目管理图表速查手册</div></div><div class="info-2"><div class="info-item-1">软考中项-全知识领域图表/图形工具/模型-分类整理，含图形特征、使用场景、所属过程与高频考点。</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/P/A004/" title="A004【项目管理】软考中项知识点集锦（十大管理领域版）"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A004【项目管理】软考中项知识点集锦（十大管理领域版）</div></div><div class="info-2"><div class="info-item-1">教材按过程组（启动 → 规划 → 执行 → 监控 → 收尾）排列，本文档改按十大知识领域排列，把散落在五个过程组里的同一领域过程归拢到一处。</div></div></div></a><a class="pagination-related" href="/P/A003/" title="A003【项目管理】一个信息系统项目从立项到运维：各方分工"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086481255_5c97d7f710fe5495683dd.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A003【项目管理】一个信息系统项目从立项到运维：各方分工</div></div><div class="info-2"><div class="info-item-1">以政府或国企的信息系统建设项目为样本，从业务部门提需求开始，一直讲到质保期满移交运维。每一段写清楚项目走到哪一步，甲方、乙方、监理、测评机构、专家各自在做什么。</div></div></div></a><a class="pagination-related" href="/P/A005/" title="A005【项目管理】软考中项-项目管理图表速查手册"><img class="cover" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086432805_2c80461490482ee5b8267.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-22</div><div class="info-item-2">A005【项目管理】软考中项-项目管理图表速查手册</div></div><div class="info-2"><div class="info-item-1">软考中项-全知识领域图表/图形工具/模型-分类整理，含图形特征、使用场景、所属过程与高频考点。</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086984021_dcb11262f483239ffc471.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Magiku</div><div class="author-info-description">要是有什么需要交流的，欢迎联系我~</div><div class="site-data"><a href="/summarize/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/39293027"><i class="fab fa-bilibili"></i><span>Follow me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%A2%98%E8%80%83%E7%82%B9%E4%B8%8E%E5%A4%B1%E5%88%86%E7%82%B9"><span class="toc-text">计算题考点与失分点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BF%9B%E5%BA%A6%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E6%B3%95"><span class="toc-text">一、进度计算：关键路径法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E6%98%AF%E6%9C%80%E9%95%BF%E8%B7%AF%E5%BE%84%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="toc-text">1. 关键路径是最长路径的推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%AD%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%A4%E8%B6%9F%E6%8E%A8%E5%AF%BC"><span class="toc-text">2. 六个参数的两趟推导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E6%8E%A8%EF%BC%9A%E4%BB%8E%E8%B5%B7%E7%82%B9%E5%BE%80%E7%BB%88%E7%82%B9%E8%B5%B0"><span class="toc-text">正推：从起点往终点走</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%86%E6%8E%A8%EF%BC%9A%E4%BB%8E%E7%BB%88%E7%82%B9%E5%BE%80%E8%B5%B7%E7%82%B9%E8%B5%B0"><span class="toc-text">逆推：从终点往起点走</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E6%B5%AE%E5%8A%A8%E6%97%B6%E9%97%B4%EF%BC%9A%E5%90%AB%E4%B9%89%E5%AE%8C%E5%85%A8%E4%B8%8D%E5%90%8C"><span class="toc-text">两个浮动时间：含义完全不同</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-1%EF%BD%9C%E5%AE%8C%E6%95%B4%E7%BD%91%E7%BB%9C%E5%9B%BE%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%B7%A5%E6%9C%9F%E3%80%81%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E3%80%81%E5%85%AD%E5%8F%82%E6%95%B0"><span class="toc-text">例 1｜完整网络图计算：工期、关键路径、六参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B7%A5%E6%9C%9F%E5%8E%8B%E7%BC%A9%EF%BC%9A%E4%B8%8D%E6%98%AF%E5%8E%8B%E6%9C%80%E9%95%BF%E7%9A%84%E5%B0%B1%E8%A1%8C"><span class="toc-text">3. 工期压缩：不是压最长的就行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-2%EF%BD%9C%E8%B5%B6%E5%B7%A5%E5%86%B3%E7%AD%96%EF%BC%9A%E5%8E%8B%E5%88%B0-13-%E5%A4%A9%E7%9A%84%E6%9C%80%E4%BD%8E%E6%88%90%E6%9C%AC"><span class="toc-text">例 2｜赶工决策：压到 13 天的最低成本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9B%E5%BA%A6%E8%AE%A1%E7%AE%97%EF%BC%9A%E4%B8%89%E7%82%B9%E4%BC%B0%E7%AE%97%E4%B8%8E%E6%A6%82%E7%8E%87"><span class="toc-text">二、进度计算：三点估算与概率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%89%E4%B8%AA%E5%85%AC%E5%BC%8F%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-text">1. 三个公式的构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E6%9D%A1%E8%B7%AF%E5%BE%84%E7%9A%84%E5%90%88%E6%88%90%EF%BC%9A%E6%96%B9%E5%B7%AE%E7%9B%B8%E5%8A%A0%EF%BC%8C%E4%B8%8D%E6%98%AF%E6%A0%87%E5%87%86%E5%B7%AE%E7%9B%B8%E5%8A%A0"><span class="toc-text">2. 多条路径的合成：方差相加，不是标准差相加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AE%A1%E7%AE%97%E6%A6%82%E7%8E%87%EF%BC%9A%E5%B8%B8%E7%94%A8%E5%8C%BA%E9%97%B4"><span class="toc-text">3. 计算概率：常用区间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-3%EF%BD%9C%E5%8D%95%E6%B4%BB%E5%8A%A8%E4%B8%89%E7%82%B9%E4%BC%B0%E7%AE%97"><span class="toc-text">例 3｜单活动三点估算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-4%EF%BD%9C%E8%B7%AF%E5%BE%84%E5%90%88%E6%88%90-%E6%A6%82%E7%8E%87%EF%BC%88%E8%80%83%E7%82%B9%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-text">例 4｜路径合成 + 概率（考点核心）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%88%90%E6%9C%AC%E8%AE%A1%E7%AE%97%EF%BC%9A%E6%8C%A3%E5%80%BC%E5%88%86%E6%9E%90"><span class="toc-text">三、成本计算：挣值分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%89%E4%B8%AA%E9%87%8F%E5%90%84%E8%87%AA%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-text">1. 三个量各自的含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%A4%E4%B8%AA%E5%81%8F%E5%B7%AE%E3%80%81%E4%B8%A4%E4%B8%AA%E6%8C%87%E6%95%B0"><span class="toc-text">2. 两个偏差、两个指数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A2%84%E6%B5%8B%E5%AE%8C%E5%B7%A5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%83%85%E5%BD%A2"><span class="toc-text">3. 预测完工的三种情形</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-5%EF%BD%9C%E6%8C%A3%E5%80%BC%E5%85%A8%E5%A5%97%E8%AE%A1%E7%AE%97%EF%BC%88%E6%A1%88%E4%BE%8B%E9%A2%98%E6%A0%87%E5%87%86%E5%BD%A2%E6%80%81%EF%BC%89"><span class="toc-text">例 5｜挣值全套计算（案例题标准形态）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-6%EF%BD%9C%E5%B7%B2%E7%9F%A5%E5%81%8F%E5%B7%AE%E5%8F%8D%E6%8E%A8%E5%BD%93%E5%89%8D%E8%BF%9B%E5%BA%A6"><span class="toc-text">例 6｜已知偏差反推当前进度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%A3%8E%E9%99%A9%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%86%B3%E7%AD%96%E6%A0%91%E4%B8%8E%E6%9C%9F%E6%9C%9B%E5%80%BC"><span class="toc-text">四、风险计算：决策树与期望值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-EMV-%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-text">1. EMV 的含义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-7%EF%BD%9C%E5%86%B3%E7%AD%96%E6%A0%91%E9%80%89%E6%96%B9%E6%A1%88"><span class="toc-text">例 7｜决策树选方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%A3%8E%E9%99%A9%E6%9B%9D%E5%85%89%E5%BA%A6"><span class="toc-text">2. 风险曝光度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-8%EF%BD%9C%E9%A3%8E%E9%99%A9%E6%8E%92%E5%BA%8F"><span class="toc-text">例 8｜风险排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%B2%9F%E9%80%9A%E6%B8%A0%E9%81%93%E6%95%B0"><span class="toc-text">五、沟通渠道数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-9%EF%BD%9C%E4%BA%BA%E5%91%98%E5%A2%9E%E5%8A%A0%E5%90%8E%E7%9A%84%E6%B8%A0%E9%81%93%E5%A2%9E%E9%87%8F"><span class="toc-text">例 9｜人员增加后的渠道增量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%87%87%E8%B4%AD%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%90%88%E5%90%8C%E4%B8%8E%E8%87%AA%E5%88%B6%E5%A4%96%E8%B4%AD"><span class="toc-text">六、采购计算：合同与自制外购</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%90%88%E5%90%8C%E8%AE%A1%E4%BB%B7%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">1. 合同计价的基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-FPIF-%E7%9A%84%E4%BA%94%E6%AD%A5%E7%AE%97%E6%B3%95"><span class="toc-text">2. FPIF 的五步算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-10%EF%BD%9CFPIF-%E4%B8%A4%E7%A7%8D%E5%AE%9E%E9%99%85%E6%88%90%E6%9C%AC%E4%B8%8B%E7%9A%84%E4%BB%98%E6%AC%BE"><span class="toc-text">例 10｜FPIF 两种实际成本下的付款</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CPIF-%E4%B8%8E-CPFF-%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">3. CPIF 与 CPFF 的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-11%EF%BD%9C%E5%90%8C%E4%B8%80%E5%AE%9E%E9%99%85%E6%88%90%E6%9C%AC%EF%BC%8C%E4%B8%89%E7%A7%8D%E5%90%88%E5%90%8C%E8%B0%81%E4%BB%98%E5%BE%97%E5%A4%9A"><span class="toc-text">例 11｜同一实际成本，三种合同谁付得多</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%87%AA%E5%88%B6%E6%88%96%E5%A4%96%E8%B4%AD%E5%88%86%E6%9E%90"><span class="toc-text">4. 自制或外购分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-12%EF%BD%9C%E8%87%AA%E5%88%B6%E8%BF%98%E6%98%AF%E5%A4%96%E8%B4%AD"><span class="toc-text">例 12｜自制还是外购</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%8A%95%E8%B5%84%E4%B8%8E%E8%B4%A2%E5%8A%A1%E8%AE%A1%E7%AE%97"><span class="toc-text">七、投资与财务计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%8A%95%E8%B5%84%E5%9B%9E%E6%94%B6%E6%9C%9F"><span class="toc-text">1. 投资回收期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-13%EF%BD%9C%E9%9D%99%E6%80%81%E5%9B%9E%E6%94%B6%E6%9C%9F"><span class="toc-text">例 13｜静态回收期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%87%80%E7%8E%B0%E5%80%BC-NPV"><span class="toc-text">2. 净现值 NPV</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-14%EF%BD%9CNPV-%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%8A%A8%E6%80%81%E5%9B%9E%E6%94%B6%E6%9C%9F"><span class="toc-text">例 14｜NPV 计算与动态回收期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%8A%95%E8%B5%84%E6%94%B6%E7%9B%8A%E7%8E%87-ROI"><span class="toc-text">3. 投资收益率 ROI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B-15%EF%BD%9CROI"><span class="toc-text">例 15｜ROI</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B%E6%BC%94%E7%BB%83"><span class="toc-text">八、综合案例演练</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E9%A2%98%EF%BD%9C%E8%BF%9B%E5%BA%A6-%E6%88%90%E6%9C%AC%E8%81%94%E5%90%88%E5%88%86%E6%9E%90"><span class="toc-text">综合题｜进度 + 成本联合分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%AD%94%E9%A2%98%E8%A7%84%E8%8C%83%E4%B8%8E%E8%87%AA%E6%9F%A5"><span class="toc-text">九、答题规范与自查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B9%A6%E5%86%99%E6%A0%BC%E5%BC%8F"><span class="toc-text">1. 书写格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AE%97%E5%AE%8C%E5%BF%85%E5%81%9A%E7%9A%84%E4%BA%94%E9%A1%B9%E6%A3%80%E6%9F%A5"><span class="toc-text">2. 算完必做的五项检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%89%E8%BD%AE%E7%BB%83%E6%B3%95"><span class="toc-text">3. 三轮练法</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By Magiku</span></div><div class="footer_custom_text"></p></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="/image/loading.gif" data-lazy-src="/img/badge/github.svg" title="本站项目由Github托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="/image/loading.gif" data-lazy-src="/img/badge/cc-by-nc-sa.svg" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="/pluginsSrc/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"data-mapping":"pathname","data-reactions-enabled":"1","data-emit-metadata":"0","data-input-position":"top","data-lang":"zh-CN","data-loading":"lazy"}
+
+  const getGiscusTheme = theme => theme === 'dark' ? 'dark_dimmed' : 'light'
+
+  const createScriptElement = config => {
+    const ele = document.createElement('script')
+    Object.entries(config).forEach(([key, value]) => {
+      ele.setAttribute(key, value)
+    })
+    return ele
+  }
+
+  const loadGiscus = (el = document, key) => {
+    const mappingConfig = isShuoshuo
+      ? { 'data-mapping': 'specific', 'data-term': key }
+      : { 'data-mapping': (option && option['data-mapping']) || 'pathname' }
+
+    const giscusConfig = {
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'magiku/magiku.github.io',
+      'data-repo-id': '707233881',
+      'data-category-id': 'DIC_kwDOKieIWc4DIiDR',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true,
+      ...option,
+      ...mappingConfig
+    }
+
+    const scriptElement = createScriptElement(giscusConfig)
+
+    el.querySelector('#giscus-wrap').appendChild(scriptElement)
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyGiscus = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const changeGiscusTheme = theme => {
+    const iframe = document.querySelector('#giscus-wrap iframe')
+    if (iframe) {
+      const message = {
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme(theme)
+          }
+        }
+      }
+      iframe.contentWindow.postMessage(message, 'https://giscus.app')
+    }
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if (isShuoshuo) {
+    'Giscus' === 'Giscus'
+      ? window.shuoshuoComment = { loadComment: loadGiscus }
+      : window.loadOtherComment = loadGiscus
+    return
+  }
+
+  if ('Giscus' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment = loadGiscus
+  }
+})()</script></div><script src="/pluginsSrc/pjax/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:description\"]","link[rel=\"canonical\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"]):not([data-fancybox])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      if (!item.parentNode) return
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || ''
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    const responseURL = e.request && e.request.responseURL
+    if (e.request && e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : responseURL && (window.location.href = responseURL)
+    } else if (responseURL) {
+      window.location.href = responseURL
+    }
+  })
+})</script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script id="pjax-tweaks">
+(function () {
+  if (!window.globalFn || !window.globalFn.pjaxSend) return
+  delete window.globalFn.pjaxSend.preloader_init
+})()
+</script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086818546_83219d7c037cf9abd4b36.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-08-18</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt="">B000【目录与概述】计算机网络系列</a><div class="blog-slider__text">本文用于归档B系列，也就是计算机网络系列的文章，作为目录与摘要使用；同时，本文也对本系列所有文章作一个前提补充以及个人建议。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/B000/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086856656_92627294e65e88396a788.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-09-03</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt="">C008【B站优化】为B站的网页全屏模式增加一个侧边评论区</a><div class="blog-slider__text">看B站总想一边看视频，一边看评论；于是手搓了一个脚本，把评论区挪到侧边，同时不影响平时的观看。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C008/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086590982_8dc26f66ea716b65e724e.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-03-29</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt="">M001【方法论】从哲学说起：我如何怀疑、如何更新</a><div class="blog-slider__text">本系列第一篇。聊我对哲学的理解、一套能照着做的思辨动作，以及这套动作落到“与人、与世、与己”上是什么样。</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/M001/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-08-23</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt="">C006【开源输入法】RIME输入法使用教程与自制词库</a><div class="blog-slider__text">推荐一款开源的本地输入法，并介绍词库制作以满足输入一些特定词汇</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C006/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src="/image/loading.gif" data-lazy-src="https://cloudflare-imgbed-etc.pages.dev/file/1792086880131_a5b442e309a8948fdb9fa.jpg" alt="" onerror="this.src=/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2026-06-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt="">C004【正则表达式】B站用弹幕屏蔽正则</a><div class="blog-slider__text">介绍一些B站用的正则表达式与编写规则</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;P/C004/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="/lib/swiper/swiper.min.js"></script><script defer data-pjax src="/lib/swiper/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1s');
+    arr[i].setAttribute('data-wow-delay', '0.5s');
+    arr[i].setAttribute('data-wow-offset', '0');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="/lib/wowjs/wow.min.js"></script><script defer src="/lib/wowjs/wow_init.js"></script><!-- hexo injector body_end end --><script id="lazy-preload">
+(function () {
+  var LOOKAHEAD = 1000
+
+  // 没有原生 observer 就完全不干预，交给主题原样处理
+  if (typeof window.IntersectionObserver !== 'function') return
+
+  var observer = new IntersectionObserver(function (entries) {
+    for (var i = 0; i < entries.length; i++) {
+      var entry = entries[i]
+      if (!entry.isIntersecting) continue
+      var img = entry.target
+      observer.unobserve(img)
+      var url = img.getAttribute('data-lazy-src')
+      // 已经被 LazyLoad 赋过 src（或不是懒加载图）就跳过
+      if (!url || img.getAttribute('src') === url) continue
+      img.src = url
+    }
+  }, { rootMargin: LOOKAHEAD + "px 0px" })
+
+  function observeAll () {
+    var imgs = document.querySelectorAll('img[data-lazy-src]')
+    for (var i = 0; i < imgs.length; i++) observer.observe(imgs[i])
+  }
+
+  function start () {
+    observeAll()
+    // pjax 换页后新插入的图片要重新纳入观察
+    if (window.btf && typeof window.btf.addGlobalFn === "function") {
+      window.btf.addGlobalFn("pjaxComplete", observeAll, "lazyPreload")
+    }
+  }
+
+  // 关键：必须等 load 之后才开始。
+  // 在 load 之前给 img 赋 src 会让图片进入文档资源树，拖长 load；
+  // load 之后赋 src 只影响下载时机，不再阻塞任何东西。
+  if (document.readyState === "complete") start()
+  else window.addEventListener("load", start)
+})()
+</script>
+</body></html>
